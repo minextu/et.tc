@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='de'>
+<head>
+    <meta charset='utf-8'>
+	<title>__MSG_PageTitle__ - et.tc</title>
+	<link rel='stylesheet' type='text/css' href='__PATH_Assets__/css/layout.css'>
+
+	<meta name='viewport' content='width=device-width, height?device-height, user-scalable=no'>
+	<link rel='icon' type='image/png' href='__PATH_Assets__/images/favicon.svg'>
+</head>
+<body>
+		<div id='main_nav_container'>
+		__VIEW_MainNav__
+		</div>
+
+		<div id='content_wrapper'>
+			<div id='title_wrapper'>
+				<div id='title' class='main' style='min-height: auto;'>
+						<header id='title_head' class='content'>
+							<h1>__MSG_PageHeading__</h1>
+							__MSG_PageSubHeading__##TIME##
+						</header>
+				</div>
+			</div>
+
+			<nav class='sort_nav'>
+				##SORT_NAV##
+			</nav>
+
+			<div class='main'>
+
+				<div class='content'>
+					__VIEW_Page__
+				</div>
+			</div>
+
+		<footer>
+			<nav class='simple_nav'>
+				<ul>
+					<li><a href='$path/About'>About et.tc</a></li>
+
+					<li class='right_li'><a class='active'>&copy; ##CURRENT_YEAR## et.tc</a></li>
+				</ul>
+			</nav>
+		</footer>
+
+	</div>
+</body>
+</html>

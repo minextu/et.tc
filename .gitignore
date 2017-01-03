@@ -1,0 +1,8 @@
+vendor/*
+docs/
+composer.phar
+.directory
+conf/config.php
+conf/config.phpUnitTest.php
+apidoc/
+apidoc.json

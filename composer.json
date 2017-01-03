@@ -1,0 +1,10 @@
+{
+	"require": {
+	},
+	"require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*",
+        "symfony/dom-crawler" : "v3.*",
+        "symfony/css-selector" : "v3.*"
+    },
+	"minimum-stability": "dev"
+}
