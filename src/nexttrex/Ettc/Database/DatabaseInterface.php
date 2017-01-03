@@ -1,5 +1,8 @@
 <?php namespace nexttrex\Ettc\Database;
 
+/**
+ * Used to interface with a Database using PDO
+ */
 interface DatabaseInterface
 {
     /**
@@ -9,5 +12,11 @@ interface DatabaseInterface
      * @param string $pw   Database Password
      * @param string $db   The Database to be used
      */
-    function _construct($host, $user, $pw, $db);
+    function __construct($host, $user, $pw, $db);
+
+    /**
+     * Returns the PDO Object for the Database
+     * @return   \PDO   PDO Object for the Database
+     */
+    function getPdo();
 }

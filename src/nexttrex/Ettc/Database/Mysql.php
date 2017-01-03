@@ -1,11 +1,23 @@
 <?php namespace nexttrex\Ettc\Database;
 
+/**
+ * A Mysql PDO Connection
+ */
 class Mysql implements DatabaseInterface
 {
-    private $charset = 'utf8';
-    private $connection;
+    /**
+     * charset to use
+     * @var   string
+     */
 
-    public function _construct($host, $user, $pw, $db)
+    private $charset = 'utf8';
+    /**
+     * PDO object
+     * @var   \PDO
+     */
+    private $pdo;
+
+    public function __construct($host, $user, $pw, $db)
     {
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
         $options = [
@@ -13,6 +25,11 @@ class Mysql implements DatabaseInterface
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
-        $this->connection = new PDO($dsn, $user, $pw, $options);
+        $this->pdo = new PDO($dsn, $user, $pw, $options);
+    }
+
+    public function getPdo()
+    {
+        return $this->pdo;
     }
 }

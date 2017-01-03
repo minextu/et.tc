@@ -1,4 +1,4 @@
-<?php namespace nexttrex\ettcUi\mainNav;
+<?php namespace nexttrex\EttcUi\mainNav;
 use nexttrex\ettcUi\AbstractPresenter;
 
 class MainNavPresenter extends AbstractPresenter

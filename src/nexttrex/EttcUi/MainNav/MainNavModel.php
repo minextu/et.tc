@@ -1,4 +1,4 @@
-<?php namespace nexttrex\ettcUi\mainNav;
+<?php namespace nexttrex\EttcUi\mainNav;
 use nexttrex\ettcUi\ModelInterface;
 
 class MainNavModel implements ModelInterface
