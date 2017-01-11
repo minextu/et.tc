@@ -8,9 +8,9 @@
     src: url("../fonts/Sansation_Italic.ttf");
     font-style: italic;
 }
-@font-face 
-{ 
-    font-family: "Sansation_Regular"; 
+@font-face
+{
+    font-family: "Sansation_Regular";
     src: url('../fonts/Sansation_Regular.ttf');
 }
 
@@ -32,7 +32,7 @@ html, body
 #header img, .header img
 {
 	height: 100%;
-	padding-top: 15px;
+	margin-top: 15px;
 	transition: all 0.5s;
 }
 #header img:hover, .header img:hover
@@ -77,7 +77,7 @@ html, body
 }*/
 .simple_nav
 {
-	height: 50px;
+	height: 60px;
 	width: 100%;
 	padding: 0px;
 	font-size: 20px;
@@ -107,7 +107,7 @@ nav ul li a, #main_nav .ul .li a
 	transition: all 0.2s ease-in-out;
 }
 
-#main_nav_container 
+#main_nav_container
 {
     height: 70px;
     background: gray;
@@ -277,18 +277,18 @@ h2
 	min-width: 200px;
 	margin: 0px auto;
 }
-.sort_nav 
+.sort_nav
 {
 	display: -webkit-box;
 	display: -moz-box;
 	display: -ms-flexbox;
 	display: -webkit-flex;
 	display: flex;
-	
+
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 	justify-content: space-between;
-	
+
 	width: 70%;
 	margin: 0px auto;
 	overflow: hidden;
@@ -331,7 +331,7 @@ h2
 #content_wrapper .content a:link, #content_wrapper .content a:visited
 {
 	color: #838282;
-	text-decoration: none;	
+	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 }
 
@@ -376,7 +376,7 @@ h2
 #content_wrapper .content .form_group input:-webkit-autofill:focus {
     -webkit-box-shadow: 0px 0px 8px rgba(18, 150, 188, 0.6),0 0 0 50px #ffffff inset !important;
     -webkit-text-fill-color: #333;
-} 
+}
 
 form .save
 {
@@ -472,7 +472,7 @@ footer
 	background: #fff;
 }
 
-@media (max-width:1024px) 
+@media (max-width:1024px)
 {
 	.simple_nav ul, .simple_nav .ul
 	{
@@ -495,7 +495,7 @@ footer
 		max-width: 120px;
 	}
 }
-@media (max-width:750px) 
+@media (max-width:750px)
 {
 	#main_nav li, .simple_nav li, #main_nav .li
 	{
@@ -511,7 +511,7 @@ footer
 		margin-left: 10px;
 	}
 }
-@media (max-width:550px) 
+@media (max-width:550px)
 {
 	.simple_nav ul, .simple_nav .ul
 	{
@@ -542,7 +542,7 @@ footer
 		display: none;
 	}
 }
-@media (max-width:450px) 
+@media (max-width:450px)
 {
 	#main_nav ul li a
 	{
@@ -558,7 +558,7 @@ footer
 		max-width: 50px;
 	}
 }
-@media (max-width:330px) 
+@media (max-width:330px)
 {
 	#main_nav #main_nav_full
 	{
@@ -575,7 +575,7 @@ footer
 }
 
 
-@media print 
+@media print
 {
 	html, body
 	{

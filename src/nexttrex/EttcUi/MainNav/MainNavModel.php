@@ -6,8 +6,8 @@ class MainNavModel implements ModelInterface
     function getEntries()
     {
         $entries = array(
-            "Start" => "?page=start",
-            "Projects" => "?page=projects"
+            "Projects" => "?page=Projects",
+            "Server" => "?page=Server"
         );
 
         return $entries;

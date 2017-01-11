@@ -13,6 +13,11 @@ class Error404View extends AbstractPageView
         return "Error 404";
     }
 
+    function getSubHeading()
+    {
+        return "Page not found";
+    }
+    
     function generateHtml()
     {
         return $this->template->convertTemplate(__DIR__."/templates/Error404View.html");

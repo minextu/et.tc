@@ -31,8 +31,7 @@ class MainView extends AbstractView
 
     function setSubHeading($subHeading)
     {
-        if (!empty($subHeading))
-            $this->subHeading = "<h2>" . $subHeading . "</h2>";
+        $this->subHeading = $subHeading;
     }
 
     function generateHtml()
@@ -44,7 +43,8 @@ class MainView extends AbstractView
             'MSG_PageHeading' => $this->heading,
             'MSG_PageSubHeading' => $this->subHeading,
             'PATH_Assets' => $this->path."/assets",
-            'PATH_Root' => $this->path
+            'PATH_Root' => $this->path,
+            'MSG_CurrentYear' => "2016 - " . date("Y")
         );
         $html = $this->template->convertTemplate(__DIR__."/templates/MainView.html", $placeholders);
 
