@@ -15,6 +15,6 @@ class TestView extends AbstractPageView
 
     function generateHtml()
     {
-        return "Test";
+        return $this->template->convertTemplate(__DIR__."/templates/TestView.html");
     }
 }

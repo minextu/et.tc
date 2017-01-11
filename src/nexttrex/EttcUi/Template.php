@@ -1,7 +1,7 @@
 <?php namespace nexttrex\EttcUi;
 
 /**
-* An instance can generates proper HTML Code out of a templates
+* An instance can generate proper HTML code out of a templates
 */
 class Template
 {

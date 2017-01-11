@@ -1,4 +1,4 @@
-<?php namespace nexttrex\EttcUi\main;
+<?php namespace nexttrex\EttcUi\Main;
 use nexttrex\EttcUi\AbstractView;
 
 class MainView extends AbstractView

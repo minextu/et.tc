@@ -1,4 +1,5 @@
 <?php namespace nexttrex\Ettc\Database;
+use \PDO;
 
 /**
  * A Mysql PDO Connection
@@ -19,7 +20,7 @@ class Mysql implements DatabaseInterface
 
     public function __construct($host, $user, $pw, $db)
     {
-        $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+        $dsn = "mysql:host=$host;dbname=$db;charset=$this->charset";
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

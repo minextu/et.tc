@@ -1,21 +1,49 @@
 <?php namespace nexttrex\EttcUi;
 
+/**
+ * An instance will render the webpage, by using the mvp concept
+ */
 class EttcUi
 {
+    /**
+     * External path to the root directory of ettc
+     * @var   String
+     */
     private $rootDir;
+
+    /**
+     * The main presenter
+     * @var   Main\MainPresenter
+     */
     private $presenter;
-    function __construct($rootDir, $pageName)
+
+    /**
+     * Will init all classed and display the given page
+     * @param   \nexttrex\Ettc\Ettc   $ettc       Main ettc object
+     * @param   String   $rootDir    External path to the root directory
+     * @param   String   $pageName   Page name to render
+     */
+    function __construct($ettc, $rootDir, $pageName)
     {
         $this->rootDir = $rootDir;
         $pagePresenter = $this->initPage($pageName);
         $this->init($pagePresenter);
     }
 
+    /**
+     * Generates the complete HTML code for this page
+     * @return   string   Complete HTML code for this page
+     */
     public function generateHtml()
     {
         return $this->presenter->getView()->generateHtml();
     }
 
+    /**
+     * Inits all model, view, presenter classes and links them together
+     * @param    AbstractPresenter   $pagePresenter   The presenter of the page to be rendered
+     * @return   Main\MainPresenter                   The main presenter
+     */
     private function init($pagePresenter)
     {
         $model = new Main\MainModel();
@@ -49,6 +77,11 @@ class EttcUi
         $this->presenter = $presenter;
     }
 
+    /**
+     * Inits the presenter of the page to be rendered by creating and linking the model and view classes
+     * @param    string   $pageName   Page to be rendered
+     * @return   AbstractPresenter               Presenter class for the page
+     */
     private function initPage($pageName)
     {
         // get all available pages

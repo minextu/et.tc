@@ -1,14 +1,14 @@
 <?php namespace nexttrex\Ettc;
 
-class ProjectTest extends \PHPUnit_Framework_TestCase
+class ProjectTest extends AbstractEttcDatabaseTest
 {
 	public function testProjectCanBeCreated()
 	{
-        $name = "Test Name";
+        $title = "Test Name";
         $description = "A Test Project";
 
         $project = new Project();
-        $project->setName($name);
+        $project->setTitle($title);
         $project->setDescription($description);
     }
 }

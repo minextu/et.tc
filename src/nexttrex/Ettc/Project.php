@@ -2,12 +2,12 @@
 
 class Project
 {
-    private $name;
+    private $title;
     private $description;
 
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
     public function setDescription($description)
