@@ -53,4 +53,12 @@ class Ettc
 
         return $status;
     }
+
+    /**
+     * @return   Database\DatabaseInterface   main database
+     */
+    public function getDb()
+    {
+        return $this->db;
+    }
 }

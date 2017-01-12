@@ -33,6 +33,14 @@ abstract class AbstractPresenter
     }
 
     /**
+     * @return   AbstractModel   Model for this presenter
+     */
+    final function getModel()
+    {
+        return $this->model;
+    }
+
+    /**
      * @param   ModelInterface   $model  Model for this presenter
      */
     final function setModel($model)

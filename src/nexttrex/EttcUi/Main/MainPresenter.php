@@ -3,12 +3,12 @@ use nexttrex\EttcUi\AbstractPresenter;
 
 class MainPresenter extends AbstractPresenter
 {
-    private $mainNavPresenter;
+    private $pageElementPresenters;
     private $pagePresenter;
 
-    function setMainNavPresenter($mainNavPresenter)
+    function setPageElementPresenters($pageElementPresenters)
     {
-        $this->mainNavPresenter = $mainNavPresenter;
+        $this->pageElementPresenters = $pageElementPresenters;
     }
 
     function setPagePresenter($pagePresenter)
@@ -18,11 +18,14 @@ class MainPresenter extends AbstractPresenter
 
     function init()
     {
-        $mainNavHtml = $this->mainNavPresenter->getView()->generateHtml();
-        $this->view->setMainNav($mainNavHtml);
+        $mainNav = $this->pageElementPresenters['MainNav']->getView();
+        $this->view->setMainNav($mainNav);
 
-        $pageHtml = $this->pagePresenter->getView()->generateHtml();
-        $this->view->setPage($pageHtml);
+        $userNav = $this->pageElementPresenters['UserNav']->getView();
+        $this->view->setUserNav($userNav);
+
+        $page = $this->pagePresenter->getView();
+        $this->view->setPage($page);
     }
 
     function setTitle($title)

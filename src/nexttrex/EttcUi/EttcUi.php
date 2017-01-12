@@ -12,10 +12,18 @@ class EttcUi
     private $rootDir;
 
     /**
+     * main ettc object
+     * @var   \nexttrex\Ettc\Ettc
+     */
+    private $ettc;
+
+    /**
      * The main presenter
      * @var   Main\MainPresenter
      */
     private $presenter;
+
+    private $pageElements = ["MainNav", "UserNav"];
 
     /**
      * Will init all classed and display the given page
@@ -26,8 +34,11 @@ class EttcUi
     function __construct($ettc, $rootDir, $pageName)
     {
         $this->rootDir = $rootDir;
+        $this->ettc = $ettc;
+
+        $pageElementPresenters = $this->initPageElements();
         $pagePresenter = $this->initPage($pageName);
-        $this->init($pagePresenter);
+        $this->init($pagePresenter, $pageElementPresenters);
     }
 
     /**
@@ -44,37 +55,67 @@ class EttcUi
      * @param    AbstractPresenter   $pagePresenter   The presenter of the page to be rendered
      * @return   Main\MainPresenter                   The main presenter
      */
-    private function init($pagePresenter)
+    private function init($pagePresenter, $pageElementPresenters)
     {
         $model = new Main\MainModel();
-        $mainNavModel = new MainNav\MainNavModel();
-
         $view = new Main\MainView($this->rootDir);
-        $mainNavView = new MainNav\MainNavView($this->rootDir);
-
         $presenter = new Main\MainPresenter();
-        $mainNavPresenter = new MainNav\MainNavPresenter();
 
         // link vars for main
         $presenter->setView($view);
         $presenter->setModel($model);
-        $presenter->setMainNavPresenter($mainNavPresenter);
+        $presenter->setPageElementPresenters($pageElementPresenters);
         $presenter->setPagePresenter($pagePresenter);
         $view->setPresenter($presenter);
 
-        // link vars for mainNav
-        $mainNavPresenter->setView($mainNavView);
-        $mainNavPresenter->setModel($mainNavModel);
-        $mainNavView->setPresenter($mainNavPresenter);
+        // init models
+        $model->setDb($this->ettc->getDb());
+        $pagePresenter->getModel()->setMainModel($model);
+        foreach ($pageElementPresenters as $elementPresenter)
+            $elementPresenter->getModel()->setMainModel($model);
 
         // init all presenters
         $pagePresenter->setMainPresenter($presenter);
         $pagePresenter->initPage();
         $pagePresenter->init();
-        $mainNavPresenter->init();
+        foreach ($pageElementPresenters as $elementPresenter)
+            $elementPresenter->init();
         $presenter->init();
 
+        // init all views
+        $pagePresenter->getView()->init();
+        foreach ($pageElementPresenters as $elementPresenter)
+            $elementPresenter->getView()->init();
+        $presenter->getView()->init();
+
         $this->presenter = $presenter;
+    }
+
+    private function initPageElements()
+    {
+        $presenters = [];
+        foreach ($this->pageElements as $element)
+        {
+            // generate names for all classes
+            $elementClassName =  "nexttrex\\EttcUi\\PageElement\\$element\\$element";
+            $elementModelName = $elementClassName . "Model";
+            $elementViewName = $elementClassName . "View";
+            $elementPresenterName = $elementClassName . "Presenter";
+
+            // create instances
+            $model = new $elementModelName();
+            $view = new $elementViewName($this->rootDir);
+            $presenter = new $elementPresenterName();
+
+            // link vars
+            $presenter->setView($view);
+            $presenter->setModel($model);
+            $view->setPresenter($presenter);
+
+            $presenters[$element] = $presenter;
+        }
+
+        return $presenters;
     }
 
     /**

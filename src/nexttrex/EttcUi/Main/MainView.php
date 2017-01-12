@@ -4,6 +4,7 @@ use nexttrex\EttcUi\AbstractView;
 class MainView extends AbstractView
 {
     private $mainNav;
+    private $userNav;
     private $page;
     private $title;
     private $heading;
@@ -12,6 +13,11 @@ class MainView extends AbstractView
     function setMainNav($mainNav)
     {
         $this->mainNav = $mainNav;
+    }
+
+    function setUserNav($userNav)
+    {
+        $this->userNav = $userNav;
     }
 
     function setPage($page)
@@ -37,8 +43,9 @@ class MainView extends AbstractView
     function generateHtml()
     {
         $placeholders = array(
-            'VIEW_MainNav' => $this->mainNav,
-            'VIEW_Page' => $this->page,
+            'VIEW_MainNav' => $this->mainNav->generateHtml(),
+            'VIEW_UserNav' => $this->userNav->generateHtml(),
+            'VIEW_Page' => $this->page->generateHtml(),
             'MSG_PageTitle' => $this->title,
             'MSG_PageHeading' => $this->heading,
             'MSG_PageSubHeading' => $this->subHeading,

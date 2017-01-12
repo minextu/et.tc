@@ -1,5 +1,6 @@
-<?php namespace nexttrex\Ettc;
+<?php namespace nexttrex\Ettc\Account;
 use Hautelook\Phpass\PasswordHash;
+use \nexttrex\Ettc\Exception;
 
 /**
  * Can Create and Load Info about a User using a Database
@@ -35,6 +36,11 @@ class User
      * @var   string
      */
     private $hash;
+
+    /**
+     * User rank id (defaults to guest rank with id 0)
+     */
+    private $rank = 0;
 
     /**
      * Creates a new Instance. Loads User Info when $id is specified
@@ -90,6 +96,18 @@ class User
     }
 
     /**
+     * Get User rank id
+     * @return   int   User rank id
+     */
+    public function getRank()
+    {
+        if (!isset($this->rank))
+            throw new Exception\Exception("User has to be loaded first.");
+
+        return $this->rank;
+    }
+
+    /**
      * Set User Nickname
      *
      * Throws InvalidNickname on invalid nicknames
@@ -138,6 +156,19 @@ class User
     }
 
     /**
+     * Set user rank id
+     *
+     * @param   int   $rank   User rank id
+     */
+    public function setRank($rank)
+    {
+        // TODO: check if rank exists
+
+		$this->rank = $rank;
+        return true;
+    }
+
+    /**
      * Load User Info using a nickname
      * @param    string   $nick   User Nickname to search for
      * @return   bool             True if User could be found, False otherwise
@@ -176,6 +207,7 @@ class User
         $this->nick = $user['nick'];
         $this->email = $user['email'];
         $this->hash = $user['hash'];
+        $this->rank = $user['rank'];
 
         return true;
     }
@@ -206,8 +238,10 @@ class User
             throw new Exception\Exception("User was loaded and is not allowed to be recreated.");
         if (empty($this->nick))
             throw new Exception\Exception("Nickname has to set via setNick first.");
+        if (empty($this->hash))
+            throw new Exception\Exception("Password has to set via setPassword first.");
 
-        $status = $this->userDb->addUser($this->nick, $this->email, $this->hash);
+        $status = $this->userDb->addUser($this->nick, $this->email, $this->hash, $this->rank);
         return $status;
     }
 

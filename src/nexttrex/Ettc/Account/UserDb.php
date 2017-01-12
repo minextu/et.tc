@@ -1,4 +1,4 @@
-<?php namespace nexttrex\Ettc;
+<?php namespace nexttrex\Ettc\Account;
 use PDO;
 
 /**
@@ -57,15 +57,16 @@ class UserDb
      * @param    string   $nick    User nickname
      * @param    string   $email   User e-mail
      * @param    string   $hash    Hashed password
+     * @param    int      $rank    User rank id
      * @return   bool              True on success, False otherwise
      */
-    public function addUser($nick, $email, $hash)
+    public function addUser($nick, $email, $hash, $rank)
     {
         $sql = 'INSERT into users
-                (nick, email, hash)
-                VALUES (?, ?, ?)';
+                (nick, email, hash, rank)
+                VALUES (?, ?, ?, ?)';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$nick, $email, $hash]);
+        $status = $stmt->execute([$nick, $email, $hash, $rank]);
 
         return $status;
     }

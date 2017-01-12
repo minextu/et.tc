@@ -1,0 +1,7 @@
+RedirectMatch 403 /\.git
+AddDefaultCharset utf-8
+RewriteEngine on
+
+RewriteRule ^([^.]+)$ index.php?page=$1
+
+Options -Indexes

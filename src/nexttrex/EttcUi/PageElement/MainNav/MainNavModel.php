@@ -1,7 +1,7 @@
-<?php namespace nexttrex\EttcUi\MainNav;
-use nexttrex\ettcUi\ModelInterface;
+<?php namespace nexttrex\EttcUi\PageElement\MainNav;
+use nexttrex\EttcUi\PageElement\AbstractPageElementModel;
 
-class MainNavModel implements ModelInterface
+class MainNavModel extends AbstractPageElementModel
 {
     function getEntries()
     {

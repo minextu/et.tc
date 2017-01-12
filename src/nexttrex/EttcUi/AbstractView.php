@@ -45,4 +45,12 @@ abstract class AbstractView
      * @return   string   html code for this view
      */
     abstract function generateHtml();
+
+    /**
+     * Will be called after setView and setModel
+     */
+    function init()
+    {
+
+    }
 }

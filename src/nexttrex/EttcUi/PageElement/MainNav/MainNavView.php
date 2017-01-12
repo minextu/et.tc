@@ -1,7 +1,7 @@
-<?php namespace nexttrex\EttcUi\MainNav;
-use nexttrex\ettcUi\AbstractView;
+<?php namespace nexttrex\EttcUi\PageElement\MainNav;
+use nexttrex\EttcUi\PageElement\AbstractPageElementView;
 
-class MainNavView extends AbstractView
+class MainNavView extends AbstractPageElementView
 {
     private $entries;
 

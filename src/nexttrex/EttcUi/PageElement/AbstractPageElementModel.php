@@ -1,7 +1,7 @@
-<?php namespace nexttrex\EttcUi\Page;
+<?php namespace nexttrex\EttcUi\PageElement;
 use nexttrex\EttcUi\AbstractModel;
 
-abstract class AbstractPageModel extends AbstractModel
+abstract class AbstractPageElementModel extends AbstractModel
 {
     /**
      * The main model

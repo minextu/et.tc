@@ -1,4 +1,5 @@
-<?php namespace nexttrex\Ettc;
+<?php namespace nexttrex\Ettc\Account;
+use \nexttrex\Ettc\AbstractEttcDatabaseTest;
 
 class UserTest extends AbstractEttcDatabaseTest
 {
@@ -31,7 +32,7 @@ class UserTest extends AbstractEttcDatabaseTest
         $this->assertEquals(1, $this->getConnection()->getRowCount('users'), "Inserting failed");
 
         // check if values are saved correctly
-        $queryTable = $this->getConnection()->createQueryTable('users', 'SELECT id,nick,email FROM users');
+        $queryTable = $this->getConnection()->createQueryTable('users', 'SELECT id,nick,email,rank FROM users');
         $expectedTable = $this->createFlatXmlDataSet(__DIR__."/UserTest.xml")->getTable("users");
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -96,6 +97,16 @@ class UserTest extends AbstractEttcDatabaseTest
         $this->setExpectedException('nexttrex\Ettc\Exception\Exception');
 
         $user = new User($this->getDb());
+
+        $createStatus = $user->create();
+    }
+
+    public function testUserWithoutPasswordCanNotBeCreated()
+    {
+        $this->setExpectedException('nexttrex\Ettc\Exception\Exception');
+
+        $user = new User($this->getDb());
+        $user->setNick("Test");
 
         $createStatus = $user->create();
     }
@@ -204,4 +215,36 @@ class UserTest extends AbstractEttcDatabaseTest
         $user = new User($this->getDb());
         $passwordStatus = $user->setPassword("abc12");
     }
+
+    /**
+     * Rank Checks
+     */
+     public function testAdminUserCanBeCreated()
+     {
+         $user = new User($this->getDb());
+
+         // save user
+         $nickname = "phpUnit_Test_Admin";
+         $email = "testadmin@nexttrex.de";
+         $password = "abc123";
+         $rank = 1;
+
+         $nicknameStatus = $user->setNick($nickname);
+         $this->assertTrue($nicknameStatus);
+         $emailStatus = $user->setEmail($email);
+         $this->assertTrue($emailStatus);
+         $passwordStatus = $user->setPassword($password);
+         $this->assertTrue($passwordStatus);
+         $rankStatus = $user->setRank($rank);
+         $this->assertTrue($rankStatus);
+
+         $createStatus = $user->create();
+         $this->assertTrue($createStatus);
+
+         // load user again and check rank
+         $user = new User($this->getDb());
+         $loadStatus = $user->loadNick("phpUnit_Test_Admin");
+         $this->assertTrue($loadStatus);
+         $this->assertEquals($rank, $user->getRank(), "User rank wasn't saved");
+     }
 }
