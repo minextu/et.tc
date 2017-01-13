@@ -27,7 +27,7 @@ use Minextu\Ettc\Exception\InvalidId;
 
 class Delete implements Routable
 {
-    public function delete($id)
+    public function delete($id=false)
     {
         $ettc = new Ettc();
 
