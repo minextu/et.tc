@@ -1,4 +1,4 @@
-<?php namespace nexttrex\Ettc\Database\Migration;
+<?php namespace Minextu\Ettc\Database\Migration;
 
 class addProjectsTable extends AbstractMigration
 {
