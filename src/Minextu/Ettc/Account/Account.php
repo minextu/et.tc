@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Account;
+use \Minextu\Ettc\Exception\Exception;
 /**
  * Static class used to login and logout using the session cookie
  */
@@ -12,12 +13,21 @@ class Account
     static function checkLogin($db)
     {
         if (!isset($_SESSION['ettc']['userId']))
-            return false;
+            $user = false;
         else
         {
-            $user = new User($db, $_SESSION['ettc']['userId']);
-            return $user;
+            try
+            {
+                $user = new User($db, $_SESSION['ettc']['userId']);
+            }
+            catch(Exception $e)
+            {
+                self::logout();
+                $user = false;
+            }
         }
+
+        return $user;
     }
 
     /**
