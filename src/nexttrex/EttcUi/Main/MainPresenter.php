@@ -18,14 +18,14 @@ class MainPresenter extends AbstractPresenter
 
     function init()
     {
-        $mainNav = $this->pageElementPresenters['MainNav']->getView();
-        $this->view->setMainNav($mainNav);
+        $pageElementViews = [];
+        foreach ($this->pageElementPresenters as $name => $elementPresenter)
+        {
+            $pageElementViews[$name] = $elementPresenter->getView();
+        }
+        $pageElementViews['Page'] = $this->pagePresenter->getView();
 
-        $userNav = $this->pageElementPresenters['UserNav']->getView();
-        $this->view->setUserNav($userNav);
-
-        $page = $this->pagePresenter->getView();
-        $this->view->setPage($page);
+        $this->view->setPageElements($pageElementViews);
     }
 
     function setTitle($title)

@@ -7,7 +7,7 @@ class Account
     /**
      * Check if the current user is logged in
      * @param    \nexttrex\Ettc\Database\DatabaseInterface   $db   Main database
-     * @return   bool                                              True when logged in, false otherwise
+     * @return   bool|User                                         Matching user object when logged in, false otherwise
      */
     static function checkLogin($db)
     {

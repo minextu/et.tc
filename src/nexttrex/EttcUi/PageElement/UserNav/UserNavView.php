@@ -13,10 +13,15 @@ class UserNavView extends AbstractPageElementView
 
     function generateHtml()
     {
+        $placeholders = [
+            'MSG_Nickname' => $this->presenter->getNickname(),
+            'IMG_Avatar' => $this->presenter->getAvatar()
+        ];
+
         if ($this->loggedIn)
-            $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedIn.html");
+            $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedIn.html", $placeholders);
         else
-            $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedOut.html");
+            $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedOut.html", $placeholders);
 
         return $html;
     }

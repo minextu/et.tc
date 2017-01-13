@@ -3,26 +3,14 @@ use nexttrex\EttcUi\AbstractView;
 
 class MainView extends AbstractView
 {
-    private $mainNav;
-    private $userNav;
-    private $page;
+    private $pageElements;
     private $title;
     private $heading;
     private $subHeading;
 
-    function setMainNav($mainNav)
+    function setPageElements($pageElements)
     {
-        $this->mainNav = $mainNav;
-    }
-
-    function setUserNav($userNav)
-    {
-        $this->userNav = $userNav;
-    }
-
-    function setPage($page)
-    {
-        $this->page = $page;
+        $this->pageElements = $pageElements;
     }
 
     function setTitle($title)
@@ -42,17 +30,20 @@ class MainView extends AbstractView
 
     function generateHtml()
     {
-        $placeholders = array(
-            'VIEW_MainNav' => $this->mainNav->generateHtml(),
-            'VIEW_UserNav' => $this->userNav->generateHtml(),
-            'VIEW_Page' => $this->page->generateHtml(),
+        $placeholders = [];
+        foreach ($this->pageElements as $name => $element)
+        {
+            $placeholders["VIEW_$name"] = $element->generateHtml();
+        }
+
+        $placeholders = array_merge($placeholders, array(
             'MSG_PageTitle' => $this->title,
             'MSG_PageHeading' => $this->heading,
             'MSG_PageSubHeading' => $this->subHeading,
             'PATH_Assets' => $this->path."/assets",
             'PATH_Root' => $this->path,
             'MSG_CurrentYear' => "2016 - " . date("Y")
-        );
+        ));
         $html = $this->template->convertTemplate(__DIR__."/templates/MainView.html", $placeholders);
 
         return $html;

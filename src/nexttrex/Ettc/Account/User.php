@@ -89,7 +89,7 @@ class User
      */
     public function getEmail()
     {
-        if (!isset($this->email))
+        if (!isset($this->id))
             throw new Exception\Exception("User has to be loaded first.");
 
         return $this->email;

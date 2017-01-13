@@ -74,6 +74,18 @@ class EttcUi
         foreach ($pageElementPresenters as $elementPresenter)
             $elementPresenter->getModel()->setMainModel($model);
 
+        // init all views
+        $pagePresenter->getView()->init();
+        foreach ($pageElementPresenters as $elementPresenter)
+            $elementPresenter->getView()->init();
+        $presenter->getView()->init();
+
+        // init all models
+        $pagePresenter->getModel()->init();
+        foreach ($pageElementPresenters as $elementPresenter)
+            $elementPresenter->getModel()->init();
+        $presenter->getModel()->init();
+
         // init all presenters
         $pagePresenter->setMainPresenter($presenter);
         $pagePresenter->initPage();
@@ -81,12 +93,6 @@ class EttcUi
         foreach ($pageElementPresenters as $elementPresenter)
             $elementPresenter->init();
         $presenter->init();
-
-        // init all views
-        $pagePresenter->getView()->init();
-        foreach ($pageElementPresenters as $elementPresenter)
-            $elementPresenter->getView()->init();
-        $presenter->getView()->init();
 
         $this->presenter = $presenter;
     }
