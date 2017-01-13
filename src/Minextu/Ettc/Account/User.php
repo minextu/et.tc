@@ -38,9 +38,9 @@ class User
     private $hash;
 
     /**
-     * User rank id (defaults to guest rank with id 0)
+     * User rank id (defaults to guest rank with id 1)
      */
-    private $rank = 0;
+    private $rank = 1;
 
     /**
      * Creates a new Instance. Loads User Info when $id is specified
@@ -201,7 +201,7 @@ class User
      * @param    array   $user   User Array created by a Database Object
      * @return   bool            True on success, False otherwise
      */
-    public function load($user)
+    private function load($user)
     {
         $this->id = $user['id'];
         $this->nick = $user['nick'];

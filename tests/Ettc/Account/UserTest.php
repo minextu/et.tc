@@ -13,14 +13,14 @@ class UserTest extends AbstractEttcDatabaseTest
         $password = "abc123";
 
         $nicknameStatus = $user->setNick($nickname);
-        $this->assertTrue($nicknameStatus);
+        $this->assertTrue($nicknameStatus, "setNick didn't return True");
         $emailStatus = $user->setEmail($email);
-        $this->assertTrue($emailStatus);
+        $this->assertTrue($emailStatus, "setEmail didn't return True");
         $passwordStatus = $user->setPassword($password);
-        $this->assertTrue($passwordStatus);
+        $this->assertTrue($passwordStatus, "setPassword didn't return True");
 
         $createStatus = $user->create();
-        $this->assertTrue($createStatus);
+        $this->assertTrue($createStatus, "create didn't return True");
     }
 
     public function testUserCanBeCreated()
@@ -227,7 +227,7 @@ class UserTest extends AbstractEttcDatabaseTest
          $nickname = "phpUnit_Test_Admin";
          $email = "testadmin@nexttrex.de";
          $password = "abc123";
-         $rank = 1;
+         $rank = 2;
 
          $nicknameStatus = $user->setNick($nickname);
          $this->assertTrue($nicknameStatus);

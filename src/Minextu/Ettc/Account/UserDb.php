@@ -8,12 +8,12 @@ class UserDb
 {
     /**
      * Main database
-     * @var   Database\DatabaseInterface
+     * @var   \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   Database\DatabaseInterface   $db   Main database
+     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
      */
     public function __construct($db)
     {

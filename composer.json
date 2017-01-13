@@ -1,6 +1,7 @@
 {
 	"require": {
-		"hautelook/phpass": "dev-master"
+		"hautelook/phpass": "dev-master",
+		"respect/rest": "^0.6.0"
 	},
 	"require-dev": {
         "phpdocumentor/phpdocumentor": "2.*",

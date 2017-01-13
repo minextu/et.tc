@@ -2,6 +2,15 @@ RedirectMatch 403 /\.git
 AddDefaultCharset utf-8
 RewriteEngine on
 
-RewriteRule ^([^.]+)$ index.php?page=$1
+# if file exists
+RewriteCond %{REQUEST_FILENAME} -s
+# return that file
+RewriteRule ^.*$ - [NC,L]
 
-Options -Indexes
+# else...
+RewriteRule api/ api.php [L]
+RewriteRule ^(.+)$ index.php?page=$1 [L]
+
+
+
+Options -Indexes -Multiviews

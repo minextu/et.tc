@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8c9878d811c2aa854ba846b22c3e26c",
+    "content-hash": "f75c25c5d867bf9735e3b992b9376f5c",
     "packages": [
         {
             "name": "hautelook/phpass",
@@ -49,6 +49,55 @@
                 "security"
             ],
             "time": "2016-12-06 21:00:52"
+        },
+        {
+            "name": "respect/rest",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Rest.git",
+                "reference": "faecd8468e8aba1ee728c3afdfcf7ad5f20877c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Respect/Rest/zipball/faecd8468e8aba1ee728c3afdfcf7ad5f20877c3",
+                "reference": "faecd8468e8aba1ee728c3afdfcf7ad5f20877c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Respect\\": "library/Respect"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Respect/Data Contributors",
+                    "homepage": "https://github.com/Respect/Data/graphs/contributors"
+                }
+            ],
+            "description": "Thin controller for RESTful applications",
+            "homepage": "http://respect.li/",
+            "time": "2016-05-13 03:14:47"
         }
     ],
     "packages-dev": [
@@ -263,7 +312,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-01-09T00:44:36+00:00"
+            "time": "2017-01-09 00:44:36"
         },
         {
             "name": "doctrine/instantiator",
@@ -417,15 +466,15 @@
         },
         {
             "name": "herrera-io/json",
-            "version": "dev-master",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kherge-abandoned/php-json.git",
+                "url": "https://github.com/kherge-php/json.git",
                 "reference": "60c696c9370a1e5136816ca557c17f82a6fa83f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kherge-abandoned/php-json/zipball/60c696c9370a1e5136816ca557c17f82a6fa83f1",
+                "url": "https://api.github.com/repos/kherge-php/json/zipball/60c696c9370a1e5136816ca557c17f82a6fa83f1",
                 "reference": "60c696c9370a1e5136816ca557c17f82a6fa83f1",
                 "shasum": ""
             },
@@ -473,7 +522,7 @@
                 "schema",
                 "validate"
             ],
-            "time": "2013-10-30 16:51:34"
+            "time": "2013-10-30T16:51:34+00:00"
         },
         {
             "name": "herrera-io/phar-update",
@@ -691,7 +740,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-01-11T12:04:28+00:00"
+            "time": "2017-01-11 12:04:28"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -877,7 +926,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2017-01-11T16:17:39+00:00"
+            "time": "2017-01-11 16:17:39"
         },
         {
             "name": "nikic/php-parser",
@@ -1537,7 +1586,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/console",
@@ -1598,7 +1647,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-08T20:43:03+00:00"
+            "time": "2017-01-08 20:43:03"
         },
         {
             "name": "symfony/css-selector",
@@ -1651,7 +1700,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:33:09+00:00"
+            "time": "2017-01-02 20:33:09"
         },
         {
             "name": "symfony/debug",
@@ -1764,7 +1813,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:33:09+00:00"
+            "time": "2017-01-02 20:33:09"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1824,7 +1873,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/filesystem",
@@ -1922,7 +1971,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2030,7 +2079,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/stopwatch",
@@ -2079,7 +2128,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-02 20:30:24"
         },
         {
             "name": "symfony/translation",
@@ -2151,12 +2200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "7fd1e2baa873466f12d150552de068b109302ad2"
+                "reference": "3b1a3188efea75ec7c0419a2568b6e5f82031811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/7fd1e2baa873466f12d150552de068b109302ad2",
-                "reference": "7fd1e2baa873466f12d150552de068b109302ad2",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/3b1a3188efea75ec7c0419a2568b6e5f82031811",
+                "reference": "3b1a3188efea75ec7c0419a2568b6e5f82031811",
                 "shasum": ""
             },
             "require": {
@@ -2216,7 +2265,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-08T20:43:03+00:00"
+            "time": "2017-01-12T19:24:25+00:00"
         },
         {
             "name": "twig/twig",
@@ -2224,12 +2273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "feb9bf539feae70a16862dbf5ff6c3e2570286e6"
+                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/feb9bf539feae70a16862dbf5ff6c3e2570286e6",
-                "reference": "feb9bf539feae70a16862dbf5ff6c3e2570286e6",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b3796b14088e5c9039de6cf2291566c95aa76c1",
+                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1",
                 "shasum": ""
             },
             "require": {
@@ -2277,7 +2326,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-01-11T16:01:13+00:00"
+            "time": "2017-01-11T19:37:33+00:00"
         },
         {
             "name": "zendframework/zend-cache",

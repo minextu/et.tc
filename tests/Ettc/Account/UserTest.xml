@@ -1,4 +1,4 @@
 <?xml version="1.0" ?>
 <dataset>
-    <users id="1" nick="phpUnit_Test_User" email="testuser@nexttrex.de" rank="0"/>
+    <users id="1" nick="phpUnit_Test_User" email="testuser@nexttrex.de" rank="1"/>
 </dataset>
