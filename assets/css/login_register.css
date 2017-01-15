@@ -1,90 +1,77 @@
-.form_text
-{
-	width: 70%;
-	margin: 20px auto;
-	text-align:center;
-	margin-bottom: 30px;
+.form_text {
+    width: 70%;
+    margin: 20px auto;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.contained_form .message_warn, .contained_form .message_success
-{
-	padding: 10px;
-	width: calc(80% - 20px);
-	margin: auto auto 20px auto;
+.contained_form .message_warn, .contained_form .message_success {
+    padding: 10px;
+    width: calc(80% - 20px);
+    margin: auto auto 20px auto;
 }
 
-.contained_form
-{
-	width: 70%;
-	margin: 20px auto;
-	border-top: 1px solid rgba(0,0,0,0.1);
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	padding: 20px 0;
-}
-.contained_form .form_group
-{
-	width: 80%;
-	margin: auto auto 10px auto;
-}
-.contained_form .form_group input
-{
-	padding: 10px !important;
-	width: calc(100% - 20px) !important;
-}
-.contained_form input:focus
-{
-	box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset;
-	outline-width: 0;
+.contained_form {
+    width: 70%;
+    margin: 20px auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
 }
 
-.contained_form .save
-{
-	width: 80%;
-	margin: 20px auto auto auto !important;
-}
-.contained_form .save input
-{
-	padding: 10px 20px !important;
+.contained_form .form_group {
+    width: 80%;
+    margin: auto auto 10px auto;
 }
 
-input[type=checkbox]
-{
-	width: auto !important;
+.contained_form .form_group input {
+    padding: 10px !important;
+    width: calc(100% - 20px) !important;
 }
 
-@media (max-width:1024px) 
-{
-	.form_text
-	{
-		width: 90%;
-	}
-	.contained_form
-	{
-		width: 90%;
-	}
+.contained_form input:focus {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+    outline-width: 0;
 }
-@media (max-width:750px) 
-{
-	.contained_form .message_warn, .contained_form .message_success
-	{
-		margin-top: 10px !important;
-		width: calc(100% - 20px);
-	}
-	.form_text
-	{
-		width: 100%;
-	}
-	.contained_form
-	{
-		width: 100%;
-		padding: 0px;
-	}
-	.contained_form .form_group
-	{
-		width: 100%;
-	}
-	.contained_form .save
-	{
-		width: 100%;
-	}
+
+.contained_form .save {
+    width: 80%;
+    margin: 20px auto auto auto !important;
+}
+
+.contained_form .save input {
+    padding: 10px 20px !important;
+}
+
+input[type=checkbox] {
+    width: auto !important;
+}
+
+@media (max-width:1024px) {
+    .form_text {
+        width: 90%;
+    }
+    .contained_form {
+        width: 90%;
+    }
+}
+
+@media (max-width:750px) {
+    .contained_form .message_warn, .contained_form .message_success {
+        margin-top: 10px !important;
+        width: calc(100% - 20px);
+    }
+    .form_text {
+        width: 100%;
+    }
+    .contained_form {
+        width: 100%;
+        padding: 0px;
+    }
+    .contained_form .form_group {
+        width: 100%;
+    }
+    .contained_form .save {
+        width: 100%;
+    }
 }

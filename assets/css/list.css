@@ -1,0 +1,64 @@
+.list {
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+    padding: 0;
+}
+
+.list .entry {
+    display: inline-block;
+    margin-right: 1.4%;
+    margin-bottom: 50px;
+    width: 32%;
+    text-align: left;
+    background: white;
+    vertical-align: top;
+}
+
+.list .entry:nth-child(3n+3) {
+    margin-right: 0px;
+}
+
+.list .entry .image {
+    width: 100%;
+    overflow: hidden;
+}
+
+.list h3 b {
+    color: black;
+}
+
+.list .entry .image img {
+    width: 100%;
+}
+
+.list .entry .text {
+    display: block;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.list .entry .text h3 {
+    font-size: 15px;
+    margin: 0px 0px 5px 0px;
+}
+
+.list .entry .date {
+    float: right;
+    font-size: 12px;
+    color: #6a6a6a;
+}
+
+.list .entry .date img {
+    margin-right: 2px;
+    margin-left: 7px;
+    height: 8px;
+}
+
+@media (max-width:780px) {
+    .list .entry {
+        margin-right: 0px;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+}
