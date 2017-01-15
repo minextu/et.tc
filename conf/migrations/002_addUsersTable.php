@@ -5,16 +5,16 @@ class addUsersTable extends AbstractMigration
     public function upgrade()
     {
         $sql = '
-		CREATE TABLE `users`
-		(
-			`id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
-			`nick` VARCHAR(30) NOT NULL ,
-			`email` VARCHAR(100) NULL ,
-			`hash` VARCHAR(100) NULL DEFAULT NULL ,
-			`rank` INT(255) NOT NULL,
-			`registerDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-			PRIMARY KEY (`id`)
-		)';
+        CREATE TABLE `users`
+        (
+            `id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
+            `nick` VARCHAR(30) NOT NULL ,
+            `email` VARCHAR(100) NULL ,
+            `hash` VARCHAR(100) NULL DEFAULT NULL ,
+            `rank` INT(255) NOT NULL,
+            `registerDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+            PRIMARY KEY (`id`)
+        )';
 
         return $this->db->getPdo()->prepare($sql)->execute();
     }
@@ -22,8 +22,8 @@ class addUsersTable extends AbstractMigration
     public function downgrade()
     {
         $sql = '
-		DROP TABLE `users`
-		';
+        DROP TABLE `users`
+        ';
 
         return $this->db->getPdo()->prepare($sql)->execute();
     }
