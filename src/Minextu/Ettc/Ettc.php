@@ -44,12 +44,13 @@ class Ettc
         $currentVersion = $this->config->get("dbVersion");
         $targetVersion = $this->config->get("dbTargetVersion");
 
-        $migrator = new Database\Migration\Migrator($currentVersion,$targetVersion,$this->db);
+        $migrator = new Database\Migration\Migrator($currentVersion, $targetVersion, $this->db);
         $status = $migrator->migrateFolder();
 
         $newCurrentVersion = $migrator->getCurrentVersion();
-        if ($currentVersion != $newCurrentVersion)
+        if ($currentVersion != $newCurrentVersion) {
             $this->config->set("dbVersion", $newCurrentVersion);
+        }
 
         return $status;
     }

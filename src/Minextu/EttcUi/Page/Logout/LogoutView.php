@@ -1,19 +1,20 @@
 <?php namespace Minextu\EttcUi\Page\Logout;
+
 use Minextu\EttcUi\Page\AbstractPageView;
 
 class LogoutView extends AbstractPageView
 {
-    function getTitle()
+    public function getTitle()
     {
         return "Logout";
     }
 
-    function getHeading()
+    public function getHeading()
     {
         return "Logout";
     }
 
-    function generateHtml()
+    public function generateHtml()
     {
         return false;
     }
@@ -21,7 +22,7 @@ class LogoutView extends AbstractPageView
     /**
      * Redirects the user to the starting page using a php header
      */
-    function redirectToStart()
+    public function redirectToStart()
     {
         header("Location: " . $this->path);
         die();

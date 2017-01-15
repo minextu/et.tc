@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcApi\Project;
+
 use Minextu\Ettc\Ettc;
 
 /**
@@ -13,11 +14,11 @@ use Minextu\Ettc\Ettc;
  * @apiError MissingValues Id wasn't transmited
  * @apiError NoPermissions No permissions to delete this project
  * @apiError NotFound      Project couldn't be found
- *     @apiErrorExample Error-Response:
- *     HTTP/1.1 403 Forbidden
- *     {
- *       "error": "NoPermissions"
- *     }
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 403 Forbidden
+ * {
+ *   "error": "NoPermissions"
+ * }
  **/
 
 use Respect\Rest\Routable;
@@ -34,40 +35,27 @@ class Delete implements Routable
         $loggedin = $this->checkLoggedIn($ettc);
         $permissions = $this->checkPermissions($ettc);
 
-        if ($id === false)
-        {
+        if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        }
-        else if (!$loggedin)
-        {
+        } elseif (!$loggedin) {
             http_response_code(403);
             $answer = ["error" => "NotLoggedIn"];
-        }
-        else if (!$permissions)
-        {
+        } elseif (!$permissions) {
             http_response_code(403);
             $answer = ["error" => "NoPermissions"];
-        }
-        else
-        {
+        } else {
             $invalidId = false;
-            try
-            {
+            try {
                 $project = new Project($ettc->getDb(), $id);
-            }
-            catch(InvalidId $e)
-            {
+            } catch (InvalidId $e) {
                 $invalidId = true;
             }
 
-            if ($invalidId)
-            {
+            if ($invalidId) {
                 http_response_code(404);
                 $answer = ["error" => "NotFound"];
-            }
-            else
-            {
+            } else {
                 $project->delete();
                 $answer = [];
             }
@@ -81,8 +69,9 @@ class Delete implements Routable
         $loggedin = false;
         $user = Account::checkLogin($ettc->getDb());
 
-        if ($user)
+        if ($user) {
             $loggedin = true;
+        }
 
         return $loggedin;
     }
@@ -93,8 +82,9 @@ class Delete implements Routable
 
         // only proceed if admin
         // TODO: check permissions instead of rank
-        if ($user && $user->getRank() == 2)
+        if ($user && $user->getRank() == 2) {
             $permissions = true;
+        }
 
         return $permissions;
     }

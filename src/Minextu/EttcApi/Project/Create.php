@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcApi\Project;
+
 use Minextu\Ettc\Ettc;
 
 /**
@@ -28,7 +29,7 @@ use Minextu\Ettc\Ettc;
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
  * {
- *    error": "NoPermissions"
+ *    "error": "NoPermissions"
  * }
  **/
 
@@ -48,23 +49,16 @@ class Create implements Routable
         $loggedin = $this->checkLoggedIn($ettc);
         $permissions = $this->checkPermissions($ettc);
 
-        if ($title === false || $description === false)
-        {
+        if ($title === false || $description === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        }
-        else if (!$loggedin)
-        {
+        } elseif (!$loggedin) {
             http_response_code(403);
             $answer = ["error" => "NotLoggedIn"];
-        }
-        else if (!$permissions)
-        {
+        } elseif (!$permissions) {
             http_response_code(403);
             $answer = ["error" => "NoPermissions"];
-        }
-        else
-        {
+        } else {
             $project = new Project($ettc->getDb());
             $project->setTitle($title);
             $project->setDescription($description);
@@ -81,8 +75,9 @@ class Create implements Routable
         $loggedin = false;
         $user = Account::checkLogin($ettc->getDb());
 
-        if ($user)
+        if ($user) {
             $loggedin = true;
+        }
 
         return $loggedin;
     }
@@ -93,8 +88,9 @@ class Create implements Routable
 
         // only proceed if admin
         // TODO: check permissions instead of rank
-        if ($user && $user->getRank() == 2)
+        if ($user && $user->getRank() == 2) {
             $permissions = true;
+        }
 
         return $permissions;
     }

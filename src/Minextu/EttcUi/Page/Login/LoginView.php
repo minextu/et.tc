@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Page\Login;
+
 use Minextu\EttcUi\Page\AbstractPageView;
 
 class LoginView extends AbstractPageView
@@ -9,17 +10,17 @@ class LoginView extends AbstractPageView
      */
     private $message;
 
-    function getTitle()
+    public function getTitle()
     {
         return "Login";
     }
 
-    function getHeading()
+    public function getHeading()
     {
         return "Login";
     }
 
-    function generateHtml()
+    public function generateHtml()
     {
         $placeholders = [
             "MSG_message" => $this->message
@@ -30,10 +31,9 @@ class LoginView extends AbstractPageView
     /**
      * Checks if the login form was submited and passes the values to the presenter
      */
-    function init()
+    public function init()
     {
-        if (isset($_POST['login']))
-        {
+        if (isset($_POST['login'])) {
             $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : false;
             $password = isset($_POST['password']) ? $_POST['password'] : false;
             $this->presenter->loginClicked($nickname, $password);
@@ -44,7 +44,7 @@ class LoginView extends AbstractPageView
      * Shows an Error message
      * @param    string   $text   Text of the message
      */
-    function showError($text)
+    public function showError($text)
     {
         $placeholders = [
             "MSG_text" => $text
@@ -55,7 +55,7 @@ class LoginView extends AbstractPageView
     /**
      * Redirects the user to the starting page using a php header
      */
-    function redirectToStart()
+    public function redirectToStart()
     {
         header("Location: " . $this->path);
         die();

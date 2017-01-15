@@ -34,11 +34,11 @@ class Project
     {
         $this->projectDb = new ProjectDb($db);
 
-        if ($id !== false)
-        {
+        if ($id !== false) {
             $status = $this->loadId($id);
-            if ($status === false)
+            if ($status === false) {
                 throw new Exception\InvalidId("Invalid project id '" . $id . "'");
+            }
         }
     }
 
@@ -48,8 +48,9 @@ class Project
      */
     public function getId()
     {
-        if (!isset($this->id))
+        if (!isset($this->id)) {
             throw new Exception\Exception("Project has to be loaded first.");
+        }
 
         return $this->id;
     }
@@ -60,8 +61,9 @@ class Project
      */
     public function getTitle()
     {
-        if (!isset($this->title))
+        if (!isset($this->title)) {
             throw new Exception\Exception("Project has to be loaded first.");
+        }
 
         return $this->title;
     }
@@ -82,8 +84,9 @@ class Project
      */
     public function getDescription()
     {
-        if (!isset($this->description))
+        if (!isset($this->description)) {
             throw new Exception\Exception("Project has to be loaded first.");
+        }
 
         return $this->description;
     }
@@ -107,8 +110,9 @@ class Project
     public function loadId($id)
     {
         $project = $this->projectDb->getProjectById($id);
-        if ($project === false)
+        if ($project === false) {
             return false;
+        }
 
         return $this->load($project);
     }
@@ -133,22 +137,23 @@ class Project
      */
     public function create()
     {
-        if (isset($this->id))
+        if (isset($this->id)) {
             throw new Exception\Exception("Project was loaded and is not allowed to be recreated.");
-        if (empty($this->title))
+        }
+        if (empty($this->title)) {
             throw new Exception\Exception("Title has to set via setTitle first.");
-        if (empty($this->description))
+        }
+        if (empty($this->description)) {
             throw new Exception\Exception("Description has to set via setDescription first.");
+        }
 
         $status = $this->projectDb->addProject($this->title, $this->description);
-        if ($status)
-        {
+        if ($status) {
             $this->id = $status;
             return true;
-        }
-        else
+        } else {
             return false;
-
+        }
     }
 
     /**
@@ -157,8 +162,9 @@ class Project
      */
     public function delete()
     {
-        if (!isset($this->id))
+        if (!isset($this->id)) {
             throw new Exception\Exception("Project has to be loaded first.");
+        }
 
         $status = $this->projectDb->deleteProject($this->id);
 

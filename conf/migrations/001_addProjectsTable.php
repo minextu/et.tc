@@ -2,9 +2,9 @@
 
 class addProjectsTable extends AbstractMigration
 {
-	public function upgrade()
-	{
-		$sql = '
+    public function upgrade()
+    {
+        $sql = '
 		CREATE TABLE `projects`
 		(
 			`id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
@@ -14,15 +14,15 @@ class addProjectsTable extends AbstractMigration
 			PRIMARY KEY (`id`)
 		)';
 
-		return $this->db->getPdo()->prepare($sql)->execute();
-	}
+        return $this->db->getPdo()->prepare($sql)->execute();
+    }
 
-	public function downgrade()
-	{
-		$sql = '
+    public function downgrade()
+    {
+        $sql = '
 		DROP TABLE `projects`
 		';
 
-		return $this->db->getPdo()->prepare($sql)->execute();
-	}
+        return $this->db->getPdo()->prepare($sql)->execute();
+    }
 }

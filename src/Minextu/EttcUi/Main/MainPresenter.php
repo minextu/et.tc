@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Main;
+
 use Minextu\EttcUi\AbstractPresenter;
 
 class MainPresenter extends AbstractPresenter
@@ -17,7 +18,7 @@ class MainPresenter extends AbstractPresenter
     /**
      * @param   \Minextu\EttcUi\PageElement\AbstractPageElementPresenter[]  $pageElementPresenters  All presenters in the PageElement folder
      */
-    function setPageElementPresenters($pageElementPresenters)
+    public function setPageElementPresenters($pageElementPresenters)
     {
         $this->pageElementPresenters = $pageElementPresenters;
     }
@@ -25,7 +26,7 @@ class MainPresenter extends AbstractPresenter
     /**
      * @param   \Minextu\EttcUi\Page\AbstractPagePresenter   $pagePresenter   Presenter for the current page
      */
-    function setPagePresenter($pagePresenter)
+    public function setPagePresenter($pagePresenter)
     {
         $this->pagePresenter = $pagePresenter;
     }
@@ -33,11 +34,10 @@ class MainPresenter extends AbstractPresenter
     /**
      * Sends all views to MainView
      */
-    function init()
+    public function init()
     {
         $pageElementViews = [];
-        foreach ($this->pageElementPresenters as $name => $elementPresenter)
-        {
+        foreach ($this->pageElementPresenters as $name => $elementPresenter) {
             $pageElementViews[$name] = $elementPresenter->getView();
         }
         $pageElementViews['Page'] = $this->pagePresenter->getView();
@@ -49,7 +49,7 @@ class MainPresenter extends AbstractPresenter
      * Sends page title to view
      * @param   string   $title   Title of this Page
      */
-    function setTitle($title)
+    public function setTitle($title)
     {
         $this->view->setTitle($title);
     }
@@ -58,7 +58,7 @@ class MainPresenter extends AbstractPresenter
      * Sends page heading to view
      * @param   string   $heading   Heading of this Page
      */
-    function setHeading($heading)
+    public function setHeading($heading)
     {
         $this->view->setHeading($heading);
     }
@@ -67,7 +67,7 @@ class MainPresenter extends AbstractPresenter
      * Sends page sub heading to view
      * @param   string   $subHeading   Sub heading of this Page
      */
-    function setSubHeading($subHeading)
+    public function setSubHeading($subHeading)
     {
         $this->view->setSubHeading($subHeading);
     }

@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Main;
+
 use Minextu\EttcUi\AbstractModel;
 
 class MainModel extends AbstractModel

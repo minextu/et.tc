@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcApi;
+
 use Respect\Rest\Router;
 use Minextu\Ettc\Ettc;
 
@@ -32,8 +33,7 @@ class EttcApi
     {
         // Show custom 404 Message
         // TODO: Find a better way than catch all
-        self::$router->any('/**', function()
-        {
+        self::$router->any('/**', function () {
             header("HTTP/1.0 404 Not Found");
             return 'Not found!';
         });
@@ -52,8 +52,7 @@ class EttcApi
         // encode to json by default, use html as fallback (in browsers)
         $router->always('Accept', array(
             'application/json' => 'json_encode',
-            'text/html' => function($data)
-            {
+            'text/html' => function ($data) {
                 $html = "
                 <!DOCTYPE html>
                 <html>

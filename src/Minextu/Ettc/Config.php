@@ -19,7 +19,7 @@ class Config
 	* Contains all Config Parameters and its values
 	* @var array
 	*/
-	private $configArray;
+    private $configArray;
 
 
 	/**

@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Account;
+
 use \Minextu\Ettc\AbstractEttcDatabaseTest;
 
 class UserTest extends AbstractEttcDatabaseTest
@@ -193,19 +194,19 @@ class UserTest extends AbstractEttcDatabaseTest
         $this->assertFalse($validPassword);
     }
 
-	public function testEmptyPasswordCheck()
-	{
-		$this->createTestUser();
+    public function testEmptyPasswordCheck()
+    {
+        $this->createTestUser();
 
-		$user = new User($this->getDb());
-		$loadStatus = $user->loadNick("phpUnit_Test_User");
-		$this->assertTrue($loadStatus);
+        $user = new User($this->getDb());
+        $loadStatus = $user->loadNick("phpUnit_Test_User");
+        $this->assertTrue($loadStatus);
 
-		$password = "";
+        $password = "";
 
-		$validPassword = $user->checkPassword($password);
-		$this->assertFalse($validPassword);
-	}
+        $validPassword = $user->checkPassword($password);
+        $this->assertFalse($validPassword);
+    }
 
     public function testInvalidShortPassword()
     {

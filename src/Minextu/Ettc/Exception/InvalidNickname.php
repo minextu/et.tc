@@ -2,7 +2,4 @@
 
 class InvalidNickname extends Exception
 {
-
 }
-
-?>

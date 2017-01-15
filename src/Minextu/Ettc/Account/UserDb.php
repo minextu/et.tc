@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Account;
+
 use PDO;
 
 /**

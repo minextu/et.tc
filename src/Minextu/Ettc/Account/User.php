@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Account;
+
 use Hautelook\Phpass\PasswordHash;
 use \Minextu\Ettc\Exception;
 
@@ -51,11 +52,11 @@ class User
     {
         $this->userDb = new UserDb($db);
 
-        if ($id !== false)
-        {
+        if ($id !== false) {
             $status = $this->loadId($id);
-            if ($status === false)
+            if ($status === false) {
                 throw new Exception\Exception("Invalid User ID '" . $id . "'");
+            }
         }
     }
 
@@ -65,8 +66,9 @@ class User
      */
     public function getId()
     {
-        if (!isset($this->id))
+        if (!isset($this->id)) {
             throw new Exception\Exception("User has to be loaded first.");
+        }
 
         return $this->id;
     }
@@ -77,8 +79,9 @@ class User
      */
     public function getNick()
     {
-        if (!isset($this->nick))
+        if (!isset($this->nick)) {
             throw new Exception\Exception("User has to be loaded first.");
+        }
 
         return $this->nick;
     }
@@ -89,8 +92,9 @@ class User
      */
     public function getEmail()
     {
-        if (!isset($this->id))
+        if (!isset($this->id)) {
             throw new Exception\Exception("User has to be loaded first.");
+        }
 
         return $this->email;
     }
@@ -101,8 +105,9 @@ class User
      */
     public function getRank()
     {
-        if (!isset($this->rank))
+        if (!isset($this->rank)) {
             throw new Exception\Exception("User has to be loaded first.");
+        }
 
         return $this->rank;
     }
@@ -116,12 +121,15 @@ class User
      */
     public function setNick($nick)
     {
-        if ($this->userDb->getUserByNick($nick) !== false)
+        if ($this->userDb->getUserByNick($nick) !== false) {
             throw new Exception\InvalidNickname("Nickname does already exist.");
-        if (strlen($nick) < 3)
+        }
+        if (strlen($nick) < 3) {
             throw new Exception\InvalidNickname("Nickname is too short");
-        if (strlen($nick) > 30)
+        }
+        if (strlen($nick) > 30) {
             throw new Exception\InvalidNickname("Nickname is too long");
+        }
 
         $this->nick = $nick;
 
@@ -148,10 +156,11 @@ class User
      */
     public function setPassword($password)
     {
-        if (strlen($password) < 6)
+        if (strlen($password) < 6) {
             throw new Exception\InvalidPassword("Password is too short");
+        }
 
-		$this->hash = $this->hashPassword($password);
+        $this->hash = $this->hashPassword($password);
         return true;
     }
 
@@ -164,7 +173,7 @@ class User
     {
         // TODO: check if rank exists
 
-		$this->rank = $rank;
+        $this->rank = $rank;
         return true;
     }
 
@@ -176,8 +185,9 @@ class User
     public function loadNick($nick)
     {
         $user = $this->userDb->getUserByNick($nick);
-        if ($user === false)
+        if ($user === false) {
             return false;
+        }
 
         return $this->load($user);
     }
@@ -190,8 +200,9 @@ class User
     public function loadId($id)
     {
         $user = $this->userDb->getUserById($id);
-        if ($user === false)
+        if ($user === false) {
             return false;
+        }
 
         return $this->load($user);
     }
@@ -219,8 +230,9 @@ class User
      */
     public function checkPassword($password)
     {
-        if (!isset($this->hash))
+        if (!isset($this->hash)) {
             throw new Exception\Exception("User has to be loaded first.");
+        }
 
         $hasher = new PasswordHash(8, false);
         $check = $hasher->CheckPassword($password, $this->hash);
@@ -234,12 +246,15 @@ class User
      */
     public function create()
     {
-        if (isset($this->id))
+        if (isset($this->id)) {
             throw new Exception\Exception("User was loaded and is not allowed to be recreated.");
-        if (empty($this->nick))
+        }
+        if (empty($this->nick)) {
             throw new Exception\Exception("Nickname has to set via setNick first.");
-        if (empty($this->hash))
+        }
+        if (empty($this->hash)) {
             throw new Exception\Exception("Password has to set via setPassword first.");
+        }
 
         $status = $this->userDb->addUser($this->nick, $this->email, $this->hash, $this->rank);
         return $status;
@@ -254,10 +269,10 @@ class User
     {
         $hasher = new PasswordHash(8, false);
         $hash = $hasher->HashPassword($password);
-        if (strlen($hash) >= 20)
+        if (strlen($hash) >= 20) {
             return $hash;
-        else
+        } else {
             throw new Exception\Exception("Invalid Hash");
+        }
     }
-
 }

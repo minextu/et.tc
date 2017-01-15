@@ -2,9 +2,9 @@
 
 class addUsersTable extends AbstractMigration
 {
-	public function upgrade()
-	{
-		$sql = '
+    public function upgrade()
+    {
+        $sql = '
 		CREATE TABLE `users`
 		(
 			`id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
@@ -16,15 +16,15 @@ class addUsersTable extends AbstractMigration
 			PRIMARY KEY (`id`)
 		)';
 
-		return $this->db->getPdo()->prepare($sql)->execute();
-	}
+        return $this->db->getPdo()->prepare($sql)->execute();
+    }
 
-	public function downgrade()
-	{
-		$sql = '
+    public function downgrade()
+    {
+        $sql = '
 		DROP TABLE `users`
 		';
 
-		return $this->db->getPdo()->prepare($sql)->execute();
-	}
+        return $this->db->getPdo()->prepare($sql)->execute();
+    }
 }

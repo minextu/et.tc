@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Account;
+
 use \Minextu\Ettc\AbstractEttcDatabaseTest;
 
 class AccountTest extends AbstractEttcDatabaseTest

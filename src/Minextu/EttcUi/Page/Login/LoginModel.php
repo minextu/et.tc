@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Page\Login;
+
 use \Minextu\EttcUi\Page\AbstractPageModel;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc\Account\User;
@@ -18,8 +19,9 @@ class LoginModel extends AbstractPageModel
 
         // check username and password
         $status = $user->loadNick($nick);
-        if ($status)
+        if ($status) {
             $status = $user->checkPassword($pw);
+        }
 
         return $status;
     }
@@ -35,9 +37,10 @@ class LoginModel extends AbstractPageModel
         $status = $user->loadNick($nick);
 
         // Set the status to logged in on success
-        if ($status)
+        if ($status) {
             Account::login($user);
-        else
+        } else {
             throw new Exception("User with Nick '$nick' not found");
+        }
     }
 }

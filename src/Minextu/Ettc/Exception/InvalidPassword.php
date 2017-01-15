@@ -2,7 +2,4 @@
 
 class InvalidPassword extends Exception
 {
-
 }
-
-?>

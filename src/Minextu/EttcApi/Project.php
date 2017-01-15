@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcApi;
+
 use Respect\Rest\Routable;
 
 class Project implements Routable

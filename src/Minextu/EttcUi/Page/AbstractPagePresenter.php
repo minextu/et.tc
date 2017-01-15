@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Page;
+
 use Minextu\EttcUi\AbstractPresenter;
 
 abstract class AbstractPagePresenter extends AbstractPresenter
@@ -12,7 +13,7 @@ abstract class AbstractPagePresenter extends AbstractPresenter
     /**
      * Get title, heading and other information out of the view for this page and send it to the main presenter
      */
-    final function initPage()
+    final public function initPage()
     {
         $title = $this->view->getTitle();
         $heading = $this->view->getHeading();
@@ -26,7 +27,7 @@ abstract class AbstractPagePresenter extends AbstractPresenter
     /**
      * @param   \Minextu\EttcUi\Main\MainPresenter   $mainPresenter   The main presenter
      */
-    final function setMainPresenter($mainPresenter)
+    final public function setMainPresenter($mainPresenter)
     {
         $this->mainPresenter = $mainPresenter;
     }

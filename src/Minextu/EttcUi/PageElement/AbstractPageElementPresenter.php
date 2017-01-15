@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\PageElement;
+
 use Minextu\EttcUi\AbstractPresenter;
 
 abstract class AbstractPageElementPresenter extends AbstractPresenter
@@ -12,7 +13,7 @@ abstract class AbstractPageElementPresenter extends AbstractPresenter
     /**
      * @param   \Minextu\EttcUi\Main\MainPresenter   $mainPresenter   The main presenter
      */
-    final function setMainPresenter($mainPresenter)
+    final public function setMainPresenter($mainPresenter)
     {
         $this->mainPresenter = $mainPresenter;
     }

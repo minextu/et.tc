@@ -1,11 +1,11 @@
 <?php namespace Minextu\EttcUi\Page\Login;
+
 use Minextu\EttcUi\Page\AbstractPagePresenter;
 
 class LoginPresenter extends AbstractPagePresenter
 {
-    function init()
+    public function init()
     {
-
     }
 
     /**
@@ -15,13 +15,12 @@ class LoginPresenter extends AbstractPagePresenter
      */
     public function loginClicked($nick, $pw)
     {
-        $check = $this->model->checkLogin($nick,$pw);
-        if ($check)
-        {
+        $check = $this->model->checkLogin($nick, $pw);
+        if ($check) {
             $this->model->login($nick);
             $this->view->redirectToStart();
-        }
-        else
+        } else {
             $this->view->showError("Wrong e-mail/nickname or password");
+        }
     }
 }

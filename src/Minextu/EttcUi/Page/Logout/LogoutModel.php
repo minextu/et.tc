@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Page\Logout;
+
 use \Minextu\EttcUi\Page\AbstractPageModel;
 use Minextu\Ettc\Account\Account;
 

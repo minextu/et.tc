@@ -51,8 +51,9 @@ class ProjectDb
         $stmt = $this->db->getPdo()->prepare($sql);
         $status = $stmt->execute([$title, $description]);
 
-        if ($status)
+        if ($status) {
             $status = $this->db->getPdo()->lastInsertId();
+        }
 
         return $status;
     }

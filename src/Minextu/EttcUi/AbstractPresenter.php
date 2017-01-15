@@ -19,7 +19,7 @@ abstract class AbstractPresenter
     /**
      * @return   AbstractView   View for this presenter
      */
-    final function getView()
+    final public function getView()
     {
         return $this->view;
     }
@@ -27,7 +27,7 @@ abstract class AbstractPresenter
     /**
      * @param   AbstractView   $view   View for this presenter
      */
-    final function setView($view)
+    final public function setView($view)
     {
         $this->view = $view;
     }
@@ -35,7 +35,7 @@ abstract class AbstractPresenter
     /**
      * @return   AbstractModel   Model for this presenter
      */
-    final function getModel()
+    final public function getModel()
     {
         return $this->model;
     }
@@ -43,7 +43,7 @@ abstract class AbstractPresenter
     /**
      * @param   ModelInterface   $model  Model for this presenter
      */
-    final function setModel($model)
+    final public function setModel($model)
     {
         $this->model = $model;
     }
@@ -51,8 +51,7 @@ abstract class AbstractPresenter
     /**
      * Will be called after setView and setModel
      */
-    function init()
+    public function init()
     {
-
     }
 }

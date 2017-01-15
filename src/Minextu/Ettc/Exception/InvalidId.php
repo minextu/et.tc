@@ -2,7 +2,4 @@
 
 class InvalidId extends Exception
 {
-
 }
-
-?>

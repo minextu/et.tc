@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\PageElement\MainNav;
+
 use Minextu\EttcUi\PageElement\AbstractPageElementView;
 
 class MainNavView extends AbstractPageElementView
@@ -17,7 +18,7 @@ class MainNavView extends AbstractPageElementView
         $this->entries = $entries;
     }
 
-    function generateHtml()
+    public function generateHtml()
     {
         $entries = $this->generateEntriesHtml();
 
@@ -35,12 +36,12 @@ class MainNavView extends AbstractPageElementView
      */
     private function generateEntriesHtml()
     {
-        if (!isset($this->entries))
+        if (!isset($this->entries)) {
             throw new Exception("No entries were set.");
+        }
 
         $entriesHtml = "";
-        foreach ($this->entries as $name => $link)
-        {
+        foreach ($this->entries as $name => $link) {
             $placeholders = array(
                 'MSG_EntryName' => $name,
                 'ENTRY_Url' => $link

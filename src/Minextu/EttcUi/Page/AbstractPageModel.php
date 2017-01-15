@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Page;
+
 use Minextu\EttcUi\AbstractModel;
 
 abstract class AbstractPageModel extends AbstractModel
@@ -12,7 +13,7 @@ abstract class AbstractPageModel extends AbstractModel
     /**
      * @param   \Minextu\EttcUi\Main\MainModel   $mainModel   The main model
      */
-    final function setMainModel($mainModel)
+    final public function setMainModel($mainModel)
     {
         $this->mainModel = $mainModel;
     }

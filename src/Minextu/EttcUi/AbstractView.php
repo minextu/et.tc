@@ -1,6 +1,6 @@
 <?php namespace Minextu\EttcUi;
 
- /**
+/**
   * A Class extending this will render the user interface
   */
 abstract class AbstractView
@@ -26,7 +26,7 @@ abstract class AbstractView
     /**
      * @param   string   $path    The external path to the folder containing the index.php
      */
-    final function __construct($path)
+    final public function __construct($path)
     {
         $this->path = $path;
         $this->template = new Template($this->path."/assets");
@@ -35,7 +35,7 @@ abstract class AbstractView
     /**
      * @param   AbstractPresenter   $presenter   The Presenter for this View
      */
-    final function setPresenter($presenter)
+    final public function setPresenter($presenter)
     {
         $this->presenter = $presenter;
     }
@@ -44,13 +44,12 @@ abstract class AbstractView
      * Returns html code for this view
      * @return   string   html code for this view
      */
-    abstract function generateHtml();
+    abstract public function generateHtml();
 
     /**
      * Will be called after setView and setModel
      */
-    function init()
+    public function init()
     {
-
     }
 }

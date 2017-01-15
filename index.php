@@ -1,5 +1,7 @@
 <?php namespace Minextu\EttcUi;
+
 use Minextu\Ettc\Ettc;
+
 require_once("src/autoload.php");
 
 session_start();

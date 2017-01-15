@@ -31,7 +31,7 @@ class EttcUi
      * @param   String   $rootDir    External path to the root directory
      * @param   String   $pageName   Page name to render
      */
-    function __construct($ettc, $rootDir, $pageName)
+    public function __construct($ettc, $rootDir, $pageName)
     {
         $this->rootDir = $rootDir;
         $this->ettc = $ettc;
@@ -72,27 +72,31 @@ class EttcUi
         // init models
         $model->setDb($this->ettc->getDb());
         $pagePresenter->getModel()->setMainModel($model);
-        foreach ($pageElementPresenters as $elementPresenter)
+        foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->getModel()->setMainModel($model);
+        }
 
         // init all views
         $pagePresenter->getView()->init();
-        foreach ($pageElementPresenters as $elementPresenter)
+        foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->getView()->init();
+        }
         $presenter->getView()->init();
 
         // init all models
         $pagePresenter->getModel()->init();
-        foreach ($pageElementPresenters as $elementPresenter)
+        foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->getModel()->init();
+        }
         $presenter->getModel()->init();
 
         // init all presenters
         $pagePresenter->setMainPresenter($presenter);
         $pagePresenter->initPage();
         $pagePresenter->init();
-        foreach ($pageElementPresenters as $elementPresenter)
+        foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->init();
+        }
         $presenter->init();
 
         $this->presenter = $presenter;
@@ -101,8 +105,7 @@ class EttcUi
     private function initPageElements()
     {
         $presenters = [];
-        foreach ($this->pageElements as $element)
-        {
+        foreach ($this->pageElements as $element) {
             // generate names for all classes
             $elementClassName =  "Minextu\\EttcUi\\PageElement\\$element\\$element";
             $elementModelName = $elementClassName . "Model";
@@ -136,17 +139,18 @@ class EttcUi
         $availablePages = $this->getPages();
 
         // If the Page does not exist show a 404 Page
-    	if (!in_array($pageName, $availablePages))
-    		$pageName = "Error404";
+        if (!in_array($pageName, $availablePages)) {
+            $pageName = "Error404";
+        }
 
         // generate names for all classes
-		$pageClassName =  "Minextu\\EttcUi\\Page\\$pageName\\$pageName";
+        $pageClassName =  "Minextu\\EttcUi\\Page\\$pageName\\$pageName";
         $pageModelName = $pageClassName . "Model";
         $pageViewName = $pageClassName . "View";
         $pagePresenterName = $pageClassName . "Presenter";
 
         // create instances
-		$model = new $pageModelName();
+        $model = new $pageModelName();
         $view = new $pageViewName($this->rootDir);
         $presenter = new $pagePresenterName();
 

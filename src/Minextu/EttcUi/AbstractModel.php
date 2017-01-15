@@ -8,8 +8,7 @@ abstract class AbstractModel
     /**
      * Will be called after setView and setModel
      */
-    function init()
+    public function init()
     {
-
     }
 }

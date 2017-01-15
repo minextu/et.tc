@@ -1,21 +1,23 @@
 <?php namespace Minextu\EttcUi\PageElement\UserNav;
+
 use Minextu\EttcUi\PageElement\AbstractPageElementView;
 
 class UserNavView extends AbstractPageElementView
 {
     private $loggedIn = false;
 
-    function generateHtml()
+    public function generateHtml()
     {
         $placeholders = [
             'MSG_Nickname' => $this->presenter->getNickname(),
             'IMG_Avatar' => $this->presenter->getAvatar()
         ];
 
-        if ($this->loggedIn)
+        if ($this->loggedIn) {
             $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedIn.html", $placeholders);
-        else
+        } else {
             $html = $this->template->convertTemplate(__DIR__."/templates/UserNavLoggedOut.html", $placeholders);
+        }
 
         return $html;
     }
@@ -23,7 +25,7 @@ class UserNavView extends AbstractPageElementView
     /**
      * @param   bool   $loggedIn   User login status
      */
-    function setLoggedIn($loggedIn)
+    public function setLoggedIn($loggedIn)
     {
         $this->loggedIn = $loggedIn;
     }

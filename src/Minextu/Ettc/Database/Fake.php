@@ -1,4 +1,5 @@
 <?php namespace Minextu\Ettc\Database;
+
 use Minextu\Ettc\Exception;
 
 /**

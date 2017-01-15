@@ -1,11 +1,12 @@
 <?php namespace Minextu\Ettc;
+
 use \PDO;
 use Minextu\Ettc\Database\Migration\Migrator;
 
 abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_TestCase
 {
     // only instantiate pdo once for test clean-up/fixture load
-    static private $pdo = null;
+    private static $pdo = null;
 
     // only instantiate PHPUnit_Extensions_Database_DB_IDatabaseConnection once per test
     private $conn = null;
@@ -15,10 +16,8 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
      */
     final public function getConnection()
     {
-        if ($this->conn === null)
-        {
-            if (self::$pdo == null)
-            {
+        if ($this->conn === null) {
+            if (self::$pdo == null) {
                 // load test database config
                 $config = new Config();
                 $config->load();
@@ -67,7 +66,7 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
         $currentVersion = 0;
         $targetVersion = true;
 
-        $migrator = new Migrator($currentVersion,$targetVersion,$this->getDb());
+        $migrator = new Migrator($currentVersion, $targetVersion, $this->getDb());
 
         // start migration, this should upgrade 002
         $status = $migrator->migrateFolder();
@@ -80,12 +79,10 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
         $currentVersion = true;
         $targetVersion = 0;
 
-        $migrator = new Migrator($currentVersion,$targetVersion,$this->getDb());
+        $migrator = new Migrator($currentVersion, $targetVersion, $this->getDb());
 
         // start migration, this should downgrade 002
         $status = $migrator->migrateFolder();
         $this->assertTrue($status);
     }
-
-
 }

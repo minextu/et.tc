@@ -1,4 +1,5 @@
 <?php namespace Minextu\EttcUi\Main;
+
 use Minextu\EttcUi\AbstractView;
 
 class MainView extends AbstractView
@@ -27,7 +28,7 @@ class MainView extends AbstractView
     /**
      * @param   \Minextu\EttcUi\AbstractView[]   $pageElements   All views in the PageElement folder + the current Page view
      */
-    function setPageElements($pageElements)
+    public function setPageElements($pageElements)
     {
         $this->pageElements = $pageElements;
     }
@@ -35,7 +36,7 @@ class MainView extends AbstractView
     /**
      * @param   string   $title   Page title
      */
-    function setTitle($title)
+    public function setTitle($title)
     {
         $this->title = $title;
     }
@@ -43,7 +44,7 @@ class MainView extends AbstractView
     /**
      * @param   string   $heading  Page heading
      */
-    function setHeading($heading)
+    public function setHeading($heading)
     {
         $this->heading = $heading;
     }
@@ -51,17 +52,16 @@ class MainView extends AbstractView
     /**
      * @param   string   $subHeading  Page sub heading
      */
-    function setSubHeading($subHeading)
+    public function setSubHeading($subHeading)
     {
         $this->subHeading = $subHeading;
     }
 
-    function generateHtml()
+    public function generateHtml()
     {
         // replace all views placeholders
         $placeholders = [];
-        foreach ($this->pageElements as $name => $element)
-        {
+        foreach ($this->pageElements as $name => $element) {
             $placeholders["VIEW_$name"] = $element->generateHtml();
         }
 
