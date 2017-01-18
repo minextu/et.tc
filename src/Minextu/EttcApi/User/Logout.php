@@ -10,13 +10,7 @@ use Minextu\Ettc\Account\Account;
  * @apiGroup User
  *
  * @apiSuccess {bool} success             Status of the logout
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *          "success" => true
- *     }
- *
+
  * @apiError NotLoggedIn   You are already loggedin
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
@@ -45,7 +39,7 @@ class Logout extends AbstractRoutable
     private function checkLoginStatus()
     {
         $loggedin = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         if ($user) {
             $loggedin = true;

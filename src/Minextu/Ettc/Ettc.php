@@ -67,7 +67,7 @@ class Ettc
      * Get the complete external Url to index.php
      * @return   string   External url to index.php (in form of 'http(s)://server.domain/dir/to/ettc')
      */
-    public function getServerUrl()
+    public static function getServerUrl()
     {
         if (empty($_SERVER['HTTPS'])) {
             $http = "http://";

@@ -55,7 +55,7 @@ class Create extends AbstractRoutable
             http_response_code(403);
             $answer = ["error" => "NoPermissions"];
         } else {
-            $project = new Project($this->ettc->getDb());
+            $project = new Project($this->getDb());
             $project->setTitle($title);
             $project->setDescription($description);
             $project->create();
@@ -69,7 +69,7 @@ class Create extends AbstractRoutable
     private function checkLoggedIn()
     {
         $loggedin = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -80,7 +80,7 @@ class Create extends AbstractRoutable
     private function checkPermissions()
     {
         $permissions = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         // only proceed if admin
         // TODO: check permissions instead of rank

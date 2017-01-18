@@ -13,6 +13,7 @@ use Minextu\Ettc\Exception\InvalidId;
  *
  * @apiParam {Number} id                  Project id
  *
+ * @apiSuccess {bool} success             Status of the deletion
  *
  * @apiError MissingValues Id wasn't transmited
  * @apiError NoPermissions No permissions to delete this project
@@ -43,7 +44,7 @@ class Delete extends AbstractRoutable
         } else {
             $invalidId = false;
             try {
-                $project = new Project($this->ettc->getDb(), $id);
+                $project = new Project($this->getDb(), $id);
             } catch (InvalidId $e) {
                 $invalidId = true;
             }
@@ -53,7 +54,7 @@ class Delete extends AbstractRoutable
                 $answer = ["error" => "NotFound"];
             } else {
                 $project->delete();
-                $answer = [];
+                $answer = ["success" => true];
             }
         }
 
@@ -63,7 +64,7 @@ class Delete extends AbstractRoutable
     private function checkLoggedIn()
     {
         $loggedin = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -74,7 +75,7 @@ class Delete extends AbstractRoutable
     private function checkPermissions()
     {
         $permissions = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         // only proceed if admin
         // TODO: check permissions instead of rank

@@ -3,35 +3,57 @@
 use Respect\Rest\Router;
 use Minextu\Ettc\Ettc;
 
+/**
+ * Handles routes to the api by using objects extending AbstractRoutable
+ */
 class EttcApi
 {
+    /**
+     * Path to api.php in root folder
+     * @var   string
+     */
     private static $rootDir;
+    /**
+     * The main router object
+     * @var   Respect\Rest\Router
+     */
     private static $router;
 
-    public static function run($rootDir, $ettc)
+    /**
+     * Run the api
+     * @param    string   $rootDir   Path to api.php in root folder
+     * @param    Minextu\Ettc\Database\DatabaseInterface   $db        Database to be used
+     */
+    public static function run($rootDir, $db)
     {
         self::init($rootDir);
-        $router = self::$router;
 
         self::init404();
-        self::setRoutes($ettc);
+        self::setRoutes($db);
         self::encode();
     }
 
-    private static function setRoutes($ettc)
+    /**
+     * Connect api calls with their objects
+     * @param   Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
+     */
+    private static function setRoutes($db)
     {
         $r = self::$router;
 
         // Project
-        $r->get('/v1/projects', new Projects($ettc));
-        $r->post('/v1/project/create', new Project\Create($ettc));
-        $r->delete('/v1/project/delete/*', new Project\Delete($ettc));
+        $r->get('/v1/projects', new Projects($db));
+        $r->post('/v1/project/create', new Project\Create($db));
+        $r->delete('/v1/project/delete/*', new Project\Delete($db));
 
         // User
-        $r->post('/v1/user/login', new User\Login($ettc));
-        $r->post('/v1/user/logout', new User\Logout($ettc));
+        $r->post('/v1/user/login', new User\Login($db));
+        $r->post('/v1/user/logout', new User\Logout($db));
     }
 
+    /**
+     * Init the 404 message for unknown api calls
+     */
     private static function init404()
     {
         // Show custom 404 Message
@@ -42,12 +64,19 @@ class EttcApi
         });
     }
 
+    /**
+     * Init the main router object
+     * @param    string   $rootDir   Path to api.php in root folder
+     */
     private static function init($rootDir)
     {
         self::$rootDir = $rootDir;
         self::$router = new Router($rootDir);
     }
 
+    /**
+     * Encode the api answer in json or html, depending on the accept header
+     */
     private static function encode()
     {
         $router = self::$router;
@@ -61,6 +90,11 @@ class EttcApi
         ));
     }
 
+    /**
+     * Use the answer array to generate html output for debug
+     * @param    array   $answer   Api answer
+     * @return   string             Html code for the api answer
+     */
     private static function htmlEncode($answer)
     {
         \ref::config('expLvl', -1);

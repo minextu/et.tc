@@ -15,12 +15,6 @@ use Minextu\Ettc\Account\Account;
  *
  * @apiSuccess {bool} success             Status of the login
  *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *          "success" => true
- *     }
- *
  * @apiError MissingValues     Nickname or Password weren't transmited
  * @apiError AlreadyLoggedIn   You are already loggedin
  * @apiError WrongNicknameOrPassword Password or nickname were wrong
@@ -61,7 +55,7 @@ class Login extends AbstractRoutable
     private function checkLoginStatus()
     {
         $loggedin = false;
-        $user = Account::checkLogin($this->ettc->getDb());
+        $user = Account::checkLogin($this->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -78,7 +72,7 @@ class Login extends AbstractRoutable
      */
     public function checkLogin($nick, $pw)
     {
-        $user = new User($this->ettc->getDb());
+        $user = new User($this->getDb());
 
         // check username and password
         $status = $user->loadNick($nick);
@@ -95,7 +89,7 @@ class Login extends AbstractRoutable
      */
     public function login($nick)
     {
-        $user = new User($this->ettc->getDb());
+        $user = new User($this->getDb());
         // load user
         $status = $user->loadNick($nick);
 

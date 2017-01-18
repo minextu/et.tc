@@ -5,32 +5,24 @@ use Minextu\EttcUi\AbstractModel;
 class MainModel extends AbstractModel
 {
     /**
-     * main ettc object
-     * @var   \Minextu\Ettc\Ettc
+     * main database
+     * @var   \Minextu\Ettc\Database\DatabaseInterface
      */
-    private $ettc;
+    private $db;
 
     /**
      * @return   \Minextu\Ettc\Database\DatabaseInterface   main database
      */
     public function getDb()
     {
-        return $this->ettc->getDb();
+        return $this->db;
     }
 
     /**
-     * @return   \Minextu\Ettc\Ettc   main ettc object
+     * @param   \Minextu\Ettc\Database\DatabaseInterface   main database
      */
-    public function getEttc()
+    public function setDb($db)
     {
-        return $this->ettc;
-    }
-
-    /**
-     * @param   \Minextu\Ettc\Ettc   $ettc   main ettc object
-     */
-    public function setEttc($ettc)
-    {
-        $this->ettc = $ettc;
+        $this->db = $db;
     }
 }

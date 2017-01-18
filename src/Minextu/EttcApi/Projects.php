@@ -2,6 +2,7 @@
 
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project;
+use Minextu\Ettc\Ettc;
 
 /**
  * @api {get} /projects list projects
@@ -38,14 +39,14 @@ class Projects extends AbstractRoutable
 
     private function getProjects()
     {
-        $projects = Project::getAll($this->ettc->getDb());
+        $projects = Project::getAll($this->getDb());
 
         $projectsArray = [];
         foreach ($projects as $project) {
             $array = $project->toArray();
 
             // add url to server to image
-            $array['image'] = $this->ettc->getServerUrl() . "/assets/images/projects/" . $array['image'];
+            $array['image'] = Ettc::getServerUrl() . "/assets/images/projects/" . $array['image'];
 
             $projectsArray[] = $array;
         }
