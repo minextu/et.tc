@@ -258,10 +258,11 @@ class Project
             $this->id = $status;
             $this->createDate = time();
             $this->updateDate = time();
-            return true;
-        } else {
-            return false;
+
+            $status = true;
         }
+        
+        return $status;
     }
 
     /**

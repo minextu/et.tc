@@ -256,7 +256,11 @@ class User
             throw new Exception\Exception("Password has to set via setPassword first.");
         }
 
-        $status = $this->userDb->addUser($this->nick, $this->email, $this->hash, $this->rank);
+        $status = $this->userDb->insertUser($this->nick, $this->email, $this->hash, $this->rank);
+        if ($status) {
+            $this->id = $status;
+            $status = true;
+        }
         return $status;
     }
 

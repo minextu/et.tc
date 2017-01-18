@@ -59,9 +59,9 @@ class UserDb
      * @param    string   $email   User e-mail
      * @param    string   $hash    Hashed password
      * @param    int      $rank    User rank id
-     * @return   bool              True on success, False otherwise
+     * @return   bool|int          Id of the user on success, False otherwise
      */
-    public function addUser($nick, $email, $hash, $rank)
+    public function insertUser($nick, $email, $hash, $rank)
     {
         $sql = 'INSERT into users
                 (nick, email, hash, rank)
@@ -69,6 +69,10 @@ class UserDb
         $stmt = $this->db->getPdo()->prepare($sql);
         $status = $stmt->execute([$nick, $email, $hash, $rank]);
 
+        if ($status) {
+            $status = $this->db->getPdo()->lastInsertId();
+        }
+        
         return $status;
     }
 }
