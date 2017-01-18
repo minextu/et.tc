@@ -16,6 +16,7 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiSuccess {bool} success             Status of the deletion
  *
  * @apiError MissingValues Id wasn't transmited
+ * @apiError NotLoggedIn   You are not logged in
  * @apiError NoPermissions No permissions to delete this project
  * @apiError NotFound      Project couldn't be found
  * @apiErrorExample Error-Response:

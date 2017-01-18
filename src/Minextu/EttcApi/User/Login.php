@@ -70,7 +70,7 @@ class Login extends AbstractRoutable
      * @param    string   $pw     Password to check
      * @return   bool             True if nickname and password are correct, false otherwise
      */
-    public function checkLogin($nick, $pw)
+    private function checkLogin($nick, $pw)
     {
         $user = new User($this->getDb());
 
@@ -87,7 +87,7 @@ class Login extends AbstractRoutable
      * Sets the user to be logged in
      * @param    string   $nick   Nickname of the user
      */
-    public function login($nick)
+    private function login($nick)
     {
         $user = new User($this->getDb());
         // load user
