@@ -451,6 +451,28 @@ footer {
     background: #fff;
 }
 
+.loading {
+    width: 40px;
+    height: 40px;
+    background-color: #2d2d2d;
+    margin: 100px auto;
+    border-radius: 100%;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+    transition: all 1s;
+}
+
+@keyframes sk-scaleout {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    100% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+        opacity: 0;
+    }
+}
+
 @media (max-width:1024px) {
     .simple_nav ul, .simple_nav .ul {
         width: 90%;
