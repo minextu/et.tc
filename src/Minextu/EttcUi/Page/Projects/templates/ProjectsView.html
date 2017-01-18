@@ -1,13 +1,20 @@
-<ul class='list'>
+<ul class='list' id='projectList'>
 
 </ul>
 
-<li class='entry' style='display: none'>
-    <a href='__MSG_ProjectLink__' class='image'>
-        <img src='__MSG_ProjectImage__' alt=''>
-    </a>
-    <div class='text'>
-        <span class='date'><img src='__PATH_Assets__/images/create.png'>__MSG_ProjectCreateDate__<img src='__PATH_Assets__/images/update.png'>__MSG_ProjectUpdateDate__</span>
-        <h3><a href='__MSG_ProjectLink__'>__MSG_ProjectTitle__</a></h3> __MSG_ProjectDescription
-    </div>
-</li>
+<a href='__PATH_Root__/CreateProject'>Create Project</a>
+
+<!-- JavaScript Templates -->
+<div style='display: none'>
+    <li id='templateEntry' class='entry'>
+        <a href='__PATH_Root__/Project/__MSG_ProjectId__' class='image'>
+            <img src='__MSG_ProjectImage__' alt=''>
+        </a>
+        <div class='text'>
+            <span class='date'><img src='__PATH_Assets__/images/create.png'>__MSG_ProjectCreateDate__<img src='__PATH_Assets__/images/update.png'>__MSG_ProjectUpdateDate__</span>
+            <h3><a href='__PATH_Root__/Project/__MSG_ProjectId__'>__MSG_ProjectTitle__</a></h3> __MSG_ProjectDescription__
+        </div>
+    </li>
+</div>
+
+<script src='__PATH_Assets__/js/projects.js'></script>

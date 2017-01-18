@@ -6,7 +6,7 @@ class LoginView extends AbstractPageView
 {
     /**
      * Contains possible warning, error or success message
-     * @var   [type]
+     * @var   string
      */
     private $message;
 

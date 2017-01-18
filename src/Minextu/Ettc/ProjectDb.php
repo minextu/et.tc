@@ -38,18 +38,31 @@ class ProjectDb
     }
 
     /**
+     * Get all Projects and return the ids
+     * @return   array       All Project ids
+     */
+    public function getProjectIds()
+    {
+        $sql = 'SELECT id FROM projects';
+
+        $ids = $this->db->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+
+        return $ids;
+    }
+
+    /**
     * Store project in database
     * @param    string   $title         Project title
     * @param    string   $description   Project description
     * @return   bool|int                Id of the project on success, False otherwise
     */
-    public function addProject($title, $description)
+    public function insertProject($title, $description, $image)
     {
         $sql = 'INSERT into projects
-                (title, description)
-                VALUES (?, ?)';
+                (title, description, image)
+                VALUES (?, ?, ?)';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$title, $description]);
+        $status = $stmt->execute([$title, $description, $image]);
 
         if ($status) {
             $status = $this->db->getPdo()->lastInsertId();

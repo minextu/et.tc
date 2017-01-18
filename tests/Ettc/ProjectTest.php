@@ -6,6 +6,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
     {
         $title = "Test Name";
         $description = "A Test Project";
+        $image = "TestImage.png";
 
         $project = new Project($this->getDb());
 
@@ -13,6 +14,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertTrue($titleStatus, "setTitle didn't return True");
         $descriptionStatus = $project->setDescription($description);
         $this->assertTrue($descriptionStatus, "setDescription didn't return True");
+        $descriptionStatus = $project->setImage($image);
+        $this->assertTrue($descriptionStatus, "setImage didn't return True");
 
         $createStatus = $project->create();
         $this->assertTrue($createStatus, "create didn't return True");
@@ -27,7 +30,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertEquals(1, $this->getConnection()->getRowCount('projects'), "Inserting failed");
 
         // check if values are saved correctly
-        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description FROM projects');
+        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description,image FROM projects');
         $expectedTable = $this->createFlatXmlDataSet(__DIR__."/ProjectTest.xml")->getTable("projects");
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -40,8 +43,16 @@ class ProjectTest extends AbstractEttcDatabaseTest
         // get project with id 1
         $project = new Project($this->getDb(), 1);
 
+        // test if title is correct
         $title = $project->getTitle();
         $this->assertEquals("Test Name", $title);
+
+        // check if image and image type is correct
+        $imageType = $project->getImageType();
+        $this->assertEquals("Default", $imageType);
+
+        $image = $project->getImage();
+        $this->assertEquals("TestImage.png", $image);
     }
 
     public function testProjectCanNotBeLoadedByInvalidId()
@@ -82,6 +93,23 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $createStatus = $project->create();
     }
 
+    public function testProjectWithoutImageCanBeCreated()
+    {
+        $project = new Project($this->getDb());
+        $project->setTitle("Test");
+        $project->setDescription("Test2");
+
+        $createStatus = $project->create();
+        $this->assertTrue($createStatus);
+
+        // image should be a placeholder
+        $image = $project->getImage();
+        $this->assertEquals("placeholder.png", $image);
+
+        $imageType = $project->getImageType();
+        $this->assertEquals("Placeholder", $imageType);
+    }
+
     public function testProjectCanBeDeleted()
     {
         $this->setExpectedException('Minextu\Ettc\Exception\InvalidId');
@@ -96,5 +124,43 @@ class ProjectTest extends AbstractEttcDatabaseTest
 
         // try to load the deleted project
         $project = new Project($this->getDb(), 1);
+    }
+
+    public function testProjectCanBeConvertedToArray()
+    {
+        $this->createTestProject();
+
+        // get project with id 1
+        $project = new Project($this->getDb(), 1);
+
+        // convert project to array
+        $array = $project->toArray();
+
+        // remove create date and update date from array, since that won't be checked
+        unset($array['createDate']);
+        unset($array['updateDate']);
+
+        $expectedArray = [
+            'id' => 1,
+            'title' => 'Test Name',
+            'description' => 'A Test Project',
+            'image' => 'TestImage.png',
+            'imageType' => 'Default'
+        ];
+        $this->assertEquals($expectedArray, $array);
+    }
+
+    public function testProjectsCanBeListed()
+    {
+        $this->createTestProject();
+
+        $projects = Project::getAll($this->getDb());
+        $this->assertCount(1, $projects, "There should only be one Project");
+
+        $firstProject = $projects[0];
+        $this->assertInstanceOf(Project::class, $firstProject);
+
+        $title = $firstProject->getTitle();
+        $this->assertEquals("Test Name", $title);
     }
 }

@@ -1,6 +1,9 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\Ettc\Ettc;
+use Respect\Rest\Routable;
+use Minextu\Ettc\Project;
+use Minextu\Ettc\Account\Account;
 
 /**
  * @api {get} /project/create/ create a new project
@@ -32,10 +35,6 @@ use Minextu\Ettc\Ettc;
  *    "error": "NoPermissions"
  * }
  **/
-
-use Respect\Rest\Routable;
-use Minextu\Ettc\Project;
-use Minextu\Ettc\Account\Account;
 
 class Create implements Routable
 {

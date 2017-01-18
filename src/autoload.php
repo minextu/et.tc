@@ -10,6 +10,6 @@ function autoload($className)
         return false;
     }
 
-    include($file);
+    require($file);
 }
 spl_autoload_register('autoload');

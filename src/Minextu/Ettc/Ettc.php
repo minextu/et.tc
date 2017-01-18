@@ -62,4 +62,21 @@ class Ettc
     {
         return $this->db;
     }
+
+    /**
+     * Get the complete external Url to index.php
+     * @return   string   External url to index.php (in form of 'http(s)://server.domain/dir/to/ettc')
+     */
+    public function getServerUrl()
+    {
+        if (empty($_SERVER['HTTPS'])) {
+            $http = "http://";
+        } else {
+            $http = "https://";
+        }
+        $rootDir = dirname($_SERVER['SCRIPT_NAME']);
+
+        $url = $http . $_SERVER['HTTP_HOST'] . $rootDir;
+        return $url;
+    }
 }

@@ -27,6 +27,24 @@ class Project
     private $description;
 
     /**
+     * Project image filename
+     * @var   string
+     */
+    private $image;
+
+    /**
+     * Project creation date
+     * @var   string
+     */
+    private $createDate;
+
+    /**
+     * Date of the projects last update
+     * @var   string
+     */
+    private $updateDate;
+
+    /**
      * @param   Database\DatabaseInterface   $db   Database to be used
      * @param   int   $id                          Project id to be loaded
      */
@@ -40,6 +58,25 @@ class Project
                 throw new Exception\InvalidId("Invalid project id '" . $id . "'");
             }
         }
+    }
+
+    /**
+     * Get all Projects that are saved in db
+     * @param    Database\DatabaseInterface   $db   Database to be used
+     * @return   Project[]                          All found projects
+     */
+    public static function getAll($db)
+    {
+        $projectDb = new ProjectDb($db);
+        $projectIds = $projectDb->getProjectIds();
+
+        $projects = [];
+        foreach ($projectIds as $id) {
+            $project = new Project($db, $id);
+            $projects[] = $project;
+        }
+
+        return $projects;
     }
 
     /**
@@ -101,6 +138,72 @@ class Project
         return true;
     }
 
+    /**
+     * Get project image
+     * @return   string   Project image filename
+     */
+    public function getImage()
+    {
+        // return default image if not set
+        if (!$this->image) {
+            $image = "placeholder.png";
+        } else {
+            $image = $this->image;
+        }
+
+        return $image;
+    }
+
+    /**
+     * @param   string   $filename      Filename of Image
+     * @return  bool                    True on success, False otherwise
+     */
+    public function setImage($filename)
+    {
+        $this->image = $filename;
+        return true;
+    }
+
+    /**
+     * Get project image type
+     * @return   string   "Placeholder" if the image is a placholder, "Default" otherwise
+     */
+    public function getImageType()
+    {
+        if (!$this->image) {
+            $type = "Placeholder";
+        } else {
+            $type = "Default";
+        }
+
+        return $type;
+    }
+
+    /**
+     * Get project creation date
+     * @return   string   Project creation date
+     */
+    public function getCreateDate()
+    {
+        if (!isset($this->createDate)) {
+            throw new Exception\Exception("Project has to be loaded first.");
+        }
+
+        return $this->createDate;
+    }
+
+    /**
+     * Get project update date
+     * @return   string   Date of the projects last update
+     */
+    public function getUpdateDate()
+    {
+        if (!isset($this->updateDate)) {
+            throw new Exception\Exception("Project has to be loaded first.");
+        }
+
+        return $this->updateDate;
+    }
 
     /**
      * Load project info using the id
@@ -127,6 +230,9 @@ class Project
         $this->id = $project['id'];
         $this->title = $project['title'];
         $this->description = $project['description'];
+        $this->image = $project['image'];
+        $this->createDate = $project['created'];
+        $this->updateDate = $project['updated'];
 
         return true;
     }
@@ -147,7 +253,7 @@ class Project
             throw new Exception\Exception("Description has to set via setDescription first.");
         }
 
-        $status = $this->projectDb->addProject($this->title, $this->description);
+        $status = $this->projectDb->insertProject($this->title, $this->description, $this->image);
         if ($status) {
             $this->id = $status;
             return true;
@@ -181,7 +287,11 @@ class Project
         $project = [
             "id" => $this->getId(),
             "title" => $this->getTitle(),
-            "description" => $this->getDescription()
+            "description" => $this->getDescription(),
+            "image" => $this->getImage(),
+            "imageType" => $this->getImageType(),
+            "createDate" => $this->getCreateDate(),
+            "updateDate" => $this->getUpdateDate(),
         ];
         return $project;
     }

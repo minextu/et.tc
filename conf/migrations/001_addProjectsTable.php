@@ -10,7 +10,9 @@ class addProjectsTable extends AbstractMigration
             `id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
             `title` VARCHAR(10) NOT NULL ,
             `description` VARCHAR(10000) NOT NULL ,
-            `added` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+            `image` VARCHAR(100) NULL ,
+            `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+            `updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
             PRIMARY KEY (`id`)
         )';
 
