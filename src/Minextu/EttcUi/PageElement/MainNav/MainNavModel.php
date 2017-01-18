@@ -11,8 +11,8 @@ class MainNavModel extends AbstractPageElementModel
     public function getEntries()
     {
         $entries = array(
-            "Projects" => "Projects",
-            "Server" => "Server"
+            "Projects" => "__PATH_Root__/Projects",
+            "Server" => "__PATH_Root__/Server"
         );
 
         return $entries;
