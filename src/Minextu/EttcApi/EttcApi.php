@@ -23,10 +23,14 @@ class EttcApi
     {
         $r = self::$router;
 
-        // Projects
+        // Project
         $r->get('/v1/projects', new Projects);
-        $r->get('/v1/project/create', new Project\Create);
+        $r->post('/v1/project/create', new Project\Create);
         $r->delete('/v1/project/delete/*', new Project\Delete);
+
+        // User
+        $r->post('/v1/user/login', new User\Login);
+        $r->post('/v1/user/logout', new User\Logout);
     }
 
     private static function init404()

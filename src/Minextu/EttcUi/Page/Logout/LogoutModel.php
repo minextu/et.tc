@@ -2,14 +2,23 @@
 
 use \Minextu\EttcUi\Page\AbstractPageModel;
 use Minextu\Ettc\Account\Account;
+use Minextu\EttcApi\User\Logout;
+use Minextu\EttcUi\Exception;
 
 class LogoutModel extends AbstractPageModel
 {
     /**
-     * Logouts the User using the static class Account
+     * Logouts the User using the ettc api
      */
     public function logout()
     {
-        return Account::logout();
+        $logoutApi = new Logout();
+        $answer = $logoutApi->post();
+
+        if (isset($answer['error'])) {
+            throw new Exception($answer['error']);
+        } else {
+            return true;
+        }
     }
 }

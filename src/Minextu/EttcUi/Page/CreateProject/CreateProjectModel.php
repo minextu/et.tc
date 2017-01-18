@@ -2,7 +2,7 @@
 
 use \Minextu\EttcUi\Page\AbstractPageModel;
 use \Minextu\Ettc\Account\Account;
-use \Minextu\Ettc\Project;
+use \Minextu\EttcApi\Project\Create;
 use \Minextu\EttcUi\Exception;
 
 class CreateProjectModel extends AbstractPageModel
@@ -21,25 +21,27 @@ class CreateProjectModel extends AbstractPageModel
         if ($user && $user->getRank() == 2) {
             $permissions = true;
         }
-
         return $permissions;
     }
 
     /**
-     * Add a project to database
+     * Add a project to database using the ettc api
      * @param   String   $title         Project Title
      * @param   String   $description   Project Description
      * @return  bool                    True on success, False otherwise
      */
     public function addProject($title, $description)
     {
-        if (empty($title) || empty($description)) {
-            throw new Exception("Missing Title or Description");
-        }
+        $_POST['title'] = $title;
+        $_POST['description'] = $description;
 
-        $project = new Project($this->mainModel->getDb());
-        $project->setTitle($title);
-        $project->setDescription($description);
-        return $project->create();
+        $createApi = new Create();
+        $answer = $createApi->post();
+
+        if (isset($answer['error'])) {
+            throw new Exception($answer['error']);
+        } else {
+            return true;
+        }
     }
 }

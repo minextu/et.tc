@@ -6,7 +6,7 @@ use Minextu\Ettc\Project;
 use Minextu\Ettc\Account\Account;
 
 /**
- * @api {get} /project/create/ create a new project
+ * @api {post} /project/create/ create a new project
  * @apiName createProject
  * @apiVersion 0.1.0
  * @apiGroup Project
@@ -38,17 +38,17 @@ use Minextu\Ettc\Account\Account;
 
 class Create implements Routable
 {
-    public function get()
+    public function post()
     {
         $ettc = new Ettc();
 
-        $title = isset($_GET['title']) ? $_GET['title'] : false;
-        $description = isset($_GET['description']) ? $_GET['description'] : false;
+        $title = isset($_POST['title']) ? $_POST['title'] : false;
+        $description = isset($_POST['description']) ? $_POST['description'] : false;
 
         $loggedin = $this->checkLoggedIn($ettc);
         $permissions = $this->checkPermissions($ettc);
 
-        if ($title === false || $description === false) {
+        if (empty($title) || empty($description)) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
         } elseif (!$loggedin) {

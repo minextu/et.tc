@@ -1,6 +1,7 @@
 <?php namespace Minextu\EttcUi\Page\Logout;
 
 use Minextu\EttcUi\Page\AbstractPagePresenter;
+use Minextu\EttcUi\Exception;
 
 class LogoutPresenter extends AbstractPagePresenter
 {
@@ -9,7 +10,11 @@ class LogoutPresenter extends AbstractPagePresenter
      */
     public function init()
     {
-        $this->model->logout();
-        $this->view->redirectToStart();
+        try {
+            $this->model->logout();
+            $this->view->redirectToStart();
+        } catch (Exception $e) {
+            $this->view->showError($e->getMessage());
+        }
     }
 }

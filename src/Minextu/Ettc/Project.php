@@ -256,6 +256,8 @@ class Project
         $status = $this->projectDb->insertProject($this->title, $this->description, $this->image);
         if ($status) {
             $this->id = $status;
+            $this->createDate = time();
+            $this->updateDate = time();
             return true;
         } else {
             return false;

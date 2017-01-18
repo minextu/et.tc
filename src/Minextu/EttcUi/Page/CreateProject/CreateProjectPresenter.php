@@ -8,6 +8,10 @@ class CreateProjectPresenter extends AbstractPagePresenter
 {
     public function init()
     {
+        $checkPermissions = $this->model->checkPermissions();
+        if (!$checkPermissions) {
+            $this->view->showError("No Permissions!");
+        }
     }
 
     /**
@@ -17,12 +21,6 @@ class CreateProjectPresenter extends AbstractPagePresenter
      */
     public function addProjectClicked($title, $description)
     {
-        $checkPermissions = $this->model->checkPermissions();
-        if (!$checkPermissions) {
-            $this->view->showError("No Permissions!");
-            return;
-        }
-
         try {
             $this->model->addProject($title, $description);
             $this->view->redirectToProjects();

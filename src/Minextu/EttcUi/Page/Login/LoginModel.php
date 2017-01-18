@@ -1,8 +1,8 @@
 <?php namespace Minextu\EttcUi\Page\Login;
 
-use \Minextu\EttcUi\Page\AbstractPageModel;
-use Minextu\Ettc\Account\Account;
+use Minextu\EttcUi\Page\AbstractPageModel;
 use Minextu\Ettc\Account\User;
+use Minextu\EttcApi\User\Login;
 use Minextu\EttcUi\Exception;
 
 class LoginModel extends AbstractPageModel
@@ -27,20 +27,22 @@ class LoginModel extends AbstractPageModel
     }
 
     /**
-     * Sets the user to be logged in
+     * Sets the user to be logged in using the ettc api
      * @param    string   $nick   Nickname of the user
+     * @param    string   $pw     Password of the user
      */
-    public function login($nick)
+    public function login($nick, $pw)
     {
-        $user = new User($this->mainModel->getDb());
-        // load user
-        $status = $user->loadNick($nick);
+        $_POST['nickname'] = $nick;
+        $_POST['password'] = $pw;
 
-        // Set the status to logged in on success
-        if ($status) {
-            Account::login($user);
+        $loginApi = new Login();
+        $answer = $loginApi->post();
+
+        if (isset($answer['error'])) {
+            throw new Exception($answer['error']);
         } else {
-            throw new Exception("User with Nick '$nick' not found");
+            return true;
         }
     }
 }
