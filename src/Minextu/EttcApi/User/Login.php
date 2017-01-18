@@ -5,6 +5,8 @@ use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
 
 /**
+ * Checks nickname and password, logs the user in on success
+ *
  * @api {post} /user/login/ login
  * @apiName loginUser
  * @apiVersion 0.1.0
@@ -27,12 +29,16 @@ use Minextu\Ettc\Account\Account;
 
 class Login extends AbstractRoutable
 {
+    /**
+     * Checks nickname and password and logs the user in
+     * @return   array   api answer
+     */
     public function post()
     {
         $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : false;
         $password = isset($_POST['password']) ? $_POST['password'] : false;
 
-        $loggedin = $this->checkLoginStatus();
+        $loggedin = $this->checkLoggedIn();
         $loginCorrect = $this->checkLogin($nickname, $password);
 
         if (empty($nickname) || empty($password)) {
@@ -52,17 +58,21 @@ class Login extends AbstractRoutable
         return $answer;
     }
 
-    private function checkLoginStatus()
-    {
-        $loggedin = false;
-        $user = Account::checkLogin($this->getDb());
+    /**
+     * Check the current login status
+     * @return   bool   True if the user ist logged in, False otherwise
+     */
+     private function checkLoggedIn()
+     {
+         $loggedin = false;
+         $user = Account::checkLogin($this->getDb());
 
-        if ($user) {
-            $loggedin = true;
-        }
+         if ($user) {
+             $loggedin = true;
+         }
 
-        return $loggedin;
-    }
+         return $loggedin;
+     }
 
     /**
      * Check if the username and password is correct

@@ -5,6 +5,8 @@ use Minextu\Ettc\Project;
 use Minextu\Ettc\Account\Account;
 
 /**
+ * Creates a new Project while checking for permissions
+ *
  * @api {post} /project/create/ create a new project
  * @apiName createProject
  * @apiVersion 0.1.0
@@ -37,6 +39,10 @@ use Minextu\Ettc\Account\Account;
 
 class Create extends AbstractRoutable
 {
+    /**
+     * Creates a new project using post values, checks fop permissions
+     * @return   array   api answer, containing the created project on success
+     */
     public function post()
     {
         $title = isset($_POST['title']) ? $_POST['title'] : false;
@@ -66,6 +72,10 @@ class Create extends AbstractRoutable
         return $answer;
     }
 
+    /**
+     * Check the current login status
+     * @return   bool   True if the user ist logged in, False otherwise
+     */
     private function checkLoggedIn()
     {
         $loggedin = false;
@@ -77,6 +87,11 @@ class Create extends AbstractRoutable
 
         return $loggedin;
     }
+
+    /**
+     * Check if the current user has permissions to create projects
+     * @return   bool   True if the user has permissions, False otherwise
+     */
     private function checkPermissions()
     {
         $permissions = false;

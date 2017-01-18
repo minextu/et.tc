@@ -10,7 +10,7 @@ abstract class AbstractRoutable implements Routable
 {
     /**
      * Main database
-     * @var   Minextu\Ettc\Database\DatabaseInterface
+     * @var   \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
     final public function __construct($db)
@@ -19,7 +19,7 @@ abstract class AbstractRoutable implements Routable
     }
 
     /**
-     * @return   Minextu\Ettc\Database\DatabaseInterface   Database to be used
+     * @return   \Minextu\Ettc\Database\DatabaseInterface   Database to be used
      */
     final public function getDb()
     {

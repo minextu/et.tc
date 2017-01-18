@@ -4,6 +4,8 @@ use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\Account;
 
 /**
+ * Logout the user
+ *
  * @api {post} /user/logout/ logout
  * @apiName logoutUser
  * @apiVersion 0.1.0
@@ -21,9 +23,13 @@ use Minextu\Ettc\Account\Account;
 
 class Logout extends AbstractRoutable
 {
+    /**
+     * Logout the user
+     * @return   array   api answer
+     */
     public function post()
     {
-        $loggedin = $this->checkLoginStatus();
+        $loggedin = $this->checkLoggedIn();
 
         if (!$loggedin) {
             http_response_code(401);
@@ -36,17 +42,21 @@ class Logout extends AbstractRoutable
         return $answer;
     }
 
-    private function checkLoginStatus()
-    {
-        $loggedin = false;
-        $user = Account::checkLogin($this->getDb());
+    /**
+     * Check the current login status
+     * @return   bool   True if the user ist logged in, False otherwise
+     */
+     private function checkLoggedIn()
+     {
+         $loggedin = false;
+         $user = Account::checkLogin($this->getDb());
 
-        if ($user) {
-            $loggedin = true;
-        }
+         if ($user) {
+             $loggedin = true;
+         }
 
-        return $loggedin;
-    }
+         return $loggedin;
+     }
 
     /**
      * Logouts the User using the static class Account

@@ -5,6 +5,8 @@ use Minextu\Ettc\Project;
 use Minextu\Ettc\Ettc;
 
 /**
+ * Generates a list of projects
+ *
  * @api {get} /projects list projects
  * @apiName listProjects
  * @apiVersion 0.1.0
@@ -29,6 +31,10 @@ use Minextu\Ettc\Ettc;
 
 class Projects extends AbstractRoutable
 {
+    /**
+     * Generate a list of Projects
+     * @return   array   List of projects
+     */
     public function get()
     {
         $projects = $this->getProjects();
@@ -37,6 +43,10 @@ class Projects extends AbstractRoutable
         return $answer;
     }
 
+    /**
+     * Get all projects, convert them to arrays
+     * @return   array   all projects as arrays
+     */
     private function getProjects()
     {
         $projects = Project::getAll($this->getDb());

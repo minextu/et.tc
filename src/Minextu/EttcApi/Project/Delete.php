@@ -6,6 +6,8 @@ use Minextu\Ettc\Account\Account;
 use Minextu\Ettc\Exception\InvalidId;
 
 /**
+ * Deletes a Project while checking for permissions
+ *
  * @api {delete} /project/delete/:id delete a project
  * @apiName deleteProject
  * @apiVersion 0.1.0
@@ -28,6 +30,11 @@ use Minextu\Ettc\Exception\InvalidId;
 
 class Delete extends AbstractRoutable
 {
+    /**
+     * Deletes the given project, after checking for permissions
+     * @param    boolean   $id   Project id to be deleted
+     * @return   array           Api answers
+     */
     public function delete($id=false)
     {
         $loggedin = $this->checkLoggedIn();
@@ -62,6 +69,10 @@ class Delete extends AbstractRoutable
         return $answer;
     }
 
+    /**
+     * Check the current login status
+     * @return   bool   True if the user ist logged in, False otherwise
+     */
     private function checkLoggedIn()
     {
         $loggedin = false;
@@ -73,6 +84,11 @@ class Delete extends AbstractRoutable
 
         return $loggedin;
     }
+
+    /**
+     * Check if the current user has permissions to create projects
+     * @return   bool   True if the user has permissions, False otherwise
+     */
     private function checkPermissions()
     {
         $permissions = false;
