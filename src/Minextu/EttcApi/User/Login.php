@@ -1,7 +1,6 @@
 <?php namespace Minextu\EttcApi\User;
 
-use Minextu\Ettc\Ettc;
-use Respect\Rest\Routable;
+use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
 
@@ -32,17 +31,15 @@ use Minextu\Ettc\Account\Account;
  * }
  **/
 
-class Login implements Routable
+class Login extends AbstractRoutable
 {
     public function post()
     {
-        $ettc = new Ettc();
-
         $nickname = isset($_POST['nickname']) ? $_POST['nickname'] : false;
         $password = isset($_POST['password']) ? $_POST['password'] : false;
 
-        $loggedin = $this->checkLoginStatus($ettc);
-        $loginCorrect = $this->checkLogin($ettc, $nickname, $password);
+        $loggedin = $this->checkLoginStatus();
+        $loginCorrect = $this->checkLogin($nickname, $password);
 
         if (empty($nickname) || empty($password)) {
             http_response_code(400);
@@ -54,17 +51,17 @@ class Login implements Routable
             http_response_code(401);
             $answer = ["error" => "WrongNicknameOrPassword"];
         } else {
-            $this->login($ettc, $nickname);
+            $this->login($nickname);
             $answer = ["success" => true];
         }
 
         return $answer;
     }
 
-    private function checkLoginStatus($ettc)
+    private function checkLoginStatus()
     {
         $loggedin = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -79,9 +76,9 @@ class Login implements Routable
      * @param    string   $pw     Password to check
      * @return   bool             True if nickname and password are correct, false otherwise
      */
-    public function checkLogin($ettc, $nick, $pw)
+    public function checkLogin($nick, $pw)
     {
-        $user = new User($ettc->getDb());
+        $user = new User($this->ettc->getDb());
 
         // check username and password
         $status = $user->loadNick($nick);
@@ -96,9 +93,9 @@ class Login implements Routable
      * Sets the user to be logged in
      * @param    string   $nick   Nickname of the user
      */
-    public function login($ettc, $nick)
+    public function login($nick)
     {
-        $user = new User($ettc->getDb());
+        $user = new User($this->ettc->getDb());
         // load user
         $status = $user->loadNick($nick);
 

@@ -1,6 +1,9 @@
 <?php namespace Minextu\EttcApi\Project;
 
-use Minextu\Ettc\Ettc;
+use Minextu\EttcApi\AbstractRoutable;
+use Minextu\Ettc\Project;
+use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Exception\InvalidId;
 
 /**
  * @api {delete} /project/delete/:id delete a project
@@ -21,19 +24,12 @@ use Minextu\Ettc\Ettc;
  * }
  **/
 
-use Respect\Rest\Routable;
-use Minextu\Ettc\Project;
-use Minextu\Ettc\Account\Account;
-use Minextu\Ettc\Exception\InvalidId;
-
-class Delete implements Routable
+class Delete extends AbstractRoutable
 {
     public function delete($id=false)
     {
-        $ettc = new Ettc();
-
-        $loggedin = $this->checkLoggedIn($ettc);
-        $permissions = $this->checkPermissions($ettc);
+        $loggedin = $this->checkLoggedIn();
+        $permissions = $this->checkPermissions();
 
         if ($id === false) {
             http_response_code(400);
@@ -47,7 +43,7 @@ class Delete implements Routable
         } else {
             $invalidId = false;
             try {
-                $project = new Project($ettc->getDb(), $id);
+                $project = new Project($this->ettc->getDb(), $id);
             } catch (InvalidId $e) {
                 $invalidId = true;
             }
@@ -64,10 +60,10 @@ class Delete implements Routable
         return $answer;
     }
 
-    private function checkLoggedIn($ettc)
+    private function checkLoggedIn()
     {
         $loggedin = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -75,10 +71,10 @@ class Delete implements Routable
 
         return $loggedin;
     }
-    private function checkPermissions($ettc)
+    private function checkPermissions()
     {
         $permissions = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         // only proceed if admin
         // TODO: check permissions instead of rank

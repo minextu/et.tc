@@ -12,7 +12,7 @@ class LogoutModel extends AbstractPageModel
      */
     public function logout()
     {
-        $logoutApi = new Logout();
+        $logoutApi = new Logout($this->mainModel->getEttc());
         $answer = $logoutApi->post();
 
         if (isset($answer['error'])) {

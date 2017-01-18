@@ -1,7 +1,6 @@
 <?php namespace Minextu\EttcApi\Project;
 
-use Minextu\Ettc\Ettc;
-use Respect\Rest\Routable;
+use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project;
 use Minextu\Ettc\Account\Account;
 
@@ -36,17 +35,15 @@ use Minextu\Ettc\Account\Account;
  * }
  **/
 
-class Create implements Routable
+class Create extends AbstractRoutable
 {
     public function post()
     {
-        $ettc = new Ettc();
-
         $title = isset($_POST['title']) ? $_POST['title'] : false;
         $description = isset($_POST['description']) ? $_POST['description'] : false;
 
-        $loggedin = $this->checkLoggedIn($ettc);
-        $permissions = $this->checkPermissions($ettc);
+        $loggedin = $this->checkLoggedIn();
+        $permissions = $this->checkPermissions();
 
         if (empty($title) || empty($description)) {
             http_response_code(400);
@@ -58,7 +55,7 @@ class Create implements Routable
             http_response_code(403);
             $answer = ["error" => "NoPermissions"];
         } else {
-            $project = new Project($ettc->getDb());
+            $project = new Project($this->ettc->getDb());
             $project->setTitle($title);
             $project->setDescription($description);
             $project->create();
@@ -69,10 +66,10 @@ class Create implements Routable
         return $answer;
     }
 
-    private function checkLoggedIn($ettc)
+    private function checkLoggedIn()
     {
         $loggedin = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         if ($user) {
             $loggedin = true;
@@ -80,10 +77,10 @@ class Create implements Routable
 
         return $loggedin;
     }
-    private function checkPermissions($ettc)
+    private function checkPermissions()
     {
         $permissions = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         // only proceed if admin
         // TODO: check permissions instead of rank

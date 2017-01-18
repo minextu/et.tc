@@ -7,30 +7,29 @@ class EttcApi
 {
     private static $rootDir;
     private static $router;
-    private static $db;
 
-    public static function run($rootDir)
+    public static function run($rootDir, $ettc)
     {
         self::init($rootDir);
         $router = self::$router;
 
         self::init404();
-        self::setRoutes();
+        self::setRoutes($ettc);
         self::encode();
     }
 
-    private static function setRoutes()
+    private static function setRoutes($ettc)
     {
         $r = self::$router;
 
         // Project
-        $r->get('/v1/projects', new Projects);
-        $r->post('/v1/project/create', new Project\Create);
-        $r->delete('/v1/project/delete/*', new Project\Delete);
+        $r->get('/v1/projects', new Projects($ettc));
+        $r->post('/v1/project/create', new Project\Create($ettc));
+        $r->delete('/v1/project/delete/*', new Project\Delete($ettc));
 
         // User
-        $r->post('/v1/user/login', new User\Login);
-        $r->post('/v1/user/logout', new User\Logout);
+        $r->post('/v1/user/login', new User\Login($ettc));
+        $r->post('/v1/user/logout', new User\Logout($ettc));
     }
 
     private static function init404()

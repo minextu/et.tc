@@ -70,7 +70,7 @@ class EttcUi
         $view->setPresenter($presenter);
 
         // init models
-        $model->setDb($this->ettc->getDb());
+        $model->setEttc($this->ettc);
         $pagePresenter->getModel()->setMainModel($model);
         foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->getModel()->setMainModel($model);

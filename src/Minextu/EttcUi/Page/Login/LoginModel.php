@@ -36,7 +36,7 @@ class LoginModel extends AbstractPageModel
         $_POST['nickname'] = $nick;
         $_POST['password'] = $pw;
 
-        $loginApi = new Login();
+        $loginApi = new Login($this->mainModel->getEttc());
         $answer = $loginApi->post();
 
         if (isset($answer['error'])) {

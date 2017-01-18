@@ -1,7 +1,6 @@
 <?php namespace Minextu\EttcApi;
 
-use Minextu\Ettc\Ettc;
-use Respect\Rest\Routable;
+use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project;
 
 /**
@@ -27,28 +26,26 @@ use Minextu\Ettc\Project;
  *
  **/
 
-class Projects implements Routable
+class Projects extends AbstractRoutable
 {
     public function get()
     {
-        $ettc = new Ettc();
-
-        $projects = $this->getProjects($ettc);
+        $projects = $this->getProjects();
 
         $answer = ["items" => $projects];
         return $answer;
     }
 
-    private function getProjects($ettc)
+    private function getProjects()
     {
-        $projects = Project::getAll($ettc->getDb());
+        $projects = Project::getAll($this->ettc->getDb());
 
         $projectsArray = [];
         foreach ($projects as $project) {
             $array = $project->toArray();
 
             // add url to server to image
-            $array['image'] = $ettc->getServerUrl() . "/assets/images/projects/" . $array['image'];
+            $array['image'] = $this->ettc->getServerUrl() . "/assets/images/projects/" . $array['image'];
 
             $projectsArray[] = $array;
         }

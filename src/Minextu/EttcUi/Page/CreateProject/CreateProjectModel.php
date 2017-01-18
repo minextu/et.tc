@@ -35,7 +35,7 @@ class CreateProjectModel extends AbstractPageModel
         $_POST['title'] = $title;
         $_POST['description'] = $description;
 
-        $createApi = new Create();
+        $createApi = new Create($this->mainModel->getEttc());
         $answer = $createApi->post();
 
         if (isset($answer['error'])) {

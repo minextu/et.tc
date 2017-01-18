@@ -1,7 +1,6 @@
 <?php namespace Minextu\EttcApi\User;
 
-use Minextu\Ettc\Ettc;
-use Respect\Rest\Routable;
+use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\Account;
 
 /**
@@ -26,13 +25,11 @@ use Minextu\Ettc\Account\Account;
  * }
  **/
 
-class Logout implements Routable
+class Logout extends AbstractRoutable
 {
     public function post()
     {
-        $ettc = new Ettc();
-
-        $loggedin = $this->checkLoginStatus($ettc);
+        $loggedin = $this->checkLoginStatus();
 
         if (!$loggedin) {
             http_response_code(401);
@@ -45,10 +42,10 @@ class Logout implements Routable
         return $answer;
     }
 
-    private function checkLoginStatus($ettc)
+    private function checkLoginStatus()
     {
         $loggedin = false;
-        $user = Account::checkLogin($ettc->getDb());
+        $user = Account::checkLogin($this->ettc->getDb());
 
         if ($user) {
             $loggedin = true;
