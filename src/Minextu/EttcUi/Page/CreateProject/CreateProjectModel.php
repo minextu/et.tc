@@ -7,6 +7,10 @@ use \Minextu\EttcUi\Exception;
 
 class CreateProjectModel extends AbstractPageModel
 {
+    /**
+     * Check if the current User has permissions to create projects
+     * @return   bool   True if the user has permissions, False otherwise
+     */
     public function checkPermissions()
     {
         $permissions = false;
@@ -21,6 +25,12 @@ class CreateProjectModel extends AbstractPageModel
         return $permissions;
     }
 
+    /**
+     * Add a project to database
+     * @param   String   $title         Project Title
+     * @param   String   $description   Project Description
+     * @return  bool                    True on success, False otherwise
+     */
     public function addProject($title, $description)
     {
         if (empty($title) || empty($description)) {

@@ -20,6 +20,9 @@ class CreateProjectView extends AbstractPageView
         return "Create Project";
     }
 
+    /**
+     * Check if user has submited the create form and send values to presenter
+     */
     public function init()
     {
         if (isset($_POST['create'])) {
