@@ -1,12 +1,11 @@
 {
-	"require": {
-		"hautelook/phpass": "dev-master",
-		"respect/rest": "^0.6.0"
-	},
-	"require-dev": {
-        "phpdocumentor/phpdocumentor": "2.*",
-        "symfony/dom-crawler" : "v3.*",
-        "symfony/css-selector" : "v3.*"
+    "require": {
+        "hautelook/phpass": "dev-master",
+        "respect/rest": "^0.6.0",
+        "digitalnature/php-ref": "dev-master"
     },
-	"minimum-stability": "dev"
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    },
+    "minimum-stability": "dev"
 }

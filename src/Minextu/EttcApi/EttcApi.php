@@ -56,21 +56,34 @@ class EttcApi
         // encode to json by default, use html as fallback (in browsers)
         $router->always('Accept', array(
             'application/json' => 'json_encode',
-            'text/html' => function ($data) {
-                $html = "
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>et.tc API</title>
-                </head>
-                <body>
-                    <h1>et.tc API Answer</h1>
-                    " . print_r($data, true) . "
-                </body>
-                </html>
-                ";
-                return $html;
+            'text/html' => function ($answer) {
+                return self::htmlEncode($answer);
             }
         ));
+    }
+
+    private static function htmlEncode($answer)
+    {
+        \ref::config('expLvl', -1);
+        \ref::config('showResourceInfo', false);
+        \ref::config('showMethods', false);
+
+        $prettyAnswer = @r($answer);
+        // remove filename and line number
+        $prettyAnswer = preg_replace('/<r data-backtrace.*?<\/r>/', "", $prettyAnswer);
+
+        $html = "
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>et.tc API</title>
+        </head>
+        <body>
+            <h1>et.tc API Answer</h1>
+            " . $prettyAnswer . "
+        </body>
+        </html>
+        ";
+        return $html;
     }
 }
