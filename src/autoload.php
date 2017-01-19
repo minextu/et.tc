@@ -1,15 +1,37 @@
 <?php
 require_once(__DIR__.'/../vendor/autoload.php');
 
-function autoload($className)
-{
-    $className = str_replace('\\', '/', $className);
-    $file = __DIR__.'/'.$className . '.php';
+/**
+ * Autoloader for Ettc
+ *
+ * @param string $class The fully-qualified class name.
+ * @return void
+ */
+spl_autoload_register(function ($class) {
 
-    if (!is_file($file)) {
-        return false;
+    // namespace prefix
+    $prefix = 'Minextu';
+
+    // base directory for the namespace prefix
+    $base_dir = __DIR__ . '/';
+
+    // does the class use the namespace prefix?
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        // no, move to the next registered autoloader
+        return;
     }
 
-    require($file);
-}
-spl_autoload_register('autoload');
+    // get the relative class name
+    $relative_class = substr($class, $len);
+
+    // replace the namespace prefix with the base directory, replace namespace
+    // separators with directory separators in the relative class name, append
+    // with .php
+    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+    // if the file exists, require it
+    if (file_exists($file)) {
+        require $file;
+    }
+});

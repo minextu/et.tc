@@ -56,7 +56,7 @@ class Migrator
     * @param  string   $folder   The folder to be used
     * @return bool               True if succeeded, False if not
     */
-    public function migrateFolder($folder=__DIR__."/../../../../../conf/migrations")
+    public function migrateFolder($folder=__DIR__."/../../../../conf/migrations")
     {
         // handle migrations in correct order
         if ($this->current < $this->target) {

@@ -9,7 +9,7 @@ class Config
     * The Path to the Root of this Project
     * @var string
     */
-    private $rootDir = __DIR__.'/../../../';
+    private $rootDir = __DIR__.'/../../';
     /**
     * The Path to the Config File starting from the Root of the Project
     * @var string
