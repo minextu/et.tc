@@ -1,6 +1,22 @@
+<nav class='sort_nav'>
+
+    <ul>
+        <li class='text'><a>Sort by:</a></li>
+        <li><a onclick='updateSort(this)' sortId="title">title</a></li>
+        <li><a onclick='updateSort(this)' sortId="created">created</a></li>
+        <li><a class='active' onclick='updateSort(this)' sortId="updated">updated</a></li>
+    </ul>
+    <ul>
+        <li class='text'><a>Order by:</a></li>
+        <li><a onclick='updateOrder(this)' sortId="asc">ascending</a></li>
+        <li><a class='active' onclick='updateOrder(this)' sortId="desc">descending</a></li>
+    </ul>
+</nav>
+
 <ul class='list' id='projectList'>
 
 </ul>
+
 
 <a href='__PATH_Root__/CreateProject'>Create Project</a>
 
@@ -11,7 +27,10 @@
             <img src='__MSG_ProjectImage__' alt=''>
         </a>
         <div class='text'>
-            <span class='date'><img src='__PATH_Assets__/images/create.png'>__MSG_ProjectCreateDate__<img src='__PATH_Assets__/images/update.png'>__MSG_ProjectUpdateDate__</span>
+            <span class='date'>
+                <span title='Creation date'><img src='__PATH_Assets__/images/create.png' alt='+'>__MSG_ProjectCreateDate__</span>
+            <span title='Last update'><img src='__PATH_Assets__/images/update.png' alt='U'>__MSG_ProjectUpdateDate__</span>
+            </span>
             <h3><a href='__PATH_Root__/Project/__MSG_ProjectId__'>__MSG_ProjectTitle__</a></h3> __MSG_ProjectDescription__
         </div>
     </li>

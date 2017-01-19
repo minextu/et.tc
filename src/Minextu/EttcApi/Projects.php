@@ -12,6 +12,9 @@ use Minextu\Ettc\Ettc;
  * @apiVersion 0.1.0
  * @apiGroup Project
  *
+ * @apiParam {String=title,created,updated} sortBy=title    Sort result by given field
+ * @apiParam {String=asc,desc}  order=asc                   Order result
+ *
  * @apiSuccess {Array} items              Contains a list of projects
  *
  * @apiSuccessExample Success-Response:
@@ -26,6 +29,12 @@ use Minextu\Ettc\Ettc;
  *               "imageType": "Default|Placeholder"
  *            }
  *         ]
+ * @apiError InvalidValues sortBy or orderBy contain invalid values
+ * @apiErrorExample Error-Response:
+ * HTTP/1.1 400 Bad Request
+ * {
+ *    "error": "InvalidValues"
+ * }
  *
  **/
 
@@ -37,19 +46,31 @@ class Projects extends AbstractRoutable
      */
     public function get()
     {
-        $projects = $this->getProjects();
+        $sortBy = !empty($_GET['sortBy']) ? $_GET['sortBy'] : "title";
+        $order = !empty($_GET['order']) ? $_GET['order'] : "asc";
+        $allowedSort = ["title", "created", "updated"];
+        $allowedOrder = ["asc", "desc"];
 
-        $answer = ["items" => $projects];
+        if (!in_array($sortBy, $allowedSort) || !in_array($order, $allowedOrder)) {
+            http_response_code(400);
+            $answer = ["error" => "InvalidValues"];
+        } else {
+            $projects = $this->getProjects($sortBy, $order);
+            $answer = ["items" => $projects];
+        }
+
         return $answer;
     }
 
     /**
      * Get all projects, convert them to arrays
+     * @param    string   $sortBy    Sort results by given field
+     * @param    string   $order   Order results
      * @return   array   all projects as arrays
      */
-    private function getProjects()
+    private function getProjects($sortBy, $order)
     {
-        $projects = Project::getAll($this->getDb());
+        $projects = Project::getAll($this->getDb(), $sortBy, $order);
 
         $projectsArray = [];
         foreach ($projects as $project) {

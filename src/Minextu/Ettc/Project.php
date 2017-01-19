@@ -63,12 +63,14 @@ class Project
     /**
      * Get all Projects that are saved in db
      * @param    Database\DatabaseInterface   $db   Database to be used
+     * @param    string   $sortBy    Sort results by given field
+     * @param    string   $order     Order results
      * @return   Project[]                          All found projects
      */
-    public static function getAll($db)
+    public static function getAll($db, $sortBy, $order)
     {
         $projectDb = new ProjectDb($db);
-        $projectIds = $projectDb->getProjectIds();
+        $projectIds = $projectDb->getProjectIds($sortBy, $order);
 
         $projects = [];
         foreach ($projectIds as $id) {
@@ -261,7 +263,7 @@ class Project
 
             $status = true;
         }
-        
+
         return $status;
     }
 

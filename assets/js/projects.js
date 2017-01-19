@@ -1,8 +1,12 @@
+var sortBy = "updated";
+var order = "desc";
+var xhttp = new XMLHttpRequest();
+
 function loadProjects()
 {
+    xhttp.abort();
     showLoadingAnimation();
 
-    var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function()
     {
         if (this.readyState == 4 && this.status == 200)
@@ -15,7 +19,7 @@ function loadProjects()
             hideLoadingAnimation();
         }
     };
-    xhttp.open("GET", path + "/api/v1/projects", true);
+    xhttp.open("GET", path + "/api/v1/projects?sortBy=" + sortBy + "&order=" + order, true);
     xhttp.send();
 }
 
@@ -66,27 +70,6 @@ function dateToString(date)
         return Math.round((now - date) / (1000 * 60 * 60 * 12 * 30)) + " month(s)";
     else
         return Math.round((now - date) / (1000 * 60 * 60 * 12 * 30 * 12)) + " year(s)";
-}
-
-
-var loading;
-var projectList;
-
-function showLoadingAnimation()
-{
-    projectList = document.getElementById('projectList');
-    projectList.style.opacity = 0;
-
-    loading = document.createElement("div");
-    loading.className = "loading";
-    projectList.parentNode.insertBefore(loading, projectList);
-}
-
-function hideLoadingAnimation()
-{
-    projectList.style.opacity = 1;
-    loading.style.opacity = 0;
-    loading.parentNode.removeChild(loading);
 }
 
 loadProjects();

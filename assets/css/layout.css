@@ -276,8 +276,8 @@ h2 {
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 70%;
     margin: 0px auto;
+    margin-bottom: 20px;
     overflow: hidden;
     min-height: 20px;
     max-width: 1000px;
@@ -291,6 +291,10 @@ h2 {
     margin-bottom: 10px;
 }
 
+.sort_nav ul:first-child {
+    margin-right: 15px;
+}
+
 .sort_nav ul li {
     float: left;
     margin-left: 10px;
@@ -298,6 +302,26 @@ h2 {
 
 .sort_nav ul li a {
     line-height: 30px;
+}
+
+.sort_nav ul .text a:hover {
+    text-decoration: none !important;
+}
+
+.sort_nav ul li a {
+    color: #838282;
+    cursor: pointer;
+}
+
+.sort_nav ul .text a {
+    color: #484848;
+    cursor: auto;
+}
+
+.sort_nav ul .active, .sort_nav ul .active:hover {
+    color: #484848 !important;
+    text-decoration: none !important;
+    cursor: auto !important;
 }
 
 #content_wrapper .main, .row .main {
@@ -451,13 +475,24 @@ footer {
     background: #fff;
 }
 
+.loadingContainer {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
 .loading {
+    margin: auto;
     width: 40px;
     height: 40px;
     background-color: #2d2d2d;
-    margin: 100px auto;
     border-radius: 100%;
     animation: sk-scaleout 1.0s infinite ease-in-out;
+    transition: all 1s;
+}
+
+[transition=on] {
     transition: all 1s;
 }
 
@@ -478,9 +513,6 @@ footer {
         width: 90%;
     }
     #content_wrapper .main, .row .main {
-        width: 90%;
-    }
-    #content_wrapper .sort_nav {
         width: 90%;
     }
     #content_wrapper .main #top_image {
@@ -509,9 +541,6 @@ footer {
         width: 99%;
     }
     #content_wrapper .main, .row .main {
-        width: 99%;
-    }
-    #content_wrapper .sort_nav {
         width: 99%;
     }
     #content_wrapper .main .content {

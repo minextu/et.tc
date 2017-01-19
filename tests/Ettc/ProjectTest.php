@@ -154,7 +154,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
     {
         $this->createTestProject();
 
-        $projects = Project::getAll($this->getDb());
+        $projects = Project::getAll($this->getDb(), "title", "asc");
         $this->assertCount(1, $projects, "There should only be one Project");
 
         $firstProject = $projects[0];

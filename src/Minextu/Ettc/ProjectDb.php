@@ -39,11 +39,21 @@ class ProjectDb
 
     /**
      * Get all Projects and return the ids
+     * @param    string   $sortBy    Sort results by given field
+     * @param    string   $order     Order results
      * @return   array       All Project ids
      */
-    public function getProjectIds()
+    public function getProjectIds($sortBy, $order)
     {
-        $sql = 'SELECT id FROM projects';
+        $allowedSort  = ["title","created","updated"];
+        $key     = array_search($sortBy, $allowedSort);
+        $sortBy = $allowedSort[$key];
+
+        $allowedOrder  = ["asc","desc"];
+        $key     = array_search($order, $allowedOrder);
+        $orderBy = $allowedOrder[$key];
+
+        $sql = "SELECT id FROM projects ORDER BY $sortBy $order";
 
         $ids = $this->db->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
 
