@@ -61,7 +61,7 @@ class EttcApi
         // TODO: Find a better way than catch all
         self::$router->any('/**', function () {
             header("HTTP/1.0 404 Not Found");
-            return 'Not found!';
+            return ['error' => 'ApiNotFound'];
         });
     }
 
