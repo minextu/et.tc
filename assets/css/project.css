@@ -1,3 +1,8 @@
+.projectContainer {
+    width: 100%;
+    overflow: hidden;
+}
+
 .projectContainer .projectImage {
     width: 100%;
 }

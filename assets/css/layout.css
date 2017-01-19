@@ -470,7 +470,6 @@ table td, table th {
 }
 
 footer {
-    width: 100%;
     margin: 0px auto;
     min-width: 200px;
     background: #fff;
@@ -555,13 +554,13 @@ footer .active, footer a:hover {
 
 @media (max-width:550px) {
     .simple_nav ul, .simple_nav .ul {
-        width: 99%;
+        width: 97%;
     }
     #content_wrapper .main, .row .main {
-        width: 99%;
+        width: 97%;
     }
     #content_wrapper .main .content {
-        padding: 10px;
+        padding: 10px 0px;
     }
     #title {
         padding: 10px;
