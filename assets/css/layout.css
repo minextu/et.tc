@@ -208,6 +208,7 @@ nav ul .text a, nav ul .text a:hover {
 
 #min_menu_entries li a {
     line-height: 35px !important;
+    color: #838282;
 }
 
 #main_nav_min #menu img {
@@ -473,6 +474,22 @@ footer {
     margin: 0px auto;
     min-width: 200px;
     background: #fff;
+}
+
+footer a {
+    color: #838282 !important;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .active:hover {
+    text-decoration: none;
+}
+
+footer .active, footer a:hover {
+    color: #484848 !important;
 }
 
 .loadingContainer {
