@@ -139,8 +139,11 @@ class EttcUi
         $availablePages = $this->getPages();
 
         // If the Page does not exist show a 404 Page
-        if (!in_array($pageName, $availablePages)) {
+        $key = array_search($pageName, $availablePages);
+        if (!$key) {
             $pageName = "Error404";
+        } else {
+            $pageName = $availablePages[$key];
         }
 
         // generate names for all classes
