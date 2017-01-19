@@ -1,10 +1,16 @@
-<?php namespace Minextu\EttcApi;
+<?php namespace Minextu\EttcApi\Project;
 
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Project;
 
 class ProjectsTest extends AbstractEttcDatabaseTest
 {
+    public static function setUpBeforeClass()
+    {
+        // set http host to be empty (Api will try to use this variable)
+        $_SERVER['HTTP_HOST'] = "";
+    }
+
     private function createTestProject($title, $description, $image)
     {
         $project = new Project($this->getDb());
@@ -16,9 +22,6 @@ class ProjectsTest extends AbstractEttcDatabaseTest
 
     public function testProjectListCanBeGenerated()
     {
-        // set http host to be empty (get will try to use this variable)
-        $_SERVER['HTTP_HOST'] = "";
-
         // create two test projects
         $title = "Test Name";
         $description = "A Test Project";
@@ -30,7 +33,7 @@ class ProjectsTest extends AbstractEttcDatabaseTest
         $image2 = "TestImage.png2";
         $this->createTestProject($title2, $description2, $image2);
 
-        $projectsApi = new Projects($this->getDb());
+        $projectsApi = new ProjectList($this->getDb());
         $answer = $projectsApi->get();
 
         $items = $answer['items'];
@@ -44,7 +47,7 @@ class ProjectsTest extends AbstractEttcDatabaseTest
 
     public function testEmptyProjectList()
     {
-        $projectsApi = new Projects($this->getDb());
+        $projectsApi = new ProjectList($this->getDb());
         $answer = $projectsApi->get();
 
         $items = $answer['items'];

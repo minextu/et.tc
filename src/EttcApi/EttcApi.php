@@ -42,7 +42,8 @@ class EttcApi
         $r = self::$router;
 
         // Project
-        $r->get('/v1/projects', new Projects($db));
+        $r->get('/v1/projects', new Project\ProjectList($db));
+        $r->get('/v1/project/*', new Project\Project($db));
         $r->post('/v1/project/create', new Project\Create($db));
         $r->delete('/v1/project/delete/*', new Project\Delete($db));
 

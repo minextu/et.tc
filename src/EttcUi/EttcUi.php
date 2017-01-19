@@ -26,7 +26,6 @@ class EttcUi
     private $pageElements = ["MainNav", "UserNav"];
 
     /**
-     * Will init all classed and display the given page
      * @param   \Minextu\Ettc\Ettc   $ettc       Main ettc object
      * @param   String   $rootDir    External path to the root directory
      * @param   String   $pageName   Page name to render
@@ -35,10 +34,22 @@ class EttcUi
     {
         $this->rootDir = $rootDir;
         $this->ettc = $ettc;
+        $this->start($pageName);
+    }
 
+    /**
+     * Will init all classes
+     * @param   String   $pageName   Page name to render
+     */
+    private function start($pageName)
+    {
         $pageElementPresenters = $this->initPageElements();
         $pagePresenter = $this->initPage($pageName);
-        $this->init($pagePresenter, $pageElementPresenters);
+        $status = $this->init($pagePresenter, $pageElementPresenters, $pageName);
+
+        if (!$status) {
+            $this->start("Error404");
+        }
     }
 
     /**
@@ -54,9 +65,10 @@ class EttcUi
      * Inits all model, view, presenter classes and links them together
      * @param    Page\AbstractPagePresenter                  $pagePresenter           The presenter of the page to be rendered
      * @param    PageElement\AbstractPageElementPresenter[]  $pageElementPresenters   All presenters in the PageElement folder
-     * @return   Main\MainPresenter                                                   The main presenter
+     * @param    String                                      $requestedpageName       Page name to render
+     * @return   bool                                                                 False if the given page is unknown, True otherwise
      */
-    private function init($pagePresenter, $pageElementPresenters)
+    private function init($pagePresenter, $pageElementPresenters, $requestedPageName)
     {
         $model = new Main\MainModel();
         $view = new Main\MainView($this->rootDir);
@@ -69,11 +81,19 @@ class EttcUi
         $presenter->setPagePresenter($pagePresenter);
         $view->setPresenter($presenter);
 
-        // init models
+        // link models
         $model->setDb($this->ettc->getDb());
         $pagePresenter->getModel()->setMainModel($model);
         foreach ($pageElementPresenters as $elementPresenter) {
             $elementPresenter->getModel()->setMainModel($model);
+        }
+
+        // tell page presenter about any subpage
+        $subPage = substr(strstr($requestedPageName, '/', false), 1);
+        $continue = $pagePresenter->setSubPage($subPage);
+        // return false if the presenter does not know this subpage
+        if (!$continue) {
+            return false;
         }
 
         // init all views
@@ -100,6 +120,8 @@ class EttcUi
         $presenter->init();
 
         $this->presenter = $presenter;
+
+        return true;
     }
 
     private function initPageElements()
@@ -130,16 +152,19 @@ class EttcUi
 
     /**
      * Inits the presenter of the page to be rendered by creating and linking the model and view classes
-     * @param    string   $pageName   Page to be rendered
+     * @param    string   $requestedPageName   Page to be rendered
      * @return   AbstractPresenter               Presenter class for the page
      */
-    private function initPage($pageName)
+    private function initPage($requestedPageName)
     {
+        // only consider portion before the first / as page name
+        $mainPage = strstr($requestedPageName, '/', true) ?: $requestedPageName;
+
         // get all available pages
         $availablePages = $this->getPages();
 
         // If the Page does not exist show a 404 Page
-        $key = array_search($pageName, $availablePages);
+        $key = array_search($mainPage, $availablePages);
         if (!$key) {
             $pageName = "Error404";
         } else {

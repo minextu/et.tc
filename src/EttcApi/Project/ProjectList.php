@@ -1,4 +1,4 @@
-<?php namespace Minextu\EttcApi;
+<?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project;
@@ -26,7 +26,9 @@ use Minextu\Ettc\Ettc;
  *               "title": String,
  *               "description" : String,
  *               "image" : String,
- *               "imageType": "Default|Placeholder"
+ *               "imageType": "Default|Placeholder",
+ *               "createDate" : Date,
+ *               "updateDate" : Date
  *            }
  *         ]
  * @apiError InvalidValues sortBy or orderBy contain invalid values
@@ -38,7 +40,7 @@ use Minextu\Ettc\Ettc;
  *
  **/
 
-class Projects extends AbstractRoutable
+class ProjectList extends AbstractRoutable
 {
     /**
      * Generate a list of Projects

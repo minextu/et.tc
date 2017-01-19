@@ -3,6 +3,7 @@
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc;
 
 /**
  * Creates a new Project while checking for permissions
@@ -66,7 +67,10 @@ class Create extends AbstractRoutable
             $project->setDescription($description);
             $project->create();
 
-            $answer = ["project" => $project->toArray()];
+            $array = $project->toArray();
+            // add url to server to image
+            $array['image'] = Ettc\Ettc::getServerUrl() . "/assets/images/projects/" . $array['image'];
+            $answer = ["project" => $array];
         }
 
         return $answer;

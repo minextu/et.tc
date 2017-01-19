@@ -31,4 +31,18 @@ abstract class AbstractPagePresenter extends AbstractPresenter
     {
         $this->mainPresenter = $mainPresenter;
     }
+
+    /**
+    * Set the subpage to given value. Will not allow any sub page by default and cause a 404
+    * @param    String   $subpage   the sub page including all slashes
+    * @return   bool              True if this sub page is valid, False otherwise
+    */
+    public function setSubPage($subpage)
+    {
+        if (empty($subpage)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

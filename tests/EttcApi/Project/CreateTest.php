@@ -7,6 +7,12 @@ use Minextu\Ettc\Project;
 
 class CreateTest extends AbstractEttcDatabaseTest
 {
+    public static function setUpBeforeClass()
+    {
+        // set http host to be empty (Api will try to use this variable)
+        $_SERVER['HTTP_HOST'] = "";
+    }
+
     public function createLoginTestUser($rank)
     {
         $user = new User($this->getDb());
