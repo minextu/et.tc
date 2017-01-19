@@ -20,6 +20,7 @@ function loadProjects()
         }
     };
     xhttp.open("GET", path + "/api/v1/projects?sortBy=" + sortBy + "&order=" + order, true);
+    xhttp.setRequestHeader('Accept', 'application/json')
     xhttp.send();
 }
 
