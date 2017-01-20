@@ -14,8 +14,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertTrue($titleStatus, "setTitle didn't return True");
         $descriptionStatus = $project->setDescription($description);
         $this->assertTrue($descriptionStatus, "setDescription didn't return True");
-        $descriptionStatus = $project->setImage($image);
-        $this->assertTrue($descriptionStatus, "setImage didn't return True");
+        $imageStatus = $project->setImage($image);
+        $this->assertTrue($imageStatus, "setImage didn't return True");
 
         $createStatus = $project->create();
         $this->assertTrue($createStatus, "create didn't return True");
@@ -162,5 +162,46 @@ class ProjectTest extends AbstractEttcDatabaseTest
 
         $title = $firstProject->getTitle();
         $this->assertEquals("Test Name", $title);
+    }
+
+    public function testProjectCanBeUpdated()
+    {
+        $this->createTestProject();
+
+        $project = new Project($this->getDb(), 1);
+
+        $newTitle = "new title";
+        $newDescription = "new description";
+        $newImage = "new_image.png";
+
+        $project->setTitle($newTitle);
+        $project->setDescription($newDescription);
+        $project->setImage($newImage);
+
+        $status = $project->update();
+        $this->assertTrue($status, "Project couldn't be updated");
+
+        // try to load project again and check values
+        $project = new Project($this->getDb(), 1);
+        $this->assertEquals($newTitle, $project->getTitle());
+        $this->assertEquals($newDescription, $project->getDescription());
+        $this->assertEquals($newImage, $project->getImage());
+    }
+
+    public function testNonExistingProjectCanNotBeUpdated()
+    {
+        $this->setExpectedException('Minextu\Ettc\Exception\Exception');
+        
+        $project = new Project($this->getDb());
+
+        $newTitle = "new title";
+        $newDescription = "new description";
+        $newImage = "new_image.png";
+
+        $project->setTitle($newTitle);
+        $project->setDescription($newDescription);
+        $project->setImage($newImage);
+
+        $status = $project->update();
     }
 }

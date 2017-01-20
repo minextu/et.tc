@@ -82,6 +82,24 @@ class ProjectDb
     }
 
     /**
+    * Update values of a project in database
+    * @param    string   $id            Project id
+    * @param    string   $title         Project title
+    * @param    string   $description   Project description
+    * @return   bool                    True on success, False otherwise
+    */
+    public function updateProject($id, $title, $description, $image)
+    {
+        $sql = 'UPDATE projects
+                Set title = ?, description = ?, image = ?
+                WHERE id = ?';
+        $stmt = $this->db->getPdo()->prepare($sql);
+        $status = $stmt->execute([$title, $description, $image, $id]);
+
+        return $status;
+    }
+
+    /**
     * Delete project from database
     * @param    string   $id         Project id
     * @return   bool|int                Id of the project on success, False otherwise

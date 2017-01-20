@@ -268,6 +268,21 @@ class Project
     }
 
     /**
+     * Update values of an existing project
+     * @return   bool   True on success, False otherwise
+     */
+    public function update()
+    {
+        if (!isset($this->id)) {
+            throw new Exception\Exception("Project has to be loaded first.");
+        }
+
+        $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->image);
+
+        return $status;
+    }
+
+    /**
      * Delete Project from Database
      * @return   bool   True on success, False otherwise
      */

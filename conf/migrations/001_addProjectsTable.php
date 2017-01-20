@@ -8,7 +8,7 @@ class addProjectsTable extends AbstractMigration
         CREATE TABLE `projects`
         (
             `id` INT(255) UNSIGNED NULL AUTO_INCREMENT ,
-            `title` VARCHAR(10) NOT NULL ,
+            `title` VARCHAR(100) NOT NULL ,
             `description` VARCHAR(10000) NOT NULL ,
             `image` VARCHAR(100) NULL ,
             `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
