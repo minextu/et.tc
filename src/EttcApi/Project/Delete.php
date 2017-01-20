@@ -32,7 +32,7 @@ class Delete extends AbstractRoutable
 {
     /**
      * Deletes the given project, after checking for permissions
-     * @param    boolean   $id   Project id to be deleted
+     * @param    int       $id   Project id to be deleted
      * @return   array           Api answers
      */
     public function delete($id=false)

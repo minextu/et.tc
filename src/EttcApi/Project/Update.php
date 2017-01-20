@@ -18,7 +18,7 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
  *
- * @apiSuccess {Object} project              Contains info for the newly created project
+ * @apiSuccess {Object} project              Contains info for the updated project
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -26,7 +26,11 @@ use Minextu\Ettc\Exception\InvalidId;
  *         "project" : {
  *           "id": Number,
  *           "title": String,
- *           "description" : String
+ *           "description" : String,
+ *           "image" : String,
+ *           "imageType": "Default|Placeholder",
+ *           "createDate" : Date,
+ *           "updateDate" : Date
  *         }
  *     }
  *
@@ -46,8 +50,9 @@ use Minextu\Ettc\Exception\InvalidId;
 class Update extends AbstractRoutable
 {
     /**
-     * Creates a new project using post values, checks fop permissions
-     * @return   array   api answer, containing the created project on success
+     * Updates a exiiting project using post values, checks for permissions
+     * @param    int       $id   Project id to be deleted
+     * @return   array           api answer, containing the created project on success
      */
     public function post($id=false)
     {

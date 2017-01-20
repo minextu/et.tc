@@ -24,7 +24,11 @@ use Minextu\Ettc;
  *         "project" : {
  *           "id": Number,
  *           "title": String,
- *           "description" : String
+ *           "description" : String,
+ *           "image" : String,
+ *           "imageType": "Default|Placeholder",
+ *           "createDate" : Date,
+ *           "updateDate" : Date
  *         }
  *     }
  *
@@ -41,7 +45,7 @@ use Minextu\Ettc;
 class Create extends AbstractRoutable
 {
     /**
-     * Creates a new project using post values, checks fop permissions
+     * Creates a new project using post values, checks for permissions
      * @return   array   api answer, containing the created project on success
      */
     public function post()
