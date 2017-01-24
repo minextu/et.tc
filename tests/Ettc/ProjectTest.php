@@ -136,9 +136,10 @@ class ProjectTest extends AbstractEttcDatabaseTest
         // convert project to array
         $array = $project->toArray();
 
-        // remove create date and update date from array, since that won't be checked
+        // remove create date, update date and git url from array, since these values won't be checked
         unset($array['createDate']);
         unset($array['updateDate']);
+        unset($array['gitUrl']);
 
         $expectedArray = [
             'id' => 1,
@@ -146,7 +147,6 @@ class ProjectTest extends AbstractEttcDatabaseTest
             'description' => 'A Test Project',
             'image' => 'TestImage.png',
             'imageType' => 'Default',
-            'gitUrl' => false
         ];
         $this->assertEquals($expectedArray, $array);
     }
