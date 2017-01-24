@@ -28,7 +28,8 @@ class ProjectDb
      */
     public function getProjectById($id)
     {
-        $sql = 'SELECT * FROM projects WHERE id=?';
+        $sql = 'SELECT id, title, description, image, created, updated
+                FROM projects WHERE id=?';
 
         $stmt = $this->db->getPdo()->prepare($sql);
         $stmt->execute([$id]);

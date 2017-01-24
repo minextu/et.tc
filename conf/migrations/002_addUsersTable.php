@@ -13,7 +13,7 @@ class addUsersTable extends AbstractMigration
             `hash` VARCHAR(100) NULL DEFAULT NULL ,
             `rank` INT(255) NOT NULL,
             `registerDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-            PRIMARY KEY (`id`)
+            PRIMARY KEY (`id`), UNIQUE (`nick`)
         )';
 
         return $this->db->getPdo()->prepare($sql)->execute();

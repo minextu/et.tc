@@ -1,5 +1,7 @@
 <?php namespace Minextu\Ettc;
 
+use Minextu\Ettc\Exception\InvalidId;
+
 class Project
 {
     /**
@@ -7,6 +9,12 @@ class Project
      * @var ProjectDb
      */
     private $projectDb;
+
+    /**
+     * Project Git Interface
+     * @var ProjectGit
+     */
+    private $projectGit;
 
     /**
      * Unique project id
@@ -92,6 +100,16 @@ class Project
         }
 
         return $this->id;
+    }
+
+    /**
+     * Sets id and initializes projectGit
+     * @param   [type]   $id   [description]
+     */
+    private function setId($id)
+    {
+        $this->id = $id;
+        $this->projectGit = new ProjectGit($id);
     }
 
     /**
@@ -208,6 +226,43 @@ class Project
     }
 
     /**
+     * Get url to projects git repository
+     * @return   String|bool   The git url if one was set before, False otherwise
+     */
+    public function getGitUrl()
+    {
+        if (!isset($this->projectGit)) {
+            throw new Exception\Exception("Project has to be loaded first.");
+        }
+
+        try {
+            $gitUrl = $this->projectGit->getUrl();
+        } catch (InvalidId $e) {
+            $gitUrl = false;
+        }
+
+        return $gitUrl;
+    }
+
+    /**
+     * Clone the given git repository
+     * @param    String   $url   Url to git repository
+     */
+    public function setGitUrl($url)
+    {
+        if (!isset($this->projectGit)) {
+            throw new Exception\Exception("Project has to be loaded first.");
+        }
+
+        // delete possible old git repository
+        if ($this->projectGit->exists()) {
+            $this->projectGit->delete();
+        }
+
+        $this->projectGit->clone($url);
+    }
+
+    /**
      * Load project info using the id
      * @param    int   $id   Unique project id
      * @return   bool        True if project could be found, False otherwise
@@ -229,7 +284,7 @@ class Project
     */
     private function load($project)
     {
-        $this->id = $project['id'];
+        $this->setId($project['id']);
         $this->title = $project['title'];
         $this->description = $project['description'];
         $this->image = $project['image'];
@@ -257,7 +312,7 @@ class Project
 
         $status = $this->projectDb->insertProject($this->title, $this->description, $this->image);
         if ($status) {
-            $this->id = $status;
+            $this->setId($status);
             $this->createDate = time();
             $this->updateDate = time();
 
@@ -310,6 +365,7 @@ class Project
             "description" => $this->getDescription(),
             "image" => $this->getImage(),
             "imageType" => $this->getImageType(),
+            "gitUrl" => $this->getGitUrl(),
             "createDate" => $this->getCreateDate(),
             "updateDate" => $this->getUpdateDate(),
         ];

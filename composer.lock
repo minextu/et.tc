@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "19af218fa9a7f477ec28190cb7eea24e",
+    "content-hash": "a00b9f19c74aa71a0ffeea20ba23b2df",
     "packages": [
         {
             "name": "digitalnature/php-ref",
@@ -40,6 +40,47 @@
                 "var_dump"
             ],
             "time": "2016-12-21 18:21:24"
+        },
+        {
+            "name": "ggioffreda/git",
+            "version": "v0.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ggioffreda/git.git",
+                "reference": "5176795ba1bca5d8a783fa415a3e23d01463eb44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ggioffreda/git/zipball/5176795ba1bca5d8a783fa415a3e23d01463eb44",
+                "reference": "5176795ba1bca5d8a783fa415a3e23d01463eb44",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "symfony/process": ">=2.4,<4.0"
+            },
+            "require-dev": {
+                "symfony/filesystem": ">=2.4,<4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gioffreda\\Component\\Git\\": "src/",
+                    "Gioffreda\\Component\\Git\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giovanni Gioffreda",
+                    "email": "giovanni.gioffreda@gmail.com"
+                }
+            ],
+            "description": "An advanced PHP wrapper for git and git-flow.",
+            "time": "2016-09-24T03:16:39+00:00"
         },
         {
             "name": "hautelook/phpass",
@@ -133,6 +174,55 @@
             "description": "Thin controller for RESTful applications",
             "homepage": "http://respect.li/",
             "time": "2016-05-13 03:14:47"
+        },
+        {
+            "name": "symfony/process",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/ebb3c2abe0940a703f08e0cbe373f62d97d40231",
+                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-01-02 20:30:24"
         }
     ],
     "packages-dev": [
@@ -710,12 +800,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "f0e07ebe648e37dcb7cc289e23aab675fb7f7e87"
+                "reference": "e238c79b5c9df054760340c8a12a3a949f34306a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/f0e07ebe648e37dcb7cc289e23aab675fb7f7e87",
-                "reference": "f0e07ebe648e37dcb7cc289e23aab675fb7f7e87",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/e238c79b5c9df054760340c8a12a3a949f34306a",
+                "reference": "e238c79b5c9df054760340c8a12a3a949f34306a",
                 "shasum": ""
             },
             "require": {
@@ -737,6 +827,7 @@
                 "jackalope/jackalope-doctrine-dbal": "^1.1.5",
                 "phpunit/phpunit": "^4.8|^5.0",
                 "propel/propel1": "~1.7",
+                "symfony/expression-language": "^2.6|^3.0",
                 "symfony/filesystem": "^2.1",
                 "symfony/form": "~2.1|^3.0",
                 "symfony/translation": "^2.1|^3.0",
@@ -777,7 +868,7 @@
                 "serialization",
                 "xml"
             ],
-            "time": "2017-01-11 12:04:28"
+            "time": "2017-01-19T15:33:25+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1962,55 +2053,6 @@
             "time": "2016-11-14 01:06:16"
         },
         {
-            "name": "symfony/process",
-            "version": "2.8.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/process.git",
-                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/ebb3c2abe0940a703f08e0cbe373f62d97d40231",
-                "reference": "ebb3c2abe0940a703f08e0cbe373f62d97d40231",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Process\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Process Component",
-            "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:30:24"
-        },
-        {
             "name": "symfony/stopwatch",
             "version": "2.8.x-dev",
             "source": {
@@ -2202,12 +2244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1"
+                "reference": "a1c1f01eac45b68d6f17c3b499297b93e1a47321"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/9b3796b14088e5c9039de6cf2291566c95aa76c1",
-                "reference": "9b3796b14088e5c9039de6cf2291566c95aa76c1",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a1c1f01eac45b68d6f17c3b499297b93e1a47321",
+                "reference": "a1c1f01eac45b68d6f17c3b499297b93e1a47321",
                 "shasum": ""
             },
             "require": {
@@ -2255,7 +2297,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2017-01-11 19:37:33"
+            "time": "2017-01-19T14:55:10+00:00"
         },
         {
             "name": "zendframework/zend-cache",

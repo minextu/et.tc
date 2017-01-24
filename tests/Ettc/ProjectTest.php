@@ -145,7 +145,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
             'title' => 'Test Name',
             'description' => 'A Test Project',
             'image' => 'TestImage.png',
-            'imageType' => 'Default'
+            'imageType' => 'Default',
+            'gitUrl' => false
         ];
         $this->assertEquals($expectedArray, $array);
     }
@@ -191,7 +192,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
     public function testNonExistingProjectCanNotBeUpdated()
     {
         $this->setExpectedException('Minextu\Ettc\Exception\Exception');
-        
+
         $project = new Project($this->getDb());
 
         $newTitle = "new title";

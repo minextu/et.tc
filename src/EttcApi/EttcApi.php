@@ -46,6 +46,7 @@ class EttcApi
         $r->get('/v1/project/*', new Project\Project($db));
         $r->post('/v1/project/create', new Project\Create($db));
         $r->post('/v1/project/update/*', new Project\Update($db));
+        $r->post('/v1/project/initGit/*', new Project\InitGit($db));
         $r->delete('/v1/project/delete/*', new Project\Delete($db));
 
         // User

@@ -11,7 +11,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public static function tearDowAfterClass()
+    public static function tearDownAfterClass()
     {
         self::setUpBeforeClass();
     }

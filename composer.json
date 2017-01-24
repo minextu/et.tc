@@ -2,6 +2,7 @@
     "require": {
         "hautelook/phpass": "dev-master",
         "respect/rest": "^0.6.0",
+        "ggioffreda/git": "~0.1",
         "digitalnature/php-ref": "dev-master"
     },
     "require-dev": {
