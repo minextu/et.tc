@@ -3,7 +3,7 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
-use Minextu\Ettc\Project;
+use Minextu\Ettc\Project\Project;
 
 class UpdateTest extends AbstractEttcDatabaseTest
 {

@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
-use Minextu\Ettc\Project;
+use Minextu\Ettc\Project\Project;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc;
 use Minextu\Ettc\Exception\InvalidId;

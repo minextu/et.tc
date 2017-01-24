@@ -1,4 +1,6 @@
-<?php namespace Minextu\Ettc;
+<?php namespace Minextu\Ettc\Project;
+
+use \Minextu\Ettc\AbstractEttcDatabaseTest;
 
 class ProjectTest extends AbstractEttcDatabaseTest
 {

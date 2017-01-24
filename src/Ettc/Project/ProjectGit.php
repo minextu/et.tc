@@ -1,4 +1,4 @@
-<?php namespace Minextu\Ettc;
+<?php namespace Minextu\Ettc\Project;
 
 use Gioffreda\Component\Git\Git;
 use Minextu\Ettc\Exception\Exception;
@@ -27,7 +27,7 @@ class ProjectGit
      */
     public function __construct($id)
     {
-        $this->projectDir = __DIR__."/../../projects/" . $id . "/";
+        $this->projectDir = __DIR__."/../../../projects/" . $id . "/";
         $this->git = Git::create($this->projectDir);
     }
 

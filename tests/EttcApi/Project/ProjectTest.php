@@ -13,7 +13,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
 
     private function createTestProject($title, $description)
     {
-        $project = new Ettc\Project($this->getDb());
+        $project = new Ettc\Project\Project($this->getDb());
         $project->setTitle($title);
         $project->setDescription($description);
         $project->create();

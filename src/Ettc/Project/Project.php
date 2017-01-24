@@ -1,6 +1,7 @@
-<?php namespace Minextu\Ettc;
+<?php namespace Minextu\Ettc\Project;
 
 use Minextu\Ettc\Exception\InvalidId;
+use Minextu\Ettc\Exception\Exception;
 
 class Project
 {
@@ -53,7 +54,7 @@ class Project
     private $updateDate;
 
     /**
-     * @param   Database\DatabaseInterface   $db   Database to be used
+     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
      * @param   int   $id                          Project id to be loaded
      */
     public function __construct($db, $id=false)
@@ -63,14 +64,14 @@ class Project
         if ($id !== false) {
             $status = $this->loadId($id);
             if ($status === false) {
-                throw new Exception\InvalidId("Invalid project id '" . $id . "'");
+                throw new InvalidId("Invalid project id '" . $id . "'");
             }
         }
     }
 
     /**
      * Get all Projects that are saved in db
-     * @param    Database\DatabaseInterface   $db   Database to be used
+     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
      * @param    string   $sortBy    Sort results by given field
      * @param    string   $order     Order results
      * @return   Project[]                          All found projects
@@ -96,7 +97,7 @@ class Project
     public function getId()
     {
         if (!isset($this->id)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         return $this->id;
@@ -119,7 +120,7 @@ class Project
     public function getTitle()
     {
         if (!isset($this->title)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         return $this->title;
@@ -142,7 +143,7 @@ class Project
     public function getDescription()
     {
         if (!isset($this->description)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         return $this->description;
@@ -206,7 +207,7 @@ class Project
     public function getCreateDate()
     {
         if (!isset($this->createDate)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         return $this->createDate;
@@ -219,7 +220,7 @@ class Project
     public function getUpdateDate()
     {
         if (!isset($this->updateDate)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         return $this->updateDate;
@@ -232,7 +233,7 @@ class Project
     public function getGitUrl()
     {
         if (!isset($this->projectGit)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         try {
@@ -251,7 +252,7 @@ class Project
     public function setGitUrl($url)
     {
         if (!isset($this->projectGit)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         // delete possible old git repository
@@ -301,13 +302,13 @@ class Project
     public function create()
     {
         if (isset($this->id)) {
-            throw new Exception\Exception("Project was loaded and is not allowed to be recreated.");
+            throw new Exception("Project was loaded and is not allowed to be recreated.");
         }
         if (empty($this->title)) {
-            throw new Exception\Exception("Title has to set via setTitle first.");
+            throw new Exception("Title has to set via setTitle first.");
         }
         if (empty($this->description)) {
-            throw new Exception\Exception("Description has to set via setDescription first.");
+            throw new Exception("Description has to set via setDescription first.");
         }
 
         $status = $this->projectDb->insertProject($this->title, $this->description, $this->image);
@@ -329,7 +330,7 @@ class Project
     public function update()
     {
         if (!isset($this->id)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->image);
@@ -344,7 +345,7 @@ class Project
     public function delete()
     {
         if (!isset($this->id)) {
-            throw new Exception\Exception("Project has to be loaded first.");
+            throw new Exception("Project has to be loaded first.");
         }
 
         $status = $this->projectDb->deleteProject($this->id);

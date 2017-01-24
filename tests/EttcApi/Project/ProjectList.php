@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\Ettc\AbstractEttcDatabaseTest;
-use Minextu\Ettc\Project;
+use Minextu\Ettc\Project\Project;
 
 class ProjectsTest extends AbstractEttcDatabaseTest
 {

@@ -65,7 +65,7 @@ class Project extends AbstractRoutable
     private function getProject($id)
     {
         try {
-            $project = new Ettc\Project($this->getDb(), $id);
+            $project = new Ettc\Project\Project($this->getDb(), $id);
             $array = $project->toArray();
             // add url to server to image
             $array['image'] = Ettc\Ettc::getServerUrl() . "/assets/images/projects/" . $array['image'];

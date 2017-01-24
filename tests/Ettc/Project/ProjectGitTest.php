@@ -1,11 +1,11 @@
-<?php namespace Minextu\Ettc;
+<?php namespace Minextu\Ettc\Project;
 
 class ProjectGitTest extends \PHPUnit_Framework_TestCase
 {
     public static function setUpBeforeClass()
     {
         // delete possible old test git repository
-        $oldProjectGit = __DIR__."/../../projects/phpUnitTest";
+        $oldProjectGit = __DIR__."/../../../projects/phpUnitTest";
         if (file_exists($oldProjectGit)) {
             self::delete($oldProjectGit);
         }
