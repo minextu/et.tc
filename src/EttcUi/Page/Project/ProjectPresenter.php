@@ -20,6 +20,7 @@ class ProjectPresenter extends AbstractPagePresenter
      */
     public function init()
     {
+        $id = $this->model->getId();
         $image = $this->model->getImage();
         $created = $this->model->getCreateDate();
         $updated = $this->model->getUpdateDate();
@@ -28,6 +29,7 @@ class ProjectPresenter extends AbstractPagePresenter
         $created = date("d.m.Y H:i", strtotime($created));
         $updated = date("d.m.Y H:i", strtotime($updated));
 
+        $this->view->setId($id);
         $this->view->setImage($image);
         $this->view->setCreateDate($created);
         $this->view->setUpdateDate($updated);

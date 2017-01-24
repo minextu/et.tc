@@ -15,7 +15,7 @@ class Project
      * Project Git Interface
      * @var ProjectGit
      */
-    private $projectGit;
+    public $git;
 
     /**
      * Unique project id
@@ -91,6 +91,19 @@ class Project
     }
 
     /**
+     * Get project git interface
+     * @return   ProjectGit   Project git interface
+     */
+    public function getGit()
+    {
+        if (!isset($this->git)) {
+            throw new Exception("Project has to be loaded first.");
+        }
+
+        return $this->git;
+    }
+
+    /**
      * Get project id
      * @return   string   Project id
      */
@@ -110,7 +123,7 @@ class Project
     private function setId($id)
     {
         $this->id = $id;
-        $this->projectGit = new ProjectGit($id);
+        $this->git = new ProjectGit($id);
     }
 
     /**
@@ -232,12 +245,12 @@ class Project
      */
     public function getGitUrl()
     {
-        if (!isset($this->projectGit)) {
+        if (!isset($this->git)) {
             throw new Exception("Project has to be loaded first.");
         }
 
         try {
-            $gitUrl = $this->projectGit->getUrl();
+            $gitUrl = $this->git->getUrl();
         } catch (InvalidId $e) {
             $gitUrl = false;
         }
@@ -251,16 +264,16 @@ class Project
      */
     public function setGitUrl($url)
     {
-        if (!isset($this->projectGit)) {
+        if (!isset($this->git)) {
             throw new Exception("Project has to be loaded first.");
         }
 
         // delete possible old git repository
-        if ($this->projectGit->exists()) {
-            $this->projectGit->delete();
+        if ($this->git->exists()) {
+            $this->git->delete();
         }
 
-        $this->projectGit->clone($url);
+        $this->git->clone($url);
     }
 
     /**

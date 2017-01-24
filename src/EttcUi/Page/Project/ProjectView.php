@@ -21,6 +21,15 @@ class ProjectView extends AbstractPageView
     }
 
     /**
+     * Save project id to placeholder array
+     * @param   int   $id   Project id
+     */
+    public function setId($id)
+    {
+        $this->placeholders['MSG_ProjectId'] = $id;
+    }
+
+    /**
      * Save project image to placeholder array
      * @param   string   $image   Image url
      */

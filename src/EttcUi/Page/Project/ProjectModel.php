@@ -17,6 +17,11 @@ class ProjectModel extends AbstractPageModel
         return $this->getProject($id);
     }
 
+    public function getId()
+    {
+        return $this->project['id'];
+    }
+
     public function getImage()
     {
         return $this->project['image'];

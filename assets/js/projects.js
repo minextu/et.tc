@@ -67,10 +67,10 @@ function dateToString(date)
     else if (now - date < 1000 * 60 * 60 * 12 * 30)
         return Math.round((now - date) / (1000 * 60 * 60 * 12)) + " day(s)";
     // less than a year
-    else if (now - date < 1000 * 60 * 60 * 12 * 30 * 12)
+    else if (now - date < 1000 * 60 * 60 * 12 * 365)
         return Math.round((now - date) / (1000 * 60 * 60 * 12 * 30)) + " month(s)";
     else
-        return Math.round((now - date) / (1000 * 60 * 60 * 12 * 30 * 12)) + " year(s)";
+        return Math.round((now - date) / (1000 * 60 * 60 * 12 * 365)) + " year(s)";
 }
 
 loadProjects();

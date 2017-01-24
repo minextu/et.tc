@@ -10,16 +10,7 @@
 
         <div class='changelog'>
             <h3>Changelog</h3>
-            <fieldset>
-                <legend>Author: Jan Houben 06.12.2016 23:32</legend> added api key ui</fieldset>
-            <fieldset>
-                <legend>Author: Jan Houben 06.12.2016 22:46</legend> save song title and artist string in db</fieldset>
-            <fieldset>
-                <legend>Author: Jan Houben 05.12.2016 17:33</legend> fixed unit tests</fieldset>
-            <fieldset>
-                <legend>Author: Jan Houben 17.09.2016 23:17</legend> updated todo</fieldset>
-            <fieldset>
-                <legend>Author: Jan Houben 17.09.2016 23:05</legend> YouTube Videos will now get saved in Database</fieldset>
+            <div id='changelogList' class='list'></div>
         </div>
 
         <div class='links'>
@@ -33,4 +24,18 @@
             <a href='#'>Class documentation</a>
         </div>
     </div>
-</div>
+
+    <!-- JavaScript Templates -->
+    <div style='display: none'>
+        <fieldset id='templateEntry'>
+            <legend>__MSG_AuthorName__ on __MSG_AuthorDate__</legend>__MSG_Subject__</fieldset>
+        <fieldset>
+    </div>
+
+    <script src='__PATH_Assets__/js/project.js'>
+    </script>
+
+    <script>
+        projectId = __MSG_ProjectId__;
+        loadChangelog();
+    </script>

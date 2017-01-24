@@ -24,7 +24,6 @@
 
 .projectContainer .infoContainer {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin: 0px -25px;
 }
@@ -36,4 +35,10 @@
 .projectContainer .changelog {
     flex-grow: 2;
     margin: 0px 25px;
+}
+
+@media (max-width:780px) {
+    .projectContainer .infoContainer {
+        flex-wrap: wrap;
+    }
 }
