@@ -1,6 +1,7 @@
 var xhttp = new XMLHttpRequest();
 var skip = 0;
 var count = 10;
+lastHeight = 500;
 
 function loadChangelog()
 {
