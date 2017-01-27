@@ -35,10 +35,32 @@
 .projectContainer .changelog {
     flex-grow: 2;
     margin: 0px 25px;
+    background: #ffffff;
+    padding: 0px 10px;
+}
+
+.projectContainer .changelog .changelogEntry {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    padding: 8px 0px 2px;
+    font-size: 14px;
+}
+
+.projectContainer .changelog .changelogEntry:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.projectContainer .changelog .changelogEntry .authorAvatar {
+    margin-right: 10px;
+}
+
+.projectContainer .changelog .changelogEntry .commitInfo .subject {
+    display: block;
+    font-weight: bold;
 }
 
 .projectContainer .changelog img {
-    height: 15px;
+    height: 35px;
 }
 
 @media (max-width:780px) {

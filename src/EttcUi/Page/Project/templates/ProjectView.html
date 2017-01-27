@@ -11,7 +11,9 @@
         <div class='changelog'>
             <h3>Changelog</h3>
             <div id='changelogList' class='list'></div>
+            <div class='pageContainer'></div>
         </div>
+
 
         <div class='links'>
             <h3>Demo</h3>
@@ -27,9 +29,15 @@
 
     <!-- JavaScript Templates -->
     <div style='display: none'>
-        <fieldset id='templateEntry'>
-            <legend><img src='__MSG_AuthorAvatar__' alt=''>__MSG_AuthorName__ on __MSG_AuthorDate__</legend>__MSG_Subject__</fieldset>
-        <fieldset>
+        <div id='templateEntry' class='changelogEntry'>
+            <div class='authorAvatar'>
+                <img src='__MSG_AuthorAvatar__' alt=''>
+            </div>
+            <div class='commitInfo'>
+                <span class='subject'>__MSG_Subject__</span>
+                <span class='author'>__MSG_AuthorName__ commited on __MSG_AuthorDate__</span>
+            </div>
+        </div>
     </div>
 
     <script src='__PATH_Assets__/js/project.js'>

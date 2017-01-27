@@ -87,8 +87,8 @@ function updateActive(e)
 
 function showPages(skip, currentCount, countAll)
 {
-    var pageContainer = document.createElement("div");
-    pageContainer.className = "pageContainer";
+    var pageContainer = document.getElementsByClassName("pageContainer")[0];
+    pageContainer.innerHTML = "";
 
     var pages = Math.ceil(countAll / currentCount);
 
@@ -110,8 +110,6 @@ function showPages(skip, currentCount, countAll)
 
         pageContainer.appendChild(page);
     }
-
-    document.getElementById('changelogList').appendChild(pageContainer);
 }
 
 function goToPage(pageNum)

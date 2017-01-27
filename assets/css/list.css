@@ -56,16 +56,16 @@
     height: 8px;
 }
 
-.list .pageContainer {
-    margin-top: 20px;
+.pageContainer {
+    margin: 5px 0px;
 }
 
-.list .pageContainer a {
+.pageContainer a {
     color: #838282;
     cursor: pointer;
 }
 
-.list .pageContainer .active {
+.pageContainer .active {
     color: #484848 !important;
     text-decoration: none !important;
     cursor: auto !important;
