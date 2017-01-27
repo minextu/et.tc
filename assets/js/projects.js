@@ -61,16 +61,16 @@ function dateToString(date)
     else if (now - date < 1000 * 60 * 60 * 1)
         return Math.round((now - date) / (1000 * 60)) + " minute(s)";
     // less than a day
-    else if (now - date < 1000 * 60 * 60 * 12)
+    else if (now - date < 1000 * 60 * 60 * 24)
         return Math.round((now - date) / (1000 * 60 * 60)) + " hour(s)";
     // less than a month
-    else if (now - date < 1000 * 60 * 60 * 12 * 30)
-        return Math.round((now - date) / (1000 * 60 * 60 * 12)) + " day(s)";
+    else if (now - date < 1000 * 60 * 60 * 24 * 30)
+        return Math.round((now - date) / (1000 * 60 * 60 * 24)) + " day(s)";
     // less than a year
-    else if (now - date < 1000 * 60 * 60 * 12 * 365)
-        return Math.round((now - date) / (1000 * 60 * 60 * 12 * 30)) + " month(s)";
+    else if (now - date < 1000 * 60 * 60 * 24 * 365)
+        return Math.round((now - date) / (1000 * 60 * 60 * 24 * 30)) + " month(s)";
     else
-        return Math.round((now - date) / (1000 * 60 * 60 * 12 * 365)) + " year(s)";
+        return Math.round((now - date) / (1000 * 60 * 60 * 24 * 365)) + " year(s)";
 }
 
 loadProjects();
