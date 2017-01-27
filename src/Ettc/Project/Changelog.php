@@ -4,12 +4,20 @@ use Tivie\GitLogParser\Format;
 
 class Changelog
 {
-    public static function generateLogs($git)
+    /**
+     * [generateLogs description]
+     * @param    \Gioffreda\Component\Git\Git   $git     Main git object
+     * @param    int   $count  Amount of logs to return
+     * @param    int   $skip   Amount of logs to skip
+     * @return   array         Logs for the git object
+     */
+    public static function generateLogs($git, $count, $skip)
     {
         $format = new Format();
         $logs = $git->log(
             [
-                "-n -1",
+                "-n $count",
+                "--skip=$skip",
                 "--decorate",
                 "--pretty=format:" . $format->getFormatString()
             ]);

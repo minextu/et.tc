@@ -84,3 +84,38 @@ function updateActive(e)
         {}
     }
 }
+
+function showPages(skip, currentCount, countAll)
+{
+    var pageContainer = document.createElement("div");
+    pageContainer.className = "pageContainer";
+
+    var pages = Math.ceil(countAll / currentCount);
+
+    for (var i = 1; i <= pages; i++)
+    {
+        var page = document.createElement("a");
+        page.innerHTML = i + " ";
+        page.setAttribute("pageNum", i);
+
+        if (currentCount * (i - 1) == skip)
+            page.className = "active";
+        else
+        {
+            page.addEventListener("click", function(e)
+            {
+                goToPage(e.srcElement.getAttribute("pageNum"));
+            });
+        }
+
+        pageContainer.appendChild(page);
+    }
+
+    document.getElementById('changelogList').appendChild(pageContainer);
+}
+
+function goToPage(pageNum)
+{
+    skip = count * (pageNum - 1);
+    loadChangelog();
+}

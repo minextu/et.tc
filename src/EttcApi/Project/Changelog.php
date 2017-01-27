@@ -13,6 +13,8 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiGroup Project
  *
  * @apiParam {integer} id    Project id
+ * @apiParam {integer} [count=10] Number of logs to return
+ * @apiParam {integer} [skip=0] Number of logs to skip
  *
  * @apiSuccess {Array} changelog              Contains changelog for the project
  *
@@ -24,7 +26,8 @@ use Minextu\Ettc\Exception\InvalidId;
  *              "authorEmail": String,
  *              "authorDateTimestamp": String,
  *              "subject": String
- *           }
+ *           },
+ *       "count" : Integer
  *     ]
  * @apiError MissingValues Id wasn't transmited
  * @apiError NotFound      Projects changelog couldn't be found
@@ -44,28 +47,33 @@ class Changelog extends AbstractRoutable
      */
     public function get($id=false)
     {
+        $count = isset($_GET['count']) && ctype_digit($_GET['count']) ? $_GET['count'] : 10;
+        $skip = isset($_GET['skip']) && ctype_digit($_GET['skip']) ? $_GET['skip'] : 0;
+
         if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
         } else {
-            $changelog = $this->getProjectChangelog($id);
+            $changelog = $this->getProjectChangelog($id, $count, $skip);
 
             if (!$changelog) {
                 $answer = ["error" => "NotFound"];
             } else {
-                $answer = ["changelog" => $changelog];
+                $answer = $changelog;
             }
         }
 
         return $answer;
     }
 
-    private function getProjectChangelog($id)
+    private function getProjectChangelog($id, $count, $skip)
     {
         try {
             $project = new Project($this->getDb(), $id);
-            $array = $project->getGit()->getLogs();
+            $changelog = $project->getGit()->getLogs($count, $skip);
+            $commitsCount = $project->getGit()->getCommitsCount();
 
+            $array = ["changelog" => $changelog, "count" => $commitsCount];
             return $array;
         } catch (InvalidId $e) {
             return false;

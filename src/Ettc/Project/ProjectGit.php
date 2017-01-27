@@ -87,15 +87,32 @@ class ProjectGit
 
     /**
      * Get all logs for the repository
+     * @param    int   $count   Amount of logs to return
+     * @param    int   $skip   Amount of logs to skip
      * @return   string   all git logs
      */
-    public function getLogs()
+    public function getLogs($count, $skip)
     {
         if (!$this->exists()) {
             throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
         }
 
-        return Changelog::generateLogs($this->git);
+        return Changelog::generateLogs($this->git, $count, $skip);
+    }
+
+    /**
+     * Count all commits, that do exist
+     * @return   int   Number of commits
+     */
+    public function getCommitsCount()
+    {
+        if (!$this->exists()) {
+            throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
+        }
+
+        $commitsCount = $this->git->run(['rev-list', 'HEAD', "--count"]);
+        $commitsCount = str_replace("\n", "", $commitsCount);
+        return $commitsCount;
     }
 
     /**

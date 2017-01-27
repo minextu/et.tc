@@ -1,4 +1,6 @@
 var xhttp = new XMLHttpRequest();
+var skip = 0;
+var count = 10;
 
 function loadChangelog()
 {
@@ -9,15 +11,18 @@ function loadChangelog()
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            var logs = JSON.parse(this.responseText)['changelog'];
+            var answer = JSON.parse(this.responseText);
+            var logs = answer['changelog'];
+
             for (id in logs)
             {
                 showChangeLog(logs[id]);
             }
+            showPages(skip, count, answer['count']);
             hideLoadingAnimation();
         }
     };
-    xhttp.open("GET", path + "/api/v1/project/changelog/" + projectId, true);
+    xhttp.open("GET", path + "/api/v1/project/changelog/" + projectId + "?skip=" + skip + "&count=" + count, true);
     xhttp.setRequestHeader('Accept', 'application/json')
     xhttp.send();
 }

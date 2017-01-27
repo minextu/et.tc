@@ -56,6 +56,21 @@
     height: 8px;
 }
 
+.list .pageContainer {
+    margin-top: 20px;
+}
+
+.list .pageContainer a {
+    color: #838282;
+    cursor: pointer;
+}
+
+.list .pageContainer .active {
+    color: #484848 !important;
+    text-decoration: none !important;
+    cursor: auto !important;
+}
+
 @media (max-width:780px) {
     .list .entry {
         margin-right: 0px;
