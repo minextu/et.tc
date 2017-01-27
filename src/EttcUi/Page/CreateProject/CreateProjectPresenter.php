@@ -24,7 +24,7 @@ class CreateProjectPresenter extends AbstractPagePresenter
         try {
             $this->model->addProject($title, $description);
             $this->view->redirectToProjects();
-        } catch (Ettc\Ettc\Exception $e) {
+        } catch (Ettc\Exception\Exception $e) {
             $this->view->showError($e->getMessage());
         } catch (EttcUi\Exception $e) {
             $this->view->showError($e->getMessage());

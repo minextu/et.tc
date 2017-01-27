@@ -5,6 +5,7 @@ use Minextu\Ettc\Project\Project;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc;
 use Minextu\Ettc\Exception\InvalidId;
+use Minextu\EttcApi\Exception\ImageException;
 
 /**
  * Update values of a project while checking for permissions
@@ -17,6 +18,7 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiParam {Number} id                  Project id
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
+ * @apiParam {File} [image]                    New project image  (does not work in apidoc)
  *
  * @apiSuccess {Object} project              Contains info for the updated project
  *
@@ -40,6 +42,7 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiError NotLoggedIn   You are not logged in
  * @apiError NoPermissions No permissions to create a project
  * @apiError NotFound      Project couldn't be found
+ * @apiError WrongImage    Image is not correct
  *
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
@@ -59,6 +62,7 @@ class Update extends AbstractRoutable
     {
         $title = isset($_POST['title']) ? $_POST['title'] : false;
         $description = isset($_POST['description']) ? $_POST['description'] : false;
+        $image = isset($_FILES['image']) ? $_FILES['image'] : false;
 
         $loggedin = $this->checkLoggedIn();
         $permissions = $this->checkPermissions();
@@ -66,7 +70,7 @@ class Update extends AbstractRoutable
         if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        } elseif (empty($title) && empty($description)) {
+        } elseif (empty($title) && empty($description) && empty($image)) {
             http_response_code(400);
             $answer = ["error" => "NoNewValues"];
         } elseif (!$loggedin) {
@@ -93,6 +97,15 @@ class Update extends AbstractRoutable
                 if (!empty($description)) {
                     $project->setDescription($description);
                 }
+                if (!empty($image)) {
+                    try {
+                        $this->uploadImage($project, $image);
+                    } catch (ImageException $e) {
+                        $answer = ["error" => "WrongImage", "errorText" => $e->getMessage()];
+                        return $answer;
+                    }
+                }
+
                 $project->update();
 
                 $array = $project->toArray();
@@ -103,6 +116,44 @@ class Update extends AbstractRoutable
         }
 
         return $answer;
+    }
+
+    /**
+     * Will check the given image, move it to the correct folder and set the image
+     * @param    \Minextu\Ettc\Project\Project   $project   Project for which the image should be saved
+     * @param    array   $image     $_FILES image
+     */
+    private function uploadImage($project, $image)
+    {
+        $check = getimagesize($image["tmp_name"]);
+        if ($check === false) {
+            throw new ImageException("Provided file is not an image");
+        }
+        if ($image["size"] > 500000) {
+            throw new ImageException("Image is too big");
+        }
+        $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+        if ($ext != "jpg" && $ext != "png" && $ext != "jpeg" && $ext != "gif") {
+            throw new ImageException("File extension has to be jpg, jpeg, png or gif");
+        }
+
+        $filename = $project->getId() . ".$ext";
+        $targetFolder = __DIR__."/../../../assets/images/projects/";
+
+        // delete possible older image
+        if ($project->getImageType() == "Default") {
+            unlink($targetFolder . $project->getImage());
+        }
+
+        // move file
+        $target = $targetFolder . $filename;
+        $status = move_uploaded_file($image["tmp_name"], $target);
+
+        if (!$status) {
+            throw new ImageException("Image move did not succeed");
+        }
+
+        $project->setImage($filename);
     }
 
     /**

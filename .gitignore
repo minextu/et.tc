@@ -7,3 +7,4 @@ conf/config.phpUnitTest.php
 apidoc/
 apidoc.json
 projects/*
+assets/images/projects/*

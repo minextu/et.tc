@@ -1,0 +1,18 @@
+<div class='form_text'>
+    Edit
+</div>
+<form action='#' method='POST' class='contained_form' enctype="multipart/form-data">
+    __MSG_message__
+    <div class='form_group'>
+        <label>Title</label><input type='text' name='title' required='required' value='__MSG_ProjectTitle__'>
+    </div>
+    <div class='form_group'>
+        <label>Description</label><input type='text' name='description' required='required' value='__MSG_ProjectDescription__'>
+    </div>
+    <div class='form_group'>
+        <label>Image</label><br><img src='__MSG_ProjectImage__' style='max-height: 100px;'><input type='file' name='image'>
+    </div>
+
+    <div class='save'><input type='submit' value='Update' name='update'></div>
+
+</form>
