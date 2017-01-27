@@ -63,6 +63,7 @@
 .pageContainer a {
     color: #838282;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .pageContainer .active {
