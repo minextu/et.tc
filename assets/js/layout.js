@@ -13,3 +13,11 @@ function menu()
 
     menu_open = !menu_open;
 }
+
+function escapeHtml(html)
+{
+    var text = document.createTextNode(html);
+    var div = document.createElement('div');
+    div.appendChild(text);
+    return div.innerHTML;
+}

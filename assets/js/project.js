@@ -36,9 +36,10 @@ function showChangeLog(log)
     var date = dateToString(log.authorDateTimestamp * 1000);
 
     logHtml.innerHTML = logHtml.innerHTML.
-    replace(/__MSG_AuthorName__/g, log.authorName).
+    replace(/__MSG_AuthorName__/g, escapeHtml(log.authorName)).
+    replace(/__MSG_AuthorAvatar__/g, escapeHtml(log.authorAvatar)).
     replace(/__MSG_AuthorDate__/g, date).
-    replace(/__MSG_Subject__/g, log.subject);
+    replace(/__MSG_Subject__/g, escapeHtml(log.subject));
 
     document.getElementById('changelogList').appendChild(logHtml);
 }

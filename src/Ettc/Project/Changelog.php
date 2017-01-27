@@ -57,6 +57,7 @@ class Changelog
             [
                 "authorName" => $log["authorName"],
                 "authorEmail" => $log["authorEmail"],
+                "authorAvatar" => self::generateAvatarUrl($log["authorEmail"]),
                 "authorDateTimestamp" => $log["authorDateTimestamp"],
                 "subject" => $log['subject']
             ];
@@ -64,5 +65,21 @@ class Changelog
         }
 
         return $newLogs;
+    }
+
+
+    /**
+     * Generates the URL for the users avatar
+     * @param    string  $email  Email of the user
+     * @return   string          Avatar image url
+     */
+    private static function generateAvatarUrl($email)
+    {
+        $default = "http://img2.wikia.nocookie.net/__cb20110302033947/recipes/images/thumb/1/1c/Avatar.svg/480px-Avatar.svg.png";
+        $size = 200;
+
+        $avatar = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size . "&r=g";
+
+        return $avatar;
     }
 }

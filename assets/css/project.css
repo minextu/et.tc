@@ -37,6 +37,10 @@
     margin: 0px 25px;
 }
 
+.projectContainer .changelog img {
+    height: 15px;
+}
+
 @media (max-width:780px) {
     .projectContainer .infoContainer {
         flex-wrap: wrap;

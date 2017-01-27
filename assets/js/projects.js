@@ -38,8 +38,8 @@ function showProject(project)
 
     projectHtml.innerHTML = projectHtml.innerHTML.
     replace(/__MSG_ProjectId__/g, project.id).
-    replace(/__MSG_ProjectTitle__/g, project.title).
-    replace(/__MSG_ProjectDescription__/g, project.description).
+    replace(/__MSG_ProjectTitle__/g, escapeHtml(project.title)).
+    replace(/__MSG_ProjectDescription__/g, escapeHtml(project.description)).
     replace(/__MSG_ProjectImage__/g, project.image).
     replace(/__MSG_ProjectCreateDate__/g, createDate).
     replace(/__MSG_ProjectUpdateDate__/g, updateDate);

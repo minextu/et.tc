@@ -24,6 +24,7 @@ use Minextu\Ettc\Exception\InvalidId;
  *          {
  *              "authorName": String,
  *              "authorEmail": String,
+ *              "authorAvatar" : String,
  *              "authorDateTimestamp": String,
  *              "subject": String
  *           },
