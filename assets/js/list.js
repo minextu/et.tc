@@ -104,7 +104,7 @@ function showPages(skip, currentCount, countAll)
         {
             page.addEventListener("click", function(e)
             {
-                goToPage(e.srcElement.getAttribute("pageNum"));
+                goToPage(e.target.getAttribute("pageNum"));
             });
         }
 
