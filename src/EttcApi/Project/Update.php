@@ -19,6 +19,7 @@ use Minextu\EttcApi\Exception\ImageException;
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
  * @apiParam {File} [image]                    New project image  (does not work in apidoc)
+ * @apiParam {bool} [deleteImage=false]        Whether to delete the current image or not
  *
  * @apiSuccess {Object} project              Contains info for the updated project
  *
@@ -54,6 +55,12 @@ use Minextu\EttcApi\Exception\ImageException;
 class Update extends AbstractRoutable
 {
     /**
+     * Folder containing images for projects
+     * @var   string
+     */
+    private $imageFolder = __DIR__."/../../../assets/images/projects/";
+
+    /**
      * Updates a exiiting project using post values, checks for permissions
      * @param    int       $id   Project id to be deleted
      * @return   array           api answer, containing the created project on success
@@ -63,6 +70,7 @@ class Update extends AbstractRoutable
         $title = isset($_POST['title']) ? $_POST['title'] : false;
         $description = isset($_POST['description']) ? $_POST['description'] : false;
         $image = isset($_FILES['image']) ? $_FILES['image'] : false;
+        $deleteImage = isset($_POST['deleteImage']) && $_POST['deleteImage'] == "true" ? true : false;
 
         $loggedin = $this->checkLoggedIn();
         $permissions = $this->checkPermissions();
@@ -70,7 +78,7 @@ class Update extends AbstractRoutable
         if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        } elseif (empty($title) && empty($description) && empty($image)) {
+        } elseif (empty($title) && empty($description) && empty($image) && empty($deleteImage)) {
             http_response_code(400);
             $answer = ["error" => "NoNewValues"];
         } elseif (!$loggedin) {
@@ -97,6 +105,10 @@ class Update extends AbstractRoutable
                 if (!empty($description)) {
                     $project->setDescription($description);
                 }
+                if ($deleteImage) {
+                    $this->deleteImage($project);
+                }
+
                 if (!empty($image)) {
                     try {
                         $this->uploadImage($project, $image);
@@ -116,6 +128,15 @@ class Update extends AbstractRoutable
         }
 
         return $answer;
+    }
+
+    private function deleteImage($project)
+    {
+        // delete current image
+        if ($project->getImageType() == "Default") {
+            unlink($this->imageFolder . $project->getImage());
+            $project->setImage(false);
+        }
     }
 
     /**
@@ -138,15 +159,12 @@ class Update extends AbstractRoutable
         }
 
         $filename = $project->getId() . ".$ext";
-        $targetFolder = __DIR__."/../../../assets/images/projects/";
 
         // delete possible older image
-        if ($project->getImageType() == "Default") {
-            unlink($targetFolder . $project->getImage());
-        }
+        $this->deleteImage($project);
 
         // move file
-        $target = $targetFolder . $filename;
+        $target = $this->imageFolder . $filename;
         $status = move_uploaded_file($image["tmp_name"], $target);
 
         if (!$status) {
