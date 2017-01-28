@@ -39,6 +39,19 @@ class ProjectView extends AbstractPageView
     }
 
     /**
+     * Show or hide image
+     * @param   bool   $visible   Visibility Status
+     */
+    public function setImageVisibility($visible)
+    {
+        if (!$visible) {
+            $this->placeholders['MSG_ImageDisplay'] = "style='display:none;'";
+        } else {
+            $this->placeholders['MSG_ImageDisplay'] = "";
+        }
+    }
+
+    /**
      * Save project creation date to placeholder array
      * @param   string   $created  Date of creation
      */

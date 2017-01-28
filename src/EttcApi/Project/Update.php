@@ -39,7 +39,7 @@ use Minextu\EttcApi\Exception\ImageException;
  *     }
  *
  * @apiError MissingValues Id wasn't transmited
- * @apiError NoNewValues   Neither a new title nor a new description were transmited
+ * @apiError NoNewValues   At least one of the optional parameters have to be transmitted
  * @apiError NotLoggedIn   You are not logged in
  * @apiError NoPermissions No permissions to create a project
  * @apiError NotFound      Project couldn't be found

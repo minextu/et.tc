@@ -22,6 +22,7 @@ class ProjectPresenter extends AbstractPagePresenter
     {
         $id = $this->model->getId();
         $image = $this->model->getImage();
+        $imageVisibility= $this->model->getImageType() == "Placeholder" ? false : true;
         $created = $this->model->getCreateDate();
         $updated = $this->model->getUpdateDate();
         $description = $this->model->getDescription();
@@ -31,6 +32,7 @@ class ProjectPresenter extends AbstractPagePresenter
 
         $this->view->setId($id);
         $this->view->setImage($image);
+        $this->view->setImageVisibility($imageVisibility);
         $this->view->setCreateDate($created);
         $this->view->setUpdateDate($updated);
         $this->view->setDescription($description);
