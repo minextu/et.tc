@@ -159,7 +159,7 @@ class Update extends AbstractRoutable
         $project->deleteImage();
 
         // move file
-        $target = $project::imageFolder . $filename;
+        $target = $project::IMAGE_FOLDER . $filename;
         $status = move_uploaded_file($image["tmp_name"], $target);
 
         if (!$status) {

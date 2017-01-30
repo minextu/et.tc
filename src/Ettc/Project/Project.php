@@ -6,6 +6,12 @@ use Minextu\Ettc\Exception\Exception;
 class Project
 {
     /**
+     * Folder containing images for projects
+     * @var   string
+     */
+    const IMAGE_FOLDER = __DIR__."/../../../assets/images/projects/";
+
+    /**
      * Project Database Interface
      * @var ProjectDb
      */
@@ -16,12 +22,6 @@ class Project
      * @var ProjectGit
      */
     public $git;
-
-    /**
-     * Folder containing images for projects
-     * @var   string
-     */
-    const imageFolder = __DIR__."/../../../assets/images/projects/";
 
     /**
      * Unique project id
@@ -211,7 +211,7 @@ class Project
     public function deleteImage()
     {
         if ($this->getImageType() == "Default") {
-            unlink($this::imageFolder . $this->getImage());
+            unlink($this::IMAGE_FOLDER . $this->getImage());
             $this->setImage(false);
         }
 

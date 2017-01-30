@@ -127,6 +127,9 @@ class ProjectTest extends AbstractEttcDatabaseTest
         // get project with id 1
         $project = new Project($this->getDb(), 1);
 
+        // unset dummy image, or it will fail to delete it
+        $project->setImage("");
+
         // delete project without deleting git repository (might affect git repositories outside of test otherwise)
         $status = $project->delete(false);
         $this->assertTrue($status);
