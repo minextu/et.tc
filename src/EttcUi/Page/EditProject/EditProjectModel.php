@@ -4,6 +4,7 @@ use \Minextu\EttcUi\Page\AbstractPageModel;
 use \Minextu\EttcApi\Project\Project;
 use \Minextu\Ettc\Account\Account;
 use \Minextu\EttcApi\Project\Update;
+use \Minextu\EttcApi\Project\InitGit;
 use \Minextu\EttcUi\Exception;
 
 class EditProjectModel extends AbstractPageModel
@@ -45,6 +46,22 @@ class EditProjectModel extends AbstractPageModel
     {
         $updateApi = new Update($this->mainModel->getDb());
         $answer = $updateApi->post($this->getId());
+
+        if (isset($answer['error'])) {
+            throw new Exception($answer['error']);
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Init git repository using the ettc api
+     * @return  bool                    True on success, False otherwise
+     */
+    public function addGitUrl()
+    {
+        $initGitApi = new InitGit($this->mainModel->getDb());
+        $answer = $initGitApi->post($this->getId());
 
         if (isset($answer['error'])) {
             throw new Exception($answer['error']);
@@ -96,6 +113,11 @@ class EditProjectModel extends AbstractPageModel
         }
     }
 
+    public function getGitUrl()
+    {
+        return $this->project['gitUrl'];
+    }
+
     public function getDescription()
     {
         return $this->project['description'];
@@ -106,7 +128,7 @@ class EditProjectModel extends AbstractPageModel
     * @param    int   $id   project id
     * @return   bool        True if the project does exist, False otherwise
     */
-    private function getProject($id)
+    public function getProject($id)
     {
         $projectApi = new Project($this->mainModel->getDb());
         $answer = $projectApi->get($id);

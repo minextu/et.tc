@@ -30,6 +30,7 @@ class EditProjectPresenter extends AbstractPagePresenter
         $createdGit = $this->model->getGitCreateTimestamp();
         $updatedGit = $this->model->getGitUpdateTimestamp();
         $description = $this->model->getDescription();
+        $gitUrl = $this->model->getGitUrl();
 
         $created = date("Y-m-d\TH:i", strtotime($created));
         $updated = date("Y-m-d\TH:i", strtotime($updated));
@@ -49,6 +50,7 @@ class EditProjectPresenter extends AbstractPagePresenter
         $this->view->setGitCreateDate($createdGit);
         $this->view->setGitUpdateDate($updatedGit);
         $this->view->setDescription($description);
+        $this->view->setGitUrl($gitUrl);
 
         $checkPermissions = $this->model->checkPermissions();
         if (!$checkPermissions) {
@@ -61,13 +63,31 @@ class EditProjectPresenter extends AbstractPagePresenter
      */
     public function updateProjectClicked()
     {
+        $success = false;
         try {
             $this->model->updateProject();
-            $this->view->redirectToProject($this->model->getId());
+            $success = true;
         } catch (Ettc\Exception\Exception $e) {
             $this->view->showError($e->getMessage());
         } catch (EttcUi\Exception $e) {
             $this->view->showError($e->getMessage());
+        }
+
+        if (isset($_POST['gitUrl']) && $this->model->getGitUrl() != $_POST['gitUrl']) {
+            $success = false;
+            try {
+                $this->model->addGitUrl();
+                $success = true;
+            } catch (EttcUi\Exception $e) {
+                $this->view->showError($e->getMessage());
+            }
+        }
+
+        if ($success) {
+            $this->view->redirectToProject($this->model->getId());
+        } else {
+            // load project again, to show changed values
+            $this->model->getProject($this->model->getId());
         }
     }
 

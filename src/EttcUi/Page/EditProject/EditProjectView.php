@@ -99,6 +99,14 @@ class EditProjectView extends AbstractPageView
         $this->placeholders['MSG_ProjectGitUpdateDate'] = $updated;
     }
 
+    /**
+     * Save project git repository url to placeholder array
+     * @param   string   $gitUrl  Url to git repository
+     */
+    public function setGitUrl($gitUrl)
+    {
+        $this->placeholders['MSG_ProjectGitUrl'] = $gitUrl;
+    }
 
     /**
      * Save project description to placeholder array
