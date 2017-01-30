@@ -227,6 +227,18 @@ class Project
     }
 
     /**
+     * Set project creation date
+     * @param   string   $date   Project creation date (parsable by strtotime)
+     * @return  bool                    True on success, False otherwise
+     */
+    public function setCreateDate($date)
+    {
+        $date = date("Y-m-d H:i:s", strtotime($date));
+        $this->createDate = $date;
+        return true;
+    }
+
+    /**
      * Get project update date
      * @return   string   Date of the projects last update
      */
@@ -237,6 +249,18 @@ class Project
         }
 
         return $this->updateDate;
+    }
+
+    /**
+     * Set project creation date
+     * @param   string   $date   Project creation date (parsable by strtotime)
+     * @return  bool                    True on success, False otherwise
+     */
+    public function setUpdateDate($date)
+    {
+        $date = date("Y-m-d H:i:s", strtotime($date));
+        $this->updateDate = $date;
+        return true;
     }
 
     /**
@@ -324,7 +348,7 @@ class Project
             throw new Exception("Description has to set via setDescription first.");
         }
 
-        $status = $this->projectDb->insertProject($this->title, $this->description, $this->image);
+        $status = $this->projectDb->insertProject($this->title, $this->description, $this->image, $this->createDate, $this->updateDate);
         if ($status) {
             $this->setId($status);
             $this->createDate = time();
@@ -346,7 +370,7 @@ class Project
             throw new Exception("Project has to be loaded first.");
         }
 
-        $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->image);
+        $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->image, $this->createDate, $this->updateDate);
 
         return $status;
     }
@@ -374,15 +398,21 @@ class Project
     public function toArray()
     {
         $project = [
-            "id" => $this->getId(),
-            "title" => $this->getTitle(),
-            "description" => $this->getDescription(),
-            "image" => $this->getImage(),
-            "imageType" => $this->getImageType(),
-            "gitUrl" => $this->getGitUrl(),
-            "createDate" => $this->getCreateDate(),
-            "updateDate" => $this->getUpdateDate(),
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'image' => $this->getImage(),
+            'imageType' => $this->getImageType(),
+            'createDate' => $this->getCreateDate(),
+            'updateDate' => $this->getUpdateDate(),
+            'gitUrl' => $this->getGitUrl(),
         ];
+
+        if ($this->git->exists()) {
+            $project['gitCreateTimestamp'] = $this->git->getCreationDate();
+            $project['gitUpdateTimestamp']  = $this->git->getUpdateDate();
+        }
+
         return $project;
     }
 }

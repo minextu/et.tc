@@ -39,8 +39,13 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
         $newTitle = "New Test Title";
         $newDescription = "New Test Description";
+        $newCreateDate = "2017-01-20T21:34:00";
+        $newUpdateDate = "2016-02-22T20:10:00";
+
         $_POST['title'] = $newTitle;
         $_POST['description'] = $newDescription;
+        $_POST['createDate'] = $newCreateDate;
+        $_POST['updateDate'] = $newUpdateDate;
 
         $updateApi = new Update($this->getDb());
 
@@ -49,14 +54,23 @@ class UpdateTest extends AbstractEttcDatabaseTest
         $this->assertFalse($error, "Project couldn't be updated (Error: $error)");
         $this->assertArrayHasKey("project", $answer, "Created project wasn't returned");
 
+        // convert update/creation date to mysql time
+        $newCreateDate = str_replace("T", " ", $newCreateDate);
+        $newUpdateDate = str_replace("T", " ", $newUpdateDate);
+
+        // check if project values have changed
         $project = $answer['project'];
         $this->assertEquals($newTitle, $project['title']);
         $this->assertEquals($newDescription, $project['description']);
+        $this->assertEquals($newCreateDate, $project['createDate']);
+        $this->assertEquals($newUpdateDate, $project['updateDate']);
 
         // check if project can be loaded using an project object
         $project = new Project($this->getDb(), 1);
-        $this->assertEquals($newTitle, $project->getTitle());
-        $this->assertEquals($newDescription, $project->getDescription());
+        $this->assertEquals($newTitle, $project->getTitle(), "title didn't get updated after reloading");
+        $this->assertEquals($newDescription, $project->getDescription(), "description didn't get updated after reloading");
+        $this->assertEquals($newCreateDate, $project->getCreateDate(), "createDate didn't get updated after reloading");
+        $this->assertEquals($newUpdateDate, $project->getUpdateDate(), "updateDate didn't get updated after reloading");
     }
 
     public function testMissingId()

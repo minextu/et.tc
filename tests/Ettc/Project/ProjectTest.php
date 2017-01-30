@@ -9,6 +9,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $title = "Test Name";
         $description = "A Test Project";
         $image = "TestImage.png";
+        $createDate = "2016-01-01T00:00";
+        $updateDate = "2017-01-01T00:00";
 
         $project = new Project($this->getDb());
 
@@ -18,6 +20,10 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertTrue($descriptionStatus, "setDescription didn't return True");
         $imageStatus = $project->setImage($image);
         $this->assertTrue($imageStatus, "setImage didn't return True");
+        $createDateStatus = $project->setCreateDate($createDate);
+        $this->assertTrue($createDateStatus, "setCreateDate didn't return True");
+        $updateDateStatus = $project->setUpdateDate($updateDate);
+        $this->assertTrue($updateDateStatus, "setUpdateDate didn't return True");
 
         $createStatus = $project->create();
         $this->assertTrue($createStatus, "create didn't return True");
@@ -32,7 +38,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertEquals(1, $this->getConnection()->getRowCount('projects'), "Inserting failed");
 
         // check if values are saved correctly
-        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description,image FROM projects');
+        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description,image,created,updated FROM projects');
         $expectedTable = $this->createFlatXmlDataSet(__DIR__."/ProjectTest.xml")->getTable("projects");
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -141,6 +147,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
         // remove create date, update date and git url from array, since these values won't be checked
         unset($array['createDate']);
         unset($array['updateDate']);
+        unset($array['gitCreateTimestamp']);
+        unset($array['gitUpdateTimestamp']);
         unset($array['gitUrl']);
 
         $expectedArray = [

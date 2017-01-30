@@ -12,28 +12,24 @@
     <div class='form_group'>
         <label>Image</label><br><a href='javascript:void(0)' onclick='deleteProjectImage(__MSG_ProjectId__)'>Delete current image</a><br><img id='projectImage' src='__MSG_ProjectImage__' style='max-height: 100px;'><input type='file' name='image'>
     </div>
+    <div class='form_group'>
+        <label>Creation date</label><input type='datetime-local' name='createDate' value='__MSG_ProjectCreateDate__'>
+        <a href='javascript:void(0)' id='gitCreateDateLink' onclick='setCreateDateGit()'>use git value</a>
+    </div>
+    <div class='form_group'>
+        <label>Update date</label><input type='datetime-local' name='updateDate' value='__MSG_ProjectUpdateDate__'>
+        <a href='javascript:void(0)' id='gitUpdateDateLink' onclick='setUpdateDateGit()'>use git value</a>
+    </div>
 
     <div class='save'><input type='submit' value='Update' name='update'></div>
 
 </form>
 
-<script>
-    var xhttp = new XMLHttpRequest();
 
-    function deleteProjectImage(id) {
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                var answer = JSON.parse(this.responseText);
-                if (answer['error'] !== undefined)
-                    alert("Error: " + answer['error']);
-                else {
-                    document.getElementById('projectImage').src = answer['project']['image'];
-                }
-            }
-        };
-        xhttp.open("POST", path + "/api/v1/project/update/" + id, true);
-        xhttp.setRequestHeader('Accept', 'application/json');
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("deleteImage=true");
-    }
+<script src='__PATH_Assets__/js/editProject.js'></script>
+
+<script>
+    var createDate = "__MSG_ProjectGitCreateDate__";
+    var updateDate = "__MSG_ProjectGitUpdateDate__";
+    initEditProject();
 </script>

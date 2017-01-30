@@ -18,6 +18,8 @@ use Minextu\EttcApi\Exception\ImageException;
  * @apiParam {Number} id                  Project id
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
+ * @apiParam {String} [createDate]             New project create date (yyyy-MM-ddThh:mm)
+ * @apiParam {String} [updateDate]             New project update date (yyyy-MM-ddThh:mm)
  * @apiParam {File} [image]                    New project image  (does not work in apidoc)
  * @apiParam {bool} [deleteImage=false]        Whether to delete the current image or not
  *
@@ -69,7 +71,9 @@ class Update extends AbstractRoutable
     {
         $title = isset($_POST['title']) ? $_POST['title'] : false;
         $description = isset($_POST['description']) ? $_POST['description'] : false;
-        $image = isset($_FILES['image']) ? $_FILES['image'] : false;
+        $image = isset($_FILES['image']) && file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']) ? $_FILES['image'] : false;
+        $createDate = isset($_POST['createDate']) ? $_POST['createDate'] : false;
+        $updateDate = isset($_POST['updateDate']) ? $_POST['updateDate'] : false;
         $deleteImage = isset($_POST['deleteImage']) && $_POST['deleteImage'] == "true" ? true : false;
 
         $loggedin = $this->checkLoggedIn();
@@ -78,7 +82,7 @@ class Update extends AbstractRoutable
         if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        } elseif (empty($title) && empty($description) && empty($image) && empty($deleteImage)) {
+        } elseif (empty($title) && empty($description) &&empty($image) && empty($deleteImage) &&empty($createDate) && empty($updateDate)) {
             http_response_code(400);
             $answer = ["error" => "NoNewValues"];
         } elseif (!$loggedin) {
@@ -104,6 +108,12 @@ class Update extends AbstractRoutable
                 }
                 if (!empty($description)) {
                     $project->setDescription($description);
+                }
+                if (!empty($createDate)) {
+                    $project->setCreateDate($createDate);
+                }
+                if (!empty($updateDate)) {
+                    $project->setUpdateDate($updateDate);
                 }
                 if ($deleteImage) {
                     $this->deleteImage($project);

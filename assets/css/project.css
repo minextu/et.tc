@@ -34,6 +34,7 @@
 
 .projectContainer .links {
     margin: 0px 25px;
+    margin-bottom: 40px;
 }
 
 .projectContainer .changelog {
@@ -69,6 +70,6 @@
 
 @media (max-width:780px) {
     .projectContainer .infoContainer {
-        flex-wrap: wrap;
+        flex-wrap: wrap-reverse;
     }
 }

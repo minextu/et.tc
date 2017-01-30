@@ -116,6 +116,34 @@ class ProjectGit
     }
 
     /**
+     * Get date of first commit and return it
+     * @return   string   Timestamp of first commit
+     */
+    public function getCreationDate()
+    {
+        if (!$this->exists()) {
+            throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
+        }
+
+        $logs = Changelog::generateLogs($this->git, 1, $this->getCommitsCount() - 1);
+        return $logs[0]['authorDateTimestamp'];
+    }
+
+    /**
+     * Get date of last commit and return it
+     * @return   string   Timestamp of last commit
+     */
+    public function getUpdateDate()
+    {
+        if (!$this->exists()) {
+            throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
+        }
+
+        $logs = Changelog::generateLogs($this->git, 1, 0);
+        return $logs[0]['authorDateTimestamp'];
+    }
+
+    /**
      * Delete git repository
      */
     public function delete()

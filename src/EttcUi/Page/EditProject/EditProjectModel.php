@@ -78,6 +78,24 @@ class EditProjectModel extends AbstractPageModel
         return $this->project['updateDate'];
     }
 
+    public function getGitCreateTimestamp()
+    {
+        if (!empty($this->project['gitCreateTimestamp'])) {
+            return $this->project['gitCreateTimestamp'];
+        } else {
+            return false;
+        }
+    }
+
+    public function getGitUpdateTimestamp()
+    {
+        if (!empty($this->project['gitUpdateTimestamp'])) {
+            return $this->project['gitUpdateTimestamp'];
+        } else {
+            return false;
+        }
+    }
+
     public function getDescription()
     {
         return $this->project['description'];

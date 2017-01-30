@@ -65,15 +65,18 @@ class ProjectDb
     * Store project in database
     * @param    string   $title         Project title
     * @param    string   $description   Project description
+    * @param    string   $image         Filename of image for project
+    * @param    string   $createDate    Project creation date
+    * @param    string   $updateDate    Project update date
     * @return   bool|int                Id of the project on success, False otherwise
     */
-    public function insertProject($title, $description, $image)
+    public function insertProject($title, $description, $image, $createDate=false, $updateDate=false)
     {
         $sql = 'INSERT into projects
-                (title, description, image)
-                VALUES (?, ?, ?)';
+                (title, description, image, created, updated)
+                VALUES (?, ?, ?, ?, ?)';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$title, $description, $image]);
+        $status = $stmt->execute([$title, $description, $image, $createDate, $updateDate]);
 
         if ($status) {
             $status = $this->db->getPdo()->lastInsertId();
@@ -87,15 +90,18 @@ class ProjectDb
     * @param    string   $id            Project id
     * @param    string   $title         Project title
     * @param    string   $description   Project description
+    * @param    string   $image         Filename of image for project
+    * @param    string   $createDate    Project creation date
+    * @param    string   $updateDate    Project update date
     * @return   bool                    True on success, False otherwise
     */
-    public function updateProject($id, $title, $description, $image)
+    public function updateProject($id, $title, $description, $image, $createDate=false, $updateDate=false)
     {
         $sql = 'UPDATE projects
-                Set title = ?, description = ?, image = ?
+                Set title = ?, description = ?, image = ?, created = ?, updated = ?
                 WHERE id = ?';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$title, $description, $image, $id]);
+        $status = $stmt->execute([$title, $description, $image, $createDate, $updateDate, $id]);
 
         return $status;
     }

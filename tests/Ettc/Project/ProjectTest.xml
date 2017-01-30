@@ -1,4 +1,4 @@
 <?xml version="1.0" ?>
 <dataset>
-    <projects id="1" title="Test Name" description="A Test Project" image="TestImage.png"/>
+    <projects id="1" title="Test Name" description="A Test Project" image="TestImage.png" created="2016-01-01 00:00:00" updated="2017-01-01 00:00:00"/>
 </dataset>

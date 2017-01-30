@@ -74,12 +74,31 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project update date to placeholder array
-     * @param   string   $update  Date of last update
+     * @param   string   $updated  Date of last update
      */
     public function setUpdateDate($updated)
     {
         $this->placeholders['MSG_ProjectUpdateDate'] = $updated;
     }
+
+    /**
+     * Save project git creation date to placeholder array
+     * @param   string   $created  Date of creation
+     */
+    public function setGitCreateDate($created)
+    {
+        $this->placeholders['MSG_ProjectGitCreateDate'] = $created;
+    }
+
+    /**
+     * Save project git update date to placeholder array
+     * @param   string   $updated  Date of last update
+     */
+    public function setGitUpdateDate($updated)
+    {
+        $this->placeholders['MSG_ProjectGitUpdateDate'] = $updated;
+    }
+
 
     /**
      * Save project description to placeholder array

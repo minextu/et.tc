@@ -84,4 +84,15 @@ class ProjectGitTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Minextu\Ettc\Exception\InvalidId');
         $url = $projectGit->getUrl();
     }
+
+    public function testCreationDateCanBeExtracted()
+    {
+        $creationDate = "1374402393";
+
+        $projectGit = new ProjectGit("phpUnitTest");
+        $gitExists = $projectGit->exists();
+        $this->assertTrue($gitExists, "project should already have a git folder created in last test");
+
+        $this->assertEquals($creationDate, $projectGit->getCreationDate());
+    }
 }
