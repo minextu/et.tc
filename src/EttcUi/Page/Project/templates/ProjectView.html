@@ -2,7 +2,8 @@
     <div class='date'>
         <span title='Last update'><img src='__PATH_Assets__/images/update.png' alt='U'>__MSG_ProjectUpdateDate__</span>
         <span title='Creation date'><img src='__PATH_Assets__/images/create.png' alt='+'>__MSG_ProjectCreateDate__</span>
-        <a style='float: right' href='__PATH_Root__/EditProject/__MSG_ProjectId__'>Edit</a>
+        <a style='float: right' href='javascript:void(0)' onclick='deleteProject(__MSG_ProjectId__)'>Delete</a>
+        <a style='float: right; margin-right: 5px;' href='__PATH_Root__/EditProject/__MSG_ProjectId__'>Edit</a>
     </div>
     <div class='projectImage' __MSG_ImageDisplay__>
         <img src='__MSG_ProjectImage__' alt=''>

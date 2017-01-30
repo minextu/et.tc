@@ -57,12 +57,6 @@ use Minextu\EttcApi\Exception\ImageException;
 class Update extends AbstractRoutable
 {
     /**
-     * Folder containing images for projects
-     * @var   string
-     */
-    private $imageFolder = __DIR__."/../../../assets/images/projects/";
-
-    /**
      * Updates a exiiting project using post values, checks for permissions
      * @param    int       $id   Project id to be deleted
      * @return   array           api answer, containing the created project on success
@@ -116,7 +110,7 @@ class Update extends AbstractRoutable
                     $project->setUpdateDate($updateDate);
                 }
                 if ($deleteImage) {
-                    $this->deleteImage($project);
+                    $project->deleteImage();
                 }
 
                 if (!empty($image)) {
@@ -138,15 +132,6 @@ class Update extends AbstractRoutable
         }
 
         return $answer;
-    }
-
-    private function deleteImage($project)
-    {
-        // delete current image
-        if ($project->getImageType() == "Default") {
-            unlink($this->imageFolder . $project->getImage());
-            $project->setImage(false);
-        }
     }
 
     /**
@@ -171,10 +156,10 @@ class Update extends AbstractRoutable
         $filename = $project->getId() . ".$ext";
 
         // delete possible older image
-        $this->deleteImage($project);
+        $project->deleteImage();
 
         // move file
-        $target = $this->imageFolder . $filename;
+        $target = $project::imageFolder . $filename;
         $status = move_uploaded_file($image["tmp_name"], $target);
 
         if (!$status) {

@@ -1,4 +1,30 @@
 var xhttp = new XMLHttpRequest();
+
+function deleteProject(id)
+{
+    var status = confirm("Do you really want to delete this project?");
+    if (status)
+    {
+        xhttp.onreadystatechange = function()
+        {
+            if (this.readyState == 4)
+            {
+                var answer = JSON.parse(this.responseText);
+                if (answer['error'] != undefined)
+                    alert(answer['error']);
+                else
+                {
+                    window.location.href = '../Projects/';
+                }
+            }
+        };
+
+        xhttp.open("DELETE", path + "/api/v1/project/delete/" + id, true);
+        xhttp.setRequestHeader('Accept', 'application/json')
+        xhttp.send();
+    }
+}
+
 var skip = 0;
 var count = 10;
 lastHeight = 500;

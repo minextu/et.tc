@@ -29,7 +29,10 @@ class DeleteTest extends AbstractEttcDatabaseTest
         $project->create();
     }
 
-    public function testProjectCanBeDeleted()
+    //
+    // This might also delete possible git repositories outside of this testcase
+    //
+    /*public function testProjectCanBeDeleted()
     {
         $this->createLoginTestUser(2);
 
@@ -50,7 +53,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
         // try to load the first project which was deleted
         $this->setExpectedException('Minextu\Ettc\Exception\InvalidId');
         $project = new Project($this->getDb(), 1);
-    }
+    }*/
 
     public function testMissingId()
     {

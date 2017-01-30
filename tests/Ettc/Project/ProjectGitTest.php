@@ -95,4 +95,22 @@ class ProjectGitTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($creationDate, $projectGit->getCreationDate());
     }
+
+    public function testRepositoryCanBeDeleted()
+    {
+        $projectGit = new ProjectGit("phpUnitTest");
+        $gitExists = $projectGit->exists();
+        $this->assertTrue($gitExists, "project should already have a git folder created in last test");
+
+        $status = $projectGit->delete();
+        $this->assertTrue($status, "delete() did not succeed");
+
+        $gitExists = $projectGit->exists();
+        $this->assertFalse($gitExists, "project should not have a git folder anymore");
+
+        // try to load repository again
+        $projectGit = new ProjectGit("phpUnitTest");
+        $gitExists = $projectGit->exists();
+        $this->assertFalse($gitExists, "project should not have a git folder anymore");
+    }
 }

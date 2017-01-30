@@ -152,7 +152,7 @@ class ProjectGit
             throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
         }
 
-        $this->deleteFolder($this->projectDir);
+        return $this->deleteFolder($this->projectDir);
     }
 
     /**

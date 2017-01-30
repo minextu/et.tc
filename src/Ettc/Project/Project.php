@@ -18,6 +18,12 @@ class Project
     public $git;
 
     /**
+     * Folder containing images for projects
+     * @var   string
+     */
+    const imageFolder = __DIR__."/../../../assets/images/projects/";
+
+    /**
      * Unique project id
      * @var   int
      */
@@ -195,6 +201,20 @@ class Project
     public function setImage($filename)
     {
         $this->image = $filename;
+        return true;
+    }
+
+    /**
+     * Deletes the current Image
+     * @return   bool   True on success, False otherwise
+     */
+    public function deleteImage()
+    {
+        if ($this->getImageType() == "Default") {
+            unlink($this::imageFolder . $this->getImage());
+            $this->setImage(false);
+        }
+
         return true;
     }
 
@@ -377,14 +397,20 @@ class Project
 
     /**
      * Delete Project from Database
+     * @param    bool  $deleteGit  Also delete any possible git repository
      * @return   bool   True on success, False otherwise
      */
-    public function delete()
+    public function delete($deleteGit=true)
     {
         if (!isset($this->id)) {
             throw new Exception("Project has to be loaded first.");
         }
 
+        if ($deleteGit && $this->git->exists()) {
+            $this->git->delete();
+        }
+
+        $this->deleteImage();
         $status = $this->projectDb->deleteProject($this->id);
 
         return $status;

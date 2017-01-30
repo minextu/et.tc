@@ -127,7 +127,8 @@ class ProjectTest extends AbstractEttcDatabaseTest
         // get project with id 1
         $project = new Project($this->getDb(), 1);
 
-        $status = $project->delete();
+        // delete project without deleting git repository (might affect git repositories outside of test otherwise)
+        $status = $project->delete(false);
         $this->assertTrue($status);
 
         // try to load the deleted project
