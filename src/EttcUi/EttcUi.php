@@ -32,7 +32,7 @@ class EttcUi
      */
     public function __construct($ettc, $rootDir, $pageName)
     {
-        $this->rootDir = $rootDir;
+        $this->rootDir = rtrim($rootDir, "/");
         $this->ettc = $ettc;
         $this->start($pageName);
     }
