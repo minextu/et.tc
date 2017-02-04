@@ -16,16 +16,11 @@ class LoginPresenter extends AbstractPagePresenter
      */
     public function loginClicked($nick, $pw)
     {
-        $check = $this->model->checkLogin($nick, $pw);
-        if ($check) {
-            try {
-                $this->model->login($nick, $pw);
-                $this->view->redirectToStart();
-            } catch (Exception $e) {
-                $this->view->showError($e->getMessage());
-            }
-        } else {
-            $this->view->showError("Wrong e-mail/nickname or password");
+        try {
+            $this->model->login($nick, $pw);
+            $this->view->redirectToStart();
+        } catch (Exception $e) {
+            $this->view->showError($e->getMessage());
         }
     }
 }

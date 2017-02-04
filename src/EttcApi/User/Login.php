@@ -3,6 +3,7 @@
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\FailedLogin;
 
 /**
  * Checks nickname and password, logs the user in on success
@@ -39,6 +40,7 @@ class Login extends AbstractRoutable
         $password = isset($_POST['password']) ? $_POST['password'] : false;
 
         $loggedin = $this->checkLoggedIn();
+        $this->preventBruteForce($nickname);
         $loginCorrect = $this->checkLogin($nickname, $password);
 
         if (empty($nickname) || empty($password)) {
@@ -49,6 +51,7 @@ class Login extends AbstractRoutable
             $answer = ["error" => "AlreadyLoggedIn"];
         } elseif (!$loginCorrect) {
             http_response_code(401);
+            $this->preventBruteForce($nickname, true);
             $answer = ["error" => "WrongNicknameOrPassword"];
         } else {
             $this->login($nickname);
@@ -108,6 +111,18 @@ class Login extends AbstractRoutable
             Account::login($user);
         } else {
             throw new Exception("User with Nick '$nick' not found");
+        }
+    }
+
+    private function preventBruteForce($nick, $isFailedLogin = false)
+    {
+        if (!$isFailedLogin) {
+            $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);
+            if ($lastLoginAttempt != false && time() - strtotime($lastLoginAttempt) < 60) {
+                sleep(mt_rand(2, 5));
+            }
+        } else {
+            FailedLogin::add($this->getDb(), $nick);
         }
     }
 }

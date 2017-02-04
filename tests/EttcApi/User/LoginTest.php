@@ -3,9 +3,16 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\FailedLogin;
 
 class LoginTest extends AbstractEttcDatabaseTest
 {
+    public static function setUpBeforeClass()
+    {
+        // set the server ip to localhost, for logged failed logins
+        $_SERVER['REMOTE_ADDR'] = "127.0.0.1";
+    }
+
     public function createTestUser($nickname, $password)
     {
         $user = new User($this->getDb());
@@ -105,5 +112,24 @@ class LoginTest extends AbstractEttcDatabaseTest
         $answer = $loginApi->post();
 
         $this->assertEquals(['error' => 'AlreadyLoggedIn'], $answer, "Login was successfull, despite already being logged in");
+    }
+
+    public function testFailedLoginWillGetLogged()
+    {
+        $nickname = "TestNickname";
+        $password = "testPassword";
+        $this->createTestUser($nickname, $password);
+
+        $_POST['nickname'] = $nickname;
+        $_POST['password'] = "wrong";
+
+        $loginApi = new Login($this->getDb());
+        $time = date("Y-m-d H:i:s");
+        $answer = $loginApi->post();
+
+        $this->assertEquals(['error' => "WrongNicknameOrPassword"], $answer);
+
+        $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nickname);
+        $this->assertEquals($time, $lastLoginAttempt, "Time of last login attempt does not match");
     }
 }
