@@ -41,7 +41,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
         $this->createTestProject();
 
         $deleteApi = new Delete($this->getDb());
-        $answer = $deleteApi->delete(1);
+        $answer = $deleteApi->post(1);
         $error = isset($answer['error']) ? $answer['error'] : false;
         $this->assertFalse($error, "Project couldn't be deleted (Error: $error)");
         $this->assertEquals(["success" => true], $answer);
@@ -58,7 +58,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
     public function testMissingId()
     {
         $deleteApi = new Delete($this->getDb());
-        $answer = $deleteApi->delete();
+        $answer = $deleteApi->post();
 
         $this->assertEquals(['error' => 'MissingValues'], $answer);
     }
@@ -68,7 +68,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
         $this->createTestProject();
 
         $deleteApi = new Delete($this->getDb());
-        $answer = $deleteApi->delete(1);
+        $answer = $deleteApi->post(1);
 
         $this->assertEquals(['error' => 'NotLoggedIn'], $answer);
 
@@ -84,7 +84,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
         $this->createLoginTestUser(1);
 
         $deleteApi = new Delete($this->getDb());
-        $answer = $deleteApi->delete(1);
+        $answer = $deleteApi->post(1);
 
         $this->assertEquals(['error' => 'NoPermissions'], $answer);
 
@@ -99,7 +99,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
         $this->createLoginTestUser(2);
 
         $deleteApi = new Delete($this->getDb());
-        $answer = $deleteApi->delete(2);
+        $answer = $deleteApi->post(2);
 
         $this->assertEquals(['error' => 'NotFound'], $answer);
 

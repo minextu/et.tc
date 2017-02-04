@@ -41,7 +41,7 @@ class ProjectGitTest extends \PHPUnit_Framework_TestCase
         $gitExists = $projectGit->exists();
         $this->assertFalse($gitExists, "project shouldn't have a git folder yet");
 
-        $status = $projectGit->clone($testGitUrl);
+        $status = $projectGit->gitClone($testGitUrl);
         $this->assertTrue($status, "clone didn't succeed");
 
         $gitExists = $projectGit->exists();
@@ -70,7 +70,7 @@ class ProjectGitTest extends \PHPUnit_Framework_TestCase
         $gitExists = $projectGit->exists();
         $this->assertTrue($gitExists, "project should already have a git folder created in last test");
 
-        $status = $projectGit->clone($testGitUrl);
+        $status = $projectGit->gitClone($testGitUrl);
     }
 
     public function testInvalidProjectPath()

@@ -8,7 +8,7 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Deletes a Project while checking for permissions
  *
- * @api {delete} /project/delete/:id delete a project
+ * @api {post} /project/delete/:id delete a project
  * @apiName deleteProject
  * @apiVersion 0.1.0
  * @apiGroup Project
@@ -35,7 +35,7 @@ class Delete extends AbstractRoutable
      * @param    int       $id   Project id to be deleted
      * @return   array           Api answers
      */
-    public function delete($id=false)
+    public function post($id=false)
     {
         $loggedin = $this->checkLoggedIn();
         $permissions = $this->checkPermissions();

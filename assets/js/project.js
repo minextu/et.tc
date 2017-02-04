@@ -19,7 +19,7 @@ function deleteProject(id)
             }
         };
 
-        xhttp.open("DELETE", path + "/api/v1/project/delete/" + id, true);
+        xhttp.open("POST", path + "/api/v1/project/delete/" + id, true);
         xhttp.setRequestHeader('Accept', 'application/json')
         xhttp.send();
     }
