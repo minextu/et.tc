@@ -25,14 +25,4 @@ abstract class AbstractRoutable implements Routable
     {
         return $this->db;
     }
-
-    public function get()
-    {
-        return "";
-    }
-
-    public function post()
-    {
-        return "";
-    }
 }
