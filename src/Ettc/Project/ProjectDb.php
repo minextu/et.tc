@@ -28,7 +28,7 @@ class ProjectDb
      */
     public function getProjectById($id)
     {
-        $sql = 'SELECT id, title, description, image, created, updated
+        $sql = 'SELECT id, title, description, html, image, created, updated
                 FROM projects WHERE id=?';
 
         $stmt = $this->db->getPdo()->prepare($sql);
@@ -65,18 +65,19 @@ class ProjectDb
     * Store project in database
     * @param    string   $title         Project title
     * @param    string   $description   Project description
+    * @param    string   $html          Project html code
     * @param    string   $image         Filename of image for project
     * @param    string   $createDate    Project creation date
     * @param    string   $updateDate    Project update date
     * @return   bool|int                Id of the project on success, False otherwise
     */
-    public function insertProject($title, $description, $image, $createDate=false, $updateDate=false)
+    public function insertProject($title, $description, $html, $image, $createDate=false, $updateDate=false)
     {
         $sql = 'INSERT into projects
-                (title, description, image, created, updated)
-                VALUES (?, ?, ?, ?, ?)';
+                (title, description, html, image, created, updated)
+                VALUES (?, ?, ?, ?, ?, ?)';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$title, $description, $image, $createDate, $updateDate]);
+        $status = $stmt->execute([$title, $description, $html, $image, $createDate, $updateDate]);
 
         if ($status) {
             $status = $this->db->getPdo()->lastInsertId();
@@ -90,18 +91,19 @@ class ProjectDb
     * @param    string   $id            Project id
     * @param    string   $title         Project title
     * @param    string   $description   Project description
+    * @param    string   $html          Project html code
     * @param    string   $image         Filename of image for project
     * @param    string   $createDate    Project creation date
     * @param    string   $updateDate    Project update date
     * @return   bool                    True on success, False otherwise
     */
-    public function updateProject($id, $title, $description, $image, $createDate=false, $updateDate=false)
+    public function updateProject($id, $title, $description, $html, $image, $createDate=false, $updateDate=false)
     {
         $sql = 'UPDATE projects
-                Set title = ?, description = ?, image = ?, created = ?, updated = ?
+                Set title = ?, description = ?, html = ?, image = ?, created = ?, updated = ?
                 WHERE id = ?';
         $stmt = $this->db->getPdo()->prepare($sql);
-        $status = $stmt->execute([$title, $description, $image, $createDate, $updateDate, $id]);
+        $status = $stmt->execute([$title, $description, $html, $image, $createDate, $updateDate, $id]);
 
         return $status;
     }

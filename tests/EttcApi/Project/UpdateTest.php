@@ -39,11 +39,13 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
         $newTitle = "New Test Title";
         $newDescription = "New Test Description";
+        $newHtml = "<p>new html</p>";
         $newCreateDate = "2017-01-20T21:34:00";
         $newUpdateDate = "2016-02-22T20:10:00";
 
         $_POST['title'] = $newTitle;
         $_POST['description'] = $newDescription;
+        $_POST['html'] = $newHtml;
         $_POST['createDate'] = $newCreateDate;
         $_POST['updateDate'] = $newUpdateDate;
 
@@ -62,6 +64,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
         $project = $answer['project'];
         $this->assertEquals($newTitle, $project['title']);
         $this->assertEquals($newDescription, $project['description']);
+        $this->assertEquals($newHtml, $project['html']);
         $this->assertEquals($newCreateDate, $project['createDate']);
         $this->assertEquals($newUpdateDate, $project['updateDate']);
 
@@ -69,6 +72,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
         $project = new Project($this->getDb(), 1);
         $this->assertEquals($newTitle, $project->getTitle(), "title didn't get updated after reloading");
         $this->assertEquals($newDescription, $project->getDescription(), "description didn't get updated after reloading");
+        $this->assertEquals($newHtml, $project->getHtml(), "html didn't get updated after reloading");
         $this->assertEquals($newCreateDate, $project->getCreateDate(), "createDate didn't get updated after reloading");
         $this->assertEquals($newUpdateDate, $project->getUpdateDate(), "updateDate didn't get updated after reloading");
     }

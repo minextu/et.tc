@@ -18,6 +18,7 @@ use Minextu\EttcApi\Exception\ImageException;
  * @apiParam {Number} id                  Project id
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
+ * @apiParam {String} [html]                   New project html code
  * @apiParam {String} [createDate]             New project create date (yyyy-MM-ddThh:mm)
  * @apiParam {String} [updateDate]             New project update date (yyyy-MM-ddThh:mm)
  * @apiParam {File} [image]                    New project image  (does not work in apidoc)
@@ -32,6 +33,7 @@ use Minextu\EttcApi\Exception\ImageException;
  *           "id": Number,
  *           "title": String,
  *           "description" : String,
+ *           "html" : String,
  *           "image" : String,
  *           "imageType": "Default|Placeholder",
  *           "gitUrl": String,
@@ -65,6 +67,7 @@ class Update extends AbstractRoutable
     {
         $title = isset($_POST['title']) ? $_POST['title'] : false;
         $description = isset($_POST['description']) ? $_POST['description'] : false;
+        $html = isset($_POST['html']) ? $_POST['html'] : false;
         $image = isset($_FILES['image']) && file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']) ? $_FILES['image'] : false;
         $createDate = isset($_POST['createDate']) ? $_POST['createDate'] : false;
         $updateDate = isset($_POST['updateDate']) ? $_POST['updateDate'] : false;
@@ -76,7 +79,7 @@ class Update extends AbstractRoutable
         if ($id === false) {
             http_response_code(400);
             $answer = ["error" => "MissingValues"];
-        } elseif (empty($title) && empty($description) &&empty($image) && empty($deleteImage) &&empty($createDate) && empty($updateDate)) {
+        } elseif (empty($title) && empty($description) && empty($html) && empty($image) && empty($deleteImage) && empty($createDate) && empty($updateDate)) {
             http_response_code(400);
             $answer = ["error" => "NoNewValues"];
         } elseif (!$loggedin) {
@@ -102,6 +105,9 @@ class Update extends AbstractRoutable
                 }
                 if (!empty($description)) {
                     $project->setDescription($description);
+                }
+                if (!empty($html)) {
+                    $project->setHtml($html);
                 }
                 if (!empty($createDate)) {
                     $project->setCreateDate($createDate);

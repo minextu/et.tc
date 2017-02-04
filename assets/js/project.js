@@ -25,6 +25,47 @@ function deleteProject(id)
     }
 }
 
+var isEdit = false;
+
+function editProjectHtml(id)
+{
+    if (!isEdit)
+    {
+        var html = document.getElementById('projectHtml');
+
+        var htmlEdit = document.createElement("textarea");
+        htmlEdit.id = "projectHtmlEdit";
+        htmlEdit.innerHTML = html.innerHTML;
+
+        html.parentNode.appendChild(htmlEdit);
+        html.parentNode.removeChild(html);
+        isEdit = true;
+    }
+    else
+    {
+        var htmlEdit = document.getElementById("projectHtmlEdit");
+
+        xhttp.onreadystatechange = function()
+        {
+            if (this.readyState == 4)
+            {
+                var answer = JSON.parse(this.responseText);
+                if (answer['error'] != undefined)
+                    alert(answer['error']);
+                else
+                {
+                    window.location.reload();
+                }
+            }
+        };
+
+        xhttp.open("POST", path + "/api/v1/project/update/" + id, true);
+        xhttp.setRequestHeader('Accept', 'application/json');
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("html=" + encodeURIComponent(htmlEdit.value));
+    }
+}
+
 var skip = 0;
 var count = 10;
 lastHeight = 500;

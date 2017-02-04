@@ -9,6 +9,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $title = "Test Name";
         $description = "A Test Project";
         $image = "TestImage.png";
+        $html = "<p>Test HTML</p>";
         $createDate = "2016-01-01T00:00";
         $updateDate = "2017-01-01T00:00";
 
@@ -20,6 +21,9 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertTrue($descriptionStatus, "setDescription didn't return True");
         $imageStatus = $project->setImage($image);
         $this->assertTrue($imageStatus, "setImage didn't return True");
+        $htmlStatus = $project->setHtml($html);
+        $this->assertTrue($htmlStatus, "setHtml didn't return True");
+
         $createDateStatus = $project->setCreateDate($createDate);
         $this->assertTrue($createDateStatus, "setCreateDate didn't return True");
         $updateDateStatus = $project->setUpdateDate($updateDate);
@@ -38,7 +42,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
         $this->assertEquals(1, $this->getConnection()->getRowCount('projects'), "Inserting failed");
 
         // check if values are saved correctly
-        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description,image,created,updated FROM projects');
+        $queryTable = $this->getConnection()->createQueryTable('projects', 'SELECT id,title,description,html,image,created,updated FROM projects');
         $expectedTable = $this->createFlatXmlDataSet(__DIR__."/ProjectTest.xml")->getTable("projects");
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
@@ -61,6 +65,10 @@ class ProjectTest extends AbstractEttcDatabaseTest
 
         $image = $project->getImage();
         $this->assertEquals("TestImage.png", $image);
+
+        // check if html is correct
+        $html = $project->getHtml();
+        $this->assertEquals("<p>Test HTML</p>", $html);
     }
 
     public function testProjectCanNotBeLoadedByInvalidId()
@@ -159,6 +167,7 @@ class ProjectTest extends AbstractEttcDatabaseTest
             'id' => 1,
             'title' => 'Test Name',
             'description' => 'A Test Project',
+            'html' => "<p>Test HTML</p>",
             'image' => 'TestImage.png',
             'imageType' => 'Default',
         ];

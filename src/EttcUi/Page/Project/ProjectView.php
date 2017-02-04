@@ -78,6 +78,15 @@ class ProjectView extends AbstractPageView
         $this->placeholders['MSG_ProjectDescription'] = $description;
     }
 
+    /**
+     * Save project html to placeholder array
+     * @param   string   $description  Project description
+     */
+    public function setHtml($html)
+    {
+        $this->placeholders['MSG_ProjectHtml'] = $html;
+    }
+
     public function generateHtml()
     {
         return $this->template->convertTemplate(__DIR__."/templates/ProjectView.html", $this->placeholders);

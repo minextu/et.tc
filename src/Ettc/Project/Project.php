@@ -42,6 +42,12 @@ class Project
     private $description;
 
     /**
+     * Project html code
+     * @var   string
+     */
+    private $html;
+
+    /**
      * Project image filename
      * @var   string
      */
@@ -175,6 +181,29 @@ class Project
     public function setDescription($description)
     {
         $this->description = $description;
+        return true;
+    }
+
+    /**
+     * Get project html code
+     * @return   string   Project html code
+     */
+    public function getHtml()
+    {
+        if (!isset($this->html)) {
+            return "";
+        }
+
+        return $this->html;
+    }
+
+    /**
+     * @param   string   $html   Project html code
+     * @return  bool             True on success, False otherwise
+     */
+    public function setHtml($html)
+    {
+        $this->html = $html;
         return true;
     }
 
@@ -345,6 +374,7 @@ class Project
         $this->setId($project['id']);
         $this->title = $project['title'];
         $this->description = $project['description'];
+        $this->html = $project['html'];
         $this->image = $project['image'];
         $this->createDate = $project['created'];
         $this->updateDate = $project['updated'];
@@ -368,7 +398,7 @@ class Project
             throw new Exception("Description has to set via setDescription first.");
         }
 
-        $status = $this->projectDb->insertProject($this->title, $this->description, $this->image, $this->createDate, $this->updateDate);
+        $status = $this->projectDb->insertProject($this->title, $this->description, $this->html, $this->image, $this->createDate, $this->updateDate);
         if ($status) {
             $this->setId($status);
             $this->createDate = time();
@@ -390,7 +420,7 @@ class Project
             throw new Exception("Project has to be loaded first.");
         }
 
-        $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->image, $this->createDate, $this->updateDate);
+        $status = $this->projectDb->updateProject($this->id, $this->title, $this->description, $this->html, $this->image, $this->createDate, $this->updateDate);
 
         return $status;
     }
@@ -427,6 +457,7 @@ class Project
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
+            'html' => $this->getHtml(),
             'image' => $this->getImage(),
             'imageType' => $this->getImageType(),
             'createDate' => $this->getCreateDate(),

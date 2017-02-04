@@ -26,6 +26,7 @@ class ProjectPresenter extends AbstractPagePresenter
         $created = $this->model->getCreateDate();
         $updated = $this->model->getUpdateDate();
         $description = $this->model->getDescription();
+        $html = $this->model->getHtml();
 
         $created = date("d.m.Y H:i", strtotime($created));
         $updated = date("d.m.Y H:i", strtotime($updated));
@@ -36,6 +37,7 @@ class ProjectPresenter extends AbstractPagePresenter
         $this->view->setCreateDate($created);
         $this->view->setUpdateDate($updated);
         $this->view->setDescription($description);
+        $this->view->setHtml($html);
     }
 
     /**

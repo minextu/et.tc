@@ -52,6 +52,11 @@ class ProjectModel extends AbstractPageModel
         return $this->project['description'];
     }
 
+    public function getHtml()
+    {
+        return $this->project['html'];
+    }
+
     /**
      * Fetch the project using EttcApi
      * @param    int   $id   project id

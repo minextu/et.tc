@@ -25,6 +25,7 @@ use Minextu\Ettc;
  *           "id": Number,
  *           "title": String,
  *           "description" : String,
+ *           "html" : String,
  *           "image" : String,
  *           "imageType": "Default|Placeholder",
  *           "createDate" : Date,
