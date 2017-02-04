@@ -38,7 +38,7 @@ $CONFIG = array(
 * Every migration script greater than databse_version will be started, till database_target_version is reached.
 * If set to true, the newest Migration will be used
 */
-'dbTargetVersion' => true
+'dbTargetVersion' => true,
 
 /**
 * The host of the Test Database
@@ -61,4 +61,3 @@ $CONFIG = array(
 'testDbDatabase' => '',
 
 );
-?>
