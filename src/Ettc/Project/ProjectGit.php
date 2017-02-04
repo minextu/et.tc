@@ -45,7 +45,7 @@ class ProjectGit
      * @param    string   $url   Url to project
      * @return   bool            True on success, False otherwise
      */
-    public function clone($url)
+    public function gitClone($url)
     {
         if ($this->exists()) {
             throw new Exception("project git folder '" . $this->projectDir . "' already exists'");

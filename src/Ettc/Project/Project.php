@@ -346,7 +346,7 @@ class Project
             $this->git->delete();
         }
 
-        $this->git->clone($url);
+        $this->git->gitClone($url);
     }
 
     /**
