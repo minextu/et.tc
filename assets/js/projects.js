@@ -30,8 +30,8 @@ function showProject(project)
     projectHtml.id = project.id;
 
     // hide image, if it's just a placeholder
-    if (project.imageType == "Placeholder")
-        projectHtml.getElementsByClassName('image')[0].style.display = "none";
+    //if (project.imageType == "Placeholder")
+    //    projectHtml.getElementsByClassName('image')[0].style.display = "none";
 
     var createDate = dateToString(project.createDate);
     var updateDate = dateToString(project.updateDate);
