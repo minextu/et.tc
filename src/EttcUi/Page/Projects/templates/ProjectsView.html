@@ -23,20 +23,25 @@
 <!-- JavaScript Templates -->
 <div style='display: none'>
     <li id='templateEntry' class='entry'>
-        <a href='__PATH_Root__/Project/__MSG_ProjectId__' class='image'>
-            <img src='__MSG_ProjectImage__' alt=''>
-        </a>
-        <div class='text'>
-            <span class='date'>
+        <a href='__PATH_Root__/Project/__MSG_ProjectId__'>
+            <div class='image'>
+                <img src='__MSG_ProjectImage__' alt=''>
+            </div>
+            <div class='text'>
+                <span class='date'>
                 <span title='Last update'><img src='__PATH_Assets__/images/update.png' alt='U'>
                     __MSG_ProjectUpdateDate__
                 </span>
-            <span title='Creation date'><img src='__PATH_Assets__/images/create.png' alt='+'>
+                <span title='Creation date'><img src='__PATH_Assets__/images/create.png' alt='+'>
                     __MSG_ProjectCreateDate__
                 </span>
-            </span>
-            <h3><a href='__PATH_Root__/Project/__MSG_ProjectId__'>__MSG_ProjectTitle__</a></h3> __MSG_ProjectDescription__
-        </div>
+                </span>
+                <h3>__MSG_ProjectTitle__</h3>
+            </div>
+            <div class='hiddenText'>
+                <h3>__MSG_ProjectTitle__</h3> __MSG_ProjectDescription__
+            </div>
+        </a>
     </li>
 </div>
 
