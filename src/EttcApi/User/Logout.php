@@ -13,7 +13,7 @@ use Minextu\Ettc\Account\Account;
  *
  * @apiSuccess {bool} success             Status of the logout
 
- * @apiError NotLoggedIn   You are already loggedin
+ * @apiError NotLoggedIn   You are not logged in
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {

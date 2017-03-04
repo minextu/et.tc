@@ -419,8 +419,7 @@ form .save input[type=submit]:hover, .button:hover, #main_nav ul .register a:hov
 
 .button {
     display: inline-block;
-    padding: 20px 40px;
-    margin: 20px auto;
+    margin-top: 20px;
 }
 
 button {

@@ -32,6 +32,7 @@ use Minextu\Ettc\Ettc;
  *               "updateDate" : Date
  *            }
  *         ]
+ *     }
  * @apiError InvalidValues sortBy or orderBy contain invalid values
  * @apiErrorExample Error-Response:
  * HTTP/1.1 400 Bad Request

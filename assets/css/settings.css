@@ -30,10 +30,11 @@
 
 .second_nav ul li {
     text-align: center;
+    background: #fff;
 }
 
 .second_nav ul .head {
-    background: #f2f2f2;
+    background: #eee;
     border-radius: 5px 5px 0px 0px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 5px;
@@ -84,7 +85,7 @@
 }
 
 #settings_tab .head {
-    background: #f2f2f2;
+    background: #eee;
     padding: 5px;
     text-align: center;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -94,9 +95,10 @@
 }
 
 #settings_tab .content {
-    padding: 10px;
-    padding-top: 30px;
+    padding: 10px !important;
+    padding-top: 30px !important;
     border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
 }
 
 #settings_tab .content .description {

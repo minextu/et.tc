@@ -111,7 +111,7 @@ class ProjectDb
     /**
     * Delete project from database
     * @param    string   $id         Project id
-    * @return   bool|int                Id of the project on success, False otherwise
+    * @return   bool|int             True on success, False otherwise
     */
     public function deleteProject($id)
     {
