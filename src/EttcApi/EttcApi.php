@@ -41,6 +41,11 @@ class EttcApi
     {
         $r = self::$router;
 
+        // ApiKey
+        $r->post('/v1/apiKey/create', new ApiKey\Create($db));
+        $r->post('/v1/apiKey/delete/*', new ApiKey\Delete($db));
+        $r->get('/v1/apiKeys', new ApiKey\ApiKeyList($db));
+
         // Project
         $r->get('/v1/projects', new Project\ProjectList($db));
         $r->get('/v1/project/*', new Project\Project($db));
@@ -53,9 +58,6 @@ class EttcApi
         // User
         $r->post('/v1/user/login', new User\Login($db));
         $r->post('/v1/user/logout', new User\Logout($db));
-        $r->post('/v1/user/addApiKey', new User\AddApiKey($db));
-        $r->post('/v1/user/deleteApiKey/*', new User\DeleteApiKey($db));
-        $r->get('/v1/user/apiKeys', new User\ApiKeyList($db));
     }
 
     /**

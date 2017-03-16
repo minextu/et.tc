@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcUi\Page\Settings;
 
 use \Minextu\EttcUi\Page\AbstractPageModel;
-use \Minextu\EttcApi\User\ApiKeyList;
+use \Minextu\EttcApi\ApiKey\ApiKeyList;
 
 class SettingsModel extends AbstractPageModel
 {

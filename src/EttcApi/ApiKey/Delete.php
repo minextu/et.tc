@@ -1,4 +1,4 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\Account;
@@ -8,10 +8,10 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Deletes an Api Key for this user
  *
- * @api {post} /user/deleteApiKey/:id delete an api key
+ * @api {post} /apiKey/delete/:id delete an api key
  * @apiName deleteApiKey
  * @apiVersion 0.1.0
- * @apiGroup User
+ * @apiGroup ApiKey
  *
  * @apiParam {Number} id                  Api key id
  *
@@ -28,7 +28,7 @@ use Minextu\Ettc\Exception\InvalidId;
  * }
  **/
 
-class DeleteApiKey extends AbstractRoutable
+class Delete extends AbstractRoutable
 {
     /**
      * Deletes the given api key, after checking for permissions

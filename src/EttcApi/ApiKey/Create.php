@@ -1,4 +1,4 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\User;
@@ -8,10 +8,10 @@ use Minextu\Ettc\Account\ApiKey;
 /**
  * Adds a new api key for the logged in user
  *
- * @api {post} /user/addApiKey/ add api key
- * @apiName addApiKey
+ * @api {post} /apiKey/create/ create api key
+ * @apiName createApiKey
  * @apiVersion 0.1.0
- * @apiGroup User
+ * @apiGroup ApiKey
  *
  * @apiParam {String} [title]                title for the new key
  *
@@ -39,7 +39,7 @@ use Minextu\Ettc\Account\ApiKey;
  * }
  **/
 
-class AddApiKey extends AbstractRoutable
+class Create extends AbstractRoutable
 {
     /**
      * Adds a new api key if user is logged in
@@ -54,7 +54,7 @@ class AddApiKey extends AbstractRoutable
             http_response_code(401);
             $answer = ["error" => "NotLoggedIn"];
         } else {
-            $key = $this->addApiKey($title);
+            $key = $this->createApiKey($title);
             $answer = ["success" => true, "key" => $key];
         }
 
@@ -81,7 +81,7 @@ class AddApiKey extends AbstractRoutable
       * Generates a new api key
       * @param   string   $title   Title for the key
       */
-    private function addApiKey($title)
+    private function createApiKey($title)
     {
         $user = Account::checkLogin($this->getDb());
 

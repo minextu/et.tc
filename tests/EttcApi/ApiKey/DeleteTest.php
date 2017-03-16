@@ -1,11 +1,11 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\ApiKey;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
 
-class DeleteApiKeyTest extends AbstractEttcDatabaseTest
+class DeleteTest extends AbstractEttcDatabaseTest
 {
     private function createLoginTestUser($nickname="phpUnit_test")
     {
@@ -34,7 +34,7 @@ class DeleteApiKeyTest extends AbstractEttcDatabaseTest
         $this->createTestApiKey("Test1", 1);
         $this->createTestApiKey("Test2", 1);
 
-        $deleteApi = new DeleteApiKey($this->getDb());
+        $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(1);
         $error = isset($answer['error']) ? $answer['error'] : false;
         $this->assertFalse($error, "Api Key couldn't be deleted (Error: $error)");
@@ -51,7 +51,7 @@ class DeleteApiKeyTest extends AbstractEttcDatabaseTest
 
     public function testMissingId()
     {
-        $deleteApi = new DeleteApiKey($this->getDb());
+        $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post();
 
         $this->assertEquals(['error' => 'MissingValues'], $answer);
@@ -68,7 +68,7 @@ class DeleteApiKeyTest extends AbstractEttcDatabaseTest
         // create an api key
         $this->createTestApiKey("Test Name", 1);
 
-        $deleteApi = new DeleteApiKey($this->getDb());
+        $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(1);
 
         $this->assertEquals(['error' => 'NotLoggedIn'], $answer);
@@ -85,7 +85,7 @@ class DeleteApiKeyTest extends AbstractEttcDatabaseTest
         $this->createLoginTestUser("phpUnit_test2");
         $this->createTestApiKey("Test2", 2);
 
-        $deleteApi = new DeleteApiKey($this->getDb());
+        $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(1);
 
         $this->assertEquals(['error' => 'NoPermissions'], $answer);
@@ -100,7 +100,7 @@ class DeleteApiKeyTest extends AbstractEttcDatabaseTest
         $this->createLoginTestUser();
         $this->createTestApiKey("Test1", 1);
 
-        $deleteApi = new DeleteApiKey($this->getDb());
+        $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(2);
 
         $this->assertEquals(['error' => 'NotFound'], $answer);

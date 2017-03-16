@@ -1,4 +1,4 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\ApiKey;

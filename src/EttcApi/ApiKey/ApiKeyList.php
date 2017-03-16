@@ -1,4 +1,4 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Account\Account;
@@ -7,10 +7,10 @@ use Minextu\Ettc\Account\ApiKey;
 /**
  * Generates a list of api keys for this user
  *
- * @api {get} /user/apiKeys list api keys
+ * @api {get} /apiKeys list api keys
  * @apiName listApiKeys
  * @apiVersion 0.1.0
- * @apiGroup User
+ * @apiGroup ApiKey
  *
  * @apiSuccess {Array} items              Contains a list of api keys
  *

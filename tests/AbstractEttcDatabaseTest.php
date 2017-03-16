@@ -68,11 +68,11 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
 
         $migrator = new Migrator($currentVersion, $targetVersion, $this->getDb());
 
-        // start migration, this should upgrade 002
+        // start migration, this should upgrade all versions
         $status = $migrator->migrateFolder();
     }
 
-    // rollback all changes
+    // remove all tables
     public function tearDown()
     {
         // downgrade
@@ -81,7 +81,7 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
 
         $migrator = new Migrator($currentVersion, $targetVersion, $this->getDb());
 
-        // start migration, this should downgrade 002
+        // start migration, this should downgrade all versions
         $status = $migrator->migrateFolder();
         $this->assertTrue($status);
     }

@@ -1,11 +1,11 @@
-<?php namespace Minextu\EttcApi\User;
+<?php namespace Minextu\EttcApi\ApiKey;
 
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc\Account\ApiKey;
 
-class AddApiKeyTest extends AbstractEttcDatabaseTest
+class CreateTest extends AbstractEttcDatabaseTest
 {
     private function createLoginTestUser()
     {
@@ -22,7 +22,7 @@ class AddApiKeyTest extends AbstractEttcDatabaseTest
         $this->createLoginTestUser();
         $title = "testTitle";
 
-        $addApiKeyApi = new AddApiKey($this->getDb());
+        $addApiKeyApi = new Create($this->getDb());
 
         $_POST['title'] = $title;
         $answer = $addApiKeyApi->post();
@@ -51,7 +51,7 @@ class AddApiKeyTest extends AbstractEttcDatabaseTest
     {
         $title = "testTitle";
 
-        $addApiKeyApi = new AddApiKey($this->getDb());
+        $addApiKeyApi = new Create($this->getDb());
         $_POST['title'] = $title;
         $answer = $addApiKeyApi->post();
 

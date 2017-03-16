@@ -29,7 +29,7 @@ function deleteApiKey(id)
             }
         };
 
-        xhttp.open("POST", path + "/api/v1/user/deleteApiKey/" + id, true);
+        xhttp.open("POST", path + "/api/v1/apiKey/delete/" + id, true);
         xhttp.setRequestHeader('Accept', 'application/json')
         xhttp.send();
     }
@@ -54,7 +54,7 @@ function generateApiKey()
             }
         };
 
-        xhttp.open("POST", path + "/api/v1/user/addApiKey/", true);
+        xhttp.open("POST", path + "/api/v1/apiKey/create/", true);
         xhttp.setRequestHeader('Accept', 'application/json');
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("title=" + encodeURIComponent(title));
