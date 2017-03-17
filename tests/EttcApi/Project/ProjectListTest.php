@@ -3,7 +3,7 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Project\Project;
 
-class ProjectsTest extends AbstractEttcDatabaseTest
+class ProjectListTest extends AbstractEttcDatabaseTest
 {
     public static function setUpBeforeClass()
     {
