@@ -43,6 +43,7 @@ class Project extends AbstractRoutable
 {
     /**
      * Generate array for the given project
+     * @param    int     $id   Project id
      * @return   array   project info
      */
     public function get($id=false)

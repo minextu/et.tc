@@ -1,7 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
 use Hautelook\Phpass\PasswordHash;
-use \Minextu\Ettc\Exception;
+use Minextu\Ettc\Exception;
 
 /**
  * Can Create and Load Info about a User using a Database
@@ -55,7 +55,7 @@ class User
         if ($id !== false) {
             $status = $this->loadId($id);
             if ($status === false) {
-                throw new Exception\Exception("Invalid User ID '" . $id . "'");
+                throw new Exception\InvalidId("Invalid User ID '" . $id . "'");
             }
         }
     }

@@ -56,6 +56,9 @@ class EttcApi
         $r->post('/v1/project/delete/*', new Project\Delete($db));
 
         // User
+        $r->post('/v1/user/denyPermission', new User\DenyPermission($db));
+        $r->post('/v1/user/grantPermission', new User\GrantPermission($db));
+        $r->get('/v1/user/permissions/*', new User\PermissionList($db));
         $r->post('/v1/user/login', new User\Login($db));
         $r->post('/v1/user/logout', new User\Logout($db));
     }

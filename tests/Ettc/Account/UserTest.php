@@ -74,7 +74,7 @@ class UserTest extends AbstractEttcDatabaseTest
     {
         $this->createTestUser();
 
-        $this->setExpectedException('Minextu\Ettc\Exception\Exception');
+        $this->setExpectedException('Minextu\Ettc\Exception\InvalidId');
         // user with id -1 does not exist
         $user = new User($this->getDb(), -1);
     }

@@ -123,6 +123,7 @@ class Update extends AbstractRoutable
                     try {
                         $this->uploadImage($project, $image);
                     } catch (ImageException $e) {
+                        http_response_code(400);
                         $answer = ["error" => "WrongImage", "errorText" => $e->getMessage()];
                         return $answer;
                     }
