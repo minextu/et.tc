@@ -70,6 +70,8 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
 
         // start migration, this should upgrade all versions
         $status = $migrator->migrateFolder();
+
+        $this->init();
     }
 
     // remove all tables
@@ -84,5 +86,9 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
         // start migration, this should downgrade all versions
         $status = $migrator->migrateFolder();
         $this->assertTrue($status);
+    }
+
+    public function init()
+    {
     }
 }

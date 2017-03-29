@@ -19,6 +19,14 @@ class addPermissionsColumn extends AbstractMigration
                 TEXT NOT NULL DEFAULT "" AFTER `key`;
         ';
         $this->db->getPdo()->prepare($sql)->execute();
+
+        // add permissions columnt to ranks table
+        $sql = '
+        ALTER TABLE `ranks`
+            ADD `permissions`
+                TEXT NOT NULL DEFAULT "" AFTER `title`;
+        ';
+        $this->db->getPdo()->prepare($sql)->execute();
     }
 
     public function downgrade()
@@ -31,6 +39,11 @@ class addPermissionsColumn extends AbstractMigration
         $sql = '
         ALTER TABLE `userApiKeys` DROP `permissions`;
         ';
-        return $this->db->getPdo()->prepare($sql)->execute();
+        $this->db->getPdo()->prepare($sql)->execute();
+
+        $sql = '
+        ALTER TABLE `ranks` DROP `permissions`;
+        ';
+        $this->db->getPdo()->prepare($sql)->execute();
     }
 }

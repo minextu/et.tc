@@ -62,7 +62,7 @@ class ApiKey
         if ($id !== false) {
             $status = $this->loadId($id);
             if ($status === false) {
-                throw new Exception\InvalidId("Invalid project id '" . $id . "'");
+                throw new Exception\InvalidId("Invalid apikey id '" . $id . "'");
             }
         }
     }
