@@ -38,7 +38,7 @@ use Minextu\Ettc\Exception\InvalidGitRemote;
  * @apiError MissingValues    Id or git url wasn't transmited
  * @apiError InvalidGitRemote The provided git url is invalid
  * @apiError NotLoggedIn      You are not logged in
- * @apiError NoPermissions    No permissions to create a project
+ * @apiError NoPermissions    No permissions to init git
  * @apiError NotFound         Project couldn't be found
  *
  * @apiErrorExample Error-Response:

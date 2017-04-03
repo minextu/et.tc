@@ -58,6 +58,19 @@ class RankDb
     }
 
     /**
+     * Get all ranks and return the ids
+     * @return   array       All rank ids
+     */
+    public function getRankIds()
+    {
+        $sql = "SELECT id FROM ranks";
+
+        $ids = $this->db->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+
+        return $ids;
+    }
+
+    /**
     * Update values of a rank in database
     * @param    string   $id            Rank id
     * @param    string   $title         Rank title

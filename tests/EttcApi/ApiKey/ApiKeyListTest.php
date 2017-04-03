@@ -40,6 +40,9 @@ class ApiKeyListTest extends AbstractEttcDatabaseTest
         $apiKeysApi = new ApiKeyList($this->getDb());
         $answer = $apiKeysApi->get();
 
+        $error = isset($answer['error']) ? $answer['error'] : false;
+        $this->assertFalse($error, "Rank list couldn't be generated (Error: $error)");
+        
         $items = $answer['items'];
         $this->assertCount(2, $items, "Two api keys were created, so there should be 2 entries in the array");
 

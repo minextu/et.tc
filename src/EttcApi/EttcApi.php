@@ -55,6 +55,11 @@ class EttcApi
         $r->post('/v1/project/initGit/*', new Project\InitGit($db));
         $r->post('/v1/project/delete/*', new Project\Delete($db));
 
+        // Rank
+        $r->get('/v1/ranks', new Rank\RankList($db));
+        $r->post('/v1/rank/create', new Rank\Create($db));
+        $r->post('/v1/rank/delete/*', new Rank\Delete($db));
+
         // User
         $r->post('/v1/user/denyPermission', new User\DenyPermission($db));
         $r->post('/v1/user/grantPermission', new User\GrantPermission($db));

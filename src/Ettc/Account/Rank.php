@@ -43,6 +43,25 @@ class Rank
     }
 
     /**
+     * Get all ranks that are saved in db
+     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
+     * @return   Ranks[]                                          All found ranks
+     */
+    public static function getAll($db)
+    {
+        $rankDb = new RankDb($db);
+        $rankIds = $rankDb->getRankIds();
+
+        $ranks = [];
+        foreach ($rankIds as $id) {
+            $rank = new Rank($db, $id);
+            $ranks[] = $rank;
+        }
+
+        return $ranks;
+    }
+
+    /**
     * Load rank using an id
     * @param    int   $id   Rank id
     * @return   bool        True if rank could be found, False otherwise
@@ -70,6 +89,14 @@ class Rank
         return true;
     }
 
+    public function getId()
+    {
+        if (!isset($this->id)) {
+            throw new Exception\Exception("No rank loaded or saved yet");
+        }
+        return $this->id;
+    }
+
     public function setTitle($title)
     {
         $this->title = $title;
@@ -78,6 +105,9 @@ class Rank
 
     public function getTitle()
     {
+        if (!isset($this->title)) {
+            throw new Exception\Exception("No rank loaded or saved yet");
+        }
         return $this->title;
     }
 
@@ -132,5 +162,19 @@ class Rank
         unset($this->id);
 
         return $status;
+    }
+
+    /**
+     * Generates array out of all values
+     * @return   array   The object as array
+     */
+    public function toArray()
+    {
+        $rank = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle()
+        ];
+
+        return $rank;
     }
 }

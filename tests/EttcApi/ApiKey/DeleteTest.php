@@ -73,7 +73,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
 
         $this->assertEquals(['error' => 'NotLoggedIn'], $answer);
 
-        // try to load tzhe api key
+        // try to load the api key
         $apiKey = new ApiKey($this->getDb(), 1);
         $this->assertEquals("Test Name", $apiKey->getTitle());
     }

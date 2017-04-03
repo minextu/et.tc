@@ -42,7 +42,7 @@ class PermissionTest extends AbstractEttcDatabaseTest
         $permission = new Permission($this->getDb(), $user);
 
         // add a dummy permission
-        $permissionName = "/phpUnit/dummyPermission";
+        $permissionName = "phpUnit/dummyPermission";
         $status = $permission->grant($permissionName);
         $this->assertTrue($status, "grant() did not return True");
 
@@ -74,9 +74,9 @@ class PermissionTest extends AbstractEttcDatabaseTest
         $permission = new Permission($this->getDb(), $user);
 
         // add two dummy permission
-        $permission1Name = "/phpUnit/dummyPermission1";
+        $permission1Name = "phpUnit/dummyPermission1";
         $permission->grant($permission1Name);
-        $permission2Name = "/phpUnit/dummyPermission2";
+        $permission2Name = "phpUnit/dummyPermission2";
         $permission->grant($permission2Name);
 
         // count permissions
