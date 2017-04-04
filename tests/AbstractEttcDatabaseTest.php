@@ -62,6 +62,9 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
     // migrate test database
     public function setUp()
     {
+        // delete possible existing tables
+        $this->dropTables();
+
         // upgrade to newest version
         $currentVersion = 0;
         $targetVersion = true;
@@ -75,17 +78,14 @@ abstract class AbstractEttcDatabaseTest extends \PHPUnit_Extensions_Database_Tes
     }
 
     // remove all tables
-    public function tearDown()
+    public function dropTables()
     {
-        // downgrade
-        $currentVersion = true;
-        $targetVersion = 0;
-
-        $migrator = new Migrator($currentVersion, $targetVersion, $this->getDb());
-
-        // start migration, this should downgrade all versions
-        $status = $migrator->migrateFolder();
-        $this->assertTrue($status);
+        $sql = "SHOW TABLES";
+        $tables = $this->getDb()->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        foreach ($tables as $table) {
+            $sql = "DROP TABLE `$table`";
+            $this->getDb()->getPdo()->prepare($sql)->execute();
+        }
     }
 
     public function init()

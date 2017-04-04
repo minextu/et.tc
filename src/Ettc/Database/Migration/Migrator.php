@@ -83,8 +83,17 @@ class Migrator
                 // use the int value as version from now on
                 $version = intval($version);
 
+                // migration with version 0 skips serveral other versions
+                if ($version == 0 && $this->current == 0) {
+                    // upgrade
+                    if ($this->current < $this->target) {
+                        $status = $this->migrateObject($migrationObject, false);
+                        // this migration object returns the version number
+                        $this->current = intval($status);
+                    }
+                }
                 // upgrade
-                if ($this->current < $this->target && $version > $this->current) {
+                elseif ($this->current < $this->target && $version > $this->current) {
                     $status = $this->migrateObject($migrationObject, false);
                     $this->current = $version;
                 }

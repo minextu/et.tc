@@ -2,20 +2,8 @@
 
 use Minextu\Ettc\Account\User;
 
-require_once("src/autoload.php");
-session_start();
-?>
+require_once(__DIR__."/../src/autoload.php");
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>et.tc create Admin</title>
-</head>
-<body>
-    <h1>Create admin account</h1>
-
-<?php
-$rootDir = dirname($_SERVER['SCRIPT_NAME']);
 $ettc = new Ettc();
 
 try {
@@ -28,8 +16,14 @@ try {
 if ($aUserDoesExist) {
     echo "A user was already created";
 } else {
-    $nick = isset($_POST['nick']) ? $_POST['nick'] : false;
-    $pw = isset($_POST['pw']) ? $_POST['pw'] : false;
+    $nick = readline("Nick: ");
+
+    echo "Password: ";
+    system('stty -echo');
+    $pw = trim(fgets(STDIN));
+    system('stty echo');
+    echo "\n";
+
     if ($nick !== false && $pw !== false) {
         $user = new User($ettc->getDb());
         try {
@@ -47,14 +41,4 @@ if ($aUserDoesExist) {
             echo "Success!";
         }
     }
-
-    echo "
-    <form action='#' method='POST'>
-        Nick: <input type='text' name='nick'><br>
-        Password: <input type='password' name='pw'><br>
-        <input type='submit'>
-    </form>";
 }
-?>
-</body>
-</html>
