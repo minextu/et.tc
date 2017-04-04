@@ -1,0 +1,54 @@
+image: php:latest
+
+# Composer stores all downloaded packages in the vendor/ directory.
+cache:
+  paths:
+  - vendor/
+
+before_script:
+- bash ci/dockerInstall.sh > /dev/null
+
+services:
+  - mysql:latest
+
+variables:
+  MYSQL_DATABASE: ettc_tests
+  MYSQL_ROOT_PASSWORD: Kaigilohgeifeph5huqu
+
+stages:
+  - test
+  - deploy
+
+# test latest php version
+test:php:latest:
+  stage: test
+  script:
+  - phpunit
+
+# test php 7.0
+test:php7.0:
+  stage: test
+  image: php:7.0
+  script:
+  - phpunit
+
+deploy_staging:
+  stage: deploy
+  script:
+    - bash ci/deploy.sh staging
+  environment:
+    name: staging
+    url: https://staging.et.tc
+  only:
+  - master
+
+deploy_prod:
+  stage: deploy
+  script:
+    - bash ci/deploy.sh production
+  environment:
+    name: production
+    url: https://et.tc
+  when: manual
+  only:
+  - master

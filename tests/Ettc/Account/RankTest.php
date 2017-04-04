@@ -28,7 +28,7 @@ class RankTest extends AbstractEttcDatabaseTest
         $this->assertEquals(1, $this->getConnection()->getRowCount('ranks'), "Inserting failed");
 
         // check if values are created correctly
-        $queryTable = $this->getConnection()->createQueryTable('ranks', 'SELECT id,title,permissions FROM ranks');
+        $queryTable = $this->getConnection()->createQueryTable('ranks', 'SELECT id,title FROM ranks');
         $expectedTable = $this->createFlatXmlDataSet(__DIR__."/RankTest.xml")->getTable("ranks");
         $this->assertTablesEqual($expectedTable, $queryTable);
 

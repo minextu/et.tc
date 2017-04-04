@@ -2,6 +2,16 @@
 
 class ProjectGitTest extends \PHPUnit_Framework_TestCase
 {
+    public function setup()
+    {
+        $gitVersion = exec('git version');
+        $gitVersion = str_replace('git version ', '', $gitVersion);
+
+        if (version_compare($gitVersion, '2.11.0', '<')) {
+            $this->markTestSkipped('Git version is too old!');
+        }
+    }
+
     public static function setUpBeforeClass()
     {
         // delete possible old test git repository

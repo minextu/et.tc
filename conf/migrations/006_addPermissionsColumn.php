@@ -8,7 +8,7 @@ class addPermissionsColumn extends AbstractMigration
         $sql = '
         ALTER TABLE `users`
             ADD `permissions`
-                TEXT NOT NULL DEFAULT "" AFTER `rank`;
+                TEXT NULL AFTER `rank`;
         ';
         $this->db->getPdo()->prepare($sql)->execute();
 
@@ -16,7 +16,7 @@ class addPermissionsColumn extends AbstractMigration
         $sql = '
         ALTER TABLE `userApiKeys`
             ADD `permissions`
-                TEXT NOT NULL DEFAULT "" AFTER `key`;
+                TEXT NULL AFTER `key`;
         ';
         $this->db->getPdo()->prepare($sql)->execute();
 
@@ -24,7 +24,7 @@ class addPermissionsColumn extends AbstractMigration
         $sql = '
         ALTER TABLE `ranks`
             ADD `permissions`
-                TEXT NOT NULL DEFAULT "" AFTER `title`;
+                TEXT NULL AFTER `title`;
         ';
         $this->db->getPdo()->prepare($sql)->execute();
     }

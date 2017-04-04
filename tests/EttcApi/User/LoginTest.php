@@ -124,12 +124,11 @@ class LoginTest extends AbstractEttcDatabaseTest
         $_POST['password'] = "wrong";
 
         $loginApi = new Login($this->getDb());
-        $time = date("Y-m-d H:i:s");
         $answer = $loginApi->post();
 
         $this->assertEquals(['error' => "WrongNicknameOrPassword"], $answer);
 
         $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nickname);
-        $this->assertEquals($time, $lastLoginAttempt, "Time of last login attempt does not match");
+        $this->assertEquals(time(), strtotime($lastLoginAttempt), "Time of last login attempt does not match", 5);
     }
 }

@@ -14,12 +14,12 @@ class FailedLoginTest extends AbstractEttcDatabaseTest
 
         // check if value got saved
         $queryTable = $this->getConnection()->createQueryTable('failedLogins', 'SELECT id,nick,ip FROM failedLogins');
-        $expectedTable = $this->createFlatXmlDataSet(__DIR__."/FailedLoginsTest.xml")->getTable("failedLogins");
+        $expectedTable = $this->createFlatXmlDataSet(__DIR__."/FailedLoginTest.xml")->getTable("failedLogins");
         $this->assertTablesEqual($expectedTable, $queryTable);
 
         // check if failed login can be loaded
         $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);
-        $this->assertEquals(date("Y-m-d H:i:s"), $lastLoginAttempt, "Time of last login does not match");
+        $this->assertEquals(time(), strtotime($lastLoginAttempt), "Time of last login does not match", 5);
     }
 
     public function testLastLoginForUnloggedUser()
@@ -43,6 +43,6 @@ class FailedLoginTest extends AbstractEttcDatabaseTest
 
         // check if newest entry will get returned
         $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);
-        $this->assertEquals(date("Y-m-d H:i:s"), $lastLoginAttempt, "Time of last login does not match");
+        $this->assertEquals(time(), strtotime($lastLoginAttempt), "Time of last login does not match", 5);
     }
 }
