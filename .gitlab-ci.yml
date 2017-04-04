@@ -1,4 +1,4 @@
-image: php:latest
+image: php:7.0
 
 # Composer stores all downloaded packages in the vendor/ directory.
 cache:
@@ -19,16 +19,10 @@ stages:
   - test
   - deploy
 
-# test latest php version
-test:php:latest:
-  stage: test
-  script:
-  - phpunit --coverage-text --colors=never
-
-# test php 7.0
-test:php7.0:
-  stage: test
+# test on php 7.0
+test:php:7.0:
   image: php:7.0
+  stage: test
   script:
   - phpunit --coverage-text --colors=never
 
