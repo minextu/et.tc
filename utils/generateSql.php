@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc;
 
 use Minextu\Ettc\Database\Migration\Migrator;
+use \PDO;
 
 require_once(__DIR__."/../src/autoload.php");
 
@@ -29,7 +30,7 @@ saveSql($sql, $version);
 function dropTables($database)
 {
     $sql = "SHOW TABLES";
-    $tables = $datbase->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+    $tables = $database->getPdo()->query($sql)->fetchAll(PDO::FETCH_COLUMN);
     foreach ($tables as $table) {
         $sql = "DROP TABLE `$table`";
         $database->getPdo()->prepare($sql)->execute();
@@ -74,13 +75,15 @@ function saveSql($sqlArr, $toVersion)
     $sqlStatements = array_filter($sqlStatements);
 
     $content  = "<?php namespace Minextu\Ettc\Database\Migration;\n";
-    $content .= "class all extends AbstractMigration\n{\n";
+    $content .= "/******* \n*******  Auto generated: Do not edit! ******* \n*******/\n\n";
+
+    $content .= "class all extends AbstractMigration{";
 
     $content .= generateUpgradeContent($sqlStatements, $toVersion);
     $content .= generateDowngradeContent($sqlStatements, $toVersion);
 
 
-    $content .= "\n}";
+    $content .= "}";
 
 
     file_put_contents($filename, $content);
@@ -89,21 +92,21 @@ function saveSql($sqlArr, $toVersion)
 
 function generateUpgradeContent($sqlStatements, $toVersion)
 {
-    $content  = "\tpublic function upgrade()\n\t{\n\t\t";
-    $content .= '$sqlArr = '.var_export($sqlStatements, true).";\n\n\t\t";
-    $content .= 'foreach ($sqlArr as $sql) {' . "\n\t\t";
-    $content .= '$this->db->getPdo()->prepare($sql)->execute();' . "\n\t\t}\n\t\t";
+    $content  = "public function upgrade(){";
+    $content .= '$sqlArr = '.var_export($sqlStatements, true).";";
+    $content .= 'foreach ($sqlArr as $sql) {';
+    $content .= '$this->db->getPdo()->prepare($sql)->execute();' . "}";
     $content .= "return $toVersion;";
-    $content .= "\n\t}\n\n";
+    $content .= "}";
 
     return $content;
 }
 
 function generateDowngradeContent()
 {
-    $content = "\tpublic function downgrade()\n\t{\n\t\t";
+    $content = "public function downgrade(){";
     $content .= 'return false;';
-    $content .= "\n\t}";
+    $content .= "}";
 
     return $content;
 }
