@@ -11,7 +11,7 @@ apt-get install git wget zlib1g-dev -yqq
 # Install php extensions
 docker-php-ext-install pdo_mysql
 docker-php-ext-install zip
-docker-php-ext-enable xdebug
+pecl install xdebug && docker-php-ext-enable xdebug
 
 # Install phpunit
 curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
