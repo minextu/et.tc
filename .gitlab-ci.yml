@@ -23,14 +23,14 @@ stages:
 test:php:latest:
   stage: test
   script:
-  - phpunit
+  - phpunit --coverage-text --colors=never
 
 # test php 7.0
 test:php7.0:
   stage: test
   image: php:7.0
   script:
-  - phpunit
+  - phpunit --coverage-text --colors=never
 
 deploy_staging:
   stage: deploy
