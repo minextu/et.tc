@@ -48,7 +48,7 @@ class EttcApi
 
         // Project
         $r->get('/v1/projects', new Project\ProjectList($db));
-        $r->get('/v1/project/*', new Project\Project($db));
+        $r->get('/v1/project/info/*', new Project\Project($db));
         $r->get('/v1/project/changelog/*', new Project\Changelog($db));
         $r->post('/v1/project/create', new Project\Create($db));
         $r->post('/v1/project/update/*', new Project\Update($db));

@@ -7,7 +7,7 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Gets info for a project
  *
- * @api {get} /project/:id get project info
+ * @api {get} /project/info/:id get project info
  * @apiName getProject
  * @apiVersion 0.1.0
  * @apiGroup Project
