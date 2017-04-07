@@ -79,9 +79,18 @@ class ProjectGit
         if (!$this->exists()) {
             throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
         }
-        $url = $this->git->remoteGetUrl('origin');
-        $url = str_replace("\n", "", $url);
 
+        // check if git version new enough, to use remote get-url
+        $gitVersion = str_replace('git version ', '', exec('git version'));
+        if (version_compare($gitVersion, '2.11.0', '>=')) {
+            $url = $this->git->remoteGetUrl('origin');
+        }
+        // use different method to get url
+        else {
+            $url = $this->git->run(['config', '--get', 'remote.origin.url']);
+        }
+
+        $url = str_replace("\n", "", $url);
         return $url;
     }
 

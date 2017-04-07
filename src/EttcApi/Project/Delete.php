@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
-use Minextu\Ettc\Project\Project;
+use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc\Exception\InvalidId;
 
@@ -52,7 +52,7 @@ class Delete extends AbstractRoutable
         } else {
             $invalidId = false;
             try {
-                $project = new Project($this->getDb(), $id);
+                $project = new ProjectObj($this->getDb(), $id);
             } catch (InvalidId $e) {
                 $invalidId = true;
             }

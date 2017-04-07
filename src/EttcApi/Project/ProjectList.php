@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
-use Minextu\Ettc\Project\Project;
+use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Ettc;
 
 /**
@@ -74,7 +74,7 @@ class ProjectList extends AbstractRoutable
      */
     private function getProjects($sortBy, $order)
     {
-        $projects = Project::getAll($this->getDb(), $sortBy, $order);
+        $projects = ProjectObj::getAll($this->getDb(), $sortBy, $order);
 
         $projectsArray = [];
         foreach ($projects as $project) {

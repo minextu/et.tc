@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
-use Minextu\Ettc\Project\Project;
+use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Exception\InvalidId;
 
 /**
@@ -70,7 +70,7 @@ class Changelog extends AbstractRoutable
     private function getProjectChangelog($id, $count, $skip)
     {
         try {
-            $project = new Project($this->getDb(), $id);
+            $project = new ProjectObj($this->getDb(), $id);
             $changelog = $project->getGit()->getLogs($count, $skip);
             $commitsCount = $project->getGit()->getCommitsCount();
 

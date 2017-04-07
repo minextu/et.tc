@@ -8,9 +8,6 @@ cache:
 before_script:
 - bash ci/dockerInstall.sh > /dev/null
 
-services:
-  - mysql:latest
-
 variables:
   MYSQL_DATABASE: ettc_tests
   MYSQL_ROOT_PASSWORD: Kaigilohgeifeph5huqu
@@ -19,11 +16,23 @@ stages:
   - test
   - deploy
 
-# test on php 7.0
+# test on php 7.0 + mariadb 10.1 (debian stretch)
 test:php:7.0:
   image: php:7.0
+  services:
+    - mariadb:10.1
   stage: test
   script:
+  - phpunit --coverage-text --colors=never
+
+# test on php 5.6 + mysql 5.5 (debian jessie)
+test:php:5.6:
+  image: php:5.6
+  services:
+    - mysql:5.5
+  stage: test
+  script:
+  - sed "s/'testDbHost' => 'mariadb'/'testDbHost' => 'mysql'/" -i conf/config.php
   - phpunit --coverage-text --colors=never
 
 deploy_staging:
