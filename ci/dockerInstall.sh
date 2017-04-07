@@ -30,7 +30,7 @@ php -r "unlink('composer-setup.php'); unlink('installer.sig');"
 
 # setup config file
 cp conf/config.sample.php conf/config.php
-sed "s/'testDbHost' => ''/'testDbHost' => 'mysql'/" -i conf/config.php
+sed "s/'testDbHost' => ''/'testDbHost' => 'mariadb'/" -i conf/config.php
 sed "s/'testDbUser' => ''/'testDbUser' => 'root'/" -i conf/config.php
 sed "s/'testDbPassword' => ''/'testDbPassword' => 'Kaigilohgeifeph5huqu'/" -i conf/config.php
 sed "s/'testDbDatabase' => ''/'testDbDatabase' => 'ettc_tests'/" -i conf/config.php
