@@ -44,7 +44,7 @@ class UserNavModel extends AbstractPageElementModel
      */
     public function getAvatar()
     {
-        $default = "http://img2.wikia.nocookie.net/__cb20110302033947/recipes/images/thumb/1/1c/Avatar.svg/480px-Avatar.svg.png";
+        $default = "https://img2.wikia.nocookie.net/__cb20110302033947/recipes/images/thumb/1/1c/Avatar.svg/480px-Avatar.svg.png";
         $size = 200;
 
         if ($this->user) {
