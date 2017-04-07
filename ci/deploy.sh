@@ -11,6 +11,10 @@ fi
 eval $(ssh-agent -s)
 ssh-add <(echo "$SSH_PRIVATE_KEY")
 
+# add server host keys
+mkdir -p ~/.ssh
+[[ -f /.dockerenv ]] && echo "$SSH_SERVER_HOSTKEYS" > ~/.ssh/known_hosts
+
 # get current commit
 commit=$(git rev-parse HEAD)
 
