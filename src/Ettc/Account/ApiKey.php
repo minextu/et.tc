@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
 use \Minextu\Ettc\Exception;
+use Hautelook\Phpass\PasswordHash;
 
 /**
   * Can Create, Delete and load api keys from database
@@ -234,7 +235,8 @@ class ApiKey
      */
     private function generateKey()
     {
-        $this->key = bin2hex(random_bytes(10));
+        $hasher = new PasswordHash(8, false);
+        $this->key = bin2hex($hasher->get_random_bytes(10));
     }
 
     /**
