@@ -2,6 +2,9 @@
 if [ $1 == "staging" ]; then
     server="deploy@staging.et.tc"
     folder="/var/www/et.tc/Staging"
+elif [ $1 == "production" ]; then
+    server="deploy@et.tc"
+    folder="/var/www/et.tc/Root"
 else
     echo "Not implemented, yet"
     exit
