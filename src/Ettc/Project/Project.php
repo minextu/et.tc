@@ -293,7 +293,7 @@ class Project
      */
     public function getUpdateDate()
     {
-        if (!isset($this->updateDate)) {
+        if (!isset($this->id)) {
             throw new Exception("Project has to be loaded first.");
         }
 

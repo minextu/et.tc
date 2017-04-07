@@ -13,7 +13,7 @@ class addProjectsTable extends AbstractMigration
             `html` VARCHAR(10000) NULL ,
             `image` VARCHAR(100) NULL ,
             `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-            `updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+            `updated` TIMESTAMP NULL ,
             PRIMARY KEY (`id`)
         )';
 
