@@ -9,7 +9,7 @@ class Project
      * Folder containing images for projects
      * @var   string
      */
-    const IMAGE_FOLDER = __DIR__."/../../../assets/images/projects/";
+    const IMAGE_FOLDER = __DIR__."/../../../public/assets/images/projects/";
 
     /**
      * Project Database Interface
