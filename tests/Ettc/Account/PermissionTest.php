@@ -191,6 +191,7 @@ class PermissionTest extends AbstractEttcDatabaseTest
         $this->setExpectedException('Minextu\Ettc\Exception\InvalidName');
         $permission->grant("phpUnit/test,phpUnit/shouldNotWork");
     }
+
     public function testPermissionNameMustNotBeEmpty()
     {
         // create and load user
@@ -203,5 +204,74 @@ class PermissionTest extends AbstractEttcDatabaseTest
         // try to add a permission that contains a comma
         $this->setExpectedException('Minextu\Ettc\Exception\InvalidName');
         $permission->grant("");
+    }
+
+    public function testPermissionCanBeAddedToRank()
+    {
+        // create test rank
+        $rank = new Rank($this->getDb());
+        $rank->setTitle("Test Rank");
+        $rank->create();
+
+        // create permission object for this rank
+        $permission = new Permission($this->getDb());
+        $permission->loadRank($rank);
+
+        // add a dummy permission
+        $permissionName = "phpUnit/dummyPermission";
+        $status = $permission->grant($permissionName);
+        $this->assertTrue($status, "grant() did not return True");
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(1, $permissionCount, "There should only one permission");
+        // get permission status
+        $hasPermission = $permission->get($permissionName);
+        $this->assertTrue($hasPermission, "Permission was not saved correctly");
+
+        // recreate permission object, to see if it was saved to database
+        $permission = new Permission($this->getDb());
+        $permission->loadRank($rank);
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(1, $permissionCount, "Permission was not saved to database");
+        // get permission status
+        $hasPermission = $permission->get($permissionName);
+        $this->assertTrue($hasPermission, "Permission was not saved correctly");
+    }
+
+    public function testPermissionsWillBeInheritedByRank()
+    {
+        // create test rank
+        $rank = new Rank($this->getDb());
+        $rank->setTitle("Test Rank");
+        $rank->create();
+
+        // create permission object for this rank
+        $permission = new Permission($this->getDb());
+        $permission->loadRank($rank);
+
+        // add a dummy permission
+        $permissionName = "phpUnit/dummyPermission";
+        $permission->grant($permissionName);
+
+        // create and load user
+        $this->createTestUser();
+        $user = new User($this->getDb(), 1);
+
+        // set users rank
+        $user->setRank($rank->getId());
+
+        // create permission object for this user
+        $permission = new Permission($this->getDb(), $user);
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(1, $permissionCount, "There should only one permission");
+
+        // get permission status
+        $hasPermission = $permission->get($permissionName);
+        $this->assertTrue($hasPermission, "Permission was not inherited correctly");
     }
 }

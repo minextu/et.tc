@@ -31,49 +31,103 @@ class Permission
     private $permissionDb;
 
     /**
-     * User for this permissions
-     * @var   User
+     * User/Rank or ApiKey for this permissions
+     * @var   User|ApiKey|Rank
      */
-    private $user;
+    private $entity;
+
+    /**
+     * Type of permission entity (user, apikey or rank)
+     * @var   String
+     */
+    private $entityType;
 
     /**
      * Contains status for all permissions. Array key is permission name
      * @var   Bool[]
      */
-    private $permissions;
+    private $permissions = [];
 
     /**
      * Loads permissions for the given user
      * @param   Database\DatabaseInterface   $db   Database to be used
-     * @param   User   $user                       User to fetch permissions for
+     * @param   User   $user                       User to fetch permissions for (will also include the users rank)
      */
-    public function __construct($db, $user)
+    public function __construct($db, $user=false)
     {
         $this->permissionDb = new PermissionDb($db);
-        $this->loadPermissions($user);
+
+        if ($user !== false) {
+            // load permissions for users rank
+            $rank = new Rank($db, $user->getRank());
+            $this->loadRank($rank);
+
+            // load users permissions
+            $this->loadOnlyUser($user, true);
+        }
     }
 
     /**
      * Load permissions for the given user
      * @param    User   $user     User to fetch permissions for
+     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    private function loadPermissions($user)
+    public function loadOnlyUser($user, $keepPreviousPermissions=false)
     {
+        if (!$keepPreviousPermissions) {
+            $this->permissions = [];
+        }
+
         // get permission csv from database
         $userId = $user->getId();
         $permissionsString = $this->permissionDb->getPermissionsByUserId($userId);
 
+        // load permissions
+        $this->loadPermissionCsv($permissionsString);
+
+        // save user to entity
+        $this->entity = $user;
+        $this->entityType = "user";
+    }
+
+
+    /**
+     * Load permissions for the given rank
+     * @param    Rank   $rank     Rank to fetch permissions for
+     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
+     */
+    public function loadRank($rank, $keepPreviousPermissions=false)
+    {
+        if (!$keepPreviousPermissions) {
+            $this->permissions = [];
+        }
+
+        // get permission csv from database
+        $rankId = $rank->getId();
+        $permissionsString = $this->permissionDb->getPermissionsByRankId($rankId);
+
+        // load permissions
+        $this->loadPermissionCsv($permissionsString);
+
+        // save rank to entity
+        $this->entity = $rank;
+        $this->entityType = "rank";
+    }
+
+    /**
+     * Loads permissions out of a csv string
+     * @param    String   $permissionString   Csv list of permissions
+     */
+    private function loadPermissionCsv($permissionString)
+    {
         // convert csv to assoc array
-        $permissionsArray = explode(",", $permissionsString);
-        $this->permissions = [];
+        $permissionsArray = explode(",", $permissionString);
         foreach ($permissionsArray as $permission) {
+            // save permission
             if (!empty($permission)) {
                 $this->permissions[$permission] = true;
             }
         }
-
-        // save user to var
-        $this->user = $user;
     }
 
     /**
@@ -171,6 +225,12 @@ class Permission
             }
         }
 
-        $this->permissionDb->updatePermissionsForUser($this->user->getId(), $permissionString);
+        if ($this->entityType === "user") {
+            $this->permissionDb->updatePermissionsForUser($this->entity->getId(), $permissionString);
+        } elseif ($this->entityType == "rank") {
+            $this->permissionDb->updatePermissionsForRank($this->entity->getId(), $permissionString);
+        } else {
+            throw new Exception\Exception("Invalid entityType '$entityType'");
+        }
     }
 }

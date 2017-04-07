@@ -85,7 +85,9 @@ class PermissionList extends AbstractRoutable
       */
      private function getPermissions($user)
      {
-         $permission = new Permission($this->getDb(), $user);
+         $permission = new Permission($this->getDb());
+         $permission->loadOnlyUser($user);
+
          $permissionList = $permission->getAll();
 
          return $permissionList;
