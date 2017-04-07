@@ -1,7 +1,7 @@
 <?php namespace Minextu\EttcApi\Project;
 
 use Minextu\EttcApi\AbstractRoutable;
-use Minextu\Ettc\Project\Project;
+use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Account\Account;
 use Minextu\Ettc;
 
@@ -67,7 +67,7 @@ class Create extends AbstractRoutable
             http_response_code(403);
             $answer = ["error" => "NoPermissions"];
         } else {
-            $project = new Project($this->getDb());
+            $project = new ProjectObj($this->getDb());
             $project->setTitle($title);
             $project->setDescription($description);
             $project->create();
