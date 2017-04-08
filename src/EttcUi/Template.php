@@ -7,11 +7,13 @@ class Template
 {
     /**
     * The external path to the assets folder
+     *
     * @var string
     */
     private $path;
     /**
     * An Array of all HTML Templates
+     *
     * @var array
     */
     private $templates;
@@ -19,7 +21,7 @@ class Template
     /**
     * Creates an instance
     *
-    * @param  string  $path       The external path to the folder containing the index.php
+    * @param  string $path The external path to the folder containing the index.php
     * @access public
     */
     public function __construct($path)
@@ -31,8 +33,8 @@ class Template
     /**
     * Converts a HTML Template by replacing the Placeholders with the given values
     *
-    * @param  string  $templateFile  Template File to be used
-    * @param  array   $values        An array containing all values to be replaced. The index indicates the Name of a placeholder
+    * @param  string $templateFile Template File to be used
+    * @param  array  $values       An array containing all values to be replaced. The index indicates the Name of a placeholder
     * @return string                 The converted Template as HTML Code
     */
     public function convertTemplate($templateFile, $values=[])

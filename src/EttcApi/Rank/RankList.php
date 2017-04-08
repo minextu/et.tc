@@ -8,10 +8,10 @@ use Minextu\Ettc\Account\Rank;
 /**
  * Generates a list of ranks
  *
- * @api {get} /ranks list ranks
- * @apiName listRanks
+ * @api        {get} /ranks list ranks
+ * @apiName    listRanks
  * @apiVersion 0.1.0
- * @apiGroup Rank
+ * @apiGroup   Rank
  *
  * @apiSuccess {Array} items              Contains a list of ranks
  *
@@ -25,22 +25,22 @@ use Minextu\Ettc\Account\Rank;
  *            }
  *         ]
  *     }
- * @apiError NotLoggedIn   You are not logged in
- * @apiError NoPermissions No permissions to list ranks
+ * @apiError          NotLoggedIn   You are not logged in
+ * @apiError          NoPermissions No permissions to list ranks
  *
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {
  *    "error": "NotLoggedIn"
  * }
- *
  **/
 
 class RankList extends AbstractRoutable
 {
     /**
      * Generate a list of ranks
-     * @return   array   List of ranks
+     *
+     * @return array   List of ranks
      */
     public function get()
     {
@@ -63,41 +63,44 @@ class RankList extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
      /**
       * Check if the current user has permissions
-      * @return   bool   True if the user has permissions, False otherwise
+      *
+      * @return bool   True if the user has permissions, False otherwise
       */
-     private function checkPermissions()
-     {
-         $hasPermissions = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkPermissions()
+    {
+        $hasPermissions = false;
+        $user = Account::checkLogin($this->getDb());
 
-         // only proceed if logged in
-         if ($user) {
-             $permissionObj = new Permission($this->getDb(), $user);
-             $hasPermissions = $permissionObj->get("ettcApi/ranks");
-         }
+        // only proceed if logged in
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermissions = $permissionObj->get("ettcApi/ranks");
+        }
 
-         return $hasPermissions;
-     }
+        return $hasPermissions;
+    }
 
     /**
      * Get all ranks, convert them to arrays
-     * @return   array   all ranks as arrays
+     *
+     * @return array   all ranks as arrays
      */
     private function getRanks()
     {

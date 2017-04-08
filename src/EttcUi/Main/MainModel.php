@@ -6,7 +6,8 @@ class MainModel extends AbstractModel
 {
     /**
      * main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 

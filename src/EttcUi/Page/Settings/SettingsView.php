@@ -6,7 +6,8 @@ class SettingsView extends AbstractPageView
 {
     /**
      * All templates placeholder
-     * @var   array
+     *
+     * @var array
      */
     private $placeholders = [];
 
@@ -29,7 +30,8 @@ class SettingsView extends AbstractPageView
 
     /**
      * Shows the content for the given tab
-     * @param    string   $tab   Tab name
+     *
+     * @param string $tab Tab name
      */
     public function showTab($tab)
     {

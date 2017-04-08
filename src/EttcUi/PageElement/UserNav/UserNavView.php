@@ -23,7 +23,7 @@ class UserNavView extends AbstractPageElementView
     }
 
     /**
-     * @param   bool   $loggedIn   User login status
+     * @param   bool $loggedIn User login status
      */
     public function setLoggedIn($loggedIn)
     {

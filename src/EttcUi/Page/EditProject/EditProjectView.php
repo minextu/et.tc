@@ -6,13 +6,15 @@ class EditProjectView extends AbstractPageView
 {
     /**
      * All templates placeholder
-     * @var   array
+     *
+     * @var array
      */
     private $placeholders = [];
 
     /**
      * Contains possible warning, error or success message
-     * @var   string
+     *
+     * @var string
      */
     private $message;
 
@@ -38,7 +40,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project id to placeholder array
-     * @param   int   $id   Project id
+     *
+     * @param int $id Project id
      */
     public function setId($id)
     {
@@ -47,7 +50,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project title to placeholder array
-     * @param   string   $title   Project title
+     *
+     * @param string $title Project title
      */
     public function setTitle($title)
     {
@@ -56,7 +60,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project image to placeholder array
-     * @param   string   $image   Image url
+     *
+     * @param string $image Image url
      */
     public function setImage($image)
     {
@@ -65,7 +70,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project creation date to placeholder array
-     * @param   string   $created  Date of creation
+     *
+     * @param string $created Date of creation
      */
     public function setCreateDate($created)
     {
@@ -74,7 +80,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project update date to placeholder array
-     * @param   string   $updated  Date of last update
+     *
+     * @param string $updated Date of last update
      */
     public function setUpdateDate($updated)
     {
@@ -83,7 +90,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project git creation date to placeholder array
-     * @param   string   $created  Date of creation
+     *
+     * @param string $created Date of creation
      */
     public function setGitCreateDate($created)
     {
@@ -92,7 +100,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project git update date to placeholder array
-     * @param   string   $updated  Date of last update
+     *
+     * @param string $updated Date of last update
      */
     public function setGitUpdateDate($updated)
     {
@@ -101,7 +110,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project git repository url to placeholder array
-     * @param   string   $gitUrl  Url to git repository
+     *
+     * @param string $gitUrl Url to git repository
      */
     public function setGitUrl($gitUrl)
     {
@@ -110,7 +120,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Save project description to placeholder array
-     * @param   string   $description  Project description
+     *
+     * @param string $description Project description
      */
     public function setDescription($description)
     {
@@ -119,7 +130,8 @@ class EditProjectView extends AbstractPageView
 
     /**
      * Shows an Error message
-     * @param    string   $text   Text of the message
+     *
+     * @param string $text Text of the message
      */
     public function showError($text)
     {

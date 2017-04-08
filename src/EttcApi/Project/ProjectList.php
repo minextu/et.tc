@@ -7,10 +7,10 @@ use Minextu\Ettc\Ettc;
 /**
  * Generates a list of projects
  *
- * @api {get} /projects list projects
- * @apiName listProjects
+ * @api        {get} /projects list projects
+ * @apiName    listProjects
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {String=title,created,updated} sortBy=title    Sort result by given field
  * @apiParam {String=asc,desc}  order=asc                   Order result
@@ -33,20 +33,20 @@ use Minextu\Ettc\Ettc;
  *            }
  *         ]
  *     }
- * @apiError InvalidValues sortBy or orderBy contain invalid values
- * @apiErrorExample Error-Response:
+ * @apiError          InvalidValues sortBy or orderBy contain invalid values
+ * @apiErrorExample   Error-Response:
  * HTTP/1.1 400 Bad Request
  * {
  *    "error": "InvalidValues"
  * }
- *
  **/
 
 class ProjectList extends AbstractRoutable
 {
     /**
      * Generate a list of Projects
-     * @return   array   List of projects
+     *
+     * @return array   List of projects
      */
     public function get()
     {
@@ -68,9 +68,10 @@ class ProjectList extends AbstractRoutable
 
     /**
      * Get all projects, convert them to arrays
-     * @param    string   $sortBy    Sort results by given field
-     * @param    string   $order   Order results
-     * @return   array   all projects as arrays
+     *
+     * @param  string $sortBy Sort results by given field
+     * @param  string $order  Order results
+     * @return array   all projects as arrays
      */
     private function getProjects($sortBy, $order)
     {

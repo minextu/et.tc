@@ -6,17 +6,19 @@ class MainPresenter extends AbstractPresenter
 {
     /**
      * Contains all presenters in the PageElement folder
-     * @var   \Minextu\EttcUi\PageElement\AbstractPageElementPresenter[]
+     *
+     * @var \Minextu\EttcUi\PageElement\AbstractPageElementPresenter[]
      */
     private $pageElementPresenters;
     /**
      * Presenter for the current page
-     * @var   \Minextu\EttcUi\Page\AbstractPagePresenter
+     *
+     * @var \Minextu\EttcUi\Page\AbstractPagePresenter
      */
     private $pagePresenter;
 
     /**
-     * @param   \Minextu\EttcUi\PageElement\AbstractPageElementPresenter[]  $pageElementPresenters  All presenters in the PageElement folder
+     * @param   \Minextu\EttcUi\PageElement\AbstractPageElementPresenter[] $pageElementPresenters All presenters in the PageElement folder
      */
     public function setPageElementPresenters($pageElementPresenters)
     {
@@ -24,7 +26,7 @@ class MainPresenter extends AbstractPresenter
     }
 
     /**
-     * @param   \Minextu\EttcUi\Page\AbstractPagePresenter   $pagePresenter   Presenter for the current page
+     * @param   \Minextu\EttcUi\Page\AbstractPagePresenter $pagePresenter Presenter for the current page
      */
     public function setPagePresenter($pagePresenter)
     {
@@ -47,7 +49,8 @@ class MainPresenter extends AbstractPresenter
 
     /**
      * Sends page title to view
-     * @param   string   $title   Title of this Page
+     *
+     * @param string $title Title of this Page
      */
     public function setTitle($title)
     {
@@ -56,7 +59,8 @@ class MainPresenter extends AbstractPresenter
 
     /**
      * Sends page heading to view
-     * @param   string   $heading   Heading of this Page
+     *
+     * @param string $heading Heading of this Page
      */
     public function setHeading($heading)
     {
@@ -65,7 +69,8 @@ class MainPresenter extends AbstractPresenter
 
     /**
      * Sends page sub heading to view
-     * @param   string   $subHeading   Sub heading of this Page
+     *
+     * @param string $subHeading Sub heading of this Page
      */
     public function setSubHeading($subHeading)
     {

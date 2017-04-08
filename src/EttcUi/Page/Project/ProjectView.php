@@ -6,7 +6,8 @@ class ProjectView extends AbstractPageView
 {
     /**
      * All templates placeholder
-     * @var   array
+     *
+     * @var array
      */
     private $placeholders = [];
 
@@ -22,7 +23,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project id to placeholder array
-     * @param   int   $id   Project id
+     *
+     * @param int $id Project id
      */
     public function setId($id)
     {
@@ -31,7 +33,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project image to placeholder array
-     * @param   string   $image   Image url
+     *
+     * @param string $image Image url
      */
     public function setImage($image)
     {
@@ -40,7 +43,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Show or hide image
-     * @param   bool   $visible   Visibility Status
+     *
+     * @param bool $visible Visibility Status
      */
     public function setImageVisibility($visible)
     {
@@ -53,7 +57,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project creation date to placeholder array
-     * @param   string   $created  Date of creation
+     *
+     * @param string $created Date of creation
      */
     public function setCreateDate($created)
     {
@@ -62,7 +67,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project update date to placeholder array
-     * @param   string   $update  Date of last update
+     *
+     * @param string $update Date of last update
      */
     public function setUpdateDate($updated)
     {
@@ -71,7 +77,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project description to placeholder array
-     * @param   string   $description  Project description
+     *
+     * @param string $description Project description
      */
     public function setDescription($description)
     {
@@ -80,7 +87,8 @@ class ProjectView extends AbstractPageView
 
     /**
      * Save project html to placeholder array
-     * @param   string   $description  Project description
+     *
+     * @param string $description Project description
      */
     public function setHtml($html)
     {

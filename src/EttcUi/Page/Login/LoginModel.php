@@ -9,8 +9,9 @@ class LoginModel extends AbstractPageModel
 {
     /**
      * Sets the user to be logged in using the ettc api
-     * @param    string   $nick   Nickname of the user
-     * @param    string   $pw     Password of the user
+     *
+     * @param string $nick Nickname of the user
+     * @param string $pw   Password of the user
      */
     public function login($nick, $pw)
     {

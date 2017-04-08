@@ -9,12 +9,13 @@ class RankDb
 {
     /**
      * Main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
+     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
      */
     public function __construct($db)
     {
@@ -23,8 +24,9 @@ class RankDb
 
     /**
      * Stores a rank in database
-     * @param   string  $title    Title of the rank
-     * @return  bool|int          Id of the rank on success, False otherwise
+     *
+     * @param  string $title Title of the rank
+     * @return bool|int          Id of the rank on success, False otherwise
      */
     public function addRank($title)
     {
@@ -43,8 +45,9 @@ class RankDb
 
     /**
      * Search for a rank by id
-     * @param    string   $id     Rank id
-     * @return   array            Rank info
+     *
+     * @param  string $id Rank id
+     * @return array            Rank info
      */
     public function getRankById($id)
     {
@@ -59,7 +62,8 @@ class RankDb
 
     /**
      * Get all ranks and return the ids
-     * @return   array       All rank ids
+     *
+     * @return array       All rank ids
      */
     public function getRankIds()
     {
@@ -72,9 +76,10 @@ class RankDb
 
     /**
     * Update values of a rank in database
-    * @param    string   $id            Rank id
-    * @param    string   $title         Rank title
-    * @return   bool                    True on success, False otherwise
+     *
+    * @param  string $id    Rank id
+    * @param  string $title Rank title
+    * @return bool                    True on success, False otherwise
     */
     public function updateRank($id, $title)
     {
@@ -89,8 +94,9 @@ class RankDb
 
     /**
     * Delete arank from database
-    * @param    string   $id            Rank id
-    * @return   bool                    True on success, False otherwise
+     *
+    * @param  string $id Rank id
+    * @return bool                    True on success, False otherwise
     */
     public function deleteRank($id)
     {

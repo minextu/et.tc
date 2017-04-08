@@ -9,8 +9,9 @@ class Account
 {
     /**
      * Check if the current user is logged in
-     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
-     * @return   bool|User                                         Matching user object when logged in, false otherwise
+     *
+     * @param  \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @return bool|User                                         Matching user object when logged in, false otherwise
      */
     public static function checkLogin($db)
     {
@@ -30,7 +31,8 @@ class Account
 
     /**
      * Sets the users session to logged in
-     * @param    User   $user     The user that was logged in
+     *
+     * @param User $user The user that was logged in
      */
     public static function login($user)
     {

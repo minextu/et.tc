@@ -9,10 +9,10 @@ use Minextu\Ettc\Account\Rank;
 /**
  * Creates a new rank
  *
- * @api {post} /rank/create/ create rank
- * @apiName createRank
+ * @api        {post} /rank/create/ create rank
+ * @apiName    createRank
  * @apiVersion 0.1.0
- * @apiGroup Rank
+ * @apiGroup   Rank
  *
  * @apiParam {String} [title]                 title for the new rank
  *
@@ -44,7 +44,8 @@ class Create extends AbstractRoutable
 {
     /**
      * Creates a new rank if user has permissions
-     * @return   array   api answer
+     *
+     * @return array   api answer
      */
     public function post()
     {
@@ -72,41 +73,44 @@ class Create extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
      /**
       * Check if the current user has permissions
-      * @return   bool   True if the user has permissions, False otherwise
+      *
+      * @return bool   True if the user has permissions, False otherwise
       */
-     private function checkPermissions()
-     {
-         $hasPermissions = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkPermissions()
+    {
+        $hasPermissions = false;
+        $user = Account::checkLogin($this->getDb());
 
-         // only proceed if logged in
-         if ($user) {
-             $permissionObj = new Permission($this->getDb(), $user);
-             $hasPermissions = $permissionObj->get("ettcApi/rank/create");
-         }
+        // only proceed if logged in
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermissions = $permissionObj->get("ettcApi/rank/create");
+        }
 
-         return $hasPermissions;
-     }
+        return $hasPermissions;
+    }
 
     /**
      * Creates a new rank
-     * @param   string   $title   Title for the rank
+     *
+     * @param string $title Title for the rank
      */
     private function createRank($title)
     {

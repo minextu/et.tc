@@ -7,10 +7,10 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Gets info for a project
  *
- * @api {get} /project/info/:id get project info
- * @apiName getProject
+ * @api        {get} /project/info/:id get project info
+ * @apiName    getProject
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {integer} id    Project id
  *
@@ -29,22 +29,22 @@ use Minextu\Ettc\Exception\InvalidId;
  *               "createDate" : Date,
   *              "updateDate" : Date
  *         }
- * @apiError MissingValues Id wasn't transmited
- * @apiError NotFound      Project couldn't be found
- * @apiErrorExample Error-Response:
+ * @apiError          MissingValues Id wasn't transmited
+ * @apiError          NotFound      Project couldn't be found
+ * @apiErrorExample   Error-Response:
  * HTTP/1.1 404 Not Found
  * {
  *    "error": "NotFound"
  * }
- *
  **/
 
 class Project extends AbstractRoutable
 {
     /**
      * Generate array for the given project
-     * @param    int     $id   Project id
-     * @return   array   project info
+     *
+     * @param  int $id Project id
+     * @return array   project info
      */
     public function get($id=false)
     {

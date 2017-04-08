@@ -9,19 +9,19 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Deletes a Project while checking for permissions
  *
- * @api {post} /project/delete/:id delete a project
- * @apiName deleteProject
+ * @api        {post} /project/delete/:id delete a project
+ * @apiName    deleteProject
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {Number} id                  Project id
  *
  * @apiSuccess {bool} success             Status of the deletion
  *
- * @apiError MissingValues Id wasn't transmited
- * @apiError NotLoggedIn   You are not logged in
- * @apiError NoPermissions No permissions to delete this project
- * @apiError NotFound      Project couldn't be found
+ * @apiError        MissingValues Id wasn't transmited
+ * @apiError        NotLoggedIn   You are not logged in
+ * @apiError        NoPermissions No permissions to delete this project
+ * @apiError        NotFound      Project couldn't be found
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
  * {
@@ -33,8 +33,9 @@ class Delete extends AbstractRoutable
 {
     /**
      * Deletes the given project, after checking for permissions
-     * @param    int       $id   Project id to be deleted
-     * @return   array           Api answers
+     *
+     * @param  int $id Project id to be deleted
+     * @return array           Api answers
      */
     public function post($id=false)
     {
@@ -72,7 +73,8 @@ class Delete extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {
@@ -88,7 +90,8 @@ class Delete extends AbstractRoutable
 
     /**
      * Check if the current user has permissions
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {

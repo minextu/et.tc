@@ -7,10 +7,10 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Gets git changelog for a project
  *
- * @api {get} /project/changelog/:id get project changelog
- * @apiName getProjectChangelog
+ * @api        {get} /project/changelog/:id get project changelog
+ * @apiName    getProjectChangelog
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {integer} id    Project id
  * @apiParam {integer} [count=10] Number of logs to return
@@ -30,21 +30,21 @@ use Minextu\Ettc\Exception\InvalidId;
  *           },
  *       "count" : Integer
  *     ]
- * @apiError MissingValues Id wasn't transmited
- * @apiError NotFound      Projects changelog couldn't be found
- * @apiErrorExample Error-Response:
+ * @apiError          MissingValues Id wasn't transmited
+ * @apiError          NotFound      Projects changelog couldn't be found
+ * @apiErrorExample   Error-Response:
  * HTTP/1.1 404 Not Found
  * {
  *    "error": "NotFound"
  * }
- *
  **/
 
 class Changelog extends AbstractRoutable
 {
     /**
      * Generate changelog array for the given project
-     * @return   array   project changelog
+     *
+     * @return array   project changelog
      */
     public function get($id=false)
     {

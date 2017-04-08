@@ -13,8 +13,9 @@ class EditProjectModel extends AbstractPageModel
 
     /**
      * Check if the project does exist
-     * @param    int   $id   Project id
-     * @return   bool         True if the project does exist, False otherwise
+     *
+     * @param  int $id Project id
+     * @return bool         True if the project does exist, False otherwise
      */
     public function checkCorrectProject($id)
     {
@@ -23,7 +24,8 @@ class EditProjectModel extends AbstractPageModel
 
     /**
      * Check if the current User has permissions to update projects
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     public function checkPermissions()
     {
@@ -40,7 +42,8 @@ class EditProjectModel extends AbstractPageModel
 
     /**
      * Update project using the ettc api
-     * @return  bool                    True on success, False otherwise
+     *
+     * @return bool                    True on success, False otherwise
      */
     public function updateProject()
     {
@@ -56,7 +59,8 @@ class EditProjectModel extends AbstractPageModel
 
     /**
      * Init git repository using the ettc api
-     * @return  bool                    True on success, False otherwise
+     *
+     * @return bool                    True on success, False otherwise
      */
     public function addGitUrl()
     {
@@ -125,8 +129,9 @@ class EditProjectModel extends AbstractPageModel
 
     /**
     * Fetch the project using EttcApi
-    * @param    int   $id   project id
-    * @return   bool        True if the project does exist, False otherwise
+     *
+    * @param  int $id project id
+    * @return bool        True if the project does exist, False otherwise
     */
     public function getProject($id)
     {

@@ -8,10 +8,10 @@ use Minextu\Ettc\Account\ApiKey;
 /**
  * Adds a new api key for the logged in user
  *
- * @api {post} /apiKey/create/ create api key
- * @apiName createApiKey
+ * @api        {post} /apiKey/create/ create api key
+ * @apiName    createApiKey
  * @apiVersion 0.1.0
- * @apiGroup ApiKey
+ * @apiGroup   ApiKey
  *
  * @apiParam {String} [title]                title for the new key
  *
@@ -31,7 +31,7 @@ use Minextu\Ettc\Account\ApiKey;
  *         }
  *     }
  *
- * @apiError NotLoggedIn   You are not logged in
+ * @apiError        NotLoggedIn   You are not logged in
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {
@@ -43,7 +43,8 @@ class Create extends AbstractRoutable
 {
     /**
      * Adds a new api key if user is logged in
-     * @return   array   api answer
+     *
+     * @return array   api answer
      */
     public function post()
     {
@@ -63,23 +64,25 @@ class Create extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
      /**
       * Generates a new api key
-      * @param   string   $title   Title for the key
+      *
+      * @param string $title Title for the key
       */
     private function createApiKey($title)
     {

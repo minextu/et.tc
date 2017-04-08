@@ -9,12 +9,13 @@ class ApiKeyDb
 {
     /**
      * Main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
+     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
      */
     public function __construct($db)
     {
@@ -23,10 +24,11 @@ class ApiKeyDb
 
     /**
      * Store api key in database
-     * @param   int     $userId   Id of user for this api
-     * @param   string  $title    Title of the key
-     * @param   string  $key      The api key to be saved
-     * @return  bool|int          Id of the key on success, False otherwise
+     *
+     * @param  int    $userId Id of user for this api
+     * @param  string $title  Title of the key
+     * @param  string $key    The api key to be saved
+     * @return bool|int          Id of the key on success, False otherwise
      */
     public function addKey($userId, $title, $key)
     {
@@ -45,8 +47,9 @@ class ApiKeyDb
 
     /**
      * Search for api key by id
-     * @param    string   $id     Api key id
-     * @return   array            Api key info
+     *
+     * @param  string $id Api key id
+     * @return array            Api key info
      */
     public function getApiKeyById($id)
     {
@@ -61,8 +64,9 @@ class ApiKeyDb
 
     /**
      * Search for api key by key
-     * @param    string   $key    Api key to search for
-     * @return   array            Api key info
+     *
+     * @param  string $key Api key to search for
+     * @return array            Api key info
      */
     public function getApiKeyByKey($key)
     {
@@ -77,8 +81,9 @@ class ApiKeyDb
 
     /**
      * Get all api keys by the given user and return the ids
-     * @param    int   $userId  User id to get the keys for
-     * @return   array          All key ids by the given user
+     *
+     * @param  int $userId User id to get the keys for
+     * @return array          All key ids by the given user
      */
     public function getApiKeyIdsByUserId($userId)
     {
@@ -93,8 +98,9 @@ class ApiKeyDb
 
     /**
     * Delete an api key from database
-    * @param    string   $id            Api key id
-    * @return   bool                    True on success, False otherwise
+     *
+    * @param  string $id Api key id
+    * @return bool                    True on success, False otherwise
     */
     public function deleteApiKey($id)
     {

@@ -15,7 +15,8 @@ class UserNavPresenter extends AbstractPageElementPresenter
 
     /**
      * Gets the nickname by using the model
-     * @return   string|bool  Nickname of the user if logged in, False otherwise
+     *
+     * @return string|bool  Nickname of the user if logged in, False otherwise
      */
     public function getNickname()
     {
@@ -24,7 +25,8 @@ class UserNavPresenter extends AbstractPageElementPresenter
 
     /**
      * Gets the avatar image for the user
-     * @return   string   Avatar image url for this user
+     *
+     * @return string   Avatar image url for this user
      */
     public function getAvatar()
     {

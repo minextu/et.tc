@@ -6,14 +6,14 @@ use Minextu\Ettc\Account\Account;
 /**
  * Logout the user
  *
- * @api {post} /user/logout/ logout
- * @apiName logoutUser
+ * @api        {post} /user/logout/ logout
+ * @apiName    logoutUser
  * @apiVersion 0.1.0
- * @apiGroup User
+ * @apiGroup   User
  *
  * @apiSuccess {bool} success             Status of the logout
 
- * @apiError NotLoggedIn   You are not logged in
+ * @apiError        NotLoggedIn   You are not logged in
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {
@@ -25,7 +25,8 @@ class Logout extends AbstractRoutable
 {
     /**
      * Logout the user
-     * @return   array   api answer
+     *
+     * @return array   api answer
      */
     public function post()
     {
@@ -44,19 +45,20 @@ class Logout extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
     /**
      * Logouts the User using the static class Account

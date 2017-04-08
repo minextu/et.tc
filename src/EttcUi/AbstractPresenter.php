@@ -7,12 +7,14 @@ abstract class AbstractPresenter
 {
     /**
      * The view for this presenter
-     * @var   AbstractView
+     *
+     * @var AbstractView
      */
     protected $view;
     /**
      * The model for this presenter
-     * @var   ModelInterface
+     *
+     * @var ModelInterface
      */
     protected $model;
 
@@ -25,7 +27,7 @@ abstract class AbstractPresenter
     }
 
     /**
-     * @param   AbstractView   $view   View for this presenter
+     * @param   AbstractView $view View for this presenter
      */
     final public function setView($view)
     {
@@ -41,7 +43,7 @@ abstract class AbstractPresenter
     }
 
     /**
-     * @param   ModelInterface   $model  Model for this presenter
+     * @param   ModelInterface $model Model for this presenter
      */
     final public function setModel($model)
     {

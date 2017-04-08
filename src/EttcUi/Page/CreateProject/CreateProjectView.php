@@ -6,7 +6,8 @@ class CreateProjectView extends AbstractPageView
 {
     /**
      * Contains possible warning, error or success message
-     * @var   string
+     *
+     * @var string
      */
     private $message;
 
@@ -34,7 +35,8 @@ class CreateProjectView extends AbstractPageView
 
     /**
      * Shows an Error message
-     * @param    string   $text   Text of the message
+     *
+     * @param string $text Text of the message
      */
     public function showError($text)
     {

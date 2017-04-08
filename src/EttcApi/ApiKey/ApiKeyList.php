@@ -7,10 +7,10 @@ use Minextu\Ettc\Account\ApiKey;
 /**
  * Generates a list of api keys for this user
  *
- * @api {get} /apiKeys list api keys
- * @apiName listApiKeys
+ * @api        {get} /apiKeys list api keys
+ * @apiName    listApiKeys
  * @apiVersion 0.1.0
- * @apiGroup ApiKey
+ * @apiGroup   ApiKey
  *
  * @apiSuccess {Array} items              Contains a list of api keys
  *
@@ -27,20 +27,20 @@ use Minextu\Ettc\Account\ApiKey;
  *            }
  *         ]
  *     }
- * @apiError NotLoggedIn   You are not logged in
- * @apiErrorExample Error-Response:
+ * @apiError          NotLoggedIn   You are not logged in
+ * @apiErrorExample   Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {
  *    "error": "NotLoggedIn"
  * }
- *
  **/
 
 class ApiKeyList extends AbstractRoutable
 {
     /**
      * Generate a list of Api keys for the logged in user
-     * @return   array   List of api keys
+     *
+     * @return array   List of api keys
      */
     public function get()
     {
@@ -59,23 +59,25 @@ class ApiKeyList extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
     /**
      * Get all api keys for this user, convert them to arrays
-     * @return   array   all api keys as arrays
+     *
+     * @return array   all api keys as arrays
      */
     private function getApiKeys()
     {

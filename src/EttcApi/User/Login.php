@@ -8,19 +8,19 @@ use Minextu\Ettc\Account\FailedLogin;
 /**
  * Checks nickname and password, logs the user in on success
  *
- * @api {post} /user/login/ login
- * @apiName loginUser
+ * @api        {post} /user/login/ login
+ * @apiName    loginUser
  * @apiVersion 0.1.0
- * @apiGroup User
+ * @apiGroup   User
  *
  * @apiParam {String} nickname            User nickname
  * @apiParam {String} password            User password
  *
  * @apiSuccess {bool} success             Status of the login
  *
- * @apiError MissingValues     Nickname or Password weren't transmited
- * @apiError AlreadyLoggedIn   You are already loggedin
- * @apiError WrongNicknameOrPassword Password or nickname were wrong
+ * @apiError        MissingValues     Nickname or Password weren't transmited
+ * @apiError        AlreadyLoggedIn   You are already loggedin
+ * @apiError        WrongNicknameOrPassword Password or nickname were wrong
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
  * {
@@ -32,7 +32,8 @@ class Login extends AbstractRoutable
 {
     /**
      * Checks nickname and password and logs the user in
-     * @return   array   api answer
+     *
+     * @return array   api answer
      */
     public function post()
     {
@@ -63,25 +64,27 @@ class Login extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
     /**
      * Check if the username and password is correct
-     * @param    string   $nick   Nickname to check
-     * @param    string   $pw     Password to check
-     * @return   bool             True if nickname and password are correct, false otherwise
+     *
+     * @param  string $nick Nickname to check
+     * @param  string $pw   Password to check
+     * @return bool             True if nickname and password are correct, false otherwise
      */
     private function checkLogin($nick, $pw)
     {
@@ -98,7 +101,8 @@ class Login extends AbstractRoutable
 
     /**
      * Sets the user to be logged in
-     * @param    string   $nick   Nickname of the user
+     *
+     * @param string $nick Nickname of the user
      */
     private function login($nick)
     {

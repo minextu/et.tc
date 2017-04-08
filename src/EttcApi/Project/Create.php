@@ -9,10 +9,10 @@ use Minextu\Ettc;
 /**
  * Creates a new Project while checking for permissions
  *
- * @api {post} /project/create/ create a new project
- * @apiName createProject
+ * @api        {post} /project/create/ create a new project
+ * @apiName    createProject
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {String} title                  Projects title
  * @apiParam {String} description            Projects description
@@ -34,9 +34,9 @@ use Minextu\Ettc;
  *         }
  *     }
  *
- * @apiError MissingValues Title or description weren't transmited
- * @apiError NotLoggedIn   You are not logged in
- * @apiError NoPermissions No permissions to create a project
+ * @apiError        MissingValues Title or description weren't transmited
+ * @apiError        NotLoggedIn   You are not logged in
+ * @apiError        NoPermissions No permissions to create a project
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
  * {
@@ -48,7 +48,8 @@ class Create extends AbstractRoutable
 {
     /**
      * Creates a new project using post values, checks for permissions
-     * @return   array   api answer, containing the created project on success
+     *
+     * @return array   api answer, containing the created project on success
      */
     public function post()
     {
@@ -84,7 +85,8 @@ class Create extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {
@@ -100,7 +102,8 @@ class Create extends AbstractRoutable
 
     /**
      * Check if the current user has permissions to create projects
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {

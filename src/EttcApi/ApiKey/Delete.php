@@ -8,19 +8,19 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Deletes an Api Key for this user
  *
- * @api {post} /apiKey/delete/:id delete an api key
- * @apiName deleteApiKey
+ * @api        {post} /apiKey/delete/:id delete an api key
+ * @apiName    deleteApiKey
  * @apiVersion 0.1.0
- * @apiGroup ApiKey
+ * @apiGroup   ApiKey
  *
  * @apiParam {Number} id                  Api key id
  *
  * @apiSuccess {bool} success             Status of the deletion
  *
- * @apiError MissingValues Id wasn't transmited
- * @apiError NotLoggedIn   You are not logged in
- * @apiError NoPermissions No permissions to delete this api key
- * @apiError NotFound      Api key couldn't be found
+ * @apiError        MissingValues Id wasn't transmited
+ * @apiError        NotLoggedIn   You are not logged in
+ * @apiError        NoPermissions No permissions to delete this api key
+ * @apiError        NotFound      Api key couldn't be found
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
  * {
@@ -32,8 +32,9 @@ class Delete extends AbstractRoutable
 {
     /**
      * Deletes the given api key, after checking for permissions
-     * @param    int       $id   Api key id to be deleted
-     * @return   array           Api answers
+     *
+     * @param  int $id Api key id to be deleted
+     * @return array           Api answers
      */
     public function post($id=false)
     {
@@ -72,7 +73,8 @@ class Delete extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {

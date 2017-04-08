@@ -10,50 +10,58 @@ class ApiKey
 {
     /**
      * Api key Database Interface
+     *
      * @var ApiKeyDb
      */
     private $apiKeyDb;
 
     /**
      * Main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
      * Unique Api key id
-     * @var   int
+     *
+     * @var int
      */
     private $id;
 
     /**
      * Optional Title of this api key
-     * @var   string
+     *
+     * @var string
      */
     private $title;
 
     /**
      * The key itself
-     * @var   string
+     *
+     * @var string
      */
     private $key;
 
     /**
      * Date of creation
-     * @var   string
+     *
+     * @var string
      */
     private $createDate;
 
     /**
      * Date of last use for this key
-     * @var   string
+     *
+     * @var string
      */
     private $lastUseDate;
 
     /**
      * Creates a new Instance. Loads an exising key if $id is specified
-     * @param   Database\DatabaseInterface   $db   Database to be used
-     * @param   int   $id                     A key id that has been saved already
+     *
+     * @param Database\DatabaseInterface $db Database to be used
+     * @param int                        $id A key id that has been saved already
      */
     public function __construct($db, $id=false)
     {
@@ -70,9 +78,10 @@ class ApiKey
 
     /**
      * Get all api keys for an user that are saved in db
-     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
-     * @param    \Minextu\Ettc\Account\User                 $user User for which keys should be fetched
-     * @return   ApiKey[]                                         All found keys for this user
+     *
+     * @param  \Minextu\Ettc\Database\DatabaseInterface $db   Database to be used
+     * @param  \Minextu\Ettc\Account\User               $user User for which keys should be fetched
+     * @return ApiKey[]                                         All found keys for this user
      */
     public static function getAll($db, $user)
     {
@@ -90,8 +99,9 @@ class ApiKey
 
     /**
      * Load Api key using its id
-     * @param    int   $id   Unique Api key id
-     * @return   bool        True if api key could be found, False otherwise
+     *
+     * @param  int $id Unique Api key id
+     * @return bool        True if api key could be found, False otherwise
      */
     public function loadId($id)
     {
@@ -105,8 +115,9 @@ class ApiKey
 
     /**
      * Load Api key using its key
-     * @param    int   $key  Unique Api key
-     * @return   bool        True if api key could be found, False otherwise
+     *
+     * @param  int $key Unique Api key
+     * @return bool        True if api key could be found, False otherwise
      */
     public function loadKey($key)
     {
@@ -120,8 +131,9 @@ class ApiKey
 
     /**
      * Assign Values to all private attributes using an api key array
-     * @param    array   $key      Api key Array created by a Database Object
-     * @return   bool              True on success, False otherwise
+     *
+     * @param  array $key Api key Array created by a Database Object
+     * @return bool              True on success, False otherwise
      */
     private function load($key)
     {
@@ -137,7 +149,8 @@ class ApiKey
 
     /**
      * Get the value of this key
-     * @return   string   The key value
+     *
+     * @return string   The key value
      */
     public function get()
     {
@@ -205,7 +218,8 @@ class ApiKey
 
     /**
      * Saves the key to database
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function create()
     {
@@ -231,7 +245,8 @@ class ApiKey
 
     /**
      * Generates a secure random key
-     * @return   string   The key
+     *
+     * @return string   The key
      */
     private function generateKey()
     {
@@ -241,7 +256,8 @@ class ApiKey
 
     /**
      * Deletes this api key
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function delete()
     {
@@ -257,7 +273,8 @@ class ApiKey
 
     /**
      * Generates array out of all values
-     * @return   array   The object as array
+     *
+     * @return array   The object as array
      */
     public function toArray()
     {

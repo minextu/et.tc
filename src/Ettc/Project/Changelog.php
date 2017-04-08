@@ -6,10 +6,11 @@ class Changelog
 {
     /**
      * [generateLogs description]
-     * @param    \Gioffreda\Component\Git\Git   $git     Main git object
-     * @param    int   $count  Amount of logs to return
-     * @param    int   $skip   Amount of logs to skip
-     * @return   array         Logs for the git object
+     *
+     * @param  \Gioffreda\Component\Git\Git $git   Main git object
+     * @param  int                          $count Amount of logs to return
+     * @param  int                          $skip  Amount of logs to skip
+     * @return array         Logs for the git object
      */
     public static function generateLogs($git, $count, $skip)
     {
@@ -20,7 +21,8 @@ class Changelog
                 "--skip=$skip",
                 "--decorate",
                 "--pretty=format:" . $format->getFormatString()
-            ]);
+            ]
+        );
 
         $parsedLogs = self::parse($format, $logs);
         return self::removeExtraValues($parsedLogs);
@@ -70,8 +72,9 @@ class Changelog
 
     /**
      * Generates the URL for the users avatar
-     * @param    string  $email  Email of the user
-     * @return   string          Avatar image url
+     *
+     * @param  string $email Email of the user
+     * @return string          Avatar image url
      */
     private static function generateAvatarUrl($email)
     {

@@ -12,18 +12,21 @@ class ProjectGit
 {
     /**
      * Complete path to project dir
-     * @var   string
+     *
+     * @var string
      */
     private $projectDir;
     /**
      * Main git object
-     * @var  \Gioffreda\Component\Git\Git
+     *
+     * @var \Gioffreda\Component\Git\Git
      */
     private $git;
 
     /**
      * Set path and init git object
-     * @param   string   $id Name for the git repository
+     *
+     * @param string $id Name for the git repository
      */
     public function __construct($id)
     {
@@ -33,7 +36,8 @@ class ProjectGit
 
     /**
      * Check if the current git repository does exist
-     * @return   bool   True if it does exist, False otherwise
+     *
+     * @return bool   True if it does exist, False otherwise
      */
     public function exists()
     {
@@ -42,8 +46,9 @@ class ProjectGit
 
     /**
      * Clones an existing git repository to $projectPath
-     * @param    string   $url   Url to project
-     * @return   bool            True on success, False otherwise
+     *
+     * @param  string $url Url to project
+     * @return bool            True on success, False otherwise
      */
     public function gitClone($url)
     {
@@ -72,7 +77,8 @@ class ProjectGit
 
     /**
      * Get url for the current repository
-     * @return   string   The url for this repository
+     *
+     * @return string   The url for this repository
      */
     public function getUrl()
     {
@@ -96,9 +102,10 @@ class ProjectGit
 
     /**
      * Get all logs for the repository
-     * @param    int   $count   Amount of logs to return
-     * @param    int   $skip   Amount of logs to skip
-     * @return   string   all git logs
+     *
+     * @param  int $count Amount of logs to return
+     * @param  int $skip  Amount of logs to skip
+     * @return string   all git logs
      */
     public function getLogs($count, $skip)
     {
@@ -111,7 +118,8 @@ class ProjectGit
 
     /**
      * Count all commits, that do exist
-     * @return   int   Number of commits
+     *
+     * @return int   Number of commits
      */
     public function getCommitsCount()
     {
@@ -126,7 +134,8 @@ class ProjectGit
 
     /**
      * Get date of first commit and return it
-     * @return   string   Timestamp of first commit
+     *
+     * @return string   Timestamp of first commit
      */
     public function getCreationDate()
     {
@@ -140,7 +149,8 @@ class ProjectGit
 
     /**
      * Get date of last commit and return it
-     * @return   string   Timestamp of last commit
+     *
+     * @return string   Timestamp of last commit
      */
     public function getUpdateDate()
     {
@@ -166,8 +176,9 @@ class ProjectGit
 
     /**
      * Recusivly delete a folder
-     * @param    string   $path   The folder that should be deleted
-     * @return   bool             False if the folder does not exist, True otherwise
+     *
+     * @param  string $path The folder that should be deleted
+     * @return bool             False if the folder does not exist, True otherwise
      */
     private function deleteFolder($path)
     {

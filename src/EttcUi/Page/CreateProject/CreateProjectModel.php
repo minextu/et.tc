@@ -9,7 +9,8 @@ class CreateProjectModel extends AbstractPageModel
 {
     /**
      * Check if the current User has permissions to create projects
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     public function checkPermissions()
     {
@@ -26,9 +27,10 @@ class CreateProjectModel extends AbstractPageModel
 
     /**
      * Add a project to database using the ettc api
-     * @param   String   $title         Project Title
-     * @param   String   $description   Project Description
-     * @return  bool                    True on success, False otherwise
+     *
+     * @param  String $title       Project Title
+     * @param  String $description Project Description
+     * @return bool                    True on success, False otherwise
      */
     public function addProject($title, $description)
     {

@@ -10,10 +10,10 @@ use Minextu\Ettc\Exception\InvalidGitRemote;
 /**
  * Init git repository of a project while checking for permissions
  *
- * @api {post} /project/initGit/:id  init git repository
- * @apiName initProjectGit
+ * @api        {post} /project/initGit/:id  init git repository
+ * @apiName    initProjectGit
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
  * @apiParam {Number} id                       Project id
  * @apiParam {String} gitUrl                   New git url
@@ -52,8 +52,9 @@ class InitGit extends AbstractRoutable
 {
     /**
      * Set git url for a project and clones it, checks for permissions
-     * @param    int       $id   Project id to be deleted
-     * @return   array           api answer, containing the created project on success
+     *
+     * @param  int $id Project id to be deleted
+     * @return array           api answer, containing the created project on success
      */
     public function post($id=false)
     {
@@ -100,7 +101,8 @@ class InitGit extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {
@@ -116,7 +118,8 @@ class InitGit extends AbstractRoutable
 
     /**
      * Check if the current user has permissions
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {

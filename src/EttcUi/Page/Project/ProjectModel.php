@@ -9,8 +9,9 @@ class ProjectModel extends AbstractPageModel
 
     /**
      * Check if the project does exist
-     * @param    int   $id   Project id
-     * @return   bool         True if the project does exist, False otherwise
+     *
+     * @param  int $id Project id
+     * @return bool         True if the project does exist, False otherwise
      */
     public function checkCorrectProject($id)
     {
@@ -59,8 +60,9 @@ class ProjectModel extends AbstractPageModel
 
     /**
      * Fetch the project using EttcApi
-     * @param    int   $id   project id
-     * @return   bool        True if the project does exist, False otherwise
+     *
+     * @param  int $id project id
+     * @return bool        True if the project does exist, False otherwise
      */
     private function getProject($id)
     {

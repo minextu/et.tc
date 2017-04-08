@@ -10,7 +10,8 @@ class SettingsModel extends AbstractPageModel
 
     /**
      * Sets the current Tab
-     * @param   string   $tab   Current tab
+     *
+     * @param string $tab Current tab
      */
     public function setTab($tab)
     {
@@ -41,7 +42,8 @@ class SettingsModel extends AbstractPageModel
 
     /**
      * Get all api keys for this user using EttcApi
-     * @return   bool|array        All api keys as array on success, False otherwise
+     *
+     * @return bool|array        All api keys as array on success, False otherwise
      */
     public function getApiKeys()
     {

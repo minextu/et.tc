@@ -9,7 +9,8 @@ class Fake implements DatabaseInterface
 {
     /**
      * PDO object
-     * @var   \PDO
+     *
+     * @var \PDO
      */
     private $pdo;
 

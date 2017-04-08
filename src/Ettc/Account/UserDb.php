@@ -9,12 +9,13 @@ class UserDb
 {
     /**
      * Main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
+     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
      */
     public function __construct($db)
     {
@@ -23,8 +24,9 @@ class UserDb
 
     /**
      * Search for a user by id
-     * @param    int   $id   Unique User Id to be searched for
-     * @return   array       User Info
+     *
+     * @param  int $id Unique User Id to be searched for
+     * @return array       User Info
      */
     public function getUserById($id)
     {
@@ -39,8 +41,9 @@ class UserDb
 
     /**
      * Search for user by nickname
-     * @param    string   $nick   User nickname to be searched for
-     * @return   array            User info
+     *
+     * @param  string $nick User nickname to be searched for
+     * @return array            User info
      */
     public function getUserByNick($nick)
     {
@@ -55,11 +58,12 @@ class UserDb
 
     /**
      * Store User in Database
-     * @param    string   $nick    User nickname
-     * @param    string   $email   User e-mail
-     * @param    string   $hash    Hashed password
-     * @param    int      $rank    User rank id
-     * @return   bool|int          Id of the user on success, False otherwise
+     *
+     * @param  string $nick  User nickname
+     * @param  string $email User e-mail
+     * @param  string $hash  Hashed password
+     * @param  int    $rank  User rank id
+     * @return bool|int          Id of the user on success, False otherwise
      */
     public function insertUser($nick, $email, $hash, $rank)
     {
@@ -72,7 +76,7 @@ class UserDb
         if ($status) {
             $status = $this->db->getPdo()->lastInsertId();
         }
-        
+
         return $status;
     }
 }

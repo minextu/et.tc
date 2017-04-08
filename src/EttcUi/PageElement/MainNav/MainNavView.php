@@ -6,12 +6,13 @@ class MainNavView extends AbstractPageElementView
 {
     /**
      * All entries in the main navigation. Keys contain the text, values contain the url
-     * @var   array
+     *
+     * @var array
      */
     private $entries;
 
     /**
-     * @param   array   $entries   All entries in the main navigation. Keys contain the text, values contain the url
+     * @param   array $entries All entries in the main navigation. Keys contain the text, values contain the url
      */
     public function setEntries($entries)
     {
@@ -32,7 +33,8 @@ class MainNavView extends AbstractPageElementView
 
     /**
      * Generates the html code for all navigation entries
-     * @return   string   Html code for all entries
+     *
+     * @return string   Html code for all entries
      */
     private function generateEntriesHtml()
     {

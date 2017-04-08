@@ -9,7 +9,8 @@ class Permission
 {
     /**
      * Contains generic permissions used throughout ettc
-     * @var   String[]
+     *
+     * @var String[]
      */
     private $allPermissions = [
 
@@ -42,32 +43,37 @@ class Permission
 
     /**
      * Permission Database Interface
+     *
      * @var PermissionDb
      */
     private $permissionDb;
 
     /**
      * User/Rank or ApiKey for this permissions
-     * @var   User|ApiKey|Rank
+     *
+     * @var User|ApiKey|Rank
      */
     private $entity;
 
     /**
      * Type of permission entity (user, apiKey or rank)
-     * @var   String
+     *
+     * @var String
      */
     private $entityType;
 
     /**
      * Contains status for all permissions. Array key is permission name
-     * @var   Bool[]
+     *
+     * @var Bool[]
      */
     private $permissions = [];
 
     /**
      * Loads permissions for the given user if specified
-     * @param   Database\DatabaseInterface   $db   Database to be used
-     * @param   User   $user                       User to fetch permissions for (will also include the users rank)
+     *
+     * @param Database\DatabaseInterface $db   Database to be used
+     * @param User                       $user User to fetch permissions for (will also include the users rank)
      */
     public function __construct($db, $user=false)
     {
@@ -88,8 +94,9 @@ class Permission
 
     /**
      * Load permissions for the given user
-     * @param    User   $user     User to fetch permissions for
-     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
+     *
+     * @param User $user                    User to fetch permissions for
+     * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
     public function loadOnlyUser($user, $keepPreviousPermissions=false)
     {
@@ -112,8 +119,9 @@ class Permission
 
     /**
      * Load permissions for the given rank
-     * @param    Rank   $rank     Rank to fetch permissions for
-     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
+     *
+     * @param Rank $rank                    Rank to fetch permissions for
+     * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
     public function loadRank($rank, $keepPreviousPermissions=false)
     {
@@ -135,8 +143,9 @@ class Permission
 
     /**
      * Load permissions for the given api key
-     * @param    Rank   $apikey     Api key to fetch permissions for
-     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
+     *
+     * @param Rank $apikey                  Api key to fetch permissions for
+     * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
     public function loadApiKey($apiKey, $keepPreviousPermissions=false)
     {
@@ -158,7 +167,8 @@ class Permission
 
     /**
      * Loads permissions out of a csv string
-     * @param    String   $permissionString   Csv list of permissions
+     *
+     * @param String $permissionString Csv list of permissions
      */
     private function loadPermissionCsv($permissionString)
     {
@@ -174,7 +184,8 @@ class Permission
 
     /**
      * Count all granted permissions for this user
-     * @return   int   Number of granted permissions
+     *
+     * @return int   Number of granted permissions
      */
     public function count()
     {
@@ -183,7 +194,8 @@ class Permission
 
     /**
      * Grant permission with the given name
-     * @param   String   $permissionName   Name of the permission to grant
+     *
+     * @param String $permissionName Name of the permission to grant
      */
     public function grant($permissionName)
     {
@@ -201,8 +213,9 @@ class Permission
 
     /**
      * Deny permission with the given name
-     * @param    String   $permissionName   Name of the permission to deny
-     * @return   Bool                       True on success, False otherwise
+     *
+     * @param  String $permissionName Name of the permission to deny
+     * @return Bool                       True on success, False otherwise
      */
     public function deny($permissionName)
     {
@@ -213,8 +226,9 @@ class Permission
 
     /**
      * Check if the given permission is granted
-     * @param    String   $permissionName   Name of the permission to Check
-     * @return   bool                       True if permissions is granted, False otherwise
+     *
+     * @param  String $permissionName Name of the permission to Check
+     * @return bool                       True if permissions is granted, False otherwise
      */
     public function get($permissionName)
     {
@@ -223,7 +237,7 @@ class Permission
         // check if permission is in permissions array and set to true
         if (!empty($this->permissions[$permissionName])) {
             $hasPermission = true;
-        // always return true, when the permission "all" is set to true
+            // always return true, when the permission "all" is set to true
         } elseif (!empty($this->permissions["all"])) {
             $hasPermission = true;
         }
@@ -233,7 +247,8 @@ class Permission
 
     /**
      * Get all granted Permissions for this user
-     * @return   String[]   Names of all granted Permissions for this user
+     *
+     * @return String[]   Names of all granted Permissions for this user
      */
     public function getAll()
     {
@@ -248,7 +263,8 @@ class Permission
 
     /**
      * Get all available generic permissions that are used throughout ettc
-     * @return   String[]   Names of all available generic permissions
+     *
+     * @return String[]   Names of all available generic permissions
      */
     public function getAllAvailable()
     {

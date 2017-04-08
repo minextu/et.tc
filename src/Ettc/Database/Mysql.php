@@ -9,13 +9,15 @@ class Mysql implements DatabaseInterface
 {
     /**
      * charset to use
-     * @var   string
+     *
+     * @var string
      */
 
     private $charset = 'utf8';
     /**
      * PDO object
-     * @var   \PDO
+     *
+     * @var \PDO
      */
     private $pdo;
 

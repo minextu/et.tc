@@ -10,31 +10,36 @@ class User
 {
     /**
      * User Database Interface
+     *
      * @var UserDb
      */
     private $userDb;
 
     /**
      * Unique User Id
-     * @var   int
+     *
+     * @var int
      */
     private $id;
 
     /**
      * User Nickname
-     * @var   string
+     *
+     * @var string
      */
     private $nick;
 
     /**
      * User E-Mail
-     * @var   string
+     *
+     * @var string
      */
     private $email;
 
     /**
      * Hashed User Password
-     * @var   string
+     *
+     * @var string
      */
     private $hash;
 
@@ -45,8 +50,9 @@ class User
 
     /**
      * Creates a new Instance. Loads User Info when $id is specified
-     * @param   Database\DatabaseInterface   $db   Database to be used
-     * @param   int   $id                          User Id to be loaded
+     *
+     * @param Database\DatabaseInterface $db Database to be used
+     * @param int                        $id User Id to be loaded
      */
     public function __construct($db, $id=false)
     {
@@ -62,7 +68,8 @@ class User
 
     /**
      * Get the Unique User Id
-     * @return   int   Unique User Id
+     *
+     * @return int   Unique User Id
      */
     public function getId()
     {
@@ -75,7 +82,8 @@ class User
 
     /**
      * Get User nickname
-     * @return   string   User Nickname
+     *
+     * @return string   User Nickname
      */
     public function getNick()
     {
@@ -88,7 +96,8 @@ class User
 
     /**
      * Get User E-Mail
-     * @return   string   User E-Mail
+     *
+     * @return string   User E-Mail
      */
     public function getEmail()
     {
@@ -101,7 +110,8 @@ class User
 
     /**
      * Get User rank id
-     * @return   int   User rank id
+     *
+     * @return int   User rank id
      */
     public function getRank()
     {
@@ -117,7 +127,7 @@ class User
      *
      * Throws InvalidNickname on invalid nicknames
      *
-     * @param   string   $nick   New User Nickname
+     * @param string $nick New User Nickname
      */
     public function setNick($nick)
     {
@@ -138,7 +148,8 @@ class User
 
     /**
      * Set User E-Mail
-     * @param   string   $email   New User E-Mail
+     *
+     * @param string $email New User E-Mail
      */
     public function setEmail($email)
     {
@@ -152,7 +163,7 @@ class User
      *
      * Throws InvalidPasswordException on invalid Passwords
      *
-     * @param   string   $password   New User Password
+     * @param string $password New User Password
      */
     public function setPassword($password)
     {
@@ -167,7 +178,7 @@ class User
     /**
      * Set user rank id
      *
-     * @param   int   $rank   User rank id
+     * @param int $rank User rank id
      */
     public function setRank($rank)
     {
@@ -179,8 +190,9 @@ class User
 
     /**
      * Load User Info using a nickname
-     * @param    string   $nick   User Nickname to search for
-     * @return   bool             True if User could be found, False otherwise
+     *
+     * @param  string $nick User Nickname to search for
+     * @return bool             True if User could be found, False otherwise
      */
     public function loadNick($nick)
     {
@@ -194,8 +206,9 @@ class User
 
     /**
      * Load User Info using the unique Id
-     * @param    int   $id   Unique User Id
-     * @return   bool        True if User could be found, False otherwise
+     *
+     * @param  int $id Unique User Id
+     * @return bool        True if User could be found, False otherwise
      */
     public function loadId($id)
     {
@@ -209,8 +222,9 @@ class User
 
     /**
      * Assign Values to all private attributes using a user array
-     * @param    array   $user   User Array created by a Database Object
-     * @return   bool            True on success, False otherwise
+     *
+     * @param  array $user User Array created by a Database Object
+     * @return bool            True on success, False otherwise
      */
     private function load($user)
     {
@@ -225,8 +239,9 @@ class User
 
     /**
      * Check if the given Password is correct for this User
-     * @param    string   $password   Password to be checked
-     * @return   bool                 True if the Password is correct, False otherwise
+     *
+     * @param  string $password Password to be checked
+     * @return bool                 True if the Password is correct, False otherwise
      */
     public function checkPassword($password)
     {
@@ -242,7 +257,8 @@ class User
 
     /**
      * Save User in Database
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function create()
     {
@@ -266,8 +282,9 @@ class User
 
     /**
      * Hash Password string using Hautelook\Phpass
-     * @param    string   $password   Password to be hashed
-     * @return   string               Hashed Password
+     *
+     * @param  string $password Password to be hashed
+     * @return string               Hashed Password
      */
     private function hashPassword($password)
     {

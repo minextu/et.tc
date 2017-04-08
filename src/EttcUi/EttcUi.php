@@ -7,28 +7,31 @@ class EttcUi
 {
     /**
      * External path to the root directory of ettc
-     * @var   String
+     *
+     * @var String
      */
     private $rootDir;
 
     /**
      * main ettc object
-     * @var   \Minextu\Ettc\Ettc
+     *
+     * @var \Minextu\Ettc\Ettc
      */
     private $ettc;
 
     /**
      * The main presenter
-     * @var   Main\MainPresenter
+     *
+     * @var Main\MainPresenter
      */
     private $presenter;
 
     private $pageElements = ["MainNav", "UserNav"];
 
     /**
-     * @param   \Minextu\Ettc\Ettc   $ettc       Main ettc object
-     * @param   String   $rootDir    External path to the root directory
-     * @param   String   $pageName   Page name to render
+     * @param   \Minextu\Ettc\Ettc $ettc     Main ettc object
+     * @param   String             $rootDir  External path to the root directory
+     * @param   String             $pageName Page name to render
      */
     public function __construct($ettc, $rootDir, $pageName)
     {
@@ -39,7 +42,8 @@ class EttcUi
 
     /**
      * Will init all classes
-     * @param   String   $pageName   Page name to render
+     *
+     * @param String $pageName Page name to render
      */
     private function start($pageName)
     {
@@ -54,7 +58,8 @@ class EttcUi
 
     /**
      * Generates the complete HTML code for this page
-     * @return   string   Complete HTML code for this page
+     *
+     * @return string   Complete HTML code for this page
      */
     public function generateHtml()
     {
@@ -63,10 +68,11 @@ class EttcUi
 
     /**
      * Inits all model, view, presenter classes and links them together
-     * @param    Page\AbstractPagePresenter                  $pagePresenter           The presenter of the page to be rendered
-     * @param    PageElement\AbstractPageElementPresenter[]  $pageElementPresenters   All presenters in the PageElement folder
-     * @param    String                                      $requestedpageName       Page name to render
-     * @return   bool                                                                 False if the given page is unknown, True otherwise
+     *
+     * @param  Page\AbstractPagePresenter                 $pagePresenter         The presenter of the page to be rendered
+     * @param  PageElement\AbstractPageElementPresenter[] $pageElementPresenters All presenters in the PageElement folder
+     * @param  String                                     $requestedpageName     Page name to render
+     * @return bool                                                                 False if the given page is unknown, True otherwise
      */
     private function init($pagePresenter, $pageElementPresenters, $requestedPageName)
     {
@@ -152,8 +158,9 @@ class EttcUi
 
     /**
      * Inits the presenter of the page to be rendered by creating and linking the model and view classes
-     * @param    string   $requestedPageName   Page to be rendered
-     * @return   AbstractPresenter               Presenter class for the page
+     *
+     * @param  string $requestedPageName Page to be rendered
+     * @return AbstractPresenter               Presenter class for the page
      */
     private function initPage($requestedPageName)
     {
@@ -192,7 +199,8 @@ class EttcUi
 
     /**
     * Generates an Array of available pages by scanning all Folders in src/Minextu/EttcUi/Page
-    * @return  array  Contains all available pages
+     *
+    * @return array  Contains all available pages
     */
     private function getPages()
     {

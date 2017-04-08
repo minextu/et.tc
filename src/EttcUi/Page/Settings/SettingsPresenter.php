@@ -6,8 +6,9 @@ class SettingsPresenter extends AbstractPagePresenter
 {
     /**
      * Check and set settings page
-     * @param   string   $subPage   The subpage to access for this page (setting tab in this case)
-     * @return  bool                True if the subpage is valid, False otherwise
+     *
+     * @param  string $subPage The subpage to access for this page (setting tab in this case)
+     * @return bool                True if the subpage is valid, False otherwise
      */
     public function setSubPage($subPage)
     {

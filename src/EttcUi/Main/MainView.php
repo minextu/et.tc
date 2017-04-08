@@ -6,27 +6,31 @@ class MainView extends AbstractView
 {
     /**
      * Contains all views in the PageElement folder + the current Page view
-     * @var   \Minextu\EttcUi\AbstractView[]
+     *
+     * @var \Minextu\EttcUi\AbstractView[]
      */
     private $pageElements;
     /**
      * Page title
-     * @var   string
+     *
+     * @var string
      */
     private $title;
     /**
      * Page heading
-     * @var   string
+     *
+     * @var string
      */
     private $heading;
     /**
      * Page sub heading
-     * @var   string
+     *
+     * @var string
      */
     private $subHeading;
 
     /**
-     * @param   \Minextu\EttcUi\AbstractView[]   $pageElements   All views in the PageElement folder + the current Page view
+     * @param   \Minextu\EttcUi\AbstractView[] $pageElements All views in the PageElement folder + the current Page view
      */
     public function setPageElements($pageElements)
     {
@@ -34,7 +38,7 @@ class MainView extends AbstractView
     }
 
     /**
-     * @param   string   $title   Page title
+     * @param   string $title Page title
      */
     public function setTitle($title)
     {
@@ -42,7 +46,7 @@ class MainView extends AbstractView
     }
 
     /**
-     * @param   string   $heading  Page heading
+     * @param   string $heading Page heading
      */
     public function setHeading($heading)
     {
@@ -50,7 +54,7 @@ class MainView extends AbstractView
     }
 
     /**
-     * @param   string   $subHeading  Page sub heading
+     * @param   string $subHeading Page sub heading
      */
     public function setSubHeading($subHeading)
     {
@@ -66,14 +70,16 @@ class MainView extends AbstractView
         }
 
         // replace other generic placeholders
-        $placeholders = array_merge($placeholders, array(
+        $placeholders = array_merge(
+            $placeholders, array(
             'MSG_PageTitle' => $this->title,
             'MSG_PageHeading' => $this->heading,
             'MSG_PageSubHeading' => $this->subHeading,
             'PATH_Assets' => $this->path."/assets",
             'PATH_Root' => $this->path,
             'MSG_CurrentYear' => "2016 - " . date("Y")
-        ));
+            )
+        );
 
         $html = $this->template->convertTemplate(__DIR__."/templates/MainView.html", $placeholders);
         return $html;

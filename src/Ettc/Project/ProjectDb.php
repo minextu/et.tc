@@ -9,12 +9,13 @@ class ProjectDb
 {
     /**
      * Main database
-     * @var   \Minextu\Ettc\Database\DatabaseInterface
+     *
+     * @var \Minextu\Ettc\Database\DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Main database
+     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
      */
     public function __construct($db)
     {
@@ -23,8 +24,9 @@ class ProjectDb
 
     /**
      * Search for a project by id
-     * @param    int   $id   Unique project id to be searched for
-     * @return   array       Project info
+     *
+     * @param  int $id Unique project id to be searched for
+     * @return array       Project info
      */
     public function getProjectById($id)
     {
@@ -40,9 +42,10 @@ class ProjectDb
 
     /**
      * Get all Projects and return the ids
-     * @param    string   $sortBy    Sort results by given field
-     * @param    string   $order     Order results
-     * @return   array       All Project ids
+     *
+     * @param  string $sortBy Sort results by given field
+     * @param  string $order  Order results
+     * @return array       All Project ids
      */
     public function getProjectIds($sortBy, $order)
     {
@@ -63,13 +66,14 @@ class ProjectDb
 
     /**
     * Store project in database
-    * @param    string   $title         Project title
-    * @param    string   $description   Project description
-    * @param    string   $html          Project html code
-    * @param    string   $image         Filename of image for project
-    * @param    string   $createDate    Project creation date
-    * @param    string   $updateDate    Project update date
-    * @return   bool|int                Id of the project on success, False otherwise
+     *
+    * @param  string $title       Project title
+    * @param  string $description Project description
+    * @param  string $html        Project html code
+    * @param  string $image       Filename of image for project
+    * @param  string $createDate  Project creation date
+    * @param  string $updateDate  Project update date
+    * @return bool|int                Id of the project on success, False otherwise
     */
     public function insertProject($title, $description, $html, $image, $createDate=false, $updateDate=false)
     {
@@ -88,14 +92,15 @@ class ProjectDb
 
     /**
     * Update values of a project in database
-    * @param    string   $id            Project id
-    * @param    string   $title         Project title
-    * @param    string   $description   Project description
-    * @param    string   $html          Project html code
-    * @param    string   $image         Filename of image for project
-    * @param    string   $createDate    Project creation date
-    * @param    string   $updateDate    Project update date
-    * @return   bool                    True on success, False otherwise
+     *
+    * @param  string $id          Project id
+    * @param  string $title       Project title
+    * @param  string $description Project description
+    * @param  string $html        Project html code
+    * @param  string $image       Filename of image for project
+    * @param  string $createDate  Project creation date
+    * @param  string $updateDate  Project update date
+    * @return bool                    True on success, False otherwise
     */
     public function updateProject($id, $title, $description, $html, $image, $createDate=false, $updateDate=false)
     {
@@ -110,8 +115,9 @@ class ProjectDb
 
     /**
     * Delete project from database
-    * @param    string   $id         Project id
-    * @return   bool|int             True on success, False otherwise
+     *
+    * @param  string $id Project id
+    * @return bool|int             True on success, False otherwise
     */
     public function deleteProject($id)
     {

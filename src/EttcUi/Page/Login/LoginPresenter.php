@@ -11,8 +11,9 @@ class LoginPresenter extends AbstractPagePresenter
 
     /**
      * Checks if the given nickname and password are correct and sets the user status to be logged in
-     * @param    string   $nick   User nickname
-     * @param    string   $pw     User password
+     *
+     * @param string $nick User nickname
+     * @param string $pw   User password
      */
     public function loginClicked($nick, $pw)
     {

@@ -7,13 +7,15 @@ class Ettc
 {
     /**
      * main database
-     * @var   Database\DatabaseInterface
+     *
+     * @var Database\DatabaseInterface
      */
     private $db;
 
     /**
      * main config
-     * @var   Config
+     *
+     * @var Config
      */
     private $conf;
 
@@ -26,10 +28,11 @@ class Ettc
         $this->config->load();
 
         $this->db = new Database\Mysql(
-                        $this->config->get("dbHost"),
-                        $this->config->get("dbUser"),
-                        $this->config->get("dbPassword"),
-                        $this->config->get("dbDatabase"));
+            $this->config->get("dbHost"),
+            $this->config->get("dbUser"),
+            $this->config->get("dbPassword"),
+            $this->config->get("dbDatabase")
+        );
 
         // TODO: only migrate on git pull (Migration could break when multible users are accessing the site)
         $this->migrateDb();
@@ -37,7 +40,8 @@ class Ettc
 
     /**
      * Migrates the database to the newest version
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     private function migrateDb()
     {
@@ -65,7 +69,8 @@ class Ettc
 
     /**
      * Get the complete external Url to index.php
-     * @return   string   External url to index.php (in form of 'http(s)://server.domain/dir/to/ettc')
+     *
+     * @return string   External url to index.php (in form of 'http(s)://server.domain/dir/to/ettc')
      */
     public static function getServerUrl()
     {

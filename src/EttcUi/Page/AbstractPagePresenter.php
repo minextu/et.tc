@@ -6,7 +6,8 @@ abstract class AbstractPagePresenter extends AbstractPresenter
 {
     /**
      * The main presenter
-     * @var   \Minextu\EttcUi\Main\MainPresenter
+     *
+     * @var \Minextu\EttcUi\Main\MainPresenter
      */
     protected $mainPresenter;
 
@@ -25,7 +26,7 @@ abstract class AbstractPagePresenter extends AbstractPresenter
     }
 
     /**
-     * @param   \Minextu\EttcUi\Main\MainPresenter   $mainPresenter   The main presenter
+     * @param   \Minextu\EttcUi\Main\MainPresenter $mainPresenter The main presenter
      */
     final public function setMainPresenter($mainPresenter)
     {
@@ -34,8 +35,9 @@ abstract class AbstractPagePresenter extends AbstractPresenter
 
     /**
     * Set the subpage to given value. Will not allow any sub page by default and cause a 404
-    * @param    String   $subpage   the sub page including all slashes
-    * @return   bool              True if this sub page is valid, False otherwise
+     *
+    * @param  String $subpage the sub page including all slashes
+    * @return bool              True if this sub page is valid, False otherwise
     */
     public function setSubPage($subpage)
     {

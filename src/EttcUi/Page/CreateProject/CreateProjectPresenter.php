@@ -16,8 +16,9 @@ class CreateProjectPresenter extends AbstractPagePresenter
 
     /**
      * Check for permissions to create projects and create the project
-     * @param   String   $title         Project title
-     * @param   String   $description   Project description
+     *
+     * @param String $title       Project title
+     * @param String $description Project description
      */
     public function addProjectClicked($title, $description)
     {

@@ -8,8 +8,9 @@ class EditProjectPresenter extends AbstractPagePresenter
 {
     /**
      * Check if the project does exist
-     * @param   string   $subPage   The subpage to access for this page (project id in this case)
-     * @return  bool                True if the subpage is valid, False otherwise
+     *
+     * @param  string $subPage The subpage to access for this page (project id in this case)
+     * @return bool                True if the subpage is valid, False otherwise
      */
     public function setSubPage($subPage)
     {
@@ -93,7 +94,8 @@ class EditProjectPresenter extends AbstractPagePresenter
 
     /**
      * Get the title for the current project
-     * @return   string   Project title
+     *
+     * @return string   Project title
      */
     public function getProjectTitle()
     {

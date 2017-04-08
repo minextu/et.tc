@@ -10,19 +10,22 @@ class EttcApi
 {
     /**
      * Path to api.php in root folder
-     * @var   string
+     *
+     * @var string
      */
     private static $rootDir;
     /**
      * The main router object
-     * @var   Respect\Rest\Router
+     *
+     * @var Respect\Rest\Router
      */
     private static $router;
 
     /**
      * Run the api
-     * @param    string   $rootDir   Path to api.php in root folder
-     * @param    Minextu\Ettc\Database\DatabaseInterface   $db        Database to be used
+     *
+     * @param string                                  $rootDir Path to api.php in root folder
+     * @param Minextu\Ettc\Database\DatabaseInterface $db      Database to be used
      */
     public static function run($rootDir, $db)
     {
@@ -35,7 +38,8 @@ class EttcApi
 
     /**
      * Connect api calls with their objects
-     * @param   Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
+     *
+     * @param Minextu\Ettc\Database\DatabaseInterface $db Database to be used
      */
     private static function setRoutes($db)
     {
@@ -77,15 +81,18 @@ class EttcApi
     {
         // Show custom 404 Message
         // TODO: Find a better way than catch all
-        self::$router->any('/**', function () {
-            header("HTTP/1.0 404 Not Found");
-            return ['error' => 'ApiNotFound'];
-        });
+        self::$router->any(
+            '/**', function () {
+                header("HTTP/1.0 404 Not Found");
+                return ['error' => 'ApiNotFound'];
+            }
+        );
     }
 
     /**
      * Init the main router object
-     * @param    string   $rootDir   Path to api.php in root folder
+     *
+     * @param string $rootDir Path to api.php in root folder
      */
     private static function init($rootDir)
     {
@@ -101,18 +108,21 @@ class EttcApi
         $router = self::$router;
 
         // encode to json by default, use html as fallback (in browsers)
-        $router->always('Accept', array(
+        $router->always(
+            'Accept', array(
             'application/json' => 'json_encode',
             'text/html' => function ($answer) {
                 return self::htmlEncode($answer);
             }
-        ));
+            )
+        );
     }
 
     /**
      * Use the answer array to generate html output for debug
-     * @param    array   $answer   Api answer
-     * @return   string             Html code for the api answer
+     *
+     * @param  array $answer Api answer
+     * @return string             Html code for the api answer
      */
     private static function htmlEncode($answer)
     {

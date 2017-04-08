@@ -12,10 +12,10 @@ use Minextu\Ettc\Exception\InvalidName;
 /**
  * Denies a permission for the given user, rank or api key, after checking for permissions
  *
- * @api {post} /permission/deny deny permission
- * @apiName denyPermission
+ * @api        {post} /permission/deny deny permission
+ * @apiName    denyPermission
  * @apiVersion 0.1.0
- * @apiGroup Permission
+ * @apiGroup   Permission
  *
  * @apiParam {int} entityId                              id of user, rank or api key to deny permission for
  * @apiParam {String=user,rank,apiKey} entityType  Type of entity
@@ -35,14 +35,14 @@ use Minextu\Ettc\Exception\InvalidName;
  * {
  *    "error": "NotLoggedIn"
  * }
- *
  **/
 
 class Deny extends AbstractRoutable
 {
     /**
      * Denies a permission for the given entity, after checking for permissions
-     * @return   array   api answer
+     *
+     * @return array   api answer
      */
     public function post()
     {
@@ -86,9 +86,10 @@ class Deny extends AbstractRoutable
 
     /**
      * Creates the given entity
-     * @param    int   $entityId     Id of the entity
-     * @param    String   $entityType   Type of the entity
-     * @return   \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey     The created Entity or False if not found
+     *
+     * @param  int    $entityId   Id of the entity
+     * @param  String $entityType Type of the entity
+     * @return \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey     The created Entity or False if not found
      */
     private function createEntity($entityId, $entityType)
     {
@@ -109,10 +110,11 @@ class Deny extends AbstractRoutable
 
     /**
      * Denies permission for the given entity
-     * @param    \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey   $entity  Entity to deny permissions for
-     * @param    String   $entityType   Type of the entity
-     * @param    String   $permission   Permission to deny
-     * @return   String[]               Api answer
+     *
+     * @param  \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey $entity     Entity to deny permissions for
+     * @param  String                                                                             $entityType Type of the entity
+     * @param  String                                                                             $permission Permission to deny
+     * @return String[]               Api answer
      */
     private function denyPermission($entity, $entityType, $permission)
     {
@@ -139,53 +141,56 @@ class Deny extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
-     private function checkLoggedIn()
-     {
-         $loggedin = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkLoggedIn()
+    {
+        $loggedin = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $loggedin = true;
-         }
+        if ($user) {
+            $loggedin = true;
+        }
 
-         return $loggedin;
-     }
+        return $loggedin;
+    }
 
      /**
       * Checks if the user has the permission to deny permissions for this entity
-      * @param    String   $entityType   Type of the entity
-      * @return   bool                   True if user has permissions, False otherwise
+      *
+      * @param  String $entityType Type of the entity
+      * @return bool                   True if user has permissions, False otherwise
       */
-     private function checkPermission($entityType)
-     {
-         $hasPermission = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkPermission($entityType)
+    {
+        $hasPermission = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $permissionObj = new Permission($this->getDb(), $user);
-             $hasPermission = $permissionObj->get("ettcApi/permission/deny:$entityType");
-         }
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermission = $permissionObj->get("ettcApi/permission/deny:$entityType");
+        }
 
-         return $hasPermission;
-     }
+        return $hasPermission;
+    }
 
      /**
       * Checks if the user has the permission himself, that he tries to grant
-      * @param    String   $permission   Permission name to check
-      * @return   bool                   True if user has permissions, False otherwise
+      *
+      * @param  String $permission Permission name to check
+      * @return bool                   True if user has permissions, False otherwise
       */
-     private function checkPermissionGranted($permission)
-     {
-         $hasPermission = false;
-         $user = Account::checkLogin($this->getDb());
+    private function checkPermissionGranted($permission)
+    {
+        $hasPermission = false;
+        $user = Account::checkLogin($this->getDb());
 
-         if ($user) {
-             $permissionObj = new Permission($this->getDb(), $user);
-             $hasPermission = $permissionObj->get($permission);
-         }
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermission = $permissionObj->get($permission);
+        }
 
-         return $hasPermission;
-     }
+        return $hasPermission;
+    }
 }

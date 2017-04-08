@@ -9,19 +9,19 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Deletes a rank
  *
- * @api {post} /rank/delete/:id delete a rank
- * @apiName deleteRank
+ * @api        {post} /rank/delete/:id delete a rank
+ * @apiName    deleteRank
  * @apiVersion 0.1.0
- * @apiGroup Rank
+ * @apiGroup   Rank
  *
  * @apiParam {Number} id                  Rank id
  *
  * @apiSuccess {bool} success             Status of the deletion
  *
- * @apiError MissingValues Id wasn't transmited
- * @apiError NotLoggedIn   You are not logged in
- * @apiError NoPermissions No permissions to delete ranks
- * @apiError NotFound      Rank couldn't be found
+ * @apiError        MissingValues Id wasn't transmited
+ * @apiError        NotLoggedIn   You are not logged in
+ * @apiError        NoPermissions No permissions to delete ranks
+ * @apiError        NotFound      Rank couldn't be found
  * @apiErrorExample Error-Response:
  * HTTP/1.1 403 Forbidden
  * {
@@ -33,8 +33,9 @@ class Delete extends AbstractRoutable
 {
     /**
      * Deletes the given rank, after checking for permissions
-     * @param    int       $id   rank id to be deleted
-     * @return   array           Api answers
+     *
+     * @param  int $id rank id to be deleted
+     * @return array           Api answers
      */
     public function post($id=false)
     {
@@ -72,7 +73,8 @@ class Delete extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {
@@ -88,7 +90,8 @@ class Delete extends AbstractRoutable
 
     /**
      * Check if the current user has permissions
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {

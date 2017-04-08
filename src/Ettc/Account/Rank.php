@@ -9,26 +9,30 @@ class Rank
 {
     /**
      * Rank Database Interface
+     *
      * @var RankDb
      */
     private $rankDb;
 
     /**
      * Rank id
-     * @var   int
+     *
+     * @var int
      */
     private $id;
 
     /**
      * Title for this rank
-     * @var   string
+     *
+     * @var string
      */
     private $title;
 
     /**
      * Creates a new Instance. Loads an exising rank if $id is specified
-     * @param   Database\DatabaseInterface   $db   Database to be used
-     * @param   int   $id                          An existing rank id
+     *
+     * @param Database\DatabaseInterface $db Database to be used
+     * @param int                        $id An existing rank id
      */
     public function __construct($db, $id=false)
     {
@@ -44,8 +48,9 @@ class Rank
 
     /**
      * Get all ranks that are saved in db
-     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
-     * @return   Ranks[]                                          All found ranks
+     *
+     * @param  \Minextu\Ettc\Database\DatabaseInterface $db Database to be used
+     * @return Ranks[]                                          All found ranks
      */
     public static function getAll($db)
     {
@@ -63,8 +68,9 @@ class Rank
 
     /**
     * Load rank using an id
-    * @param    int   $id   Rank id
-    * @return   bool        True if rank could be found, False otherwise
+     *
+    * @param  int $id Rank id
+    * @return bool        True if rank could be found, False otherwise
     */
     public function loadId($id)
     {
@@ -78,8 +84,9 @@ class Rank
 
     /**
      * Assign Values to all private attributes using an rank array
-     * @param    array   $rank     Rank Array created by a Database Object
-     * @return   bool              True on success, False otherwise
+     *
+     * @param  array $rank Rank Array created by a Database Object
+     * @return bool              True on success, False otherwise
      */
     private function load($rank)
     {
@@ -113,7 +120,8 @@ class Rank
 
     /**
      * Saves the rank to database
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function create()
     {
@@ -135,7 +143,8 @@ class Rank
 
     /**
      * Update values of an existing rank
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function update()
     {
@@ -150,7 +159,8 @@ class Rank
 
     /**
      * Deletes this rank
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function delete()
     {
@@ -166,7 +176,8 @@ class Rank
 
     /**
      * Generates array out of all values
-     * @return   array   The object as array
+     *
+     * @return array   The object as array
      */
     public function toArray()
     {

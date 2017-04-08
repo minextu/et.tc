@@ -6,12 +6,13 @@ abstract class AbstractPageElementPresenter extends AbstractPresenter
 {
     /**
      * The main presenter
-     * @var   \Minextu\EttcUi\Main\MainPresenter
+     *
+     * @var \Minextu\EttcUi\Main\MainPresenter
      */
     protected $mainPresenter;
 
     /**
-     * @param   \Minextu\EttcUi\Main\MainPresenter   $mainPresenter   The main presenter
+     * @param   \Minextu\EttcUi\Main\MainPresenter $mainPresenter The main presenter
      */
     final public function setMainPresenter($mainPresenter)
     {

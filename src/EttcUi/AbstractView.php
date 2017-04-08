@@ -7,24 +7,27 @@ abstract class AbstractView
 {
     /**
     * The external path to the folder containing the index.php
+     *
     * @var string
     */
     protected $path;
 
     /**
      * Template
-     * @var   Template object
+     *
+     * @var Template object
      */
     protected $template;
 
     /**
      * The Presenter for this View
-     * @var   AbstractPresenter
+     *
+     * @var AbstractPresenter
      */
     protected $presenter;
 
     /**
-     * @param   string   $path    The external path to the folder containing the index.php
+     * @param   string $path The external path to the folder containing the index.php
      */
     final public function __construct($path)
     {
@@ -33,7 +36,7 @@ abstract class AbstractView
     }
 
     /**
-     * @param   AbstractPresenter   $presenter   The Presenter for this View
+     * @param   AbstractPresenter $presenter The Presenter for this View
      */
     final public function setPresenter($presenter)
     {
@@ -42,7 +45,8 @@ abstract class AbstractView
 
     /**
      * Returns html code for this view
-     * @return   string   html code for this view
+     *
+     * @return string   html code for this view
      */
     abstract public function generateHtml();
 

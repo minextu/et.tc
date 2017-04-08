@@ -7,6 +7,7 @@ interface DatabaseInterface
 {
     /**
      * Create a new instance and connect to the Database
+     *
      * @param string $host Database Server
      * @param string $user Database Username
      * @param string $pw   Database Password
@@ -16,7 +17,8 @@ interface DatabaseInterface
 
     /**
      * Returns the PDO Object for the Database
-     * @return   \PDO   PDO Object for the Database
+     *
+     * @return \PDO   PDO Object for the Database
      */
     public function getPdo();
 }

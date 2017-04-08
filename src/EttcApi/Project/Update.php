@@ -11,12 +11,12 @@ use Minextu\EttcApi\Exception\ImageException;
 /**
  * Update values of a project while checking for permissions
  *
- * @api {post} /project/update/:id update project
- * @apiName updateProject
+ * @api        {post} /project/update/:id update project
+ * @apiName    updateProject
  * @apiVersion 0.1.0
- * @apiGroup Project
+ * @apiGroup   Project
  *
- * @apiParam {Number} id                  Project id
+ * @apiParam {Number} id                       Project id
  * @apiParam {String} [title]                  New project title
  * @apiParam {String} [description]            New project description
  * @apiParam {String} [html]                   New project html code
@@ -61,8 +61,9 @@ class Update extends AbstractRoutable
 {
     /**
      * Updates a exiiting project using post values, checks for permissions
-     * @param    int       $id   Project id to be deleted
-     * @return   array           api answer, containing the created project on success
+     *
+     * @param  int $id Project id to be deleted
+     * @return array           api answer, containing the created project on success
      */
     public function post($id=false)
     {
@@ -144,8 +145,9 @@ class Update extends AbstractRoutable
 
     /**
      * Will check the given image, move it to the correct folder and set the image
-     * @param    \Minextu\Ettc\Project\Project   $project   Project for which the image should be saved
-     * @param    array   $image     $_FILES image
+     *
+     * @param \Minextu\Ettc\Project\Project $project Project for which the image should be saved
+     * @param array                         $image   $_FILES image
      */
     private function uploadImage($project, $image)
     {
@@ -179,7 +181,8 @@ class Update extends AbstractRoutable
 
     /**
      * Check the current login status
-     * @return   bool   True if the user ist logged in, False otherwise
+     *
+     * @return bool   True if the user ist logged in, False otherwise
      */
     private function checkLoggedIn()
     {
@@ -195,7 +198,8 @@ class Update extends AbstractRoutable
 
     /**
      * Check if the current user has permissions
-     * @return   bool   True if the user has permissions, False otherwise
+     *
+     * @return bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {

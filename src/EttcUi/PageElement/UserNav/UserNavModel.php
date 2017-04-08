@@ -14,7 +14,8 @@ class UserNavModel extends AbstractPageElementModel
 
     /**
      * Checks if the User is logged in
-     * @return   bool   True if the user is logged in, False otherwise
+     *
+     * @return bool   True if the user is logged in, False otherwise
      */
     public function checkLogin()
     {
@@ -27,7 +28,8 @@ class UserNavModel extends AbstractPageElementModel
 
     /**
      * Returns the nickname of the User
-     * @return   bool|string   The nickname if the user is logged in, False otherwise
+     *
+     * @return bool|string   The nickname if the user is logged in, False otherwise
      */
     public function getNickname()
     {
@@ -40,7 +42,8 @@ class UserNavModel extends AbstractPageElementModel
 
     /**
      * Generates the URL for the users avatar
-     * @return   string   Avatar image url
+     *
+     * @return string   Avatar image url
      */
     public function getAvatar()
     {

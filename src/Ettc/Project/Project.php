@@ -7,67 +7,77 @@ class Project
 {
     /**
      * Folder containing images for projects
-     * @var   string
+     *
+     * @var string
      */
     const IMAGE_FOLDER = __DIR__."/../../../public/assets/images/projects/";
 
     /**
      * Project Database Interface
+     *
      * @var ProjectDb
      */
     private $projectDb;
 
     /**
      * Project Git Interface
+     *
      * @var ProjectGit
      */
     public $git;
 
     /**
      * Unique project id
-     * @var   int
+     *
+     * @var int
      */
     private $id;
 
     /**
      * Project title
-     * @var   string
+     *
+     * @var string
      */
     private $title;
 
     /**
      * Project description
-     * @var   string
+     *
+     * @var string
      */
     private $description;
 
     /**
      * Project html code
-     * @var   string
+     *
+     * @var string
      */
     private $html;
 
     /**
      * Project image filename
-     * @var   string
+     *
+     * @var string
      */
     private $image;
 
     /**
      * Project creation date
-     * @var   string
+     *
+     * @var string
      */
     private $createDate;
 
     /**
      * Date of the projects last update
-     * @var   string
+     *
+     * @var string
      */
     private $updateDate;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
-     * @param   int   $id                          Project id to be loaded
+     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Database to be used
+     * @param   int                                      $id Project id to be loaded
      */
     public function __construct($db, $id=false)
     {
@@ -83,10 +93,11 @@ class Project
 
     /**
      * Get all Projects that are saved in db
-     * @param    \Minextu\Ettc\Database\DatabaseInterface   $db   Database to be used
-     * @param    string   $sortBy    Sort results by given field
-     * @param    string   $order     Order results
-     * @return   Project[]                          All found projects
+     *
+     * @param  \Minextu\Ettc\Database\DatabaseInterface $db     Database to be used
+     * @param  string                                   $sortBy Sort results by given field
+     * @param  string                                   $order  Order results
+     * @return Project[]                          All found projects
      */
     public static function getAll($db, $sortBy, $order)
     {
@@ -104,7 +115,8 @@ class Project
 
     /**
      * Get project git interface
-     * @return   ProjectGit   Project git interface
+     *
+     * @return ProjectGit   Project git interface
      */
     public function getGit()
     {
@@ -117,7 +129,8 @@ class Project
 
     /**
      * Get project id
-     * @return   string   Project id
+     *
+     * @return string   Project id
      */
     public function getId()
     {
@@ -130,7 +143,8 @@ class Project
 
     /**
      * Sets id and initializes projectGit
-     * @param   [type]   $id   [description]
+     *
+     * @param [type] $id [description]
      */
     private function setId($id)
     {
@@ -140,7 +154,8 @@ class Project
 
     /**
      * Get project title
-     * @return   string   Project title
+     *
+     * @return string   Project title
      */
     public function getTitle()
     {
@@ -152,7 +167,7 @@ class Project
     }
 
     /**
-     * @param   string   $title   Project title
+     * @param   string $title Project title
      * @return  bool              True on success, False otherwise
      */
     public function setTitle($title)
@@ -163,7 +178,8 @@ class Project
 
     /**
      * Get project description
-     * @return   string   Project description
+     *
+     * @return string   Project description
      */
     public function getDescription()
     {
@@ -175,7 +191,7 @@ class Project
     }
 
     /**
-     * @param   string   $description   Project description
+     * @param   string $description Project description
      * @return  bool                    True on success, False otherwise
      */
     public function setDescription($description)
@@ -186,7 +202,8 @@ class Project
 
     /**
      * Get project html code
-     * @return   string   Project html code
+     *
+     * @return string   Project html code
      */
     public function getHtml()
     {
@@ -198,7 +215,7 @@ class Project
     }
 
     /**
-     * @param   string   $html   Project html code
+     * @param   string $html Project html code
      * @return  bool             True on success, False otherwise
      */
     public function setHtml($html)
@@ -209,7 +226,8 @@ class Project
 
     /**
      * Get project image
-     * @return   string   Project image filename
+     *
+     * @return string   Project image filename
      */
     public function getImage()
     {
@@ -224,7 +242,7 @@ class Project
     }
 
     /**
-     * @param   string   $filename      Filename of Image
+     * @param   string $filename Filename of Image
      * @return  bool                    True on success, False otherwise
      */
     public function setImage($filename)
@@ -235,7 +253,8 @@ class Project
 
     /**
      * Deletes the current Image
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function deleteImage()
     {
@@ -249,7 +268,8 @@ class Project
 
     /**
      * Get project image type
-     * @return   string   "Placeholder" if the image is a placholder, "Default" otherwise
+     *
+     * @return string   "Placeholder" if the image is a placholder, "Default" otherwise
      */
     public function getImageType()
     {
@@ -264,7 +284,8 @@ class Project
 
     /**
      * Get project creation date
-     * @return   string   Project creation date
+     *
+     * @return string   Project creation date
      */
     public function getCreateDate()
     {
@@ -277,8 +298,9 @@ class Project
 
     /**
      * Set project creation date
-     * @param   string   $date   Project creation date (parsable by strtotime)
-     * @return  bool                    True on success, False otherwise
+     *
+     * @param  string $date Project creation date (parsable by strtotime)
+     * @return bool                    True on success, False otherwise
      */
     public function setCreateDate($date)
     {
@@ -289,7 +311,8 @@ class Project
 
     /**
      * Get project update date
-     * @return   string   Date of the projects last update
+     *
+     * @return string   Date of the projects last update
      */
     public function getUpdateDate()
     {
@@ -302,8 +325,9 @@ class Project
 
     /**
      * Set project creation date
-     * @param   string   $date   Project creation date (parsable by strtotime)
-     * @return  bool                    True on success, False otherwise
+     *
+     * @param  string $date Project creation date (parsable by strtotime)
+     * @return bool                    True on success, False otherwise
      */
     public function setUpdateDate($date)
     {
@@ -314,7 +338,8 @@ class Project
 
     /**
      * Get url to projects git repository
-     * @return   String|bool   The git url if one was set before, False otherwise
+     *
+     * @return String|bool   The git url if one was set before, False otherwise
      */
     public function getGitUrl()
     {
@@ -333,7 +358,8 @@ class Project
 
     /**
      * Clone the given git repository
-     * @param    String   $url   Url to git repository
+     *
+     * @param String $url Url to git repository
      */
     public function setGitUrl($url)
     {
@@ -351,8 +377,9 @@ class Project
 
     /**
      * Load project info using the id
-     * @param    int   $id   Unique project id
-     * @return   bool        True if project could be found, False otherwise
+     *
+     * @param  int $id Unique project id
+     * @return bool        True if project could be found, False otherwise
     */
     public function loadId($id)
     {
@@ -366,8 +393,9 @@ class Project
 
     /**
      * Assign Values to all private attributes using a project array
-     * @param    array   $project   Project array created by a Database Object
-     * @return   bool               True on success, False otherwise
+     *
+     * @param  array $project Project array created by a Database Object
+     * @return bool               True on success, False otherwise
     */
     private function load($project)
     {
@@ -384,7 +412,8 @@ class Project
 
     /**
      * Save Project in Database
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function create()
     {
@@ -412,7 +441,8 @@ class Project
 
     /**
      * Update values of an existing project
-     * @return   bool   True on success, False otherwise
+     *
+     * @return bool   True on success, False otherwise
      */
     public function update()
     {
@@ -427,8 +457,9 @@ class Project
 
     /**
      * Delete Project from Database
-     * @param    bool  $deleteGit  Also delete any possible git repository
-     * @return   bool   True on success, False otherwise
+     *
+     * @param  bool $deleteGit Also delete any possible git repository
+     * @return bool   True on success, False otherwise
      */
     public function delete($deleteGit=true)
     {
@@ -449,7 +480,8 @@ class Project
 
     /**
      * Generates array out of all values
-     * @return   array   The object as array
+     *
+     * @return array   The object as array
      */
     public function toArray()
     {

@@ -7,8 +7,9 @@ class FailedLogin
 {
     /**
      * Add a failed login attempt, will also log ip address
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db    Database to be sued
-     * @param   string   $nick   Nickname to log
+     *
+     * @param \Minextu\Ettc\Database\DatabaseInterface $db   Database to be sued
+     * @param string                                   $nick Nickname to log
      */
     public static function add($db, $nick)
     {
@@ -25,9 +26,10 @@ class FailedLogin
 
     /**
      * Try to fetch the time of last login attempt
-     * @param   \Minextu\Ettc\Database\DatabaseInterface   $db    Database to be sued
-     * @param   string   $nick   Nickname that was logged
-     * @return                   Mysql time of last login attempt, or False if non exist
+     *
+     * @param  \Minextu\Ettc\Database\DatabaseInterface $db   Database to be sued
+     * @param  string                                   $nick Nickname that was logged
+     * @return Mysql time of last login attempt, or False if non exist
      */
     public static function getLastTime($db, $nick)
     {
