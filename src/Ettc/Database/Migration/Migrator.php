@@ -35,7 +35,7 @@ class Migrator
     * @param int|bool          $targetVersion  Target Database Migration Version (True for the newest version)
     * @param DatabaseInterface $db             Database to be migrated
     */
-    public function __construct(int $currentVersion, $targetVersion, DatabaseInterface $db)
+    public function __construct($currentVersion, $targetVersion, DatabaseInterface $db)
     {
         $this->current = $currentVersion;
 
@@ -62,7 +62,7 @@ class Migrator
     * @param  string $folder The folder to be used
     * @return bool               True if succeeded, False if not
     */
-    public function migrateFolder(string $folder=__DIR__."/../../../../conf/migrations")
+    public function migrateFolder($folder=__DIR__."/../../../../conf/migrations")
     {
         // handle migrations in correct order
         if ($this->current < $this->target) {
@@ -127,7 +127,7 @@ class Migrator
     * @param  bool              $downgrade       Executes a Downgrade when true
     * @return bool                               True if succeeded, False if not
     */
-    public function migrateObject(AbstractMigration $migrationObject, bool $downgrade=false)
+    public function migrateObject(AbstractMigration $migrationObject, $downgrade=false)
     {
         $migrationObject->setDb($this->db);
 

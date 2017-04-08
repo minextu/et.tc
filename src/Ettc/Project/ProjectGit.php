@@ -50,7 +50,7 @@ class ProjectGit
      * @param  string $url Url to project
      * @return bool            True on success, False otherwise
      */
-    public function gitClone(string $url)
+    public function gitClone($url)
     {
         if ($this->exists()) {
             throw new Exception("project git folder '" . $this->projectDir . "' already exists'");
@@ -107,7 +107,7 @@ class ProjectGit
      * @param  int $skip  Amount of logs to skip
      * @return string   all git logs
      */
-    public function getLogs(int $count, int $skip)
+    public function getLogs($count, $skip)
     {
         if (!$this->exists()) {
             throw new InvalidId("project git folder '" . $this->projectDir . "' does not exists'");
@@ -180,7 +180,7 @@ class ProjectGit
      * @param  string $path The folder that should be deleted
      * @return bool             False if the folder does not exist, True otherwise
      */
-    private function deleteFolder(string $path)
+    private function deleteFolder($path)
     {
         if (is_dir($path) === true) {
             $files = array_diff(scandir($path), array('.', '..'));

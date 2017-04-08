@@ -86,7 +86,7 @@ class Login extends AbstractRoutable
      * @param  string $pw   Password to check
      * @return bool             True if nickname and password are correct, false otherwise
      */
-    private function checkLogin(string $nick, string $pw)
+    private function checkLogin($nick, $pw)
     {
         $user = new User($this->getDb());
 
@@ -104,7 +104,7 @@ class Login extends AbstractRoutable
      *
      * @param string $nick Nickname of the user
      */
-    private function login(string $nick)
+    private function login($nick)
     {
         $user = new User($this->getDb());
         // load user
@@ -124,7 +124,7 @@ class Login extends AbstractRoutable
      * @param string  $nick          Nickname of the user
      * @param boolean $isFailedLogin Wether this login attempt has failed or not
      */
-    private function preventBruteForce(string $nick, bool $isFailedLogin = false)
+    private function preventBruteForce($nick, $isFailedLogin = false)
     {
         if (!$isFailedLogin) {
             $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);

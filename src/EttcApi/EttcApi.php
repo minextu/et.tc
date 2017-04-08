@@ -28,7 +28,7 @@ class EttcApi
      * @param string            $rootDir Path to api.php in root folder
      * @param DatabaseInterface $db      Database to be used
      */
-    public static function run(string $rootDir, DatabaseInterface $db)
+    public static function run($rootDir, DatabaseInterface $db)
     {
         self::init($rootDir);
 
@@ -95,7 +95,7 @@ class EttcApi
      *
      * @param string $rootDir Path to api.php in root folder
      */
-    private static function init(string $rootDir)
+    private static function init($rootDir)
     {
         self::$rootDir = $rootDir;
         self::$router = new Router($rootDir);

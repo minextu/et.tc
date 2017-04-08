@@ -87,7 +87,7 @@ class PermissionList extends AbstractRoutable
      * @param  string $entityType Type of the entity
      * @return User|Rank|ApiKey   The created Entity or False if not found
      */
-    private function createEntity(int $entityId, string $entityType)
+    private function createEntity($entityId, $entityType)
     {
         $entity = false;
 
@@ -117,7 +117,7 @@ class PermissionList extends AbstractRoutable
      * @param  string                   $entityType Type of the entity
      * @return string[]                             Api answer
      */
-    private function listPermission($entity, string $entityType)
+    private function listPermission($entity, $entityType)
     {
         $permissionObj = new Permission($this->getDb());
 
@@ -158,7 +158,7 @@ class PermissionList extends AbstractRoutable
       * @param  String $entityType Type of the entity
       * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermission(int $entityId, string $entityType)
+    private function checkPermission($entityId, $entityType)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());

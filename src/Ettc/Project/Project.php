@@ -100,7 +100,7 @@ class Project
      * @param  string            $order  Order results
      * @return Project[]                 All found projects
      */
-    public static function getAll(DatabaseInterface $db, string $sortBy, string $order)
+    public static function getAll(DatabaseInterface $db, $sortBy, $order)
     {
         $projectDb = new ProjectDb($db);
         $projectIds = $projectDb->getProjectIds($sortBy, $order);
@@ -147,7 +147,7 @@ class Project
      *
      * @param int $id project id
      */
-    private function setId(int $id)
+    private function setId($id)
     {
         $this->id = $id;
         $this->git = new ProjectGit($id);
@@ -171,7 +171,7 @@ class Project
      * @param   string $title Project title
      * @return  bool              True on success, False otherwise
      */
-    public function setTitle(string $title)
+    public function setTitle($title)
     {
         $this->title = $title;
         return true;
@@ -219,7 +219,7 @@ class Project
      * @param   string $html Project html code
      * @return  bool             True on success, False otherwise
      */
-    public function setHtml(string $html)
+    public function setHtml($html)
     {
         $this->html = $html;
         return true;
@@ -246,7 +246,7 @@ class Project
      * @param   string $filename Filename of Image
      * @return  bool                    True on success, False otherwise
      */
-    public function setImage(string $filename)
+    public function setImage($filename)
     {
         $this->image = $filename;
         return true;
@@ -303,7 +303,7 @@ class Project
      * @param  string $date Project creation date (parsable by strtotime)
      * @return bool                    True on success, False otherwise
      */
-    public function setCreateDate(string $date)
+    public function setCreateDate($date)
     {
         $date = date("Y-m-d H:i:s", strtotime($date));
         $this->createDate = $date;
@@ -330,7 +330,7 @@ class Project
      * @param  string $date Project creation date (parsable by strtotime)
      * @return bool         True on success, False otherwise
      */
-    public function setUpdateDate(string $date)
+    public function setUpdateDate($date)
     {
         $date = date("Y-m-d H:i:s", strtotime($date));
         $this->updateDate = $date;
@@ -362,7 +362,7 @@ class Project
      *
      * @param String $url Url to git repository
      */
-    public function setGitUrl(string $url)
+    public function setGitUrl($url)
     {
         if (!isset($this->git)) {
             throw new Exception("Project has to be loaded first.");
@@ -382,7 +382,7 @@ class Project
      * @param  int $id Unique project id
      * @return bool    True if project could be found, False otherwise
     */
-    public function loadId(int $id)
+    public function loadId($id)
     {
         $project = $this->projectDb->getProjectById($id);
         if ($project === false) {
@@ -462,7 +462,7 @@ class Project
      * @param  bool $deleteGit Also delete any possible git repository
      * @return bool            True on success, False otherwise
      */
-    public function delete(bool $deleteGit=true)
+    public function delete($deleteGit=true)
     {
         if (!isset($this->id)) {
             throw new Exception("Project has to be loaded first.");

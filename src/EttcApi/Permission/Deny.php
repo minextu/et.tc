@@ -91,7 +91,7 @@ class Deny extends AbstractRoutable
      * @param  string $entityType Type of the entity
      * @return User|Rank|ApiKey   The created Entity or False if not found
      */
-    private function createEntity(int $entityId, string $entityType)
+    private function createEntity($entityId, $entityType)
     {
         try {
             if ($entityType == "user") {
@@ -116,7 +116,7 @@ class Deny extends AbstractRoutable
      * @param  string           $permission Permission to deny
      * @return string[]                     Api answer
      */
-    private function denyPermission($entity, string $entityType, string $permission)
+    private function denyPermission($entity, $entityType, $permission)
     {
         $permissionObj = new Permission($this->getDb());
 
@@ -162,7 +162,7 @@ class Deny extends AbstractRoutable
       * @param  string $entityType Type of the entity
       * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermission(string $entityType)
+    private function checkPermission($entityType)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());
@@ -181,7 +181,7 @@ class Deny extends AbstractRoutable
       * @param  string $permission Permission name to check
       * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermissionGranted(string $permission)
+    private function checkPermissionGranted($permission)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());

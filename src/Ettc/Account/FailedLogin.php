@@ -13,7 +13,7 @@ class FailedLogin
      * @param DatabaseInterface $db   Database to be sued
      * @param string            $nick Nickname to log
      */
-    public static function add(DatabaseInterface $db, string $nick)
+    public static function add(DatabaseInterface $db, $nick)
     {
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -33,7 +33,7 @@ class FailedLogin
      * @param  string            $nick Nickname that was logged
      * @return Mysql time of last login attempt, or False if non exist
      */
-    public static function getLastTime(DatabaseInterface $db, string $nick)
+    public static function getLastTime(DatabaseInterface $db, $nick)
     {
         $sql = 'SELECT `time` FROM failedLogins WHERE nick=? ORDER BY `time` DESC LIMIT 1';
 

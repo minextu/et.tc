@@ -73,7 +73,7 @@ class ProjectList extends AbstractRoutable
      * @param  string $order  Order results
      * @return array   all projects as arrays
      */
-    private function getProjects(string $sortBy, string $order)
+    private function getProjects($sortBy, $order)
     {
         $projects = ProjectObj::getAll($this->getDb(), $sortBy, $order);
 

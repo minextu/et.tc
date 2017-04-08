@@ -125,7 +125,7 @@ class Permission
      * @param Rank $rank                    Rank to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadRank(Rank $rank, bool $keepPreviousPermissions=false)
+    public function loadRank(Rank $rank, $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -149,7 +149,7 @@ class Permission
      * @param Rank $apikey                  Api key to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadApiKey(ApiKey $apiKey, bool $keepPreviousPermissions=false)
+    public function loadApiKey(ApiKey $apiKey, $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -199,7 +199,7 @@ class Permission
      *
      * @param string $permissionName Name of the permission to grant
      */
-    public function grant(string $permissionName)
+    public function grant($permissionName)
     {
         if (strpos($permissionName, ",") !== false) {
             throw new Exception\InvalidName("Permission must not contain a comma");
@@ -219,7 +219,7 @@ class Permission
      * @param  string $permissionName Name of the permission to deny
      * @return bool                       True on success, False otherwise
      */
-    public function deny(string $permissionName)
+    public function deny($permissionName)
     {
         unset($this->permissions[$permissionName]);
         $this->savePermissions();
@@ -232,7 +232,7 @@ class Permission
      * @param  string $permissionName Name of the permission to Check
      * @return bool                       True if permissions is granted, False otherwise
      */
-    public function get(string $permissionName)
+    public function get($permissionName)
     {
         $hasPermission = false;
 

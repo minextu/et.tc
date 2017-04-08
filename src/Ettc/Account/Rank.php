@@ -73,7 +73,7 @@ class Rank
     * @param  int $id Rank id
     * @return bool    True if rank could be found, False otherwise
     */
-    public function loadId(int $id)
+    public function loadId($id)
     {
         $rank = $this->rankDb->getRankById($id);
         if ($rank=== false) {
@@ -105,7 +105,7 @@ class Rank
         return $this->id;
     }
 
-    public function setTitle(string $title)
+    public function setTitle($title)
     {
         $this->title = $title;
         return true;

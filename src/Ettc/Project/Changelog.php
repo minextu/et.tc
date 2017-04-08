@@ -13,7 +13,7 @@ class Changelog
      * @param  int                       $skip  Amount of logs to skip
      * @return array         Logs for the git object
      */
-    public static function generateLogs(Git $git, int $count, int $skip)
+    public static function generateLogs(Git $git, $count, $skip)
     {
         $format = new Format();
         $logs = $git->log(
@@ -36,7 +36,7 @@ class Changelog
      * @param  string $log    Git log answer
      * @return array              All commits as array
      */
-    private static function parse(Format $format, string $log)
+    private static function parse(Format $format, $log)
     {
         $buffer = array();
         $commits = explode($format->getCommitDelimiter(), $log);
@@ -90,7 +90,7 @@ class Changelog
      * @param  string $email Email of the user
      * @return string          Avatar image url
      */
-    private static function generateAvatarUrl(string $email)
+    private static function generateAvatarUrl($email)
     {
         $default = "http://img2.wikia.nocookie.net/__cb20110302033947/recipes/images/thumb/1/1c/Avatar.svg/480px-Avatar.svg.png";
         $size = 200;

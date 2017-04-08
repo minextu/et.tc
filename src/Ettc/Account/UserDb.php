@@ -29,7 +29,7 @@ class UserDb
      * @param  int $id Unique User Id to be searched for
      * @return array   User Info
      */
-    public function getUserById(int $id)
+    public function getUserById($id)
     {
         $sql = 'SELECT * FROM users WHERE id=?';
 
@@ -46,7 +46,7 @@ class UserDb
      * @param  string $nick User nickname to be searched for
      * @return array        User info
      */
-    public function getUserByNick(string $nick)
+    public function getUserByNick($nick)
     {
         $sql = 'SELECT * FROM users WHERE nick=?';
 
@@ -66,7 +66,7 @@ class UserDb
      * @param  int         $rank  User rank id
      * @return bool|int           Id of the user on success, False otherwise
      */
-    public function insertUser(string $nick, $email, string $hash, int $rank)
+    public function insertUser($nick, $email, $hash, $rank)
     {
         $sql = 'INSERT into users
                 (nick, email, hash, rank)

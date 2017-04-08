@@ -105,7 +105,7 @@ class ApiKey
      * @param  int $id Unique Api key id
      * @return bool        True if api key could be found, False otherwise
      */
-    public function loadId(int $id)
+    public function loadId($id)
     {
         $key = $this->apiKeyDb->getApiKeyById($id);
         if ($key=== false) {
@@ -121,7 +121,7 @@ class ApiKey
      * @param  string $key Unique Api key
      * @return bool        True if api key could be found, False otherwise
      */
-    public function loadKey(string $key)
+    public function loadKey($key)
     {
         $key = $this->apiKeyDb->getApiKeyByKey($key);
         if ($key=== false) {
@@ -197,7 +197,7 @@ class ApiKey
         return $this->user;
     }
 
-    public function setTitle(string $title)
+    public function setTitle($title)
     {
         $this->title = $title;
         return true;

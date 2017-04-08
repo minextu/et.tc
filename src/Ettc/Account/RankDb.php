@@ -29,7 +29,7 @@ class RankDb
      * @param  string $title Title of the rank
      * @return bool|int          Id of the rank on success, False otherwise
      */
-    public function addRank(string $title)
+    public function addRank($title)
     {
         $sql = 'INSERT into ranks
                 (`title`)
@@ -50,7 +50,7 @@ class RankDb
      * @param  int $id Rank id
      * @return array   Rank info
      */
-    public function getRankById(int $id)
+    public function getRankById($id)
     {
         $sql = 'SELECT `id`,`title` FROM ranks WHERE `id`=?';
 
@@ -82,7 +82,7 @@ class RankDb
     * @param  string $title Rank title
     * @return bool          True on success, False otherwise
     */
-    public function updateRank(int $id, string $title)
+    public function updateRank($id, $title)
     {
         $sql = 'UPDATE ranks
                 Set title = ?
@@ -99,7 +99,7 @@ class RankDb
     * @param  int $id Rank id
     * @return bool    True on success, False otherwise
     */
-    public function deleteRank(int $id)
+    public function deleteRank($id)
     {
         $sql = 'DELETE from ranks
                 WHERE id = ?';
