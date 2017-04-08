@@ -274,4 +274,20 @@ class PermissionTest extends AbstractEttcDatabaseTest
         $hasPermission = $permission->get($permissionName);
         $this->assertTrue($hasPermission, "Permission was not inherited correctly");
     }
+
+    public function testInvalidRankWillBeIngoredForUser()
+    {
+        // create and load user
+        $this->createTestUser();
+        $user = new User($this->getDb(), 1);
+        // set users rank to an invalid id
+        $user->setRank(-1);
+
+        // create permission object for this user
+        $permission = new Permission($this->getDb(), $user);
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(0, $permissionCount, "There should not be any permissions");
+    }
 }

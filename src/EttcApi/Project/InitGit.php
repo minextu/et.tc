@@ -115,20 +115,19 @@ class InitGit extends AbstractRoutable
     }
 
     /**
-     * Check if the current user has permissions to create projects
+     * Check if the current user has permissions
      * @return   bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {
-        $permissions = false;
+        $hasPermission = false;
         $user = Account::checkLogin($this->getDb());
 
-        // only proceed if admin
-        // TODO: check permissions instead of rank
-        if ($user && $user->getRank() == 2) {
-            $permissions = true;
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermission = $permissionObj->get("ettcApi/project/initGit");
         }
 
-        return $permissions;
+        return $hasPermission;
     }
 }

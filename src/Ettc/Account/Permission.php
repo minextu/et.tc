@@ -13,6 +13,12 @@ class Permission
      */
     private $allPermissions = [
 
+        // api: project
+        "ettcApi/project/create",
+        "ettcApi/project/delete",
+        "ettcApi/project/initGit",
+        "ettcApi/project/update",
+
         // api: rank
         "ettcApi/ranks",
         "ettcApi/rank/create",
@@ -58,9 +64,12 @@ class Permission
         $this->permissionDb = new PermissionDb($db);
 
         if ($user !== false) {
-            // load permissions for users rank
-            $rank = new Rank($db, $user->getRank());
-            $this->loadRank($rank);
+            // try to load permissions for users rank
+            try {
+                $rank = new Rank($db, $user->getRank());
+                $this->loadRank($rank);
+            } catch (Exception\InvalidId $e) {
+            }
 
             // load users permissions
             $this->loadOnlyUser($user, true);

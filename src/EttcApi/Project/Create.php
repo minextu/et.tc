@@ -3,6 +3,7 @@
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc;
 
 /**
@@ -103,15 +104,14 @@ class Create extends AbstractRoutable
      */
     private function checkPermissions()
     {
-        $permissions = false;
+        $hasPermission = false;
         $user = Account::checkLogin($this->getDb());
 
-        // only proceed if admin
-        // TODO: check permissions instead of rank
-        if ($user && $user->getRank() == 2) {
-            $permissions = true;
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermission = $permissionObj->get("ettcApi/project/create");
         }
 
-        return $permissions;
+        return $hasPermission;
     }
 }
