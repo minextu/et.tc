@@ -197,7 +197,7 @@ class ApiKey
         return $this->user;
     }
 
-    public function setTitle(string $title)
+    public function setTitle($title)
     {
         $this->title = $title;
         return true;
