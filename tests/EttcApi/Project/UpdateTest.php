@@ -3,6 +3,7 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc\Project\Project;
 
 class UpdateTest extends AbstractEttcDatabaseTest
@@ -13,13 +14,18 @@ class UpdateTest extends AbstractEttcDatabaseTest
         $_SERVER['HTTP_HOST'] = "";
     }
 
-    public function createLoginTestUser($rank)
+    public function createLoginTestUser($grantPermission=true)
     {
         $user = new User($this->getDb());
         $user->setNick("TestNickname");
         $user->setPassword("TestPassword");
-        $user->setRank($rank);
         $user->create();
+
+        // set permissions
+        if ($grantPermission) {
+            $permission = new Permission($this->getDb(), $user);
+            $permission->grant("ettcApi/project/update");
+        }
 
         Account::login($user, $this->getDb());
     }
@@ -34,7 +40,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
     public function testProjectCanBeUpdate()
     {
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
         $this->createTestProject("oldTestTitle", "oldTestDescription");
 
         $newTitle = "New Test Title";
@@ -79,7 +85,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
     public function testMissingId()
     {
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         $title = "Test Title";
         $description = "Test Description";
@@ -117,8 +123,8 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
     public function testNoPermissions()
     {
-        // Create user with guest permissions
-        $this->createLoginTestUser(1);
+        // Create user with no permissions
+        $this->createLoginTestUser(false);
 
         $title = "Test Title";
         $description = "Test Description";
@@ -138,7 +144,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
 
     public function testProjectWithNoChangesWillNotGetUpdated()
     {
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         $title = "Test Title";
         $description = "Test Description";
@@ -161,7 +167,7 @@ class UpdateTest extends AbstractEttcDatabaseTest
         $description = "Test Description";
         $this->createTestProject($title, $description);
 
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         $_POST['title'] = "new title";
         $_POST['description'] = "new description";

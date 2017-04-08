@@ -3,6 +3,7 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc\Project\Project;
 
 class CreateTest extends AbstractEttcDatabaseTest
@@ -13,20 +14,25 @@ class CreateTest extends AbstractEttcDatabaseTest
         $_SERVER['HTTP_HOST'] = "";
     }
 
-    public function createLoginTestUser($rank)
+    public function createLoginTestUser($grantPermission=true)
     {
         $user = new User($this->getDb());
         $user->setNick("TestNickname");
         $user->setPassword("TestPassword");
-        $user->setRank($rank);
         $user->create();
+
+        // set permissions
+        if ($grantPermission) {
+            $permission = new Permission($this->getDb(), $user);
+            $permission->grant("ettcApi/project/create");
+        }
 
         Account::login($user, $this->getDb());
     }
 
     public function testProjectCanBeCreated()
     {
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         $title = "Test Title";
         $description = "Test Description";
@@ -97,8 +103,8 @@ class CreateTest extends AbstractEttcDatabaseTest
 
     public function testNoPermissions()
     {
-        // Create user with guest permissions
-        $this->createLoginTestUser(1);
+        // Create user with no permissions
+        $this->createLoginTestUser(false);
 
         $title = "Test Title";
         $description = "Test Description";
