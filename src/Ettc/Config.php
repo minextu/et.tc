@@ -31,7 +31,7 @@ class Config
     * @param  string $configFile The Config File to be used
     * @access public
     */
-    public function __construct(string $configFile="conf/config.php")
+    public function __construct($configFile="conf/config.php")
     {
         $this->configFile = $configFile;
     }

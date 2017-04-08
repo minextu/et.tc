@@ -462,7 +462,7 @@ class Project
      * @param  bool $deleteGit Also delete any possible git repository
      * @return bool            True on success, False otherwise
      */
-    public function delete(bool $deleteGit=true)
+    public function delete($deleteGit=true)
     {
         if (!isset($this->id)) {
             throw new Exception("Project has to be loaded first.");

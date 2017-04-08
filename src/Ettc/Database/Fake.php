@@ -15,7 +15,7 @@ class Fake implements DatabaseInterface
      */
     private $pdo;
 
-    public function __construct($pdo, string $user="", string $pw="", string $db="")
+    public function __construct($pdo, $user="", $pw="", $db="")
     {
         $this->pdo = $pdo;
     }

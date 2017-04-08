@@ -124,7 +124,7 @@ class Login extends AbstractRoutable
      * @param string  $nick          Nickname of the user
      * @param boolean $isFailedLogin Wether this login attempt has failed or not
      */
-    private function preventBruteForce(string $nick, bool $isFailedLogin = false)
+    private function preventBruteForce(string $nick, $isFailedLogin = false)
     {
         if (!$isFailedLogin) {
             $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);

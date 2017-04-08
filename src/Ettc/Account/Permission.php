@@ -125,7 +125,7 @@ class Permission
      * @param Rank $rank                    Rank to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadRank(Rank $rank, bool $keepPreviousPermissions=false)
+    public function loadRank(Rank $rank, $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -149,7 +149,7 @@ class Permission
      * @param Rank $apikey                  Api key to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadApiKey(ApiKey $apiKey, bool $keepPreviousPermissions=false)
+    public function loadApiKey(ApiKey $apiKey, $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];

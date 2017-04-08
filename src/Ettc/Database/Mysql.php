@@ -21,7 +21,7 @@ class Mysql implements DatabaseInterface
      */
     private $pdo;
 
-    public function __construct($host, string $user, string $pw, string $db)
+    public function __construct($host, $user, $pw, $db)
     {
         $dsn = "mysql:host=$host;dbname=$db;charset=$this->charset";
         $options = [
