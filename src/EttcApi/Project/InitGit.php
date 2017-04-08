@@ -3,6 +3,7 @@
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc;
 use Minextu\Ettc\Exception\InvalidId;
 use Minextu\Ettc\Exception\InvalidGitRemote;
