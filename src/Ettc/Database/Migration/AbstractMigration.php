@@ -1,5 +1,7 @@
 <?php namespace Minextu\Ettc\Database\Migration;
 
+use Minextu\Ettc\Database\DatabaseInterface;
+
 /**
  * An instance should be able to migrate the Database
  */
@@ -8,16 +10,16 @@ abstract class AbstractMigration
     /**
      * Database to be migrated
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     protected $db;
 
     /**
      * Sets the DB
      *
-     * @param \Minextu\Ettc\Database\DatabaseInterface $db Database to be migrated
+     * @param DatabaseInterface $db Database to be migrated
      */
-    final public function setDb($db)
+    final public function setDb(DatabaseInterface $db)
     {
         $this->db = $db;
     }

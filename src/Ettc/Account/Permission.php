@@ -1,6 +1,8 @@
 <?php namespace Minextu\Ettc\Account;
 
-use \Minextu\Ettc\Exception;
+use Minextu\Ettc\Exception;
+use Minextu\Ettc\Account\User;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
   * Can Create, Delete and fetch permissions for a user
@@ -75,7 +77,7 @@ class Permission
      * @param Database\DatabaseInterface $db   Database to be used
      * @param User                       $user User to fetch permissions for (will also include the users rank)
      */
-    public function __construct($db, $user=false)
+    public function __construct(DatabaseInterface $db, $user=false)
     {
         $this->permissionDb = new PermissionDb($db);
 
@@ -98,7 +100,7 @@ class Permission
      * @param User $user                    User to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadOnlyUser($user, $keepPreviousPermissions=false)
+    public function loadOnlyUser(User $user, $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -123,7 +125,7 @@ class Permission
      * @param Rank $rank                    Rank to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadRank($rank, $keepPreviousPermissions=false)
+    public function loadRank(Rank $rank, bool $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -147,7 +149,7 @@ class Permission
      * @param Rank $apikey                  Api key to fetch permissions for
      * @param bool $keepPreviousPermissions Wether to delte previous loaded permissions or not
      */
-    public function loadApiKey($apiKey, $keepPreviousPermissions=false)
+    public function loadApiKey(ApiKey $apiKey, bool $keepPreviousPermissions=false)
     {
         if (!$keepPreviousPermissions) {
             $this->permissions = [];
@@ -168,7 +170,7 @@ class Permission
     /**
      * Loads permissions out of a csv string
      *
-     * @param String $permissionString Csv list of permissions
+     * @param string|null $permissionString Csv list of permissions
      */
     private function loadPermissionCsv($permissionString)
     {
@@ -195,9 +197,9 @@ class Permission
     /**
      * Grant permission with the given name
      *
-     * @param String $permissionName Name of the permission to grant
+     * @param string $permissionName Name of the permission to grant
      */
-    public function grant($permissionName)
+    public function grant(string $permissionName)
     {
         if (strpos($permissionName, ",") !== false) {
             throw new Exception\InvalidName("Permission must not contain a comma");
@@ -214,10 +216,10 @@ class Permission
     /**
      * Deny permission with the given name
      *
-     * @param  String $permissionName Name of the permission to deny
-     * @return Bool                       True on success, False otherwise
+     * @param  string $permissionName Name of the permission to deny
+     * @return bool                       True on success, False otherwise
      */
-    public function deny($permissionName)
+    public function deny(string $permissionName)
     {
         unset($this->permissions[$permissionName]);
         $this->savePermissions();
@@ -227,10 +229,10 @@ class Permission
     /**
      * Check if the given permission is granted
      *
-     * @param  String $permissionName Name of the permission to Check
+     * @param  string $permissionName Name of the permission to Check
      * @return bool                       True if permissions is granted, False otherwise
      */
-    public function get($permissionName)
+    public function get(string $permissionName)
     {
         $hasPermission = false;
 
@@ -248,7 +250,7 @@ class Permission
     /**
      * Get all granted Permissions for this user
      *
-     * @return String[]   Names of all granted Permissions for this user
+     * @return string[]   Names of all granted Permissions for this user
      */
     public function getAll()
     {

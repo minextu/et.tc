@@ -2,6 +2,7 @@
 
 use Minextu\Ettc\Ettc;
 use Respect\Rest\Routable;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Classes extending this will be able to be used as api call object
@@ -11,16 +12,17 @@ abstract class AbstractRoutable implements Routable
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
-    final public function __construct($db)
+
+    final public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
 
     /**
-     * @return   \Minextu\Ettc\Database\DatabaseInterface   Database to be used
+     * @return   DatabaseInterface   Database to be used
      */
     final public function getDb()
     {

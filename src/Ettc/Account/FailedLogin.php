@@ -1,5 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
+use Minextu\Ettc\Database\DatabaseInterface;
+
 /**
  * Static class used log and get failed logins
  */
@@ -8,10 +10,10 @@ class FailedLogin
     /**
      * Add a failed login attempt, will also log ip address
      *
-     * @param \Minextu\Ettc\Database\DatabaseInterface $db   Database to be sued
-     * @param string                                   $nick Nickname to log
+     * @param DatabaseInterface $db   Database to be sued
+     * @param string            $nick Nickname to log
      */
-    public static function add($db, $nick)
+    public static function add(DatabaseInterface $db, string $nick)
     {
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -27,11 +29,11 @@ class FailedLogin
     /**
      * Try to fetch the time of last login attempt
      *
-     * @param  \Minextu\Ettc\Database\DatabaseInterface $db   Database to be sued
-     * @param  string                                   $nick Nickname that was logged
+     * @param  DatabaseInterface $db   Database to be sued
+     * @param  string            $nick Nickname that was logged
      * @return Mysql time of last login attempt, or False if non exist
      */
-    public static function getLastTime($db, $nick)
+    public static function getLastTime(DatabaseInterface $db, string $nick)
     {
         $sql = 'SELECT `time` FROM failedLogins WHERE nick=? ORDER BY `time` DESC LIMIT 1';
 

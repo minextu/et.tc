@@ -1,5 +1,6 @@
 <?php namespace Minextu\Ettc\Account;
 
+use Minextu\Ettc\Database\DatabaseInterface;
 use PDO;
 
 /**
@@ -10,14 +11,14 @@ class RankDb
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @param   DatabaseInterface $db Main database
      */
-    public function __construct($db)
+    public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
@@ -28,7 +29,7 @@ class RankDb
      * @param  string $title Title of the rank
      * @return bool|int          Id of the rank on success, False otherwise
      */
-    public function addRank($title)
+    public function addRank(string $title)
     {
         $sql = 'INSERT into ranks
                 (`title`)
@@ -46,10 +47,10 @@ class RankDb
     /**
      * Search for a rank by id
      *
-     * @param  string $id Rank id
-     * @return array            Rank info
+     * @param  int $id Rank id
+     * @return array   Rank info
      */
-    public function getRankById($id)
+    public function getRankById(int $id)
     {
         $sql = 'SELECT `id`,`title` FROM ranks WHERE `id`=?';
 
@@ -77,11 +78,11 @@ class RankDb
     /**
     * Update values of a rank in database
      *
-    * @param  string $id    Rank id
+    * @param  int    $id    Rank id
     * @param  string $title Rank title
-    * @return bool                    True on success, False otherwise
+    * @return bool          True on success, False otherwise
     */
-    public function updateRank($id, $title)
+    public function updateRank(int $id, string $title)
     {
         $sql = 'UPDATE ranks
                 Set title = ?
@@ -93,12 +94,12 @@ class RankDb
     }
 
     /**
-    * Delete arank from database
+    * Delete a rank from database
      *
-    * @param  string $id Rank id
-    * @return bool                    True on success, False otherwise
+    * @param  int $id Rank id
+    * @return bool    True on success, False otherwise
     */
-    public function deleteRank($id)
+    public function deleteRank(int $id)
     {
         $sql = 'DELETE from ranks
                 WHERE id = ?';

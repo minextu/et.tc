@@ -64,7 +64,13 @@ class Project extends AbstractRoutable
         return $answer;
     }
 
-    private function getProject($id)
+    /**
+     * Get project array
+     *
+     * @param  int $id id of the project
+     * @return array   Project info array
+     */
+    private function getProject(int $id)
     {
         try {
             $project = new Ettc\Project\Project($this->getDb(), $id);

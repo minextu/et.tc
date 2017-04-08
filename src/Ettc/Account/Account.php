@@ -1,6 +1,8 @@
 <?php namespace Minextu\Ettc\Account;
 
-use \Minextu\Ettc\Exception\Exception;
+use Minextu\Ettc\Exception\Exception;
+use Minextu\Ettc\Database\DatabaseInterface;
+use Minextu\Ettc\Account\User;
 
 /**
  * Static class used to login and logout using the session cookie
@@ -10,10 +12,10 @@ class Account
     /**
      * Check if the current user is logged in
      *
-     * @param  \Minextu\Ettc\Database\DatabaseInterface $db Main database
-     * @return bool|User                                         Matching user object when logged in, false otherwise
+     * @param  DatabaseInterface $db Main database
+     * @return bool|User             Matching user object when logged in, false otherwise
      */
-    public static function checkLogin($db)
+    public static function checkLogin(DatabaseInterface $db)
     {
         if (!isset($_SESSION['ettc']['userId'])) {
             $user = false;
@@ -34,7 +36,7 @@ class Account
      *
      * @param User $user The user that was logged in
      */
-    public static function login($user)
+    public static function login(User $user)
     {
         $_SESSION['ettc']['userId'] = $user->getId();
     }

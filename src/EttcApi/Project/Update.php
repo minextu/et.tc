@@ -146,10 +146,10 @@ class Update extends AbstractRoutable
     /**
      * Will check the given image, move it to the correct folder and set the image
      *
-     * @param \Minextu\Ettc\Project\Project $project Project for which the image should be saved
-     * @param array                         $image   $_FILES image
+     * @param Project $project Project for which the image should be saved
+     * @param array   $image   $_FILES image
      */
-    private function uploadImage($project, $image)
+    private function uploadImage(Project $project, array $image)
     {
         $check = getimagesize($image["tmp_name"]);
         if ($check === false) {

@@ -31,7 +31,7 @@ class Config
     * @param  string $configFile The Config File to be used
     * @access public
     */
-    public function __construct($configFile="conf/config.php")
+    public function __construct(string $configFile="conf/config.php")
     {
         $this->configFile = $configFile;
     }
@@ -84,9 +84,9 @@ class Config
     *
     * @param  string $parameter Name of the Parameter
     * @param  string $value     Value of the Parameter
-    * @return bool                True if File could be saved, False otherwise
+    * @return bool              True if File could be saved, False otherwise
     */
-    public function set($parameter, $value)
+    public function set(string $parameter, string $value)
     {
         if (!is_array($this->configArray)) {
             throw new Exception\Exception('The Config File has to be loaded with load() first.');
@@ -102,7 +102,7 @@ class Config
     * @param  string $parameter Name of the Parameter
     * @return string              Value of the Parameter
     */
-    public function get($parameter)
+    public function get(string $parameter)
     {
         if (!is_array($this->configArray)) {
             throw new Exception\Exception('The Config File has to be loaded with load() first.');

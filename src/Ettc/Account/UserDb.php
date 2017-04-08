@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
 use PDO;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Use a database to read, modify and add users
@@ -10,14 +11,14 @@ class UserDb
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @param   DatabaseInterface $db Main database
      */
-    public function __construct($db)
+    public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
@@ -26,9 +27,9 @@ class UserDb
      * Search for a user by id
      *
      * @param  int $id Unique User Id to be searched for
-     * @return array       User Info
+     * @return array   User Info
      */
-    public function getUserById($id)
+    public function getUserById(int $id)
     {
         $sql = 'SELECT * FROM users WHERE id=?';
 
@@ -43,9 +44,9 @@ class UserDb
      * Search for user by nickname
      *
      * @param  string $nick User nickname to be searched for
-     * @return array            User info
+     * @return array        User info
      */
-    public function getUserByNick($nick)
+    public function getUserByNick(string $nick)
     {
         $sql = 'SELECT * FROM users WHERE nick=?';
 
@@ -59,13 +60,13 @@ class UserDb
     /**
      * Store User in Database
      *
-     * @param  string $nick  User nickname
-     * @param  string $email User e-mail
-     * @param  string $hash  Hashed password
-     * @param  int    $rank  User rank id
-     * @return bool|int          Id of the user on success, False otherwise
+     * @param  string      $nick  User nickname
+     * @param  string|null $email User e-mail
+     * @param  string      $hash  Hashed password
+     * @param  int         $rank  User rank id
+     * @return bool|int           Id of the user on success, False otherwise
      */
-    public function insertUser($nick, $email, $hash, $rank)
+    public function insertUser(string $nick, $email, string $hash, int $rank)
     {
         $sql = 'INSERT into users
                 (nick, email, hash, rank)

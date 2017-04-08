@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
 use Minextu\Ettc\Exception;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
   * Can Create, Delete and load ranks from database
@@ -31,10 +32,10 @@ class Rank
     /**
      * Creates a new Instance. Loads an exising rank if $id is specified
      *
-     * @param Database\DatabaseInterface $db Database to be used
-     * @param int                        $id An existing rank id
+     * @param DatabaseInterface $db Database to be used
+     * @param int               $id An existing rank id
      */
-    public function __construct($db, $id=false)
+    public function __construct(DatabaseInterface $db, $id=false)
     {
         $this->rankDb = new RankDb($db);
 
@@ -49,10 +50,10 @@ class Rank
     /**
      * Get all ranks that are saved in db
      *
-     * @param  \Minextu\Ettc\Database\DatabaseInterface $db Database to be used
-     * @return Ranks[]                                          All found ranks
+     * @param  DatabaseInterface $db Database to be used
+     * @return Ranks[]               All found ranks
      */
-    public static function getAll($db)
+    public static function getAll(DatabaseInterface $db)
     {
         $rankDb = new RankDb($db);
         $rankIds = $rankDb->getRankIds();
@@ -70,9 +71,9 @@ class Rank
     * Load rank using an id
      *
     * @param  int $id Rank id
-    * @return bool        True if rank could be found, False otherwise
+    * @return bool    True if rank could be found, False otherwise
     */
-    public function loadId($id)
+    public function loadId(int $id)
     {
         $rank = $this->rankDb->getRankById($id);
         if ($rank=== false) {
@@ -88,7 +89,7 @@ class Rank
      * @param  array $rank Rank Array created by a Database Object
      * @return bool              True on success, False otherwise
      */
-    private function load($rank)
+    private function load(array $rank)
     {
         $this->id = $rank['id'];
         $this->title = $rank['title'];
@@ -104,7 +105,7 @@ class Rank
         return $this->id;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
         return true;

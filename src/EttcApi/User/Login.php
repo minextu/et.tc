@@ -18,8 +18,8 @@ use Minextu\Ettc\Account\FailedLogin;
  *
  * @apiSuccess {bool} success             Status of the login
  *
- * @apiError        MissingValues     Nickname or Password weren't transmited
- * @apiError        AlreadyLoggedIn   You are already loggedin
+ * @apiError        MissingValues           Nickname or Password weren't transmited
+ * @apiError        AlreadyLoggedIn         You are already loggedin
  * @apiError        WrongNicknameOrPassword Password or nickname were wrong
  * @apiErrorExample Error-Response:
  * HTTP/1.1 401 Unauthorized
@@ -86,7 +86,7 @@ class Login extends AbstractRoutable
      * @param  string $pw   Password to check
      * @return bool             True if nickname and password are correct, false otherwise
      */
-    private function checkLogin($nick, $pw)
+    private function checkLogin(string $nick, string $pw)
     {
         $user = new User($this->getDb());
 
@@ -104,7 +104,7 @@ class Login extends AbstractRoutable
      *
      * @param string $nick Nickname of the user
      */
-    private function login($nick)
+    private function login(string $nick)
     {
         $user = new User($this->getDb());
         // load user
@@ -118,7 +118,13 @@ class Login extends AbstractRoutable
         }
     }
 
-    private function preventBruteForce($nick, $isFailedLogin = false)
+    /**
+     * Logs failed logins and add timeout when to many fail
+     *
+     * @param string  $nick          Nickname of the user
+     * @param boolean $isFailedLogin Wether this login attempt has failed or not
+     */
+    private function preventBruteForce(string $nick, bool $isFailedLogin = false)
     {
         if (!$isFailedLogin) {
             $lastLoginAttempt = FailedLogin::getLastTime($this->getDb(), $nick);

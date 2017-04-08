@@ -13,7 +13,7 @@ interface DatabaseInterface
      * @param string $pw   Database Password
      * @param string $db   The Database to be used
      */
-    public function __construct($host, $user, $pw, $db);
+    public function __construct($host, string $user, string $pw, string $db);
 
     /**
      * Returns the PDO Object for the Database

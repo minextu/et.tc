@@ -112,7 +112,7 @@ class Create extends AbstractRoutable
      *
      * @param string $title Title for the rank
      */
-    private function createRank($title)
+    private function createRank(string $title)
     {
         $rank = new Rank($this->getDb());
         $rank->setTitle($title);

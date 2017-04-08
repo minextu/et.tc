@@ -2,6 +2,7 @@
 
 use Minextu\Ettc\Exception\InvalidId;
 use Minextu\Ettc\Exception\Exception;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 class Project
 {
@@ -76,10 +77,10 @@ class Project
     private $updateDate;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Database to be used
-     * @param   int                                      $id Project id to be loaded
+     * @param   DatabaseInterface $db Database to be used
+     * @param   int               $id Project id to be loaded
      */
-    public function __construct($db, $id=false)
+    public function __construct(DatabaseInterface $db, $id=false)
     {
         $this->projectDb = new ProjectDb($db);
 
@@ -94,12 +95,12 @@ class Project
     /**
      * Get all Projects that are saved in db
      *
-     * @param  \Minextu\Ettc\Database\DatabaseInterface $db     Database to be used
-     * @param  string                                   $sortBy Sort results by given field
-     * @param  string                                   $order  Order results
-     * @return Project[]                          All found projects
+     * @param  DatabaseInterface $db     Database to be used
+     * @param  string            $sortBy Sort results by given field
+     * @param  string            $order  Order results
+     * @return Project[]                 All found projects
      */
-    public static function getAll($db, $sortBy, $order)
+    public static function getAll(DatabaseInterface $db, string $sortBy, string $order)
     {
         $projectDb = new ProjectDb($db);
         $projectIds = $projectDb->getProjectIds($sortBy, $order);
@@ -144,9 +145,9 @@ class Project
     /**
      * Sets id and initializes projectGit
      *
-     * @param [type] $id [description]
+     * @param int $id project id
      */
-    private function setId($id)
+    private function setId(int $id)
     {
         $this->id = $id;
         $this->git = new ProjectGit($id);
@@ -170,7 +171,7 @@ class Project
      * @param   string $title Project title
      * @return  bool              True on success, False otherwise
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
         return true;
@@ -218,7 +219,7 @@ class Project
      * @param   string $html Project html code
      * @return  bool             True on success, False otherwise
      */
-    public function setHtml($html)
+    public function setHtml(string $html)
     {
         $this->html = $html;
         return true;
@@ -245,7 +246,7 @@ class Project
      * @param   string $filename Filename of Image
      * @return  bool                    True on success, False otherwise
      */
-    public function setImage($filename)
+    public function setImage(string $filename)
     {
         $this->image = $filename;
         return true;
@@ -302,7 +303,7 @@ class Project
      * @param  string $date Project creation date (parsable by strtotime)
      * @return bool                    True on success, False otherwise
      */
-    public function setCreateDate($date)
+    public function setCreateDate(string $date)
     {
         $date = date("Y-m-d H:i:s", strtotime($date));
         $this->createDate = $date;
@@ -327,9 +328,9 @@ class Project
      * Set project creation date
      *
      * @param  string $date Project creation date (parsable by strtotime)
-     * @return bool                    True on success, False otherwise
+     * @return bool         True on success, False otherwise
      */
-    public function setUpdateDate($date)
+    public function setUpdateDate(string $date)
     {
         $date = date("Y-m-d H:i:s", strtotime($date));
         $this->updateDate = $date;
@@ -361,7 +362,7 @@ class Project
      *
      * @param String $url Url to git repository
      */
-    public function setGitUrl($url)
+    public function setGitUrl(string $url)
     {
         if (!isset($this->git)) {
             throw new Exception("Project has to be loaded first.");
@@ -379,9 +380,9 @@ class Project
      * Load project info using the id
      *
      * @param  int $id Unique project id
-     * @return bool        True if project could be found, False otherwise
+     * @return bool    True if project could be found, False otherwise
     */
-    public function loadId($id)
+    public function loadId(int $id)
     {
         $project = $this->projectDb->getProjectById($id);
         if ($project === false) {
@@ -395,9 +396,9 @@ class Project
      * Assign Values to all private attributes using a project array
      *
      * @param  array $project Project array created by a Database Object
-     * @return bool               True on success, False otherwise
+     * @return bool           True on success, False otherwise
     */
-    private function load($project)
+    private function load(array $project)
     {
         $this->setId($project['id']);
         $this->title = $project['title'];
@@ -459,9 +460,9 @@ class Project
      * Delete Project from Database
      *
      * @param  bool $deleteGit Also delete any possible git repository
-     * @return bool   True on success, False otherwise
+     * @return bool            True on success, False otherwise
      */
-    public function delete($deleteGit=true)
+    public function delete(bool $deleteGit=true)
     {
         if (!isset($this->id)) {
             throw new Exception("Project has to be loaded first.");

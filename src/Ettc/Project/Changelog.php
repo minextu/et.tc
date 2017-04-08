@@ -1,18 +1,19 @@
 <?php namespace Minextu\Ettc\Project;
 
 use Tivie\GitLogParser\Format;
+use Gioffreda\Component\Git\Git;
 
 class Changelog
 {
     /**
-     * [generateLogs description]
+     * Generates logs out of all git commits
      *
-     * @param  \Gioffreda\Component\Git\Git $git   Main git object
-     * @param  int                          $count Amount of logs to return
-     * @param  int                          $skip  Amount of logs to skip
+     * @param  $git   Git Main git object
+     * @param  int                       $count Amount of logs to return
+     * @param  int                       $skip  Amount of logs to skip
      * @return array         Logs for the git object
      */
-    public static function generateLogs($git, $count, $skip)
+    public static function generateLogs(Git $git, int $count, int $skip)
     {
         $format = new Format();
         $logs = $git->log(
@@ -28,7 +29,14 @@ class Changelog
         return self::removeExtraValues($parsedLogs);
     }
 
-    private static function parse($format, $log)
+    /**
+     * Parse git answer and convert it to an array
+     *
+     * @param  Format $format Git format
+     * @param  string $log    Git log answer
+     * @return array              All commits as array
+     */
+    private static function parse(Format $format, string $log)
     {
         $buffer = array();
         $commits = explode($format->getCommitDelimiter(), $log);
@@ -50,7 +58,13 @@ class Changelog
         return $buffer;
     }
 
-    private static function removeExtraValues($logs)
+    /**
+     * Strips all uneeded commit values out of the array
+     *
+     * @param  array $logs commit array
+     * @return array           commit array without uneeded info
+     */
+    private static function removeExtraValues(array $logs)
     {
         $newLogs = [];
 
@@ -76,7 +90,7 @@ class Changelog
      * @param  string $email Email of the user
      * @return string          Avatar image url
      */
-    private static function generateAvatarUrl($email)
+    private static function generateAvatarUrl(string $email)
     {
         $default = "http://img2.wikia.nocookie.net/__cb20110302033947/recipes/images/thumb/1/1c/Avatar.svg/480px-Avatar.svg.png";
         $size = 200;

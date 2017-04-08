@@ -2,6 +2,7 @@
 
 use Hautelook\Phpass\PasswordHash;
 use Minextu\Ettc\Exception;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Can Create and Load Info about a User using a Database
@@ -51,10 +52,10 @@ class User
     /**
      * Creates a new Instance. Loads User Info when $id is specified
      *
-     * @param Database\DatabaseInterface $db Database to be used
-     * @param int                        $id User Id to be loaded
+     * @param DatabaseInterface $db Database to be used
+     * @param int               $id User Id to be loaded
      */
-    public function __construct($db, $id=false)
+    public function __construct(DatabaseInterface $db, $id=false)
     {
         $this->userDb = new UserDb($db);
 
@@ -129,7 +130,7 @@ class User
      *
      * @param string $nick New User Nickname
      */
-    public function setNick($nick)
+    public function setNick(string $nick)
     {
         if ($this->userDb->getUserByNick($nick) !== false) {
             throw new Exception\InvalidNickname("Nickname does already exist.");
@@ -151,7 +152,7 @@ class User
      *
      * @param string $email New User E-Mail
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
@@ -165,7 +166,7 @@ class User
      *
      * @param string $password New User Password
      */
-    public function setPassword($password)
+    public function setPassword(string $password)
     {
         if (strlen($password) < 6) {
             throw new Exception\InvalidPassword("Password is too short");
@@ -180,7 +181,7 @@ class User
      *
      * @param int $rank User rank id
      */
-    public function setRank($rank)
+    public function setRank(int $rank)
     {
         // TODO: check if rank exists
 
@@ -194,7 +195,7 @@ class User
      * @param  string $nick User Nickname to search for
      * @return bool             True if User could be found, False otherwise
      */
-    public function loadNick($nick)
+    public function loadNick(string $nick)
     {
         $user = $this->userDb->getUserByNick($nick);
         if ($user === false) {
@@ -210,7 +211,7 @@ class User
      * @param  int $id Unique User Id
      * @return bool        True if User could be found, False otherwise
      */
-    public function loadId($id)
+    public function loadId(int $id)
     {
         $user = $this->userDb->getUserById($id);
         if ($user === false) {
@@ -226,7 +227,7 @@ class User
      * @param  array $user User Array created by a Database Object
      * @return bool            True on success, False otherwise
      */
-    private function load($user)
+    private function load(array $user)
     {
         $this->id = $user['id'];
         $this->nick = $user['nick'];
@@ -243,7 +244,7 @@ class User
      * @param  string $password Password to be checked
      * @return bool                 True if the Password is correct, False otherwise
      */
-    public function checkPassword($password)
+    public function checkPassword(string $password)
     {
         if (!isset($this->hash)) {
             throw new Exception\Exception("User has to be loaded first.");
@@ -284,9 +285,9 @@ class User
      * Hash Password string using Hautelook\Phpass
      *
      * @param  string $password Password to be hashed
-     * @return string               Hashed Password
+     * @return string           Hashed Password
      */
-    private function hashPassword($password)
+    private function hashPassword(string $password)
     {
         $hasher = new PasswordHash(8, false);
         $hash = $hasher->HashPassword($password);

@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc\Account;
 
 use PDO;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Use a database to read, modify and add permissions to users and api keys
@@ -10,14 +11,14 @@ class PermissionDb
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @param   DatabaseInterface $db Main database
      */
-    public function __construct($db)
+    public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
@@ -28,7 +29,7 @@ class PermissionDb
      * @param  int $userId Id of the user to get the permissions for
      * @return String          CSV string of all granted permissions for this user
      */
-    public function getPermissionsByUserId($userId)
+    public function getPermissionsByUserId(int $userId)
     {
         $sql = 'SELECT permissions FROM users WHERE id=?';
 
@@ -45,7 +46,7 @@ class PermissionDb
      * @param  int $rankId Id of the rank to get the permissions for
      * @return String          CSV string of all granted permissions for this rank
      */
-    public function getPermissionsByRankId($rankId)
+    public function getPermissionsByRankId(int $rankId)
     {
         $sql = 'SELECT permissions FROM ranks WHERE id=?';
 
@@ -62,7 +63,7 @@ class PermissionDb
      * @param  int $apiKeyId Id of the api key to get the permissions for
      * @return String           CSV string of all granted permissions for this rank
      */
-    public function getPermissionsByApiKeyId($apiKeyId)
+    public function getPermissionsByApiKeyId(int $apiKeyId)
     {
         $sql = 'SELECT permissions FROM userApiKeys WHERE id=?';
 
@@ -80,7 +81,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForUser($userId, $permissions)
+    public function updatePermissionsForUser(int $userId, string $permissions)
     {
         $sql = 'UPDATE users
                 Set permissions = ?
@@ -98,7 +99,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForRank($rankId, $permissions)
+    public function updatePermissionsForRank(int $rankId, string $permissions)
     {
         $sql = 'UPDATE ranks
                 Set permissions = ?
@@ -116,7 +117,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForApiKey($apiKeyId, $permissions)
+    public function updatePermissionsForApiKey(int $apiKeyId, string $permissions)
     {
         $sql = 'UPDATE userApiKeys
                 Set permissions = ?

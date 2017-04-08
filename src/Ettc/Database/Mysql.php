@@ -1,6 +1,6 @@
 <?php namespace Minextu\Ettc\Database;
 
-use \PDO;
+use PDO;
 
 /**
  * A Mysql PDO Connection
@@ -17,11 +17,11 @@ class Mysql implements DatabaseInterface
     /**
      * PDO object
      *
-     * @var \PDO
+     * @var PDO
      */
     private $pdo;
 
-    public function __construct($host, $user, $pw, $db)
+    public function __construct($host, string $user, string $pw, string $db)
     {
         $dsn = "mysql:host=$host;dbname=$db;charset=$this->charset";
         $options = [

@@ -12,9 +12,9 @@ use Minextu\Ettc\Exception\InvalidId;
  * @apiVersion 0.1.0
  * @apiGroup   Project
  *
- * @apiParam {integer} id    Project id
+ * @apiParam {integer} id         Project id
  * @apiParam {integer} [count=10] Number of logs to return
- * @apiParam {integer} [skip=0] Number of logs to skip
+ * @apiParam {integer} [skip=0]   Number of logs to skip
  *
  * @apiSuccess {Array} changelog              Contains changelog for the project
  *
@@ -67,7 +67,15 @@ class Changelog extends AbstractRoutable
         return $answer;
     }
 
-    private function getProjectChangelog($id, $count, $skip)
+    /**
+     * Get git commits as array
+     *
+     * @param  int $id    id of the project
+     * @param  int $count Amount of commits to get
+     * @param  int $skip  Amount of commits to skip
+     * @return array      Api answer
+     */
+    private function getProjectChangelog(int $id, int $count, int $skip)
     {
         try {
             $project = new ProjectObj($this->getDb(), $id);

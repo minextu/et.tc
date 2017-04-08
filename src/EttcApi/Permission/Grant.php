@@ -17,9 +17,9 @@ use Minextu\Ettc\Exception\InvalidName;
  * @apiVersion 0.1.0
  * @apiGroup   Permission
  *
- * @apiParam {int} entityId                              id of user, rank or api key to grant permission for
+ * @apiParam {int} entityId                        id of user, rank or api key to grant permission for
  * @apiParam {String=user,rank,apiKey} entityType  Type of entity
- * @apiParam {String} permission                         Name of permission to grant
+ * @apiParam {String} permission                   Name of permission to grant
  *
  * @apiSuccess {bool} success     Status
  *
@@ -88,10 +88,10 @@ class Grant extends AbstractRoutable
      * Creates the given entity
      *
      * @param  int    $entityId   Id of the entity
-     * @param  String $entityType Type of the entity
-     * @return \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey     The created Entity or False if not found
+     * @param  string $entityType Type of the entity
+     * @return User|Rank|ApiKey   The created Entity or False if not found
      */
-    private function createEntity($entityId, $entityType)
+    private function createEntity(int $entityId, string $entityType)
     {
         try {
             if ($entityType == "user") {
@@ -111,12 +111,12 @@ class Grant extends AbstractRoutable
     /**
      * Grants permission for the given entity
      *
-     * @param  \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey $entity     Entity to grant permissions for
-     * @param  String                                                                             $entityType Type of the entity
-     * @param  String                                                                             $permission Permission to grant
-     * @return String[]               Api answer
+     * @param  User|Rank|ApiKey $entity     Entity to grant permissions for
+     * @param  string           $entityType Type of the entity
+     * @param  string           $permission Permission to grant
+     * @return string[]                     Api answer
      */
-    private function grantPermission($entity, $entityType, $permission)
+    private function grantPermission($entity, string $entityType, string $permission)
     {
         $permissionObj = new Permission($this->getDb());
 
@@ -159,10 +159,10 @@ class Grant extends AbstractRoutable
      /**
       * Checks if the user has the permission to grant permissions for this entity
       *
-      * @param  String $entityType Type of the entity
-      * @return bool                   True if user has permissions, False otherwise
+      * @param  string $entityType Type of the entity
+      * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermission($entityType)
+    private function checkPermission(string $entityType)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());
@@ -178,10 +178,10 @@ class Grant extends AbstractRoutable
      /**
       * Checks if the user has the permission himself, that he tries to grant
       *
-      * @param  String $permission Permission name to check
-      * @return bool                   True if user has permissions, False otherwise
+      * @param  string $permission Permission name to check
+      * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermissionGranted($permission)
+    private function checkPermissionGranted(string $permission)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());

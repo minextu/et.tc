@@ -2,6 +2,7 @@
 
 use Respect\Rest\Router;
 use Minextu\Ettc\Ettc;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Handles routes to the api by using objects extending AbstractRoutable
@@ -24,10 +25,10 @@ class EttcApi
     /**
      * Run the api
      *
-     * @param string                                  $rootDir Path to api.php in root folder
-     * @param Minextu\Ettc\Database\DatabaseInterface $db      Database to be used
+     * @param string            $rootDir Path to api.php in root folder
+     * @param DatabaseInterface $db      Database to be used
      */
-    public static function run($rootDir, $db)
+    public static function run(string $rootDir, DatabaseInterface $db)
     {
         self::init($rootDir);
 
@@ -39,9 +40,9 @@ class EttcApi
     /**
      * Connect api calls with their objects
      *
-     * @param Minextu\Ettc\Database\DatabaseInterface $db Database to be used
+     * @param DatabaseInterface $db Database to be used
      */
-    private static function setRoutes($db)
+    private static function setRoutes(DatabaseInterface $db)
     {
         $r = self::$router;
 
@@ -94,7 +95,7 @@ class EttcApi
      *
      * @param string $rootDir Path to api.php in root folder
      */
-    private static function init($rootDir)
+    private static function init(string $rootDir)
     {
         self::$rootDir = $rootDir;
         self::$router = new Router($rootDir);
@@ -124,7 +125,7 @@ class EttcApi
      * @param  array $answer Api answer
      * @return string             Html code for the api answer
      */
-    private static function htmlEncode($answer)
+    private static function htmlEncode(array $answer)
     {
         \ref::config('expLvl', -1);
         \ref::config('showResourceInfo', false);

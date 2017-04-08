@@ -1,6 +1,7 @@
 <?php namespace Minextu\Ettc\Project;
 
 use PDO;
+use Minextu\Ettc\Database\DatabaseInterface;
 
 /**
  * Use a database to read, modify and add projects
@@ -10,14 +11,14 @@ class ProjectDb
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @param   DatabaseInterface $db Main database
      */
-    public function __construct($db)
+    public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
@@ -26,9 +27,9 @@ class ProjectDb
      * Search for a project by id
      *
      * @param  int $id Unique project id to be searched for
-     * @return array       Project info
+     * @return array   Project info
      */
-    public function getProjectById($id)
+    public function getProjectById(int $id)
     {
         $sql = 'SELECT id, title, description, html, image, created, updated
                 FROM projects WHERE id=?';
@@ -45,9 +46,9 @@ class ProjectDb
      *
      * @param  string $sortBy Sort results by given field
      * @param  string $order  Order results
-     * @return array       All Project ids
+     * @return array          All Project ids
      */
-    public function getProjectIds($sortBy, $order)
+    public function getProjectIds(string $sortBy, string $order)
     {
         $allowedSort  = ["title","created","updated"];
         $key     = array_search($sortBy, $allowedSort);
@@ -67,15 +68,15 @@ class ProjectDb
     /**
     * Store project in database
      *
-    * @param  string $title       Project title
-    * @param  string $description Project description
-    * @param  string $html        Project html code
-    * @param  string $image       Filename of image for project
-    * @param  string $createDate  Project creation date
-    * @param  string $updateDate  Project update date
-    * @return bool|int                Id of the project on success, False otherwise
+    * @param  string      $title       Project title
+    * @param  string      $description Project description
+    * @param  string|null $html        Project html code
+    * @param  string|null $image       Filename of image for project
+    * @param  string|null $createDate  Project creation date
+    * @param  string|null $updateDate  Project update date
+    * @return bool|int                 Id of the project on success, False otherwise
     */
-    public function insertProject($title, $description, $html, $image, $createDate=false, $updateDate=false)
+    public function insertProject(string $title, string $description, $html=null, $image=null, $createDate=null, $updateDate=null)
     {
         $sql = 'INSERT into projects
                 (title, description, html, image, created, updated)
@@ -93,16 +94,16 @@ class ProjectDb
     /**
     * Update values of a project in database
      *
-    * @param  string $id          Project id
-    * @param  string $title       Project title
-    * @param  string $description Project description
-    * @param  string $html        Project html code
-    * @param  string $image       Filename of image for project
-    * @param  string $createDate  Project creation date
-    * @param  string $updateDate  Project update date
-    * @return bool                    True on success, False otherwise
+    * @param  int         $id          Project id
+    * @param  string      $title       Project title
+    * @param  string      $description Project description
+    * @param  string|null $html        Project html code
+    * @param  string|null $image       Filename of image for project
+    * @param  string|null $createDate  Project creation date
+    * @param  string|null $updateDate  Project update date
+    * @return bool                True on success, False otherwise
     */
-    public function updateProject($id, $title, $description, $html, $image, $createDate=false, $updateDate=false)
+    public function updateProject(int $id, string $title, string $description, $html=null, $image=null, $createDate=null, $updateDate=null)
     {
         $sql = 'UPDATE projects
                 Set title = ?, description = ?, html = ?, image = ?, created = ?, updated = ?
@@ -117,9 +118,9 @@ class ProjectDb
     * Delete project from database
      *
     * @param  string $id Project id
-    * @return bool|int             True on success, False otherwise
+    * @return bool|int   True on success, False otherwise
     */
-    public function deleteProject($id)
+    public function deleteProject(int $id)
     {
         $sql = 'DELETE from projects
                 WHERE id = ?';

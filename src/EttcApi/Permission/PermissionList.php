@@ -18,7 +18,7 @@ use Minextu\Ettc\Exception\InvalidId;
  *
  * @apiParam   {integer} entityId]                   User, Rank or Api key id to fetch permissions for
  * @apiParam   {String=user,rank,apiKey} entityType  Type of entity
- * @apiSuccess {Array} items                       Contains a list of permissions for this entity
+ * @apiSuccess {Array} items                         Contains a list of permissions for this entity
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
@@ -84,10 +84,10 @@ class PermissionList extends AbstractRoutable
      * Creates the given entity
      *
      * @param  int    $entityId   Id of the entity
-     * @param  String $entityType Type of the entity
-     * @return \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey     The created Entity or False if not found
+     * @param  string $entityType Type of the entity
+     * @return User|Rank|ApiKey   The created Entity or False if not found
      */
-    private function createEntity($entityId, $entityType)
+    private function createEntity(int $entityId, string $entityType)
     {
         $entity = false;
 
@@ -113,11 +113,11 @@ class PermissionList extends AbstractRoutable
     /**
      * Lists permission for the given entity while checking for permissions
      *
-     * @param  \Minextu\Ettc\Account\User|\Minextu\Ettc\Account\Rank|\Minextu\Ettc\Account\ApiKey $entity     Entity to list permissions for
-     * @param  String                                                                             $entityType Type of the entity
-     * @return String[]               Api answer
+     * @param  User|Rank|Account\ApiKey $entity     Entity to list permissions for
+     * @param  string                   $entityType Type of the entity
+     * @return string[]                             Api answer
      */
-    private function listPermission($entity, $entityType)
+    private function listPermission($entity, string $entityType)
     {
         $permissionObj = new Permission($this->getDb());
 
@@ -154,10 +154,11 @@ class PermissionList extends AbstractRoutable
      /**
       * Checks if the user has the permission to list permissions for this entity
       *
+      * @param  int    $entityId   Id of the entity
       * @param  String $entityType Type of the entity
-      * @return bool                   True if user has permissions, False otherwise
+      * @return bool               True if user has permissions, False otherwise
       */
-    private function checkPermission($entityId, $entityType)
+    private function checkPermission(int $entityId, string $entityType)
     {
         $hasPermission = false;
         $user = Account::checkLogin($this->getDb());

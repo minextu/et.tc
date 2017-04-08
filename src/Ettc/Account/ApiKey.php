@@ -1,7 +1,9 @@
 <?php namespace Minextu\Ettc\Account;
 
-use \Minextu\Ettc\Exception;
+use Minextu\Ettc\Exception;
 use Hautelook\Phpass\PasswordHash;
+use Minextu\Ettc\Database\DatabaseInterface;
+use Minextu\Ettc\Account\User;
 
 /**
   * Can Create, Delete and load api keys from database
@@ -18,7 +20,7 @@ class ApiKey
     /**
      * Main database
      *
-     * @var \Minextu\Ettc\Database\DatabaseInterface
+     * @var DatabaseInterface
      */
     private $db;
 
@@ -60,10 +62,10 @@ class ApiKey
     /**
      * Creates a new Instance. Loads an exising key if $id is specified
      *
-     * @param Database\DatabaseInterface $db Database to be used
-     * @param int                        $id A key id that has been saved already
+     * @param DatabaseInterface $db Database to be used
+     * @param int               $id A key id that has been saved already
      */
-    public function __construct($db, $id=false)
+    public function __construct(DatabaseInterface $db, $id=false)
     {
         $this->db = $db;
         $this->apiKeyDb = new ApiKeyDb($db);
@@ -79,11 +81,11 @@ class ApiKey
     /**
      * Get all api keys for an user that are saved in db
      *
-     * @param  \Minextu\Ettc\Database\DatabaseInterface $db   Database to be used
-     * @param  \Minextu\Ettc\Account\User               $user User for which keys should be fetched
-     * @return ApiKey[]                                         All found keys for this user
+     * @param  DatabaseInterface $db   Database to be used
+     * @param  User              $user User for which keys should be fetched
+     * @return ApiKey[]                All found keys for this user
      */
-    public static function getAll($db, $user)
+    public static function getAll(DatabaseInterface $db, User $user)
     {
         $apiKeyDb = new ApiKeyDb($db);
         $keyIds = $apiKeyDb->getApiKeyIdsByUserId($user->getId());
@@ -103,7 +105,7 @@ class ApiKey
      * @param  int $id Unique Api key id
      * @return bool        True if api key could be found, False otherwise
      */
-    public function loadId($id)
+    public function loadId(int $id)
     {
         $key = $this->apiKeyDb->getApiKeyById($id);
         if ($key=== false) {
@@ -116,10 +118,10 @@ class ApiKey
     /**
      * Load Api key using its key
      *
-     * @param  int $key Unique Api key
+     * @param  string $key Unique Api key
      * @return bool        True if api key could be found, False otherwise
      */
-    public function loadKey($key)
+    public function loadKey(string $key)
     {
         $key = $this->apiKeyDb->getApiKeyByKey($key);
         if ($key=== false) {
@@ -135,7 +137,7 @@ class ApiKey
      * @param  array $key Api key Array created by a Database Object
      * @return bool              True on success, False otherwise
      */
-    private function load($key)
+    private function load(array $key)
     {
         $this->id = $key['id'];
         $this->title = $key['title'];
@@ -170,7 +172,7 @@ class ApiKey
         return $this->id;
     }
 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         if (isset($this->id)) {
             throw new Exception\Exception("This key has already been saved");
@@ -195,7 +197,7 @@ class ApiKey
         return $this->user;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
         return true;

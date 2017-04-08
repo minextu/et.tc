@@ -1,5 +1,6 @@
 <?php namespace Minextu\Ettc\Account;
 
+use Minextu\Ettc\Database\DatabaseInterface;
 use PDO;
 
 /**
@@ -15,9 +16,9 @@ class ApiKeyDb
     private $db;
 
     /**
-     * @param   \Minextu\Ettc\Database\DatabaseInterface $db Main database
+     * @param   DatabaseInterface $db Main database
      */
-    public function __construct($db)
+    public function __construct(DatabaseInterface $db)
     {
         $this->db = $db;
     }
@@ -25,12 +26,12 @@ class ApiKeyDb
     /**
      * Store api key in database
      *
-     * @param  int    $userId Id of user for this api
-     * @param  string $title  Title of the key
-     * @param  string $key    The api key to be saved
-     * @return bool|int          Id of the key on success, False otherwise
+     * @param  int         $userId Id of user for this api
+     * @param  string|null $title  Title of the key
+     * @param  string      $key    The api key to be saved
+     * @return bool|int            Id of the key on success, False otherwise
      */
-    public function addKey($userId, $title, $key)
+    public function addKey(int $userId, $title, string $key)
     {
         $sql = 'INSERT into userApiKeys
                 (`userId`, `title`, `key`)
@@ -48,10 +49,10 @@ class ApiKeyDb
     /**
      * Search for api key by id
      *
-     * @param  string $id Api key id
+     * @param  int $id Api key id
      * @return array            Api key info
      */
-    public function getApiKeyById($id)
+    public function getApiKeyById(int $id)
     {
         $sql = 'SELECT `id`,`title`,`key`,`userId`,`created`,`used` FROM userApiKeys WHERE `id`=?';
 
@@ -68,7 +69,7 @@ class ApiKeyDb
      * @param  string $key Api key to search for
      * @return array            Api key info
      */
-    public function getApiKeyByKey($key)
+    public function getApiKeyByKey(string $key)
     {
         $sql = 'SELECT `id`,`title`,`key`,`userId`,`created`,`used` FROM userApiKeys WHERE `key`=?';
 
@@ -83,9 +84,9 @@ class ApiKeyDb
      * Get all api keys by the given user and return the ids
      *
      * @param  int $userId User id to get the keys for
-     * @return array          All key ids by the given user
+     * @return array       All key ids by the given user
      */
-    public function getApiKeyIdsByUserId($userId)
+    public function getApiKeyIdsByUserId(int $userId)
     {
         $sql = "SELECT `id` FROM userApiKeys WHERE userId = ?";
 
@@ -100,9 +101,9 @@ class ApiKeyDb
     * Delete an api key from database
      *
     * @param  string $id Api key id
-    * @return bool                    True on success, False otherwise
+    * @return bool       True on success, False otherwise
     */
-    public function deleteApiKey($id)
+    public function deleteApiKey(int $id)
     {
         $sql = 'DELETE from userApiKeys
                 WHERE id = ?';
