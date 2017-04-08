@@ -31,7 +31,7 @@ class ApiKeyDb
      * @param  string      $key    The api key to be saved
      * @return bool|int            Id of the key on success, False otherwise
      */
-    public function addKey(int $userId, $title, string $key)
+    public function addKey($userId, $title, $key)
     {
         $sql = 'INSERT into userApiKeys
                 (`userId`, `title`, `key`)
@@ -52,7 +52,7 @@ class ApiKeyDb
      * @param  int $id Api key id
      * @return array            Api key info
      */
-    public function getApiKeyById(int $id)
+    public function getApiKeyById($id)
     {
         $sql = 'SELECT `id`,`title`,`key`,`userId`,`created`,`used` FROM userApiKeys WHERE `id`=?';
 
@@ -69,7 +69,7 @@ class ApiKeyDb
      * @param  string $key Api key to search for
      * @return array            Api key info
      */
-    public function getApiKeyByKey(string $key)
+    public function getApiKeyByKey($key)
     {
         $sql = 'SELECT `id`,`title`,`key`,`userId`,`created`,`used` FROM userApiKeys WHERE `key`=?';
 
@@ -86,7 +86,7 @@ class ApiKeyDb
      * @param  int $userId User id to get the keys for
      * @return array       All key ids by the given user
      */
-    public function getApiKeyIdsByUserId(int $userId)
+    public function getApiKeyIdsByUserId($userId)
     {
         $sql = "SELECT `id` FROM userApiKeys WHERE userId = ?";
 
@@ -103,7 +103,7 @@ class ApiKeyDb
     * @param  string $id Api key id
     * @return bool       True on success, False otherwise
     */
-    public function deleteApiKey(int $id)
+    public function deleteApiKey($id)
     {
         $sql = 'DELETE from userApiKeys
                 WHERE id = ?';

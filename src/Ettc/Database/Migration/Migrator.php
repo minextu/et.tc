@@ -35,7 +35,7 @@ class Migrator
     * @param int|bool          $targetVersion  Target Database Migration Version (True for the newest version)
     * @param DatabaseInterface $db             Database to be migrated
     */
-    public function __construct(int $currentVersion, $targetVersion, DatabaseInterface $db)
+    public function __construct($currentVersion, $targetVersion, DatabaseInterface $db)
     {
         $this->current = $currentVersion;
 

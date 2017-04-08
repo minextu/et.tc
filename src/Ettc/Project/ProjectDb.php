@@ -29,7 +29,7 @@ class ProjectDb
      * @param  int $id Unique project id to be searched for
      * @return array   Project info
      */
-    public function getProjectById(int $id)
+    public function getProjectById($id)
     {
         $sql = 'SELECT id, title, description, html, image, created, updated
                 FROM projects WHERE id=?';
@@ -48,7 +48,7 @@ class ProjectDb
      * @param  string $order  Order results
      * @return array          All Project ids
      */
-    public function getProjectIds(string $sortBy, string $order)
+    public function getProjectIds($sortBy, $order)
     {
         $allowedSort  = ["title","created","updated"];
         $key     = array_search($sortBy, $allowedSort);
@@ -76,7 +76,7 @@ class ProjectDb
     * @param  string|null $updateDate  Project update date
     * @return bool|int                 Id of the project on success, False otherwise
     */
-    public function insertProject(string $title, string $description, $html=null, $image=null, $createDate=null, $updateDate=null)
+    public function insertProject($title, $description, $html=null, $image=null, $createDate=null, $updateDate=null)
     {
         $sql = 'INSERT into projects
                 (title, description, html, image, created, updated)
@@ -103,7 +103,7 @@ class ProjectDb
     * @param  string|null $updateDate  Project update date
     * @return bool                True on success, False otherwise
     */
-    public function updateProject(int $id, string $title, string $description, $html=null, $image=null, $createDate=null, $updateDate=null)
+    public function updateProject($id, $title, $description, $html=null, $image=null, $createDate=null, $updateDate=null)
     {
         $sql = 'UPDATE projects
                 Set title = ?, description = ?, html = ?, image = ?, created = ?, updated = ?
@@ -120,7 +120,7 @@ class ProjectDb
     * @param  string $id Project id
     * @return bool|int   True on success, False otherwise
     */
-    public function deleteProject(int $id)
+    public function deleteProject($id)
     {
         $sql = 'DELETE from projects
                 WHERE id = ?';

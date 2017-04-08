@@ -75,7 +75,7 @@ class Changelog extends AbstractRoutable
      * @param  int $skip  Amount of commits to skip
      * @return array      Api answer
      */
-    private function getProjectChangelog(int $id, int $count, int $skip)
+    private function getProjectChangelog($id, $count, $skip)
     {
         try {
             $project = new ProjectObj($this->getDb(), $id);

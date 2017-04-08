@@ -130,7 +130,7 @@ class User
      *
      * @param string $nick New User Nickname
      */
-    public function setNick(string $nick)
+    public function setNick($nick)
     {
         if ($this->userDb->getUserByNick($nick) !== false) {
             throw new Exception\InvalidNickname("Nickname does already exist.");
@@ -152,7 +152,7 @@ class User
      *
      * @param string $email New User E-Mail
      */
-    public function setEmail(string $email)
+    public function setEmail($email)
     {
         $this->email = $email;
 
@@ -166,7 +166,7 @@ class User
      *
      * @param string $password New User Password
      */
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         if (strlen($password) < 6) {
             throw new Exception\InvalidPassword("Password is too short");
@@ -181,7 +181,7 @@ class User
      *
      * @param int $rank User rank id
      */
-    public function setRank(int $rank)
+    public function setRank($rank)
     {
         // TODO: check if rank exists
 
@@ -195,7 +195,7 @@ class User
      * @param  string $nick User Nickname to search for
      * @return bool             True if User could be found, False otherwise
      */
-    public function loadNick(string $nick)
+    public function loadNick($nick)
     {
         $user = $this->userDb->getUserByNick($nick);
         if ($user === false) {
@@ -211,7 +211,7 @@ class User
      * @param  int $id Unique User Id
      * @return bool        True if User could be found, False otherwise
      */
-    public function loadId(int $id)
+    public function loadId($id)
     {
         $user = $this->userDb->getUserById($id);
         if ($user === false) {
@@ -244,7 +244,7 @@ class User
      * @param  string $password Password to be checked
      * @return bool                 True if the Password is correct, False otherwise
      */
-    public function checkPassword(string $password)
+    public function checkPassword($password)
     {
         if (!isset($this->hash)) {
             throw new Exception\Exception("User has to be loaded first.");
@@ -287,7 +287,7 @@ class User
      * @param  string $password Password to be hashed
      * @return string           Hashed Password
      */
-    private function hashPassword(string $password)
+    private function hashPassword($password)
     {
         $hasher = new PasswordHash(8, false);
         $hash = $hasher->HashPassword($password);

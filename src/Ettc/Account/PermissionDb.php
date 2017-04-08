@@ -29,7 +29,7 @@ class PermissionDb
      * @param  int $userId Id of the user to get the permissions for
      * @return String          CSV string of all granted permissions for this user
      */
-    public function getPermissionsByUserId(int $userId)
+    public function getPermissionsByUserId($userId)
     {
         $sql = 'SELECT permissions FROM users WHERE id=?';
 
@@ -46,7 +46,7 @@ class PermissionDb
      * @param  int $rankId Id of the rank to get the permissions for
      * @return String          CSV string of all granted permissions for this rank
      */
-    public function getPermissionsByRankId(int $rankId)
+    public function getPermissionsByRankId($rankId)
     {
         $sql = 'SELECT permissions FROM ranks WHERE id=?';
 
@@ -63,7 +63,7 @@ class PermissionDb
      * @param  int $apiKeyId Id of the api key to get the permissions for
      * @return String           CSV string of all granted permissions for this rank
      */
-    public function getPermissionsByApiKeyId(int $apiKeyId)
+    public function getPermissionsByApiKeyId($apiKeyId)
     {
         $sql = 'SELECT permissions FROM userApiKeys WHERE id=?';
 
@@ -81,7 +81,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForUser(int $userId, string $permissions)
+    public function updatePermissionsForUser($userId, $permissions)
     {
         $sql = 'UPDATE users
                 Set permissions = ?
@@ -99,7 +99,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForRank(int $rankId, string $permissions)
+    public function updatePermissionsForRank($rankId, $permissions)
     {
         $sql = 'UPDATE ranks
                 Set permissions = ?
@@ -117,7 +117,7 @@ class PermissionDb
      * @param  string $permissions CSV of all granted permissions
      * @return bool                  True on success, False otherwise
      */
-    public function updatePermissionsForApiKey(int $apiKeyId, string $permissions)
+    public function updatePermissionsForApiKey($apiKeyId, $permissions)
     {
         $sql = 'UPDATE userApiKeys
                 Set permissions = ?

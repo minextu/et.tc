@@ -199,7 +199,7 @@ class Permission
      *
      * @param string $permissionName Name of the permission to grant
      */
-    public function grant(string $permissionName)
+    public function grant($permissionName)
     {
         if (strpos($permissionName, ",") !== false) {
             throw new Exception\InvalidName("Permission must not contain a comma");
@@ -219,7 +219,7 @@ class Permission
      * @param  string $permissionName Name of the permission to deny
      * @return bool                       True on success, False otherwise
      */
-    public function deny(string $permissionName)
+    public function deny($permissionName)
     {
         unset($this->permissions[$permissionName]);
         $this->savePermissions();
@@ -232,7 +232,7 @@ class Permission
      * @param  string $permissionName Name of the permission to Check
      * @return bool                       True if permissions is granted, False otherwise
      */
-    public function get(string $permissionName)
+    public function get($permissionName)
     {
         $hasPermission = false;
 
