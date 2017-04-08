@@ -43,7 +43,7 @@ deploy_staging:
     name: staging
     url: https://staging.et.tc
   only:
-  - master
+  - master@Jan/ettc
 
 deploy_prod:
   stage: deploy
@@ -54,4 +54,4 @@ deploy_prod:
     url: https://et.tc
   when: manual
   only:
-  - master
+  - master@Jan/ettc
