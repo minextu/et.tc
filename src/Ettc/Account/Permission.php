@@ -13,6 +13,21 @@ class Permission
      */
     private $allPermissions = [
 
+        // api: permission
+        "ettcApi/permission/grant:user",
+        "ettcApi/permission/grant:rank",
+        "ettcApi/permission/grant:apiKey",
+        "ettcApi/permission/deny:user",
+        "ettcApi/permission/deny:rank",
+        "ettcApi/permission/deny:apiKey",
+
+        "ettcApi/permission/list:user:own",
+        "ettcApi/permission/list:user:other",
+        "ettcApi/permission/list:rank:own",
+        "ettcApi/permission/list:rank:other",
+        "ettcApi/permission/list:apiKey:own",
+        "ettcApi/permission/list:apiKey:other",
+
         // api: project
         "ettcApi/project/create",
         "ettcApi/project/delete",
@@ -23,11 +38,6 @@ class Permission
         "ettcApi/ranks",
         "ettcApi/rank/create",
         "ettcApi/rank/delete",
-
-        // api: user
-        "ettcApi/user/grantPermission",
-        "ettcApi/user/denyPermission",
-        "ettcApi/user/permissions:otherUsers"
     ];
 
     /**

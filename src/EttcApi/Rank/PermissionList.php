@@ -9,8 +9,8 @@ use Minextu\Ettc\Exception\InvalidId;
 /**
  * Generates a list of permissions a user (current if none is specified)
  *
- * @api {get} /user/permissions/:id list permissions
- * @apiName listPermissions
+ * @api {get} /user/listPermissions/:id list permissions
+ * @apiName listPermissionsUser
  * @apiVersion 0.1.0
  * @apiGroup User
  *

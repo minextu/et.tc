@@ -46,6 +46,11 @@ class EttcApi
         $r->post('/v1/apiKey/delete/*', new ApiKey\Delete($db));
         $r->get('/v1/apiKeys', new ApiKey\ApiKeyList($db));
 
+        // Permission
+        $r->post('/v1/permission/deny', new Permission\Deny($db));
+        $r->post('/v1/permission/grant', new Permission\Grant($db));
+        $r->get('/v1/permission/list', new Permission\PermissionList($db));
+
         // Project
         $r->get('/v1/projects', new Project\ProjectList($db));
         $r->get('/v1/project/info/*', new Project\Project($db));
@@ -61,9 +66,6 @@ class EttcApi
         $r->post('/v1/rank/delete/*', new Rank\Delete($db));
 
         // User
-        $r->post('/v1/user/denyPermission', new User\DenyPermission($db));
-        $r->post('/v1/user/grantPermission', new User\GrantPermission($db));
-        $r->get('/v1/user/permissions/*', new User\PermissionList($db));
         $r->post('/v1/user/login', new User\Login($db));
         $r->post('/v1/user/logout', new User\Logout($db));
     }
