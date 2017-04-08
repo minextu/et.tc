@@ -39,7 +39,7 @@ class PermissionDb
 
     /**
      * Get permission csv string for the given rankId
-     * @param    int   $userId   Id of the ranj to get the permissions for
+     * @param    int   $rankId   Id of the rank to get the permissions for
      * @return   String          CSV string of all granted permissions for this rank
      */
     public function getPermissionsByRankId($rankId)
@@ -48,6 +48,22 @@ class PermissionDb
 
         $stmt = $this->db->getPdo()->prepare($sql);
         $stmt->execute([$rankId]);
+
+        $permissions = $stmt->fetchColumn();
+        return $permissions;
+    }
+
+    /**
+     * Get permission csv string for the given apiKeyId
+     * @param    int   $apiKeyId  Id of the api key to get the permissions for
+     * @return   String           CSV string of all granted permissions for this rank
+     */
+    public function getPermissionsByApiKeyId($apiKeyId)
+    {
+        $sql = 'SELECT permissions FROM userApiKeys WHERE id=?';
+
+        $stmt = $this->db->getPdo()->prepare($sql);
+        $stmt->execute([$apiKeyId]);
 
         $permissions = $stmt->fetchColumn();
         return $permissions;
@@ -84,6 +100,23 @@ class PermissionDb
         $stmt = $this->db->getPdo()->prepare($sql);
 
         $status = $stmt->execute([$permissions, $rankId]);
+        return $status;
+    }
+
+    /**
+     * Update permissions csv string for the given apiKey
+     * @param    int     $apiKeyId     Id of the api key to update permissions
+     * @param    string  $permissions  CSV of all granted permissions
+     * @return   bool                  True on success, False otherwise
+     */
+    public function updatePermissionsForApiKey($apiKeyId, $permissions)
+    {
+        $sql = 'UPDATE userApiKeys
+                Set permissions = ?
+                WHERE id = ?';
+        $stmt = $this->db->getPdo()->prepare($sql);
+
+        $status = $stmt->execute([$permissions, $apiKeyId]);
         return $status;
     }
 }

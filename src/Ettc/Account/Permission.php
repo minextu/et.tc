@@ -43,7 +43,7 @@ class Permission
     private $entity;
 
     /**
-     * Type of permission entity (user, apikey or rank)
+     * Type of permission entity (user, apiKey or rank)
      * @var   String
      */
     private $entityType;
@@ -55,7 +55,7 @@ class Permission
     private $permissions = [];
 
     /**
-     * Loads permissions for the given user
+     * Loads permissions for the given user if specified
      * @param   Database\DatabaseInterface   $db   Database to be used
      * @param   User   $user                       User to fetch permissions for (will also include the users rank)
      */
@@ -121,6 +121,29 @@ class Permission
         // save rank to entity
         $this->entity = $rank;
         $this->entityType = "rank";
+    }
+
+    /**
+     * Load permissions for the given api key
+     * @param    Rank   $apikey     Api key to fetch permissions for
+     * @param    bool   $keepPreviousPermissions Wether to delte previous loaded permissions or not
+     */
+    public function loadApiKey($apiKey, $keepPreviousPermissions=false)
+    {
+        if (!$keepPreviousPermissions) {
+            $this->permissions = [];
+        }
+
+        // get permission csv from database
+        $apiKeyId = $apiKey->getId();
+        $permissionsString = $this->permissionDb->getPermissionsByApiKeyId($apiKeyId);
+
+        // load permissions
+        $this->loadPermissionCsv($permissionsString);
+
+        // save apiKey to entity
+        $this->entity = $apiKey;
+        $this->entityType = "apiKey";
     }
 
     /**
@@ -238,8 +261,10 @@ class Permission
             $this->permissionDb->updatePermissionsForUser($this->entity->getId(), $permissionString);
         } elseif ($this->entityType == "rank") {
             $this->permissionDb->updatePermissionsForRank($this->entity->getId(), $permissionString);
+        } elseif ($this->entityType == "apiKey") {
+            $this->permissionDb->updatePermissionsForApiKey($this->entity->getId(), $permissionString);
         } else {
-            throw new Exception\Exception("Invalid entityType '$entityType'");
+            throw new Exception\Exception("Invalid entityType '$this->entityType'");
         }
     }
 }

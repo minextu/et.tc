@@ -241,7 +241,7 @@ class PermissionTest extends AbstractEttcDatabaseTest
         $this->assertTrue($hasPermission, "Permission was not saved correctly");
     }
 
-    public function testPermissionsWillBeInheritedByRank()
+    public function testUserPermissionsWillBeInheritedByRank()
     {
         // create test rank
         $rank = new Rank($this->getDb());
@@ -273,6 +273,43 @@ class PermissionTest extends AbstractEttcDatabaseTest
         // get permission status
         $hasPermission = $permission->get($permissionName);
         $this->assertTrue($hasPermission, "Permission was not inherited correctly");
+    }
+
+    public function testPermissionCanBeAddedToApiKey()
+    {
+        // create test api key
+        $this->createTestUser();
+        $user = new User($this->getDb(), 1);
+        $apiKey = new ApiKey($this->getDb());
+        $apiKey->setUser($user);
+        $apiKey->create();
+
+        // create permission object for this api key
+        $permission = new Permission($this->getDb());
+        $permission->loadApiKey($apiKey);
+
+        // add a dummy permission
+        $permissionName = "phpUnit/dummyPermission";
+        $status = $permission->grant($permissionName);
+        $this->assertTrue($status, "grant() did not return True");
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(1, $permissionCount, "There should only one permission");
+        // get permission status
+        $hasPermission = $permission->get($permissionName);
+        $this->assertTrue($hasPermission, "Permission was not saved correctly");
+
+        // recreate permission object, to see if it was saved to database
+        $permission = new Permission($this->getDb());
+        $permission->loadApiKey($apiKey);
+
+        // count permissions
+        $permissionCount = $permission->count();
+        $this->assertEquals(1, $permissionCount, "Permission was not saved to database");
+        // get permission status
+        $hasPermission = $permission->get($permissionName);
+        $this->assertTrue($hasPermission, "Permission was not saved correctly");
     }
 
     public function testInvalidRankWillBeIngoredForUser()
