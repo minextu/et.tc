@@ -3,17 +3,23 @@
 use Minextu\Ettc\AbstractEttcDatabaseTest;
 use Minextu\Ettc\Account\User;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc\Project\Project;
 
 class DeleteTest extends AbstractEttcDatabaseTest
 {
-    public function createLoginTestUser($rank)
+    public function createLoginTestUser($grantPermission=true)
     {
         $user = new User($this->getDb());
         $user->setNick("TestNickname");
         $user->setPassword("TestPassword");
-        $user->setRank($rank);
         $user->create();
+
+        // set permissions
+        if ($grantPermission) {
+            $permission = new Permission($this->getDb(), $user);
+            $permission->grant("ettcApi/project/delete");
+        }
 
         Account::login($user, $this->getDb());
     }
@@ -34,7 +40,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
     //
     /*public function testProjectCanBeDeleted()
     {
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         // create two projects
         $this->createTestProject();
@@ -81,7 +87,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
     {
         $this->createTestProject();
         // create user with guest rank
-        $this->createLoginTestUser(1);
+        $this->createLoginTestUser(false);
 
         $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(1);
@@ -96,7 +102,7 @@ class DeleteTest extends AbstractEttcDatabaseTest
     public function testWrongProjectId()
     {
         $this->createTestProject();
-        $this->createLoginTestUser(2);
+        $this->createLoginTestUser();
 
         $deleteApi = new Delete($this->getDb());
         $answer = $deleteApi->post(2);

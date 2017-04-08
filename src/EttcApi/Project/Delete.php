@@ -3,6 +3,7 @@
 use Minextu\EttcApi\AbstractRoutable;
 use Minextu\Ettc\Project\Project as ProjectObj;
 use Minextu\Ettc\Account\Account;
+use Minextu\Ettc\Account\Permission;
 use Minextu\Ettc\Exception\InvalidId;
 
 /**
@@ -86,20 +87,19 @@ class Delete extends AbstractRoutable
     }
 
     /**
-     * Check if the current user has permissions to create projects
+     * Check if the current user has permissions
      * @return   bool   True if the user has permissions, False otherwise
      */
     private function checkPermissions()
     {
-        $permissions = false;
+        $hasPermission = false;
         $user = Account::checkLogin($this->getDb());
 
-        // only proceed if admin
-        // TODO: check permissions instead of rank
-        if ($user && $user->getRank() == 2) {
-            $permissions = true;
+        if ($user) {
+            $permissionObj = new Permission($this->getDb(), $user);
+            $hasPermission = $permissionObj->get("ettcApi/project/delete");
         }
 
-        return $permissions;
+        return $hasPermission;
     }
 }
