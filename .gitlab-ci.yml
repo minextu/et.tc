@@ -52,6 +52,5 @@ deploy_prod:
   environment:
     name: production
     url: https://et.tc
-  when: manual
   only:
-  - master@Jan/ettc
+  - production@Jan/ettc
