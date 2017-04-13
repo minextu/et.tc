@@ -1,0 +1,14 @@
+language: php
+php:
+  - '5.6'
+services: mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS ettc_tests;'
+  
+before_script: 
+  - composer install
+  - cp conf/config.sample.php conf/config.php
+  - sed "s/'testDbHost' => ''/'testDbHost' => '127.0.0.1'/" -i conf/config.php
+  - sed "s/'testDbUser' => ''/'testDbUser' => 'root'/" -i conf/config.php
+  - sed "s/'testDbDatabase' => ''/'testDbDatabase' => 'ettc_tests'/" -i conf/config.php
