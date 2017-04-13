@@ -10,7 +10,7 @@ services: mysql
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS ettc_tests;'
   
-before-script: 
+before_script: 
   - composer install
   - cp conf/config.sample.php conf/config.php
   - sed "s/'testDbHost' => ''/'testDbHost' => '127.0.0.1'/" -i conf/config.php
