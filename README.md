@@ -1,7 +1,7 @@
 Gitlab: [![build status](https://git.et.tc/Jan/ettc/badges/master/build.svg)](https://git.et.tc/Jan/ettc/commits/master)
 [![coverage report] (https://git.et.tc/Jan/ettc/badges/master/coverage.svg)](https://git.et.tc/Jan/ettc/commits/master)
 
-Travis: [![Build Status](https://travis-ci.com/minextu/et.tc.svg?token=pNBhtzWtvTGaCzzzqwui&branch=master)](https://travis-ci.com/minextu/et.tc)
+Travis: [![Build Status](https://travis-ci.org/minextu/et.tc.svg?branch=master)](https://travis-ci.org/minextu/et.tc)
 
 # et.tc
 
